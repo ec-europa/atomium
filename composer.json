@@ -1,0 +1,36 @@
+{
+  "name": "drupal/atomium",
+  "description": "The NextEuropa clean base theme.",
+  "type": "drupal-theme",
+  "license": "GPL-2.0",
+  "homepage": "https://drupal.org/project/atomium",
+  "authors": [
+    {
+      "name": "Pol Dellaiera (Pol)",
+      "homepage": "https://www.drupal.org/u/pol",
+      "role": "Author"
+    }
+  ],
+  "support": {
+    "docs": "https://drupal.org/project/atomium",
+    "issues": "https://drupal.org/project/issues/atomium",
+    "source": "https://drupal.org/project/atomium"
+  },
+  "require-dev": {
+    "drupal/coder": "^8.2"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "./vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
+      "./vendor/bin/phpcs --config-set show_progress 1",
+      "cp ./tests/scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
+    ],
+    "post-update-cmd": [
+      "./vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
+      "./vendor/bin/phpcs --config-set show_progress 1",
+      "cp ./tests/scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
+    ],
+    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice ./includes ./themes ./templates ./assets",
+    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice ./includes ./themes ./templates ./assets"
+  }
+}

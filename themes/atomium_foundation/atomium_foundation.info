@@ -1,0 +1,30 @@
+name = Atomium Foundation
+description = The NextEuropa theme based on Zurb Foundation Framework
+screenshot = assets/images/screenshot.png
+engine = phptemplate
+core = 7.x
+php = 5.2
+base theme = atomium
+
+;-------------- F E A T U R E S -------------
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = favicon
+
+;-------------- R E G I O N S -------------
+regions[header] = "Header"
+regions[highlighted] = "Highlighted"
+regions[help] = "Help"
+regions[content] = "Content"
+regions[sidebar_first] = "Sidebar first"
+regions[sidebar_second] = "Sidebar second"
+regions[footer] = "Footer"
+;-------------- P A N E L S -------------
+
+;-------------- C S S -------------
+
+;-------------- JS -------------
+
+;-------------- Default Settings for theme-settings.php -------------
+settings[toggle_logo] = 0

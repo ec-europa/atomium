@@ -1,0 +1,10 @@
+fieldset legend.panel-heading {
+  float: left;
+  line-height: 1em;
+  margin: 0;
+}
+
+fieldset .panel-body {
+  clear: both;
+  display: inherit;
+}
