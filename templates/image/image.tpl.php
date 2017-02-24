@@ -1,0 +1,1 @@
+<img<?php print $attributes; ?>/>
