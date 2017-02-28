@@ -9,5 +9,10 @@
  * Implements hook_preprocess_breadcrumb().
  */
 function atomium_preprocess_breadcrumb(&$variables) {
-  // This could be removed.
+  $variables['attributes_array'] = array(
+    'rel' => 'navigation',
+    'class' => array(
+      'breadcrumb',
+    )
+  );
 }

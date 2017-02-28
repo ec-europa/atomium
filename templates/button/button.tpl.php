@@ -5,4 +5,4 @@
  * button.tpl.php
  */
 ?>
-<input<?php print $attributes; ?>/>
+<input<?php print $attributes; ?>><?php print $element['#value']; ?></input>

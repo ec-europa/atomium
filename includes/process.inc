@@ -44,7 +44,7 @@ function atomium_process(&$variables, $hook) {
         if (isset($variable_content['placeholder'])) {
           $variable_content['placeholder'] = strip_tags($variable_content['placeholder']);
         }
-        $variables[$new_variable] = drupal_attributes($variable_content);
+        $variables[$new_variable] = atomium_drupal_attributes($variable_content);
       }
     }
   }

@@ -192,3 +192,17 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 
   return $element[$property];
 }
+
+function atomium_drupal_attributes(array $attributes = array(), $hook = NULL) {
+  foreach ($attributes as $attribute => &$data) {
+    $value = implode(' ', (array) $data);
+
+    if (!is_numeric($attribute)) {
+      $data = $attribute . '="' . check_plain($value) . '"';
+    } else {
+      $data = $value;
+    }
+
+  }
+  return $attributes ? ' ' . implode(' ', $attributes) : '';
+}

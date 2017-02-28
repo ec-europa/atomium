@@ -5,4 +5,4 @@
  * breadcrumb.tpl.php
  */
 ?>
-<nav class="breadcrumb" rel="navigation"><?php print render($links); ?></nav>
+<nav<?php print $attributes; ?>><?php print render($links); ?></nav>

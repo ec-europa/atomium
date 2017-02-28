@@ -25,7 +25,27 @@ function atomium_foundation_status_messages($variables) {
     'messages' => array(),
   );
 
-  $close = '<button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button>';
+  $close = array(
+    '#theme' => 'html_tag',
+    '#tag' => 'button',
+    '#attributes' => array(
+      'type' => 'button',
+      'class' => array(
+        'close-button',
+      ),
+      'aria-label' => t('Dismiss alert'),
+      'data-close',
+    ),
+    '#value' => '',
+    'value' => array(
+      '#theme' => 'html_tag',
+      '#tag' => 'span',
+      '#attributes' => array(
+        'aria-hidden' => 'true',
+      ),
+      '#value' => '&times;'
+    ),
+  );
 
   foreach (drupal_get_messages($display) as $type => $messages) {
     $container = array(
@@ -36,6 +56,7 @@ function atomium_foundation_status_messages($variables) {
         '#attributes' => array(
           'data-closable' => '',
           'class' => array(
+            'data-closable',
             'callout',
             isset($status_mapping[$type]) ? $status_mapping[$type] : 'info',
           ),
@@ -49,7 +70,7 @@ function atomium_foundation_status_messages($variables) {
       '#type' => 'ul',
       '#attributes' => array('class' => array('no-bullet')),
     );
-    $container[0]['#value'] = render($item_list) . $close;
+    $container[0]['#value'] = render($item_list) . render($close);
 
     $output['messages'][] = $container;
   }
