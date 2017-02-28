@@ -33,7 +33,7 @@ function atomium_process(&$variables, $hook) {
   foreach ($variables as $variable_name => $variable_content) {
     if (strpos($variable_name, 'attributes_array') !== FALSE) {
       $variable_content = array_filter($variable_content, function($value) {
-        return ($value !== null && $value !== false && $value !== '');
+        return ($value !== null && $value !== false && $value !== '' && !empty($value));
       });
       $new_variable = substr($variable_name, 0, -6);
       $variables[$new_variable] = NULL;
