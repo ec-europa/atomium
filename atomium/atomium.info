@@ -28,3 +28,4 @@ regions[footer] = "Footer"
 
 ;-------------- Default Settings for theme-settings.php -------------
 settings[toggle_logo] = 0
+settings[theme_debug] = 0

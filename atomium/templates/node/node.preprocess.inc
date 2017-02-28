@@ -96,8 +96,7 @@ function atomium_preprocess_node(&$variables) {
   }
 
   $variables['classes_array'][] = 'node-' . $variables['nid'];
-  $variables['attributes_array']['class'] = $variables['classes_array'];
+  $variables['attributes_array']['class'] = array_merge($variables['classes_array'], $variables['attributes_array']['class']);
   $variables['attributes_array']['role'] = 'article';
   $variables['attributes_array']['id'] = 'node-' . $variables['nid'];
-
 }

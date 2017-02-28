@@ -64,6 +64,9 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks['form_required_marker'] = array(
     'render element' => 'element',
     'template' => 'form-required-marker',
+    'variables' => array(
+      'title' => '*',
+    ),
   );
 
   $hooks['form'] = array(
@@ -94,6 +97,11 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks['radio'] = array(
     'render element' => 'element',
     'template' => 'radio',
+  );
+
+  $hooks['radios'] = array(
+    'render element' => 'element',
+    'template' => 'radios',
   );
 
   $hooks['checkbox'] = array(
@@ -176,6 +184,19 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
 
   $hooks['image'] = array(
     'template' => 'image',
+  );
+
+  $hooks['form_element'] = array(
+    'template' => 'form-element',
+    'render element' => 'element',
+  );
+
+  $hooks['form_element_label'] = array(
+    'template' => 'form-element-label',
+    'render element' => 'element',
+    'variables' => array(
+      'element' => NULL,
+    )
   );
 
   return $hooks;

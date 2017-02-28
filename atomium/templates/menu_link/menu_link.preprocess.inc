@@ -13,11 +13,11 @@ function atomium_preprocess_menu_link(&$variables) {
   $sub_menu = '';
 
   if ($element['#below']) {
-    $sub_menu = drupal_render($element['#below']);
+    $sub_menu = $element['#below'];
   }
   $output = l($element['#title'], $element['#href'], $element['#localized_options']);
 
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables['attributes_array'] = drupal_array_merge_deep($element['#attributes'], $variables['attributes_array']);
   $variables['sub_menu'] = $sub_menu;
   $variables['output'] = $output;
 

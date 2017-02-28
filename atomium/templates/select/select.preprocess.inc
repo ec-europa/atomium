@@ -25,7 +25,6 @@ function atomium_preprocess_select(&$variables) {
       $variables['theme_hook_suggestions'][] = 'select__' . $element['#entity_type'] . '__' . $element['#bundle'];
     }
   }
-
-  $variables['attributes_array'] = $variables['element']['#attributes'];
+  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $variables['element']['#attributes']);
   $variables['options'] = form_select_options($variables['element']);
 }

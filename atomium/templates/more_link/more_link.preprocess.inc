@@ -9,5 +9,10 @@
  * Implements hook_preprocess_more_link().
  */
 function atomium_preprocess_more_link(&$variables) {
-  $variables['link'] = l(t('More'), $variables['url'], array('attributes' => array('title' => $variables['title'])));
+  $variables['link'] = array(
+    '#theme' => 'link',
+    '#text' => t('More'),
+    '#path' => $variables['url'],
+    '#options' => array('attributes' => array('title' => $variables['title'])),
+  );
 }

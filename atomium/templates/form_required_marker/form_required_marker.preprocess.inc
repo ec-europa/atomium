@@ -17,7 +17,6 @@ function atomium_preprocess_form_required_marker(&$variables) {
   );
 
   $variables['attributes_array'] = $attributes;
-  $variables['title'] = '*';
   if (isset($variables['element']['#field_name'])) {
     $variables['theme_hook_suggestions'][] = 'form_required_marker__' . $variables['element']['#field_name'];
   }

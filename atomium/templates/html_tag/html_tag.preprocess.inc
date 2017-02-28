@@ -18,7 +18,7 @@ function atomium_preprocess_html_tag(&$variables) {
       $variables['element']['#value'] = '';
     }
     // Concatenate the rendered child onto the element #value.
-    $variables['element']['#value'] .= drupal_render($variables['element'][$key]);
+    $variables['element']['#value'][] = $variables['element'][$key];
   }
 
   $variables['attributes_array'] = $variables['element']['#attributes'];

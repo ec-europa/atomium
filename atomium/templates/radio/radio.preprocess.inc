@@ -24,5 +24,5 @@ function atomium_preprocess_radio(&$variables) {
     $element['#attributes']['checked'] = 'checked';
   }
   _form_set_class($element, array('form-radio'));
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
 }

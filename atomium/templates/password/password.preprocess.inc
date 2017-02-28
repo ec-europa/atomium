@@ -14,5 +14,5 @@ function atomium_preprocess_password(&$variables) {
   element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
   _form_set_class($element, array('form-text'));
 
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
 }

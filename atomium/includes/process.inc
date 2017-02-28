@@ -40,6 +40,7 @@ function atomium_process(&$variables, $hook) {
       if (!empty($variable_content) && is_array($variable_content)) {
         if (isset($variable_content['class'])) {
           $variable_content['class'] = array_map('drupal_html_class', (array) $variable_content['class']);
+          $variable_content['class'] = array_unique($variable_content['class']);
         }
         if (isset($variable_content['placeholder'])) {
           $variable_content['placeholder'] = strip_tags($variable_content['placeholder']);

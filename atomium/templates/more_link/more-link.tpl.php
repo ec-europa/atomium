@@ -5,4 +5,4 @@
  * more-link.tpl.php
  */
 ?>
-<div<?php print $attributes; ?>><?php print $link;?></div>
+<div<?php print $attributes; ?>><?php print render($link);?></div>

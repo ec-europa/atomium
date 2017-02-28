@@ -5,4 +5,4 @@
  * username.tpl.php
  */
 ?>
-<?php print $name; ?><?php print $extra; ?>
+<?php print render($name); ?>

@@ -9,5 +9,5 @@
  * Implements hook_preprocess_block().
  */
 function atomium_foundation_preprocess_block(&$variables) {
-  $variables['classes_array'] = array('clearfix');
+  $variables['attributes_array']['class'] = array('clearfix');
 }

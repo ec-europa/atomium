@@ -2,13 +2,13 @@
 
 /**
  * @file
- * form_element.inc
+ * form_element.preprocess.inc
  */
 
 /**
- * Implements hook_form_element().
+ * Implements hook_preprocess_form_element().
  */
-function atomium_form_element($variables) {
+function atomium_preprocess_form_element(&$variables) {
   $element = &$variables['element'];
 
   // This function is invoked as theme wrapper, but the rendered form element
@@ -39,45 +39,34 @@ function atomium_form_element($variables) {
   if ((isset($element['#title']) && $element['#title'] != 'Language') && (isset($element['#required']) && $element['#required'])) {
     $attributes['class'][] = 'form-required';
   }
-
-  if ($attributes['class']) {
-    $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
-  }
-  else {
-    $output = "\n" . '<div>' . "\n";
-  }
-
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
     $element['#title_display'] = 'none';
   }
-  $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
-  $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
 
-  switch ($element['#title_display']) {
-    case 'before':
-    case 'invisible':
-      $output .= ' ' . theme('form_element_label', $variables);
-      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-      break;
-
-    case 'after':
-      $output .= ' ' . $prefix . $element['#children'] . $suffix;
-      $output .= ' ' . theme('form_element_label', $variables) . "\n";
-      break;
-
-    case 'none':
-    case 'attribute':
-      // Output no label and no required marker, only the children.
-      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-      break;
-  }
-
+  $variables['description'] = '';
   if (!empty($element['#description'])) {
-    $output .= "\n" . '<small>' . $element['#description'] . "</small>\n";
+
+    $variables['description'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#attributes' => array(
+        'class' => array()
+      ),
+      'text' => array(
+        '#type' => 'markup',
+        '#markup' => $element['#description'],
+      ),
+    );
   }
 
-  $output .= "</div>\n";
+  $variables['element'] += array(
+    '#field_suffix' => '',
+    '#field_prefix' => '',
+  );
 
-  return $output;
+  $variables['label'] = array(
+    '#theme' => 'form_element_label',
+    '#element' => $variables['element'],
+  );
 }

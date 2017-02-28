@@ -55,6 +55,6 @@ function atomium_preprocess_textfield(&$variables) {
     }
   }
 
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
   $variables['extra'] = $extra;
 }
