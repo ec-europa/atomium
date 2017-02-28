@@ -278,9 +278,9 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
     foreach ($themes as $theme) {
       // Get the theme's base path.
       $path = drupal_get_path('theme', $theme);
-
+      $regexp = "/\." . $phase . ".inc$/";
       // Find theme function overrides.
-      foreach (drupal_system_listing("/\.inc$/", $path . '/includes/' . $phase, 'name', 0) as $name => $file) {
+      foreach (drupal_system_listing($regexp, $path . '/templates', 'name', 0) as $name => $file) {
         // Strip off the extension.
         if (($pos = strpos($name, '.')) !== FALSE) {
           $name = substr($name, 0, $pos);
