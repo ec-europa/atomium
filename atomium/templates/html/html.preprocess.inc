@@ -30,7 +30,7 @@ function atomium_preprocess_html(&$variables, $hook) {
       // Remove xlmns: and ending quote and fix prefix formatting.
       $prefixes[] = str_replace('="', ': ', substr($namespace, 6, -1));
     }
-    $variables['rdf_namespaces'] = implode(' ', $prefixes) . '"';
+    $variables['rdf_namespaces'] = implode(' ', $prefixes);
   }
 
   $variables['html_attributes_array']['prefix'] = $variables['rdf_namespaces'];
