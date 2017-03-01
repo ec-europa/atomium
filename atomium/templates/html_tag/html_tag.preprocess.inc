@@ -28,4 +28,12 @@ function atomium_preprocess_html_tag(&$variables) {
   }
 
   $element += array('#value' => '');
+
+  // Remove type="..." and CDATA prefix/suffix.
+  unset($element['#attributes']['type'], $element['#value_prefix'], $element['#value_suffix']);
+
+  // Remove media="all" but leave others unaffected.
+  if (isset($element['#attributes']['media']) && $element['#attributes']['media'] === 'all') {
+    unset($element['#attributes']['media']);
+  }
 }
