@@ -17,8 +17,10 @@ function atomium_preprocess_block(&$variables) {
   $variables['id_block'] = ' id="' . $variables['block_html_id'] . '"';
   $variables['classes_array'][] = $variables['block_html_id'];
   $variables['classes_array'][] = $variables['block_zebra'];
-  $variables['classes_array'][] = 'order-' . $variables['block']->order;
 
+  if (isset($variables['block']->order) && !empty($variables['block']->order)) {
+    $variables['classes_array'][] = 'order-' . $variables['block']->order;
+  }
   if (isset($variables['block']->classes) && is_array($variables['block']->classes)) {
     $variables['classes_array'] = array_merge($variables['classes_array'], (array) $variables['block']->classes);
   }
