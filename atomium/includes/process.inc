@@ -33,7 +33,7 @@ function atomium_process(&$variables, $hook) {
           $variable_content['class'] = array_unique($variable_content['class']);
         }
         if (isset($variable_content['placeholder'])) {
-          $variable_content['placeholder'] = strip_tags($variable_content['placeholder']);
+          $variable_content['placeholder'] = array_map('strip_tags', (array) $variable_content['placeholder']);
         }
         $variables[$new_variable] = atomium_drupal_attributes($variable_content);
       }
