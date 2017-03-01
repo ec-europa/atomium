@@ -153,11 +153,13 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks['link'] = array(
     'render element' => 'element',
     'template' => 'link',
+    'variables' => array('text' => NULL, 'path' => NULL, 'options' => array()),
   );
 
   $hooks['username'] = array(
     'render element' => 'element',
     'template' => 'username',
+    'variables' => array('account' => NULL),
   );
 
   $hooks['username_link'] = array(
@@ -168,6 +170,7 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks['more_link'] = array(
     'render element' => 'element',
     'template' => 'more-link',
+    'variables' => array('url' => NULL, 'title' => NULL)
   );
 
   $hooks['admin_block'] = array(
@@ -176,6 +179,14 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
 
   $hooks['image'] = array(
     'template' => 'image',
+    'variables' => array(
+      'path' => NULL,
+      'width' => NULL,
+      'height' => NULL,
+      'alt' => '',
+      'title' => NULL,
+      'attributes' => array()
+    ),
   );
 
   $hooks['form_element'] = array(
@@ -197,6 +208,23 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     'variables' => array(
       'element' => NULL,
     ),
+  );
+
+  $hooks['mark'] = array(
+    'render element' => 'element',
+    'template' => 'mark',
+    'variables' => array(
+      'title' => NULL,
+      'type' => MARK_NEW,
+    ),
+  );
+
+  $hook['indentation'] = array(
+    'variables' => array(
+      'size' => 1,
+      'indentation' => '&nbsp;',
+    ),
+    'template' => 'indentation',
   );
 
   return $hooks;
