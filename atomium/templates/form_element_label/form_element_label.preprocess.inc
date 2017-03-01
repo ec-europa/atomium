@@ -8,28 +8,25 @@
 /**
  * Implements hook_preprocess_form_element_label().
  */
-function atomium_preprocess_form_element_label(&$variables) {
+function atomium_preprocess_form_element_label(&$variables, $hook) {
   $element = &$variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
 
-  $title = filter_xss_admin($element['#title']);
-
-  $attributes = array();
-// Style the label as class option to display inline with the element.
+  // Style the label as class option to display inline with the element.
   if ($element['#title_display'] == 'after') {
-    $attributes['class'] = 'option';
+    $variables['attributes_array']['class'][] = 'option';
   }
-// Show label only to screen readers to avoid disruption in visual flows.
+  // Show label only to screen readers to avoid disruption in visual flows.
   elseif ($element['#title_display'] == 'invisible') {
-    $attributes['class'] = 'element-invisible';
+    $variables['attributes_array']['class'][] = 'element-invisible';
   }
 
   if (!empty($element['#id'])) {
-    $attributes['for'] = $element['#id'];
+    $variables['attributes_array']['for'][] = $element['#id'];
   }
 
-  $variables['title'] = $t($title);
+  $variables['title'] = $t(filter_xss_admin($element['#title']));
 
   // TODO: See how we can improve this.
   $variables['required'] = '';
@@ -39,5 +36,13 @@ function atomium_preprocess_form_element_label(&$variables) {
       '#title' => '*',
     );
   }
-}
 
+  if (isset($variables['element']['#parents'])) {
+    $parents = implode('__', $variables['element']['#parents']);
+    $variables['theme_hook_suggestions'][] = $hook . '__form-element-' . $parents;
+  }
+
+  if (isset($variables['element']['#name'])) {
+    $variables['attributes_array']['class'][] = 'hook__' . $hook . '__' . $variables['element']['#name'];
+  }
+}

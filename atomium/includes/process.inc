@@ -18,16 +18,6 @@ function atomium_process(&$variables, $hook) {
     }
   });
 
-  /* Attributes processing */
-  // Initialize some keys to avoid warnings later.
-  $variables += array(
-    'classes_array' => array(),
-    'attributes_array' => array(),
-    'title_attributes_array' => array(),
-    'content_attributes_array' => array(),
-    'wrapper_attributes_array' => array(),
-  );
-
   // Convert all variables '*_attributes_array' into a valid
   // '*_attributes' variable.
   foreach ($variables as $variable_name => $variable_content) {
