@@ -126,6 +126,15 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     'template' => 'image_button',
   );
 
+  $hook['feed_icon'] = array(
+    'template' => 'feed-icon',
+    'variables' => array(
+      'url' => NULL,
+      'title' => NULL,
+      'link' => NULL,
+    ),
+  );
+
   $hooks['hidden'] = array(
     'render element' => 'element',
     'template' => 'hidden',

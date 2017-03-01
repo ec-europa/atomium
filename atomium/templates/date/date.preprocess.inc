@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_select().
+ * Implements hook_preprocess_date().
  */
 function atomium_preprocess_date(&$variables) {
   $element = $variables['element'];

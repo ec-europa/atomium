@@ -33,6 +33,7 @@
       <?php if ($action_links): ?><div class="button-group expanded"><?php print render($action_links); ?></div><?php endif; ?>
       <?php print render($page['help']); ?>
       <?php print render($page['content']); ?>
+      <?php print $feed_icons; ?>
     </main>
 
   <?php if ($page['sidebar_second']): ?>

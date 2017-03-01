@@ -5,4 +5,4 @@
  * date.tpl.php
  */
 ?>
-'<div<?php print $attributes; ?>><?php print render($date);?></div>
+<div<?php print $attributes; ?>><?php print render($date);?></div>
