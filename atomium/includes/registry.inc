@@ -150,6 +150,26 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     'template' => 'menu-link',
   );
 
+  $hooks['menu_local_task'] = array(
+    'render element' => 'element',
+    'template' => 'menu-local-task',
+    'variables' => array(
+      'link' => NULL,
+      'menu_link' => NULL,
+      'active' => FALSE,
+    ),
+  );
+
+  $hooks['menu_local_tasks'] = array(
+    'render element' => 'element',
+    'template' => 'menu-local-tasks',
+    'variables' => array(
+      'primary' => array(),
+      'secondary' => array(),
+      'menu' => array(),
+    ),
+  );
+
   $hooks['link'] = array(
     'render element' => 'element',
     'template' => 'link',
