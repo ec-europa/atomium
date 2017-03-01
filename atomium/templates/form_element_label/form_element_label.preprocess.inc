@@ -33,7 +33,7 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
   if ($variables['element']['#required']) {
     $variables['required'] = array(
       '#theme' => 'form_required_marker',
-      '#title' => '*',
+      '#element' => $variables['element'],
     );
   }
 

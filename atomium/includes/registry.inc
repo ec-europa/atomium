@@ -61,14 +61,6 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     'template' => 'breadcrumb',
   );
 
-  $hooks['form_required_marker'] = array(
-    'render element' => 'element',
-    'template' => 'form-required-marker',
-    'variables' => array(
-      'title' => '*',
-    ),
-  );
-
   $hooks['form'] = array(
     'render element' => 'element',
     'template' => 'form',
@@ -197,6 +189,14 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     'variables' => array(
       'element' => NULL,
     )
+  );
+
+  $hooks['form_required_marker'] = array(
+    'render element' => 'element',
+    'template' => 'form-required-marker',
+    'variables' => array(
+      'element' => NULL,
+    ),
   );
 
   return $hooks;
