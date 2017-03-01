@@ -21,7 +21,7 @@ function atomium_process(&$variables, $hook) {
   // Convert all variables '*_attributes_array' into a valid
   // '*_attributes' variable.
   foreach ($variables as $variable_name => $variable_content) {
-    if (strpos($variable_name, 'attributes_array') !== FALSE) {
+    if (strpos($variable_name, 'attributes_array') !== FALSE && !in_array($variable_name, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
       $variable_content = array_filter($variable_content, function($value) {
         return ($value !== null && $value !== false && $value !== '' && !empty($value));
       });

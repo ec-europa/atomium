@@ -95,6 +95,8 @@ function atomium_preprocess_node(&$variables) {
     $variables['classes_array'][] = 'node-by-viewer';
   }
 
+  $variables['attributes_array'] += array('class' => array());
+
   $variables['classes_array'][] = 'node-' . $variables['nid'];
   $variables['attributes_array']['class'] = array_merge($variables['classes_array'], $variables['attributes_array']['class']);
   $variables['attributes_array']['role'] = 'article';

@@ -193,7 +193,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
   return $element[$property];
 }
 
-function atomium_drupal_attributes(array $attributes = array(), $hook = NULL) {
+function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
     $value = implode(' ', (array) $data);
 
