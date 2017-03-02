@@ -47,5 +47,4 @@ function atomium_process(&$variables, $hook) {
     array_walk($classes_array, 'drupal_html_class');
     $variables['classes'] = implode(' ', $classes_array);
   }
-
 }

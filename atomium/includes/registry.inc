@@ -230,14 +230,23 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
           $registry[$hook]['variables']['context'] = array();
         }
 
-        // Setup a default "icon" variable. This allows #icon to be passed
-        // to every template and theme function.
+        // Setup some default variables.
         // @see https://drupal.org/node/2219965
-        if (isset($info['variables']) && !isset($info['variables']['icon'])) {
-          $registry[$hook]['variables']['icon'] = NULL;
+        if (isset($info['variables']) && !isset($info['variables']['attributes_array'])) {
+          $registry[$hook]['variables']['attributes_array'] = array();
+          $registry[$hook]['variables']['attributes'] = '';
         }
-        if (isset($info['variables']) && !isset($info['variables']['icon_position'])) {
-          $registry[$hook]['variables']['icon_position'] = 'before';
+        if (isset($info['variables']) && !isset($info['variables']['content_attributes_array'])) {
+          $registry[$hook]['variables']['content_attributes_array'] = array();
+          $registry[$hook]['variables']['content_attributes'] = '';
+        }
+        if (isset($info['variables']) && !isset($info['variables']['wrapper_attributes_array'])) {
+          $registry[$hook]['variables']['wrapper_attributes_array'] = array();
+          $registry[$hook]['variables']['wrapper_attributes'] = '';
+        }
+        if (isset($info['variables']) && !isset($info['variables']['title_attributes_array'])) {
+          $registry[$hook]['variables']['title_attributes_array'] = array();
+          $registry[$hook]['variables']['title_attributes'] = '';
         }
       }
     }

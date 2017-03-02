@@ -13,7 +13,7 @@ function atomium_preprocess_username(&$variables) {
     $variables['theme_hook_suggestions'][] = 'username__uid_' . $variables['uid'];
   }
   if (isset($variables['name'])) {
-    $variables['theme_hook_suggestions'][] = 'username__name_' . $variables['name'];
+    $variables['theme_hook_suggestions'][] = 'username__name_' . drupal_html_class($variables['name']);
   }
 
   $variables['link_options'] += array(
