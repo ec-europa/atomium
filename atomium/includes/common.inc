@@ -228,7 +228,7 @@ function atomium_find_templates() {
     if (is_dir($path)) {
       $directories = array_diff(scandir($path), array('..', '.'));
       foreach ($directories as $directory) {
-        $templates[$directory] = array(
+        $templates[$theme][$directory] = array(
           'theme' => $theme,
           'directory' => $path . '/' . $directory,
         );

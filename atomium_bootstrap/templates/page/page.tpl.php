@@ -39,8 +39,9 @@ if (!empty($page['header'])): ?>
           <?php print $messages; ?>
           <?php print render($tabs); ?>
           <?php print render($page['help']); ?>
-          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php
-          endif; ?>
+          <?php if ($action_links): ?>
+              <div class="btn-group btn-group-justified" role="group"><?php print render($action_links); ?></div>
+          <?php endif; ?>
           <?php print render($page['content']); ?>
         </main>
 

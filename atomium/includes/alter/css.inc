@@ -44,10 +44,15 @@ function atomium_css_alter(&$css) {
   );
   $css = array_diff_key($css, $exclude);
 
-  foreach (atomium_find_templates() as $component => $data) {
-    $css_file = sprintf('%s/%s.css', $data['directory'], $component);
-    if (file_exists($css_file)) {
-      $css = drupal_add_css($css_file, array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+  foreach (atomium_find_templates() as $theme => $theme_data) {
+    foreach ($theme_data as $component => $component_data) {
+      $css_file = sprintf('%s/%s.css', $component_data['directory'], $component);
+      if (file_exists($css_file)) {
+        $css = drupal_add_css($css_file, array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+      }
     }
   }
 }

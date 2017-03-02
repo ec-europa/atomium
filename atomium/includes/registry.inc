@@ -53,19 +53,22 @@
 function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks = array();
 
-  foreach (atomium_find_templates() as $component => $data) {
-    $file = sprintf('%s/%s.theme.inc', $data['directory'], $component);
-    if (file_exists($file)) {
-      include_once $file;
-    }
-    $file = sprintf('%s/%s.preprocess.inc', $data['directory'], $component);
-    if (file_exists($file)) {
-      include_once $file;
-    }
+  foreach (atomium_find_templates() as $theme => $theme_data) {
+    foreach ($theme_data as $component => $component_data) {
 
-    $function_name = $data['theme'] . '_theme__' . $component;
-    if (function_exists($function_name)) {
-      $hooks = array_merge((array) call_user_func($function_name), $hooks);
+      $file = sprintf('%s/%s.theme.inc', $component_data['directory'], $component);
+      if (file_exists($file)) {
+        include_once $file;
+      }
+      $file = sprintf('%s/%s.preprocess.inc', $component_data['directory'], $component);
+      if (file_exists($file)) {
+        include_once $file;
+      }
+
+      $function_name = $theme . '_theme__' . $component;
+      if (function_exists($function_name)) {
+        $hooks = array_merge((array) call_user_func($function_name), $hooks);
+      }
     }
   }
 
@@ -109,7 +112,6 @@ function atomium_theme_registry_alter(&$registry) {
     if (!empty($registry[$hook]['process functions'])) {
       $registry[$hook]['process functions'] = array_unique($info['process functions']);
     }
-
     // Ensure "theme path" is set.
     if (!isset($registry[$hook]['theme path'])) {
       $registry[$hook]['theme path'] = $GLOBALS['theme_path'];

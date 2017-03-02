@@ -11,7 +11,7 @@
 function atomium_item_list($variables) {
   $items = $variables['items'];
   $type = $variables['type'];
-  $attributes = $variables['attributes'];
+  $attributes = (array) $variables['attributes'];
   $output = '';
 
   if (!empty($items)) {
