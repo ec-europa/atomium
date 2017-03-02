@@ -10,9 +10,9 @@
  */
 function atomium_preprocess_menu_local_tasks(&$variables) {
   if (!empty($variables['primary'])) {
-    $variables['menu'] = $variables['primary'];
+    $variables['menu'][] = $variables['primary'];
   }
   if (!empty($variables['secondary'])) {
-    $variables['menu'] = $variables['secondary'];
+    $variables['menu'][] = $variables['secondary'];
   }
 }
