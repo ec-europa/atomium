@@ -9,9 +9,6 @@
  * Implements hook_preprocess_breadcrumb().
  */
 function atomium_bootstrap_preprocess_breadcrumb(&$variables) {
-  $variables['attributes_array'] = array(
-    'class' => array(
-      'breadcrumb',
-    ),
-  );
+  $variables['links']['#type'] = 'ol';
+  $variables['links']['#attributes']['class'][] = 'breadcrumb';
 }
