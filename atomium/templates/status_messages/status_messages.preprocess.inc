@@ -16,7 +16,7 @@ function atomium_preprocess_status_messages(&$variables) {
     'error' => t('Error message'),
     'warning' => t('Warning message'),
   );
-  
+
   $output = array();
   foreach (drupal_get_messages($display) as $type => $messages) {
     $container = array(

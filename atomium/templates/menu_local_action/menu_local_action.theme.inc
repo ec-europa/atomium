@@ -5,6 +5,9 @@
  * menu_local_action.theme.inc
  */
 
+/**
+ * Implements atomium_theme_alter__hook().
+ */
 function atomium_theme__menu_local_action() {
   return array(
     'menu_local_action' => array(

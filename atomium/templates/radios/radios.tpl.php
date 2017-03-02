@@ -2,7 +2,7 @@
 
 /**
  * @file
- * checkboxes.tpl.php
+ * Checkboxes.tpl.php.
  */
 ?>
 <div<?php print $attributes; ?>><?php print $element['#children']; ?></div>

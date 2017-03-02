@@ -17,20 +17,7 @@
     "source": "https://drupal.org/project/atomium"
   },
   "require-dev": {
-    "drupal/coder": "^8.2"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "./vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
-      "./vendor/bin/phpcs --config-set show_progress 1",
-      "cp ./tests/scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
-    ],
-    "post-update-cmd": [
-      "./vendor/bin/phpcs --config-set installed_paths ../../drupal/coder/coder_sniffer",
-      "./vendor/bin/phpcs --config-set show_progress 1",
-      "cp ./tests/scripts/pre-push.sh .git/hooks/pre-push && chmod +x .git/hooks/pre-push"
-    ],
-    "phpcs": "./vendor/bin/phpcs --standard=Drupal,DrupalPractice ./includes ./themes ./templates ./assets",
-    "phpcbf": "./vendor/bin/phpcbf --standard=Drupal,DrupalPractice ./includes ./themes ./templates ./assets"
+    "drupal/coder": "^8.2",
+    "phpro/grumphp": "^0.11.3"
   }
 }

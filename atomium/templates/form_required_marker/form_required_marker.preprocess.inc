@@ -13,7 +13,7 @@ function atomium_preprocess_form_required_marker(&$variables, $hook) {
 
   $attributes = array(
     'class' => array(
-      'form-required'
+      'form-required',
     ),
     'title' => $t('This field is required.'),
   );
