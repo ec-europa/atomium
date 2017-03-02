@@ -225,12 +225,14 @@ function atomium_find_templates() {
 
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
     $path = drupal_get_path('theme', $theme) . '/templates';
-    $directories = array_diff(scandir($path), array('..', '.'));
-    foreach ($directories as $directory) {
-      $templates[$directory] = array(
-        'theme' => $theme,
-        'directory' => $path . '/' . $directory,
-      );
+    if (is_dir($path)) {
+      $directories = array_diff(scandir($path), array('..', '.'));
+      foreach ($directories as $directory) {
+        $templates[$directory] = array(
+          'theme' => $theme,
+          'directory' => $path . '/' . $directory,
+        );
+      }
     }
   }
 

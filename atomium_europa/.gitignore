@@ -1,0 +1,15 @@
+# Temporary files
+.tmp
+
+# Ignore some folders
+node_modules
+dist
+
+# Logs
+logs
+*.log
+
+# Editors
+.idea
+.c9
+.env
