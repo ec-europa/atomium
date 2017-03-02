@@ -23,6 +23,7 @@ regions[footer] = "Footer"
 ;-------------- P A N E L S -------------
 
 ;-------------- C S S -------------
+stylesheets[all][] = assets/css/style.css
 
 ;-------------- JS -------------
 
