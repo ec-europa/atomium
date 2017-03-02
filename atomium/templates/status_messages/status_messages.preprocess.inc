@@ -21,13 +21,9 @@ function atomium_preprocess_status_messages(&$variables) {
   foreach (drupal_get_messages($display) as $type => $messages) {
     $container = array(
       '#type' => 'container',
-      array(
-        '#type' => 'html_tag',
-        '#tag' => 'div',
-        '#attributes' => array(
-          'class' => array(
-            isset($status_mapping[$type]) ? $status_mapping[$type] : 'info',
-          ),
+      '#attributes' => array(
+        'class' => array(
+          $type,
         ),
       ),
     );
@@ -39,9 +35,9 @@ function atomium_preprocess_status_messages(&$variables) {
       '#type' => 'ul',
       '#attributes' => array('class' => array()),
     );
-    $container[0]['#value'] = $item_list;
+    $container['value'] = $item_list;
 
-    $output[] = $container;
+    $output[$type] = $container;
   }
 
   $variables['messages'] = $output;
