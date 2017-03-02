@@ -9,6 +9,18 @@
  * Implements hook_css_alter().
  */
 function atomium_css_alter(&$css) {
+  foreach (atomium_find_templates() as $theme => $theme_data) {
+    foreach ($theme_data as $component => $component_data) {
+      $css_file = sprintf('%s/%s.css', $component_data['directory'], $component);
+      if (file_exists($css_file)) {
+        $css = drupal_add_css($css_file, array(
+          'group' => CSS_DEFAULT,
+          'every_page' => TRUE,
+        ));
+      }
+    }
+  }
+
   $exclude = array(
     /*
      'misc/vertical-tabs.css' => FALSE,
@@ -46,15 +58,4 @@ function atomium_css_alter(&$css) {
   );
   $css = array_diff_key($css, $exclude);
 
-  foreach (atomium_find_templates() as $theme => $theme_data) {
-    foreach ($theme_data as $component => $component_data) {
-      $css_file = sprintf('%s/%s.css', $component_data['directory'], $component);
-      if (file_exists($css_file)) {
-        $css = drupal_add_css($css_file, array(
-          'group' => CSS_DEFAULT,
-          'every_page' => TRUE,
-        ));
-      }
-    }
-  }
 }
