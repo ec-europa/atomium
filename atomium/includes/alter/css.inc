@@ -36,6 +36,7 @@ function atomium_css_alter(&$css) {
      'modules/system/system.admin.css' => FALSE,
      'modules/system/system.maintenance.css' => FALSE,
      'modules/update/update.css' => FALSE,
+     'modules/system/system.base.css' => FALSE,
     */
     'modules/aggregator/aggregator.css' => FALSE,
     'modules/block/block.css' => FALSE,
@@ -48,7 +49,6 @@ function atomium_css_alter(&$css) {
     'modules/poll/poll.css' => FALSE,
     'modules/profile/profile.css' => FALSE,
     'modules/search/search.css' => FALSE,
-    'modules/system/system.base.css' => FALSE,
     'modules/system/system.menus.css' => FALSE,
     'modules/system/system.messages.css' => FALSE,
     'modules/system/system.theme.css' => FALSE,
