@@ -27,5 +27,5 @@ regions[footer] = "Footer"
 ;-------------- JS -------------
 
 ;-------------- Default Settings for theme-settings.php -------------
-settings[toggle_logo] = 0
 settings[theme_debug] = 0
+settings[allow_css_double_underscores] = 1

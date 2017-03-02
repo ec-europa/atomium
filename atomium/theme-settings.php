@@ -21,4 +21,9 @@ function atomium_form_system_theme_settings_alter(&$form, $form_state) {
     '#default_value' => theme_get_setting('theme_debug'),
     '#description'   => t('Enable theme debug ?'),
   );
+  $form['atomium']['allow_css_double_underscores'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Allow CSS double underscore'),
+    '#default_value' => theme_get_setting('allow_css_double_underscores'),
+  );
 }
