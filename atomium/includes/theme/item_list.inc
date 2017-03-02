@@ -15,7 +15,7 @@ function atomium_item_list($variables) {
   $output = '';
 
   if (!empty($items)) {
-    $output .= "<$type" . drupal_attributes($attributes) . '>';
+    $output .= "<$type" . atomium_drupal_attributes($attributes) . '>';
     $num_items = count($items);
     $i = 0;
     foreach ($items as $item) {
@@ -56,7 +56,7 @@ function atomium_item_list($variables) {
       if ($i == $num_items) {
         $attributes['class'][] = 'last';
       }
-      $output .= '<li' . drupal_attributes($attributes) . '>' . render($data) . "</li>\n";
+      $output .= '<li' . atomium_drupal_attributes($attributes) . '>' . render($data) . "</li>\n";
     }
     $output .= "</$type>";
   }
