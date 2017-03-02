@@ -2,8 +2,7 @@
 
 /**
  * @file
- * more-link.tpl.php
+ * More-link.tpl.php.
  */
-
 ?>
 <div<?php print $attributes; ?>><?php print render($link);?></div>

@@ -14,8 +14,8 @@ function atomium_preprocess_checkbox(&$variables) {
   element_set_attributes(
     $element,
     array(
-      'id',
-      'name',
+      0 => 'id',
+      1 => 'name',
       '#return_value' => 'value',
     )
   );

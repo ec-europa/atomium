@@ -197,7 +197,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
  * Copy of the drupal_attributes function.
  *
  * The only difference is that if a key is a numeric, it will only display the
- * value. Ex: 0="data-closable" will be displayed: data-closable
+ * value. Ex: 0="data-closable" will be displayed: data-closable.
  */
 function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
@@ -206,7 +206,8 @@ function atomium_drupal_attributes(array $attributes = array()) {
 
     if (!is_numeric($attribute)) {
       $data = $attribute . '="' . check_plain($value) . '"';
-    } else {
+    }
+    else {
       $data = $value;
     }
   }
@@ -228,7 +229,7 @@ function atomium_find_templates() {
     foreach ($directories as $directory) {
       $templates[$directory] = array(
         'theme' => $theme,
-        'directory' => $path . '/' . $directory
+        'directory' => $path . '/' . $directory,
       );
     }
   }

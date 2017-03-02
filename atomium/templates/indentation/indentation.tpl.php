@@ -2,7 +2,7 @@
 
 /**
  * @file
- * link.tpl.php
+ * Link.tpl.php.
  */
 ?>
 <?php for ($n = 0; $n < $size; $n++): ?>

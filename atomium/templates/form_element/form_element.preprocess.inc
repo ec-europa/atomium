@@ -51,7 +51,7 @@ function atomium_preprocess_form_element(&$variables) {
       '#type' => 'html_tag',
       '#tag' => 'p',
       '#attributes' => array(
-        'class' => array()
+        'class' => array(),
       ),
       'text' => array(
         '#type' => 'markup',

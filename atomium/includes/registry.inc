@@ -434,6 +434,7 @@ function _atomium_process_theme_registry_suggestions(array &$registry, $themes) 
  * @see https://www.drupal.org/node/2339447
  */
 if (!function_exists('drupal_group_functions_by_prefix')) {
+
   /**
    * Group all user functions by word before first underscore.
    *

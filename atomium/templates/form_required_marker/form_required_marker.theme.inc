@@ -2,9 +2,12 @@
 
 /**
  * @file
- * form_element_mark.theme.inc
+ * Form_element_mark.theme.inc.
  */
 
+/**
+ * Implements atomium_theme_alter__hook().
+ */
 function atomium_theme__form_element_mark() {
   return array(
     'form_element_mark' => array(

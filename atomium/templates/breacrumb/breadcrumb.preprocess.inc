@@ -13,6 +13,6 @@ function atomium_preprocess_breadcrumb(&$variables) {
     'rel' => 'navigation',
     'class' => array(
       'breadcrumb',
-    )
+    ),
   );
 }

@@ -5,6 +5,9 @@
  * link.theme.inc
  */
 
+/**
+ * Implements atomium_theme_alter__hook().
+ */
 function atomium_theme__link() {
   return array(
     'link' => array(
@@ -13,7 +16,7 @@ function atomium_theme__link() {
       'variables' => array(
         'text' => NULL,
         'path' => NULL,
-        'options' => array()
+        'options' => array(),
       ),
     ),
   );

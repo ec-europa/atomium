@@ -12,8 +12,7 @@ function atomium_preprocess_link(&$variables, $hook) {
   $variables += array('options' => array('attributes' => array()));
   $variables['options'] += array(
     'html' => FALSE,
-    'attributes' => array(
-    ),
+    'attributes' => array(),
   );
 
   $variables['attributes_array'] = $variables['options']['attributes'];

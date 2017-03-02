@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file.
- * config.inc.php
+ * @file
+ * Contains config.inc.php.
  */
 ?>
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * The primary PHP file for the Drupal Atomium base theme.
@@ -47,7 +48,7 @@ drupal_static_reset('element_info');
 /**
  * Declare various hook_*_alter() hooks.
  *
- * hook_*_alter() implementations must live (via include) inside this file so
+ * Hook_*_alter() implementations must live (via include) inside this file so
  * they are properly detected when drupal_alter() is invoked.
  */
 atomium_include('atomium', 'includes/alter');

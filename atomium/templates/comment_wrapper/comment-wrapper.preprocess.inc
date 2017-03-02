@@ -2,7 +2,7 @@
 
 /**
  * @file
- * comment.preprocess.inc
+ * Comment.preprocess.inc.
  */
 
 /**

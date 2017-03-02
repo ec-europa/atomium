@@ -23,4 +23,3 @@ function atomium_preprocess_radios(&$variables) {
   }
   $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $attributes);
 }
-
