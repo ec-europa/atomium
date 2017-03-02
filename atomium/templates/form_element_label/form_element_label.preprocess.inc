@@ -26,11 +26,14 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
     $variables['attributes_array']['for'][] = $element['#id'];
   }
 
-  $variables['title'] = $t(filter_xss_admin($element['#title']));
+  $variables['title'] = '';
+  if (isset($element['#title'])) {
+    $variables['title'] = $t(filter_xss_admin($element['#title']));
+  }
 
   // TODO: See how we can improve this.
   $variables['required'] = '';
-  if ($variables['element']['#required']) {
+  if (isset($variables['element']['#required']) && $variables['element']['#required'] == TRUE) {
     $variables['required'] = array(
       '#theme' => 'form_required_marker',
       '#element' => $variables['element'],

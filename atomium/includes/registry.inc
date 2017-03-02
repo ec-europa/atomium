@@ -51,219 +51,23 @@
  * @see hook_theme()
  */
 function _atomium_theme(&$existing, $type, $theme, $path) {
-  $hooks['fieldset'] = array(
-    'render element' => 'element',
-    'template' => 'fieldset',
-  );
+  $hooks = array();
 
-  $hooks['breadcrumb'] = array(
-    'variables' => array('breadcrumb' => NULL),
-    'template' => 'breadcrumb',
-  );
+  foreach (atomium_find_templates() as $component => $data) {
+    $file = sprintf('%s/%s.theme.inc', $data['directory'], $component);
+    if (file_exists($file)) {
+      include_once $file;
+    }
+    $file = sprintf('%s/%s.preprocess.inc', $data['directory'], $component);
+    if (file_exists($file)) {
+      include_once $file;
+    }
 
-  $hooks['form'] = array(
-    'render element' => 'element',
-    'template' => 'form',
-  );
-
-  $hooks['block'] = array(
-    'render element' => 'elements',
-    'template' => 'block',
-  );
-
-  $hooks['textfield'] = array(
-    'render element' => 'element',
-    'template' => 'textfield',
-  );
-
-  $hooks['html_tag'] = array(
-    'render element' => 'element',
-    'template' => 'html-tag',
-  );
-
-  $hooks['select'] = array(
-    'render element' => 'element',
-    'template' => 'select',
-  );
-
-  $hooks['radio'] = array(
-    'render element' => 'element',
-    'template' => 'radio',
-  );
-
-  $hooks['radios'] = array(
-    'render element' => 'element',
-    'template' => 'radios',
-  );
-
-  $hooks['checkbox'] = array(
-    'render element' => 'element',
-    'template' => 'checkbox',
-  );
-
-  $hooks['checkboxes'] = array(
-    'render element' => 'element',
-    'template' => 'checkboxes',
-  );
-
-  $hooks['date'] = array(
-    'render element' => 'element',
-    'template' => 'date',
-  );
-
-  $hooks['vertical_tabs'] = array(
-    'render element' => 'element',
-    'template' => 'vertical_tabs',
-  );
-
-  $hooks['button'] = array(
-    'render element' => 'element',
-    'template' => 'button',
-  );
-
-  $hooks['image_button'] = array(
-    'render element' => 'element',
-    'template' => 'image_button',
-  );
-
-  $hook['feed_icon'] = array(
-    'template' => 'feed-icon',
-    'variables' => array(
-      'url' => NULL,
-      'title' => NULL,
-      'link' => NULL,
-    ),
-  );
-
-  $hooks['hidden'] = array(
-    'render element' => 'element',
-    'template' => 'hidden',
-  );
-
-  $hooks['container'] = array(
-    'render element' => 'element',
-    'template' => 'container',
-  );
-
-  $hooks['file'] = array(
-    'render element' => 'element',
-    'template' => 'file',
-  );
-
-  $hooks['menu_tree'] = array(
-    'template' => 'menu_tree',
-  );
-
-  $hooks['menu_link'] = array(
-    'render element' => 'element',
-    'template' => 'menu-link',
-  );
-
-  $hooks['menu_local_action'] = array(
-    'render element' => 'element',
-    'template' => 'menu-local-action',
-    'variables' => array(
-      'link' => NULL,
-      'menu_link' => NULL,
-    ),
-  );
-
-  $hooks['menu_local_task'] = array(
-    'render element' => 'element',
-    'template' => 'menu-local-task',
-    'variables' => array(
-      'link' => NULL,
-      'menu_link' => NULL,
-      'active' => FALSE,
-    ),
-  );
-
-  $hooks['menu_local_tasks'] = array(
-    'render element' => 'element',
-    'template' => 'menu-local-tasks',
-    'variables' => array(
-      'primary' => array(),
-      'secondary' => array(),
-      'menu' => array(),
-    ),
-  );
-
-  $hooks['link'] = array(
-    'render element' => 'element',
-    'template' => 'link',
-    'variables' => array('text' => NULL, 'path' => NULL, 'options' => array()),
-  );
-
-  $hooks['username'] = array(
-    'render element' => 'element',
-    'template' => 'username',
-    'variables' => array('account' => NULL),
-  );
-
-  $hooks['username_link'] = array(
-    'render element' => 'element',
-    'template' => 'username-link',
-  );
-
-  $hooks['more_link'] = array(
-    'render element' => 'element',
-    'template' => 'more-link',
-    'variables' => array('url' => NULL, 'title' => NULL)
-  );
-
-  $hooks['admin_block'] = array(
-    'template' => 'admin-block',
-  );
-
-  $hooks['image'] = array(
-    'template' => 'image',
-    'variables' => array(
-      'path' => NULL,
-      'width' => NULL,
-      'height' => NULL,
-      'alt' => '',
-      'title' => NULL,
-      'attributes' => array()
-    ),
-  );
-
-  $hooks['form_element'] = array(
-    'template' => 'form-element',
-    'render element' => 'element',
-  );
-
-  $hooks['form_element_label'] = array(
-    'template' => 'form-element-label',
-    'render element' => 'element',
-    'variables' => array(
-      'element' => NULL,
-    )
-  );
-
-  $hooks['form_required_marker'] = array(
-    'render element' => 'element',
-    'template' => 'form-required-marker',
-    'variables' => array(
-      'element' => NULL,
-    ),
-  );
-
-  $hooks['mark'] = array(
-    'render element' => 'element',
-    'template' => 'mark',
-    'variables' => array(
-      'title' => NULL,
-      'type' => MARK_NEW,
-    ),
-  );
-
-  $hook['indentation'] = array(
-    'variables' => array(
-      'size' => 1,
-      'indentation' => '&nbsp;',
-    ),
-    'template' => 'indentation',
-  );
+    $function_name = $data['theme'] . '_theme__' . $component;
+    if (function_exists($function_name)) {
+      $hooks = array_merge((array) call_user_func($function_name), $hooks);
+    }
+  }
 
   return $hooks;
 }

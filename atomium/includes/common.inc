@@ -62,7 +62,7 @@ function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE)
   if ($include_theme_key) {
     $themes[$theme_key][] = $theme_key;
   }
-  return $themes[$theme_key];
+  return array_unique($themes[$theme_key]);
 }
 
 /**
@@ -193,16 +193,45 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
   return $element[$property];
 }
 
+/**
+ * Copy of the drupal_attributes function.
+ *
+ * The only difference is that if a key is a numeric, it will only display the
+ * value. Ex: 0="data-closable" will be displayed: data-closable
+ */
 function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
-    $value = implode(' ', (array) $data);
+    $data = array_map('trim', (array) $data);
+    $value = implode(' ', $data);
 
     if (!is_numeric($attribute)) {
       $data = $attribute . '="' . check_plain($value) . '"';
     } else {
       $data = $value;
     }
-
   }
+
   return $attributes ? ' ' . implode(' ', $attributes) : '';
+}
+
+/**
+ * Discover templates based on directory name.
+ *
+ * It is important that directories have the name of the hook for the moment.
+ */
+function atomium_find_templates() {
+  $templates = array();
+
+  foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
+    $path = drupal_get_path('theme', $theme) . '/templates';
+    $directories = array_diff(scandir($path), array('..', '.'));
+    foreach ($directories as $directory) {
+      $templates[$directory] = array(
+        'theme' => $theme,
+        'directory' => $path . '/' . $directory
+      );
+    }
+  }
+
+  return $templates;
 }

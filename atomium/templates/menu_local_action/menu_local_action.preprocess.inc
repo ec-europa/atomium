@@ -9,7 +9,7 @@
  * Implements hook_preprocess_menu_local_action().
  */
 function atomium_preprocess_menu_local_action(&$variables) {
-  $link = $variables['link'];
+  $link = $variables['element']['#link'];
 
   if (isset($link['href'])) {
     $variables['menu_link'] = array(

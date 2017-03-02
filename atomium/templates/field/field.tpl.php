@@ -11,7 +11,7 @@
 <?php endif; ?>
 <div<?php print $content_attributes; ?>>
 <?php foreach ($items as $delta => $item) : ?>
-<div<?php print $item_attributes[$delta]; ?>><?php print render($item); ?></div>
+<div<?php print $attributes_item[$delta]; ?>><?php print render($item); ?></div>
 <?php endforeach; ?>
 </div>
-</div>
+</div

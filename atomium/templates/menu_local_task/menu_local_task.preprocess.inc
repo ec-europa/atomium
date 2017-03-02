@@ -9,7 +9,7 @@
  * Implements hook_preprocess_menu_local_task().
  */
 function atomium_preprocess_menu_local_task(&$variables) {
-  $link = &$variables['link'];
+  $link = &$variables['element']['#link'];
   $link_text = $link['title'];
 
   if (!empty($variables['element']['#active'])) {
@@ -25,14 +25,18 @@ function atomium_preprocess_menu_local_task(&$variables) {
     $link_text = t('!local-task-title!active', array('!local-task-title' => $link['title'], '!active' => $active));
   }
 
-  $variables['menu_link'] = array(
-    '#theme' => 'link',
-    '#text' => $link_text,
-    '#path' => $link['href'],
-    '#options' => array(
-      'attributes' => array('title' => $link_text)
-    ),
-  );
+  $variables['menu_link'] = $link_text;
+  if (isset($link['href'])) {
+    $variables['menu_link'] = array(
+      '#theme' => 'link',
+      '#text' => $link_text,
+      '#path' => $link['href'],
+      '#options' => array(
+        'attributes' => array('title' => $link_text),
+        'html' => TRUE,
+      ),
+    );
+  }
 
   $variables['attributes_array']['class'][] = !empty($variables['element']['#active']) ? 'active' : '';
 }

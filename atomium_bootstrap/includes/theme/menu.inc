@@ -29,7 +29,7 @@ function atomium_bootstrap_menu_local_tasks(&$variables) {
  * Implements hook_menu_local_task().
  */
 function atomium_bootstrap_menu_local_task(&$variables) {
-  $link = $variables['element']['#link'];
+  $link = $variables['link'];
   $link_text = $link['title'];
 
   $attributes = array();
