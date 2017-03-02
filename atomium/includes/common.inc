@@ -202,6 +202,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
     $data = array_map('trim', (array) $data);
+    $data = array_filter($data);
     $value = implode(' ', $data);
 
     if (!is_numeric($attribute)) {

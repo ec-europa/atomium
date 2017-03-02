@@ -16,4 +16,7 @@ function atomium_foundation_preprocess_menu_local_task(&$variables) {
       'secondary',
     );
   }
+  if ($variables['active']) {
+    $variables['attributes_array']['class'][] = 'active';
+  }
 }

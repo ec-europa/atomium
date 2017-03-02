@@ -5,6 +5,13 @@
  * menu-local-tasks.tpl.php
  */
 ?>
-<?php if ($menu): ?>
-    <ul<?php print $attributes; ?>><?php print render($menu); ?></ul>
+<?php if ($primary): ?>
+    <ul<?php print $primary_attributes; ?>>
+      <?php print render($primary); ?>
+    </ul>
+<?php endif; ?>
+<?php if ($secondary): ?>
+    <ul<?php print $secondary_attributes; ?>>
+      <?php print render($secondary); ?>
+    </ul>
 <?php endif; ?>

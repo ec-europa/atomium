@@ -16,7 +16,8 @@ function atomium_theme__menu_local_tasks() {
       'variables' => array(
         'primary' => array(),
         'secondary' => array(),
-        'menu' => array(),
+        'primary_attributes_array' => array(),
+        'secondary_attributes_array' => array(),
       ),
     ),
   );
