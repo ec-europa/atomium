@@ -8,11 +8,8 @@
 /**
  * Implements hook_preprocess_menu_tree().
  */
-function atomium_preprocess_menu_tree(&$variables) {
-  $variables['attributes_array']['class'][] = 'menu';
-  // TODO: See if we can find a way to detect if we are in a submenu.
-  $variables['attributes_array']['class'][] = 'nested';
-  $variables['attributes_array']['class'][] = 'hook__menu_tree';
+function atomium_preprocess_menu_tree(&$variables, $hook) {
+  $variables['attributes_array']['class'][] = 'hook__' . $hook;
   if (isset($variables['theme_hook_original'])) {
     $variables['attributes_array']['class'][] = 'hook__' . $variables['theme_hook_original'];
   }
