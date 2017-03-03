@@ -35,6 +35,6 @@ function atomium_preprocess_checkbox(&$variables) {
   if (!empty($element['#checked'])) {
     $element['#attributes']['checked'] = 'checked';
   }
-  _form_set_class($element, array('form-radio'));
+  _form_set_class($element, array('form-checkbox'));
   $variables['attributes_array'] = $element['#attributes'];
 }
