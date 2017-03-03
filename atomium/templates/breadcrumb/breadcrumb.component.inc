@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Breadcrumb.theme.inc.
+ * Contains component file.
  */
 
 /**

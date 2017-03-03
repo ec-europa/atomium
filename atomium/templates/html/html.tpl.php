@@ -2,7 +2,7 @@
 
 /**
  * @file
- * html.tpl.php
+ * Contains template file.
  */
 ?>
 <!DOCTYPE html>

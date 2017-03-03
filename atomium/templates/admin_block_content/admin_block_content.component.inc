@@ -2,7 +2,7 @@
 
 /**
  * @file
- * File admin_block.theme.inc.
+ * Contains component file.
  */
 
 /**

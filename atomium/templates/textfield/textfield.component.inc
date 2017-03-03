@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Textfield.theme.inc.
+ * Contains component file.
  */
 
 /**

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Comment_wrapper.theme.inc.
+ * Contains component file.
  */
 
 /**

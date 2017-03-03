@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Form_element.tpl.php.
+ * Contains template file.
  */
 ?>
 <div<?php print $attributes; ?>>

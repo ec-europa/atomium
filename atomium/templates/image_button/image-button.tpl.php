@@ -2,7 +2,7 @@
 
 /**
  * @file
- * image-button.tpl.php
+ * Contains template file.
  */
 ?>
 <input<?php print $attributes; ?>/>

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Container.theme.inc.
+ * Contains component file.
  */
 
 /**

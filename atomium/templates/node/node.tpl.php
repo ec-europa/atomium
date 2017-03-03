@@ -2,7 +2,7 @@
 
 /**
  * @file
- * node.tpl.php
+ * Contains template file.
  */
 ?>
 <article<?php print $attributes; ?>>

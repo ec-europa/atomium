@@ -2,7 +2,7 @@
 
 /**
  * @file
- * menu-local-tasks.tpl.php
+ * Contains template file.
  */
 ?>
 <?php if ($primary): ?>

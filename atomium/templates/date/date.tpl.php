@@ -2,7 +2,7 @@
 
 /**
  * @file
- * date.tpl.php
+ * Contains template file.
  */
 ?>
 <div<?php print $attributes; ?>><?php print render($date);?></div>

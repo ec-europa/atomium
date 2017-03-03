@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains image.tpl.php.
+ * Contains template file.
  */
 ?>
 <img<?php print $attributes; ?>/>

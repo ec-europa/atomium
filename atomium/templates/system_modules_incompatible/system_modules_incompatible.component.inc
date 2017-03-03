@@ -2,7 +2,7 @@
 
 /**
  * @file
- * System_modules_incompatible.theme.inc.
+ * Contains component file.
  */
 
 /**

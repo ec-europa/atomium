@@ -2,7 +2,7 @@
 
 /**
  * @file
- * fieldset.tpl.php
+ * Contains template file.
  */
 ?>
 <fieldset<?php print $attributes; ?>>

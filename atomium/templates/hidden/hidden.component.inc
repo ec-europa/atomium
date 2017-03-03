@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hidden.theme.inc.
+ * Contains component file.
  */
 
 /**

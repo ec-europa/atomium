@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Button.theme.inc.
+ * Contains component file.
  */
 
 /**

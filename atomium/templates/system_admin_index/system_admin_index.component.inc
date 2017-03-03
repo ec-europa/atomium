@@ -2,7 +2,7 @@
 
 /**
  * @file
- * File system_admin_index.theme.inc.
+ * Contains component file.
  */
 
 /**

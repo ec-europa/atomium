@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Node.preprocess.inc.
+ * Contains component file.
  */
 
 /**

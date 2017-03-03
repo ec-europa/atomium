@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Password.theme.inc.
+ * Contains component file.
  */
 
 /**

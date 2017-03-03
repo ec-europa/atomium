@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Mark.theme.inc.
+ * Contains component file.
  */
 
 /**

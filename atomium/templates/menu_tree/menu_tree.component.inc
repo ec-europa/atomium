@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Menu_tree.theme.inc.
+ * Contains component file.
  */
 
 /**

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Includes atomium_overview theme functions.
+ * Contains component file.
  */
 
 /**

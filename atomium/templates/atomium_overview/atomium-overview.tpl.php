@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Admin-page.tpl.php.
+ * Contains template file.
  */
 ?>
 

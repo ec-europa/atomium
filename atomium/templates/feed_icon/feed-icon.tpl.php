@@ -2,7 +2,7 @@
 
 /**
  * @file
- * feed-icon.tpl.php
+ * Contains template file.
  */
 ?>
 <?php print render($link); ?>

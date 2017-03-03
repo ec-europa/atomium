@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Admin_page.theme.inc.
+ * Contains component file.
  */
 
 /**

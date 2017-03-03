@@ -2,7 +2,7 @@
 
 /**
  * @file
- * form.process.inc
+ * Contains component file.
  */
 
 /**

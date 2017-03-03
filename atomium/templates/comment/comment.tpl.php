@@ -2,7 +2,7 @@
 
 /**
  * @file
- * comment.tpl.php
+ * Contains template file.
  */
 ?>
 <article <?php print $attributes; ?>>

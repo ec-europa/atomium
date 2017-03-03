@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Radio.theme.inc.
+ * Contains component file.
  */
 
 /**

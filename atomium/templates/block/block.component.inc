@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Block.theme.inc.
+ * Contains component file.
  */
 
 /**

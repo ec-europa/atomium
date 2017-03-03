@@ -2,7 +2,7 @@
 
 /**
  * @file
- * hidden.tpl.php
+ * Contains template file.
  */
 ?>
 <input<?php print $attributes; ?>/>

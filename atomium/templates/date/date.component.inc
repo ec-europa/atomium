@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Date.theme.inc.
+ * Contains component file.
  */
 
 /**

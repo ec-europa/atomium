@@ -2,7 +2,7 @@
 
 /**
  * @file
- * password.tpl.php
+ * Contains template file.
  */
 ?>
 <input<?php print $attributes; ?>/>

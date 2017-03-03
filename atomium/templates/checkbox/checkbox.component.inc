@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Checkbox.theme.inc.
+ * Contains component file.
  */
 
 /**

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * admin-block-content.tpl.php
+ * Contains template file.
  */
 ?>
 <dl<?php print $attributes; ?>>

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Link.tpl.php.
+ * Contains template file.
  */
 ?>
 <?php for ($n = 0; $n < $size; $n++): ?>

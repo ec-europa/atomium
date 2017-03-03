@@ -2,7 +2,7 @@
 
 /**
  * @file
- * username.tpl.php
+ * Contains template file.
  */
 ?>
 <?php print render($name); ?>

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * More_link.theme.inc.
+ * Contains component file.
  */
 
 /**

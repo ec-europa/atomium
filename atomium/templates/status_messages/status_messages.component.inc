@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Status_messages.theme.inc.
+ * Contains component file.
  */
 
 /**

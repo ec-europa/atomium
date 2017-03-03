@@ -2,7 +2,7 @@
 
 /**
  * @file
- * breadcrumb.tpl.php
+ * Contains template file.
  */
 ?>
 <nav<?php print $attributes; ?>><?php print render($links); ?></nav>

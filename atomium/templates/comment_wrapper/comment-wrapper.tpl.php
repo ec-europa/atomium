@@ -2,7 +2,7 @@
 
 /**
  * @file
- * comment-wrapper.tpl.php
+ * Contains template file.
  */
 ?>
 <aside <?php print $attributes; ?>>

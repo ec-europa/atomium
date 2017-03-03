@@ -2,7 +2,7 @@
 
 /**
  * @file
- * radio.tpl.php
+ * Contains template file.
  */
 ?>
 <input<?php print $attributes; ?>/>

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Feed_icon.theme.inc.
+ * Contains component file.
  */
 
 /**

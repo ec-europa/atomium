@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Fieldset.theme.inc.
+ * Contains component file.
  */
 
 /**

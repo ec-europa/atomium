@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Textarea.theme.inc.
+ * Contains component file.
  */
 
 /**

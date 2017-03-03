@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Image_button.theme.inc.
+ * Contains component file.
  */
 
 /**

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * File system-admin-index.tpl.php.
+ * Contains template file.
  */
 ?>
 <div<?php print $attributes; ?>>

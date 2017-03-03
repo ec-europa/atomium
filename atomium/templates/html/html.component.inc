@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Html.theme.inc.
+ * Contains component file.
  */
 
 /**

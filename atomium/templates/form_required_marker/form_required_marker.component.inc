@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Form_element_mark.theme.inc.
+ * Contains component file.
  */
 
 /**

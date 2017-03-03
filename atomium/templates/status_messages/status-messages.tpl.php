@@ -2,7 +2,7 @@
 
 /**
  * @file
- * status-messages.tpl.php
+ * Contains template file.
  */
 ?>
 <div>

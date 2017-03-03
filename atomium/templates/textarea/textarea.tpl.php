@@ -2,7 +2,7 @@
 
 /**
  * @file
- * textarea.tpl.php
+ * Contains template file.
  */
 ?>
 <div<?php print $wrapper_attributes; ?>>

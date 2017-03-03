@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Field.theme.inc.
+ * Contains component file.
  */
 
 /**

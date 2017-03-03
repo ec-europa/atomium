@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Indentation.theme.inc.
+ * Contains component file.
  */
 
 /**

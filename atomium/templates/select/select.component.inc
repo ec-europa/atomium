@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Select.theme.inc.
+ * Contains component file.
  */
 
 /**

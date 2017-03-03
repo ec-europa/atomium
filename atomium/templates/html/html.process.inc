@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Html.process.process.process.inc.
+ * Contains component file.
  */
 
 /**

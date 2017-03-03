@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Menu_local_tasks.theme.inc.
+ * Contains component file.
  */
 
 /**

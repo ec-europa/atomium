@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Page.preprocess.inc.
+ * Contains component file.
  */
 
 /**

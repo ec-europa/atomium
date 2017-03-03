@@ -2,7 +2,7 @@
 
 /**
  * @file
- * region.tpl.php
+ * Contains template file.
  */
 ?>
 <div<?php print $attributes; ?>><?php print $content; ?></div>

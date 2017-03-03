@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Region.preprocess.inc.
+ * Contains component file.
  */
 
 /**

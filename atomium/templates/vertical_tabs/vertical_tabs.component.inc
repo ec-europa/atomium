@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Vertical_tabs.theme.inc.
+ * Contains component file.
  */
 
 /**

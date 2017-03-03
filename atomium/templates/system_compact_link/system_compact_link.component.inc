@@ -2,7 +2,7 @@
 
 /**
  * @file
- * System_compact_link.theme.inc.
+ * Contains component file.
  */
 
 /**

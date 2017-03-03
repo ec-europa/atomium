@@ -2,7 +2,7 @@
 
 /**
  * @file
- * block.tpl.php
+ * Contains template file.
  */
 ?>
 <section<?php print $attributes; ?>>
