@@ -36,6 +36,20 @@ function atomium_theme(&$existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function atomium_menu_alter(&$items) {
+  $items['atomium-overview'] = [
+    'title' => 'Atomium overview',
+    'page callback' => 'theme',
+    'page arguments' => array('atomium_overview'),
+    'access arguments' => array('administer themes'),
+    'type' => MENU_CALLBACK,
+  ];
+  return $items;
+}
+
+/**
  * Clear any previously set element_info() static cache.
  *
  * If element_info() was invoked before the theme was fully initialized, this
