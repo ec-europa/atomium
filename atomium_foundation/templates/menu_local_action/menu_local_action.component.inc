@@ -2,7 +2,7 @@
 
 /**
  * @file
- * menu_local_action.preprocess.inc
+ * Menu_local_action.preprocess.inc.
  */
 
 /**

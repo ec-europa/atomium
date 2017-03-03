@@ -2,7 +2,7 @@
 
 /**
  * @file
- * table.preprocess.inc
+ * Table.preprocess.inc.
  */
 
 /**

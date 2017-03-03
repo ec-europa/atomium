@@ -2,7 +2,7 @@
 
 /**
  * @file
- * region.preprocess.inc
+ * Region.preprocess.inc.
  */
 
 /**

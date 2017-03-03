@@ -2,7 +2,7 @@
 
 /**
  * @file
- * menu_tree.preprocess.inc
+ * Menu_tree.preprocess.inc.
  */
 
 /**

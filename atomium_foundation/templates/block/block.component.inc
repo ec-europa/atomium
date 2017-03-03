@@ -2,7 +2,7 @@
 
 /**
  * @file
- * block.preprocess.inc
+ * Block.preprocess.inc.
  */
 
 /**

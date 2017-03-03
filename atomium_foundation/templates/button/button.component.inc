@@ -2,7 +2,7 @@
 
 /**
  * @file
- * button.preprocess.inc
+ * Button.preprocess.inc.
  */
 
 /**

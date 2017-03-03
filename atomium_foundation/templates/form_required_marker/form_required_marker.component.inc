@@ -2,18 +2,19 @@
 
 /**
  * @file
- * form_required_marker.preprocess.inc
+ * Form_required_marker.preprocess.inc.
  */
 
 /**
  * Implements hook_preprocess_form_required_marker().
  */
-function atomium_bootstrap_preprocess_form_required_marker(&$variables) {
+function atomium_foundation_preprocess_form_required_marker(&$variables) {
   $t = get_t();
 
   $attributes = array(
     'class' => array(
-      'badge',
+      'label',
+      'alert',
     ),
     'title' => $t('Required'),
   );

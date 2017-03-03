@@ -2,7 +2,7 @@
 
 /**
  * @file
- * status_messages.preprocess.inc
+ * Status_messages.preprocess.inc.
  */
 
 /**

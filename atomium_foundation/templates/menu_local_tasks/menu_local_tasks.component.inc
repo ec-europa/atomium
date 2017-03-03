@@ -2,7 +2,7 @@
 
 /**
  * @file
- * menu_local_tasks.preprocess.inc
+ * Menu_local_tasks.preprocess.inc.
  */
 
 /**

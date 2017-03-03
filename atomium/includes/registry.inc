@@ -62,7 +62,6 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
         $function_name = $theme . '_atomium_theme_' . $component;
         if (function_exists($function_name)) {
           $hooks = array_merge((array) call_user_func($function_name), $hooks);
-          $hooks[$component]['file'] = "templates/$component/$component.component.inc";
         }
       }
     }
@@ -167,7 +166,7 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
     foreach ($themes as $theme) {
       // Get the theme's base path.
       $path = drupal_get_path('theme', $theme);
-      $regexp = "/\." . $phase . ".inc$/";
+      $regexp = '/\.component\.inc$/';
       // Find theme function overrides.
       foreach (drupal_system_listing($regexp, $path . '/templates', 'name', 0) as $name => $file) {
         // Strip off the extension.

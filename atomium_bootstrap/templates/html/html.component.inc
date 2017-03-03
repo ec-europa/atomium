@@ -2,7 +2,7 @@
 
 /**
  * @file
- * html.preprocess.inc
+ * Html.preprocess.inc.
  */
 
 /**

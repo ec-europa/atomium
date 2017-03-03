@@ -2,7 +2,7 @@
 
 /**
  * @file
- * fieldset.preprocess.inc
+ * Fieldset.preprocess.inc.
  */
 
 /**

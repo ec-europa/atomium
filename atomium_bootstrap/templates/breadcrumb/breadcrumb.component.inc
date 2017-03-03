@@ -2,7 +2,7 @@
 
 /**
  * @file
- * breadcrumb.preprocess.inc
+ * Breadcrumb.preprocess.inc.
  */
 
 /**

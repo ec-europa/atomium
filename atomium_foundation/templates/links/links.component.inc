@@ -2,7 +2,7 @@
 
 /**
  * @file
- * links.preprocess.inc
+ * Links.preprocess.inc.
  */
 
 /**
