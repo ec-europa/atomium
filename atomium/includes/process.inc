@@ -29,7 +29,13 @@ function atomium_process(&$variables, $hook) {
       $variables[$new_variable] = NULL;
       if (!empty($variable_content) && is_array($variable_content)) {
         if (isset($variable_content['class'])) {
-          $variable_content['class'] = array_map('drupal_html_class', (array) $variable_content['class']);
+          // If this line is enabled, it will cause problem with the filter.js
+          // - are converted to _ and JS is not able to find the right
+          // object having the appropriate class.
+          /*
+           * $variable_content['class'] =
+           * array_map('drupal_html_class', (array) $variable_content['class']);
+           */
           $variable_content['class'] = array_unique($variable_content['class']);
         }
         if (isset($variable_content['placeholder'])) {
@@ -47,4 +53,5 @@ function atomium_process(&$variables, $hook) {
     array_walk($classes_array, 'drupal_html_class');
     $variables['classes'] = implode(' ', $classes_array);
   }
+
 }

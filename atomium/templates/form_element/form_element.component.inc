@@ -42,7 +42,17 @@ function atomium_preprocess_form_element(&$variables) {
       $attributes['class'] = array('form-item');
     }
   }
-
+  // Add element's #type and #name as class to aid with JS/CSS selectors.
+  $attributes['class'] = array('form-item');
+  if (!empty($element['#type'])) {
+    $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
+  }
+  if (!empty($element['#name'])) {
+    $attributes['class'][] = 'form-item-' . strtr(
+      $element['#name'],
+        array(' ' => '-', '_' => '-', '[' => '-', ']' => '')
+      );
+  }
   // Add a class for disabled elements to facilitate cross-browser styling.
   if (!empty($element['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-disabled';
@@ -80,5 +90,9 @@ function atomium_preprocess_form_element(&$variables) {
   $variables['label'] = array(
     '#theme' => 'form_element_label',
     '#element' => $variables['element'],
+  );
+  $variables['attributes_array'] = drupal_array_merge_deep(
+    $variables['attributes_array'],
+    $attributes
   );
 }

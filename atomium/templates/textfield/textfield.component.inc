@@ -51,7 +51,7 @@ function atomium_preprocess_textfield(&$variables) {
     $attributes['value'] = $element['#autocomplete_input']['#url_value'];
     $attributes['disabled'] = 'disabled';
     $attributes['class'][] = 'autocomplete';
-    $extra = '<input' . drupal_attributes($attributes) . ' />';
+    $extra = '<input' . atomium_drupal_attributes($attributes) . ' />';
   }
 
   if (isset($element['#field_name'])) {
