@@ -16,4 +16,6 @@ function atomium_preprocess_admin_block(&$variables, $hook) {
   if (isset($variables['block']['title'])) {
     $variables['theme_hook_suggestions'][] = 'admin_block__' . drupal_html_class($variables['block']['title']);
   }
+
+  $variables['content_attributes_array']['class'][] = 'body';
 }
