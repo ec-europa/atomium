@@ -1,9 +1,9 @@
 # Temporary files
 .tmp
+*.css.map
 
 # Ignore some folders
 node_modules
-dist
 
 # Logs
 logs

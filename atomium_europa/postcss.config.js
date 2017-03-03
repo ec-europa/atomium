@@ -1,11 +1,9 @@
 const params = process.env.NODE_ENV === 'production' ? {
-  output: 'dist/styles/europa.css',
   plugins: [
     'cssnano',
   ],
   map: 'file',
 } : {
-  output: 'static/styles/europa.css',
   plugins: [
     'autoprefixer',
   ],
@@ -14,6 +12,6 @@ const params = process.env.NODE_ENV === 'production' ? {
 
 module.exports = {
   use: params.plugins,
-  output: params.output,
+  output: 'dist/styles/europa.css',
   map: params.map,
 };

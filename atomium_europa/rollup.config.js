@@ -6,16 +6,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 
 const params = process.env.NODE_ENV === 'production' ? {
-  dest: 'dist/scripts/europa.js',
   sourceMap: false,
 } : {
-  dest: 'static/scripts/europa.js',
   sourceMap: 'inline',
 };
 
 export default {
   entry: './src/scripts.js',
-  dest: params.dest,
+  dest: 'dist/scripts/europa.js',
   format: 'iife',
   sourceMap: params.sourceMap,
   moduleName: 'Europa',
