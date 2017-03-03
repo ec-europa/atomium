@@ -233,7 +233,7 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
         if (isset($info['variables']) && !isset($info['variables']['attributes_array'])) {
           $registry[$hook]['variables']['attributes_array'] = array();
           // Special case, this must stay an array or else, you'll get error
-          // When visiting admin/report/updates.
+          // When visiting admin/reports/updates.
           $registry[$hook]['variables']['attributes'] = array();
         }
         if (isset($info['variables']) && !isset($info['variables']['content_attributes_array'])) {
