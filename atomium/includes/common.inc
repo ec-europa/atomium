@@ -253,7 +253,7 @@ function atomium_get_component_definitions() {
   foreach (atomium_find_templates() as $theme => $theme_data) {
     foreach ($theme_data as $component => $component_data) {
 
-      $file = sprintf('%s/%s.theme.inc', $component_data['directory'], $component);
+      $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
       if (file_exists($file)) {
         include_once $file;
       }

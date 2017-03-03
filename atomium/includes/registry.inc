@@ -56,18 +56,14 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
   foreach (atomium_find_templates() as $theme => $theme_data) {
     foreach ($theme_data as $component => $component_data) {
 
-      $file = sprintf('%s/%s.theme.inc', $component_data['directory'], $component);
+      $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
       if (file_exists($file)) {
         include_once $file;
-      }
-      $file = sprintf('%s/%s.preprocess.inc', $component_data['directory'], $component);
-      if (file_exists($file)) {
-        include_once $file;
-      }
-
-      $function_name = $theme . '_theme__' . $component;
-      if (function_exists($function_name)) {
-        $hooks = array_merge((array) call_user_func($function_name), $hooks);
+        $function_name = $theme . '_theme__' . $component;
+        if (function_exists($function_name)) {
+          $hooks = array_merge((array) call_user_func($function_name), $hooks);
+          $hooks[$component]['file'] = "templates/$component/$component.component.inc";
+        }
       }
     }
   }
