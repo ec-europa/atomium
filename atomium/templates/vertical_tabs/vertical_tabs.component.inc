@@ -12,7 +12,7 @@ function atomium_atomium_theme_vertical_tabs() {
   return array(
     'vertical_tabs' => array(
       'render element' => 'element',
-      'template' => 'vertical_tabs',
+      'template' => 'vertical-tabs',
     ),
   );
 }
