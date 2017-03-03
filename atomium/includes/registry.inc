@@ -107,6 +107,7 @@ function atomium_theme_registry_alter(&$registry) {
     if (!empty($registry[$hook]['process functions'])) {
       $registry[$hook]['process functions'] = array_unique($info['process functions']);
     }
+
     // Ensure "theme path" is set.
     if (!isset($registry[$hook]['theme path'])) {
       $registry[$hook]['theme path'] = $GLOBALS['theme_path'];
@@ -231,7 +232,9 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
         // @see https://drupal.org/node/2219965
         if (isset($info['variables']) && !isset($info['variables']['attributes_array'])) {
           $registry[$hook]['variables']['attributes_array'] = array();
-          $registry[$hook]['variables']['attributes'] = '';
+          // Special case, this must stay an array or else, you'll get error
+          // When visiting admin/report/updates.
+          $registry[$hook]['variables']['attributes'] = array();
         }
         if (isset($info['variables']) && !isset($info['variables']['content_attributes_array'])) {
           $registry[$hook]['variables']['content_attributes_array'] = array();
