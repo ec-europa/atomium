@@ -16,3 +16,17 @@ function atomium_theme__button() {
     ),
   );
 }
+
+/**
+ * Implements THEME_atomium_overview__HOOK().
+ */
+function atomium_atomium_overview__button() {
+  return array(
+    'label' => 'Button',
+    'description' => 'Button template.',
+    'preview' => array(
+      'type' => 'submit',
+      'value' => 'Save',
+    ),
+  );
+}
