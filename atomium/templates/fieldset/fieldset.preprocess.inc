@@ -13,6 +13,7 @@ function atomium_preprocess_fieldset(&$variables) {
     'attributes_array' => array(),
     'description' => '',
   );
+  $variables['title'] = '';
   if (isset($variables['element']['#title'])) {
     $variables['title'] = $variables['element']['#title'];
   }
