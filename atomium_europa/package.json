@@ -44,7 +44,8 @@
     "stylelint": "7.8.0",
     "stylelint-config-sass-guidelines": "2.0.0",
     "stylelint-config-standard": "16.0.0",
-    "stylelint-selector-bem-pattern": "1.0.0"
+    "stylelint-selector-bem-pattern": "1.0.0",
+    "tachyons": "^4.6.1"
   },
   "dependencies": {
     "@ec-europa/europa-component-library": "git+https://github.com/ec-europa/europa-component-library.git#702c7ca"

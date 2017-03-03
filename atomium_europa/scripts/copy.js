@@ -21,3 +21,12 @@ copy(path.resolve(frameworkDir, 'images'), path.resolve(dest, 'images'), (err) =
 
   return console.log('Images copied!');
 });
+
+// Copy Tachyons CSS.
+copy(path.resolve(path.resolve(__dirname, '../node_modules/tachyons'), 'css'), path.resolve(dest, 'styles'), (err) => {
+  if (err) {
+    return console.error(err);
+  }
+
+  return console.log('Tachyons CSS copied!');
+});
