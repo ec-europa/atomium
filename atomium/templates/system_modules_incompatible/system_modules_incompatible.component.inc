@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__system_modules_incompatible() {
+function atomium_atomium_theme_system_modules_incompatible() {
   return array(
     'system_modules_incompatible' => array(
       'variables' => array('message' => NULL),
@@ -18,7 +18,7 @@ function atomium_theme__system_modules_incompatible() {
 }
 
 /**
- * Implements hook_preprocess_system_modules_incompatible().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_system_modules_incompatible(&$variables) {
   $variables['attributes_array']['class'][] = 'incompatible';

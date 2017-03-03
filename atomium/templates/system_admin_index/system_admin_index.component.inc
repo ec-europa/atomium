@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__system_admin_index() {
+function atomium_atomium_theme_system_admin_index() {
   return array(
     'admin_page' => array(
       'template' => 'admin-page',
@@ -18,7 +18,7 @@ function atomium_theme__system_admin_index() {
 }
 
 /**
- * Implements hook_preprocess_system_admin_index().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_system_admin_index(&$variables, $hook) {
   $container = array('left' => '', 'right' => '');

@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__form_element_label() {
+function atomium_atomium_theme_form_element_label() {
   return array(
     'form_element_label' => array(
       'template' => 'form-element-label',
@@ -20,7 +20,7 @@ function atomium_theme__form_element_label() {
 }
 
 /**
- * Implements hook_preprocess_form_element_label().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_form_element_label(&$variables, $hook) {
   $element = &$variables['element'];

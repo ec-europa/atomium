@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__form_element_mark() {
+function atomium_atomium_theme_form_element_mark() {
   return array(
     'form_element_mark' => array(
       'render element' => 'element',
@@ -21,7 +21,7 @@ function atomium_theme__form_element_mark() {
 }
 
 /**
- * Implements hook_preprocess_form_required_marker().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_form_required_marker(&$variables, $hook) {
   $t = get_t();

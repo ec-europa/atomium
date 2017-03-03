@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__menu_local_tasks() {
+function atomium_atomium_theme_menu_local_tasks() {
   return array(
     'menu_local_tasks' => array(
       'render element' => 'element',
@@ -24,7 +24,7 @@ function atomium_theme__menu_local_tasks() {
 }
 
 /**
- * Implements hook_preprocess_menu_local_tasks().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
   $variables['primary_attributes_array'] = $variables['attributes_array'];

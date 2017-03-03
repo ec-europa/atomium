@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__comment_wrapper() {
+function atomium_atomium_theme_comment_wrapper() {
   return array(
     'comment_wrapper' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__comment_wrapper() {
 }
 
 /**
- * Implements hook_preprocess_comment_wrapper().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_comment_wrapper(&$variables) {
   $variables['attributes_array'] += array('class' => array());

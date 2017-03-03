@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_html().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_html(&$variables, $hook) {
   // Add variables and paths needed for HTML5 and responsive support.

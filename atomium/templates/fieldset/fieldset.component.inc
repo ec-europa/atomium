@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__fieldset() {
+function atomium_atomium_theme_fieldset() {
   return array(
     'fieldset' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__fieldset() {
 }
 
 /**
- * Implements hook_preprocess_fieldset().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_fieldset(&$variables) {
   $variables += array(

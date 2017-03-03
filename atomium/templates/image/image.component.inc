@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__image() {
+function atomium_atomium_theme_image() {
   return array(
     'image' => array(
       'template' => 'image',
@@ -25,7 +25,7 @@ function atomium_theme__image() {
 }
 
 /**
- * Implements hook_preprocess_image().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_image(&$variables) {
   $attributes = $variables['attributes'];

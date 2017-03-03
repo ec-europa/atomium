@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__button() {
+function atomium_atomium_theme_button() {
   return array(
     'button' => array(
       'render element' => 'element',
@@ -18,9 +18,9 @@ function atomium_theme__button() {
 }
 
 /**
- * Implements THEME_atomium_overview__HOOK().
+ * Implements hook_atomium_definition_HOOK().
  */
-function atomium_atomium_overview__button() {
+function atomium_atomium_definition_button() {
   return array(
     'label' => 'Button',
     'description' => 'Button template.',
@@ -32,7 +32,7 @@ function atomium_atomium_overview__button() {
 }
 
 /**
- * Implements hook_preprocess_button().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_button(&$variables) {
   $element = &$variables['element'];

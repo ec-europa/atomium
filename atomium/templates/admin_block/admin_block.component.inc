@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__admin_block() {
+function atomium_atomium_theme_admin_block() {
   return array(
     'admin_block' => array(
       'template' => 'admin-block',
@@ -17,7 +17,7 @@ function atomium_theme__admin_block() {
 }
 
 /**
- * Implements hook_preprocess_admin_block().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_admin_block(&$variables, $hook) {
   // If you want classes with double underscore.

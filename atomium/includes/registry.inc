@@ -59,7 +59,7 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
       $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
       if (file_exists($file)) {
         include_once $file;
-        $function_name = $theme . '_theme__' . $component;
+        $function_name = $theme . '_atomium_theme_' . $component;
         if (function_exists($function_name)) {
           $hooks = array_merge((array) call_user_func($function_name), $hooks);
           $hooks[$component]['file'] = "templates/$component/$component.component.inc";

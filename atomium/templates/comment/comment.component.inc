@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__comment() {
+function atomium_atomium_theme_comment() {
   return array(
     'comment' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__comment() {
 }
 
 /**
- * Implements hook_preprocess_comment().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_comment(&$variables) {
   if (isset($variables['elements']['#comment']->new) && $variables['elements']['#comment']->new) {

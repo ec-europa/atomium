@@ -258,7 +258,7 @@ function atomium_get_component_definitions() {
         include_once $file;
       }
 
-      $function_name = $theme . '_atomium_overview__' . $component;
+      $function_name = $theme . '_atomium_definition_' . $component;
       if (function_exists($function_name)) {
         $definition = call_user_func($function_name);
 

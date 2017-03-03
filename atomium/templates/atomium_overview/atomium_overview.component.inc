@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__atomium_overview() {
+function atomium_atomium_theme_atomium_overview() {
   return array(
     'atomium_overview' => array(
       'template' => 'atomium-overview',

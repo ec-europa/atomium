@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__admin_page() {
+function atomium_atomium_theme_admin_page() {
   return array(
     'admin_page' => array(
       'template' => 'admin-page',
@@ -18,7 +18,7 @@ function atomium_theme__admin_page() {
 }
 
 /**
- * Implements hook_preprocess_admin_page().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_admin_page(&$variables, $hook) {
   $variables['toggle_link'] = array(

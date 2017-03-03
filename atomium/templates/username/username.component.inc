@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__username() {
+function atomium_atomium_theme_username() {
   return array(
     'username' => array(
       'render element' => 'element',
@@ -19,7 +19,7 @@ function atomium_theme__username() {
 }
 
 /**
- * Implements hook_preprocess_username().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_username(&$variables) {
   if (isset($variables['uid'])) {

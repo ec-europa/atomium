@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_page().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_page(&$variables, $hook) {
   $variables['page_manager_control'] = NULL;

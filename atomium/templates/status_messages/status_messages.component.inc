@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__status_messages() {
+function atomium_atomium_theme_status_messages() {
   return array(
     'status_messages' => array(
       'variables' => array('display' => NULL),
@@ -18,7 +18,7 @@ function atomium_theme__status_messages() {
 }
 
 /**
- * Implements hook_preprocess_status_messages().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_status_messages(&$variables) {
   $display = $variables['display'];

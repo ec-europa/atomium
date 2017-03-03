@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_node().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_node(&$variables) {
   // One unified node teaser template.

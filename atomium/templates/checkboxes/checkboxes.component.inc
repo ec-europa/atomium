@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__checkboxes() {
+function atomium_atomium_theme_checkboxes() {
   return array(
     'checkboxes' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__checkboxes() {
 }
 
 /**
- * Implements hook_preprocess_checkboxes().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_checkboxes(&$variables) {
   $element = $variables['element'];

@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__textfield() {
+function atomium_atomium_theme_textfield() {
   return array(
     'textfield' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__textfield() {
 }
 
 /**
- * Implements hook_preprocess_textfield().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_textfield(&$variables) {
   $element = &$variables['element'];

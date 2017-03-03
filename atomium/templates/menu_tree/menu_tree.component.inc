@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__menu_tree() {
+function atomium_atomium_theme_menu_tree() {
   return array(
     'menu_tree' => array(
       'template' => 'menu-tree',
@@ -17,7 +17,7 @@ function atomium_theme__menu_tree() {
 }
 
 /**
- * Implements hook_preprocess_menu_tree().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_menu_tree(&$variables, $hook) {
   $variables['attributes_array']['class'][] = 'hook__' . $hook;

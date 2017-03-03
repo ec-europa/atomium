@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__system_compact_link() {
+function atomium_atomium_theme_system_compact_link() {
   return array(
     'system_compact_link' => array(
       'variables' => array('link' => array()),
@@ -18,7 +18,7 @@ function atomium_theme__system_compact_link() {
 }
 
 /**
- * Implements hook_preprocess_system_compact_link().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_system_compact_link(&$variables) {
   $variables['link'] = array(

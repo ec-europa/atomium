@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__menu_local_task() {
+function atomium_atomium_theme_menu_local_task() {
   return array(
     'menu_local_task' => array(
       'template' => 'menu-local-task',
@@ -22,7 +22,7 @@ function atomium_theme__menu_local_task() {
 }
 
 /**
- * Implements hook_preprocess_menu_local_task().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_menu_local_task(&$variables) {
   $link = $variables['link'];

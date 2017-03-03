@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__image_button() {
+function atomium_atomium_theme_image_button() {
   return array(
     'image_button' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__image_button() {
 }
 
 /**
- * Implements hook_preprocess_image_button().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_image_button(&$variables) {
   $element = $variables['element'];

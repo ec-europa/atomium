@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__select() {
+function atomium_atomium_theme_select() {
   return array(
     'select' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__select() {
 }
 
 /**
- * Implements hook_preprocess_select().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_select(&$variables) {
   $element = &$variables['element'];

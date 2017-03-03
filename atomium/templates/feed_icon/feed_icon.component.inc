@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__feed_icon() {
+function atomium_atomium_theme_feed_icon() {
   return array(
     'feed_icon' => array(
       'template' => 'feed-icon',
@@ -22,7 +22,7 @@ function atomium_theme__feed_icon() {
 }
 
 /**
- * Implements hook_preprocess_feed_icon().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_feed_icon(&$variables) {
   $variables['link'] = '';

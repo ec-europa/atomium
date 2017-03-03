@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__more_link() {
+function atomium_atomium_theme_more_link() {
   return array(
     'more_link' => array(
       'render element' => 'element',
@@ -19,7 +19,7 @@ function atomium_theme__more_link() {
 }
 
 /**
- * Implements hook_preprocess_more_link().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_more_link(&$variables) {
   $variables['link'] = array(

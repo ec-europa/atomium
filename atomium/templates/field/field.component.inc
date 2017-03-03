@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__field() {
+function atomium_atomium_theme_field() {
   return array(
     'field' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__field() {
 }
 
 /**
- * Implements hook_preprocess_field().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_field(&$variables) {
   $variables += array('attributes_array' => array());

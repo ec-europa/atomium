@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__html_tag() {
+function atomium_atomium_theme_html_tag() {
   return array(
     'html_tag' => array(
       'render element' => 'element',
@@ -18,7 +18,7 @@ function atomium_theme__html_tag() {
 }
 
 /**
- * Implements hook_preprocess_html_tag().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_html_tag(&$variables) {
   $element = &$variables['element'];

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_region().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_region(&$variables, $hook) {
   $classes = array(

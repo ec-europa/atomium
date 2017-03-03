@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__form_element() {
+function atomium_atomium_theme_form_element() {
   return array(
     'form_element' => array(
       'template' => 'form-element',
@@ -18,7 +18,7 @@ function atomium_theme__form_element() {
 }
 
 /**
- * Implements hook_preprocess_form_element().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_form_element(&$variables) {
   $element = &$variables['element'];

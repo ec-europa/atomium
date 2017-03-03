@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__breadcrumb() {
+function atomium_atomium_theme_breadcrumb() {
   return array(
     'breadcrumb' => array(
       'variables' => array('breadcrumb' => NULL),
@@ -18,9 +18,9 @@ function atomium_theme__breadcrumb() {
 }
 
 /**
- * Implements THEME_atomium_overview__HOOK().
+ * Implements hook_atomium_definition_HOOK().
  */
-function atomium_atomium_overview__breadcrumb() {
+function atomium_atomium_definition_breadcrumb() {
   return array(
     'label' => 'Breadcrumb',
     'description' => 'Site breadcrumb.',
@@ -35,7 +35,7 @@ function atomium_atomium_overview__breadcrumb() {
 }
 
 /**
- * Implements hook_preprocess_breadcrumb().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_breadcrumb(&$variables) {
   $variables['links'] = array(

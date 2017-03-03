@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements atomium_theme_alter__hook().
+ * Implements hook_atomium_theme_HOOK().
  */
-function atomium_theme__admin_block_content() {
+function atomium_atomium_theme_admin_block_content() {
   return array(
     'admin_block_content' => array(
       'template' => 'admin-block-content',
@@ -20,7 +20,7 @@ function atomium_theme__admin_block_content() {
 }
 
 /**
- * Implements hook_preprocess_admin_block_content().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_admin_block_content(&$variables, $hook) {
   $variables['compact'] = FALSE;
