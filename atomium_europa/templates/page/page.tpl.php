@@ -2,7 +2,7 @@
 
 /**
  * @file
- * page.tpl.php
+ * Contains template file.
  */
 ?>
 <header role="banner"><?php print render($page['header']); ?></header>
