@@ -18,4 +18,5 @@ function atomium_preprocess_admin_block(&$variables, $hook) {
   }
 
   $variables['content_attributes_array']['class'][] = 'body';
+  $variables['description_attributes_array']['class'][] = 'description';
 }
