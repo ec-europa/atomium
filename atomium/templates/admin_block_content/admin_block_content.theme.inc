@@ -12,6 +12,9 @@ function atomium_theme__admin_block_content() {
   return array(
     'admin_block_content' => array(
       'template' => 'admin-block-content',
+      'variables' => array(
+        'content' => NULL,
+      ),
     ),
   );
 }

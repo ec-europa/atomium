@@ -11,8 +11,8 @@
     <?php endif; ?>
 
     <?php if (!empty($block['content'])): ?>
-        <div<?php print $content_attributes; ?>><?php print $block['content']; ?></div>
+        <div<?php print $content_attributes; ?>><?php print render($block['content']); ?></div>
     <?php else: ?>
-        <div class="description"><?php print $block['description']; ?></div>
+        <div<?php print $description_attributes; ?>><?php print render($block['description']); ?></div>
     <?php endif; ?>
 </div>
