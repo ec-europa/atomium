@@ -13,5 +13,7 @@ function atomium_bootstrap_preprocess_links(&$variables) {
     return;
   }
 
-  $variables['attributes']['class'] = array('nav', 'nav-pills', 'nav-justified');
+  $variables['attributes_array']['class'][] = 'nav';
+  $variables['attributes_array']['class'][] = 'nav-pills';
+  $variables['attributes_array']['class'][] = 'nav-justified';
 }
