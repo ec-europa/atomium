@@ -124,10 +124,6 @@ function atomium_preprocess_block(&$variables) {
 
   $variables['classes_array'][] = drupal_html_class('block-' . $variables['block']->module);
 
-  $variables['theme_hook_suggestions'][] = 'block__' . $variables['block']->region;
-  $variables['theme_hook_suggestions'][] = 'block__' . $variables['block']->module;
-  $variables['theme_hook_suggestions'][] = 'block__' . $variables['block']->module . '__' . strtr($variables['block']->delta, '-', '_');
-
   // Create a valid HTML ID and make sure it is unique.
   $variables['block_html_id'] = drupal_html_id('block-' . $variables['block']->module . '-' . $variables['block']->delta);
 }
