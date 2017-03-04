@@ -6,12 +6,8 @@
  */
 ?>
 <?php if ($primary): ?>
-    <ul<?php print $primary_attributes; ?>>
-      <?php print render($primary); ?>
-    </ul>
+  <?php print render($primary); ?>
 <?php endif; ?>
 <?php if ($secondary): ?>
-    <ul<?php print $secondary_attributes; ?>>
-      <?php print render($secondary); ?>
-    </ul>
+  <?php print render($secondary); ?>
 <?php endif; ?>

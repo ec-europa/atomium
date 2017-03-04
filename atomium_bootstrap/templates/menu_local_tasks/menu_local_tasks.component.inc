@@ -9,8 +9,8 @@
  * Implements hook_preprocess_menu_local_tasks().
  */
 function atomium_bootstrap_preprocess_menu_local_tasks(&$variables) {
-  $variables['primary_attributes_array']['class'][] = 'nav';
-  $variables['primary_attributes_array']['class'][] = 'nav-tabs';
-  $variables['secondary_attributes_array']['class'][] = 'nav';
-  $variables['secondary_attributes_array']['class'][] = 'nav-pills';
+  $variables['primary']['#attributes']['class'][] = 'nav';
+  $variables['primary']['#attributes']['class'][] = 'nav-tabs';
+  $variables['secondary']['#attributes']['class'][] = 'nav';
+  $variables['secondary']['#attributes']['class'][] = 'nav-pills';
 }
