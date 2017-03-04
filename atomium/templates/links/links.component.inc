@@ -88,6 +88,11 @@ function atomium_preprocess_links(&$variables, $hook) {
           '#text' => $link['title'],
           '#path' => $link['href'],
           '#options' => $link,
+          '#context' => array(
+            'parents' => array(
+              $hook => $variables,
+            ),
+          ),
         );
       }
       elseif (!empty($link['title'])) {

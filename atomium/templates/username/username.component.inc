@@ -21,7 +21,7 @@ function atomium_atomium_theme_username() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_username(&$variables) {
+function atomium_preprocess_username(&$variables, $hook) {
   if (isset($variables['uid'])) {
     $variables['theme_hook_suggestions'][] = 'username__uid_' . $variables['uid'];
   }
@@ -39,6 +39,11 @@ function atomium_preprocess_username(&$variables) {
       '#text' => $variables['name'] . $variables['extra'],
       '#path' => $variables['link_path'],
       '#options' => $variables['link_options'],
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
+      ),
     );
   }
 }

@@ -23,6 +23,11 @@ function atomium_atomium_theme_admin_page() {
 function atomium_preprocess_admin_page(&$variables, $hook) {
   $variables['toggle_link'] = array(
     '#theme' => 'system_compact_link',
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
+      ),
+    ),
   );
 
   $stripe = 0;
@@ -39,6 +44,11 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
     $container[$block['position']]['content'][] = array(
       '#theme' => 'admin_block',
       '#block' => $block,
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
+      ),
     );
   }
 

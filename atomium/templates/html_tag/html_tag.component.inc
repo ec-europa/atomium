@@ -20,12 +20,12 @@ function atomium_atomium_theme_html_tag() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_html_tag(&$variables) {
+function atomium_preprocess_html_tag(&$variables, $hook) {
   $element = &$variables['element'];
 
   // Loop over element children, render them, and add them to the #value string.
   foreach (element_children($variables['element']) as $key) {
-    if ($variables['element']['#value'] === NULL) {
+    if (isset($variables['element']['#value']) && $variables['element']['#value'] === NULL) {
       // Set this to string to avoid E_NOTICE error when concatenating to NULL.
       $variables['element']['#value'] = '';
     }

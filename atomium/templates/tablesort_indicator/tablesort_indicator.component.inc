@@ -34,6 +34,11 @@ function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
         $variables['style'],
       ),
     ),
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
+      ),
+    ),
   );
 
   if ($variables['style'] == "asc") {

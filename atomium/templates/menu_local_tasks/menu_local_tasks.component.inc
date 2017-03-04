@@ -40,7 +40,9 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
     '#type' => $variables['type'],
     '#attributes' => $variables['primary_attributes_array'],
     '#context' => array(
-      $hook => $variables,
+      'parents' => array(
+        $hook => $variables,
+      ),
     ),
   );
   $variables['secondary'] = array(
@@ -49,7 +51,9 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
     '#type' => $variables['type'],
     '#attributes' => $variables['secondary_attributes_array'],
     '#context' => array(
-      $hook => $variables,
+      'parents' => array(
+        $hook => $variables,
+      ),
     ),
   );
 }

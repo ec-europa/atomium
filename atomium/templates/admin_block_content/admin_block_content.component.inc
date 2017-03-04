@@ -39,11 +39,21 @@ function atomium_preprocess_admin_block_content(&$variables, $hook) {
       '#text' => $item['title'],
       '#path' => $item['href'],
       '#options' => $item['localized_options'],
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
+      ),
     );
     if (!$variables['compact'] && isset($item['description'])) {
       $description = array(
         '#type' => 'markup',
         '#markup' => filter_xss_admin($item['description']),
+        '#context' => array(
+          'parents' => array(
+            $hook => $variables,
+          ),
+        ),
       );
     }
     $item = array(

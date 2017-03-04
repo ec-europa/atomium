@@ -5,6 +5,6 @@
  * Contains template file.
  */
 ?>
-<div>
-  <?php print render($messages); ?>
-</div>
+<?php if ($messages): ?>
+    <div><?php print render($messages); ?></div>
+<?php endif; ?>

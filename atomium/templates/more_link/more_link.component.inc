@@ -21,11 +21,16 @@ function atomium_atomium_theme_more_link() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_more_link(&$variables) {
+function atomium_preprocess_more_link(&$variables, $hook) {
   $variables['link'] = array(
     '#theme' => 'link',
     '#text' => t('More'),
     '#path' => $variables['url'],
     '#options' => array('attributes' => array('title' => $variables['title'])),
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
+      ),
+    ),
   );
 }

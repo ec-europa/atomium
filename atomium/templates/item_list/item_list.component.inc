@@ -46,7 +46,7 @@ function atomium_preprocess_item_list(&$variables, $hook) {
         $item += array('class' => array());
         $attributes['class'] = drupal_array_merge_deep($attributes['class'], $item['class']);
         $variables['items'][$key] = array(
-          '#type' => 'html_tag',
+          '#theme' => 'html_tag',
           '#tag' => 'li',
           '#attributes' => $attributes,
           '#value' => $item['data'],
@@ -60,7 +60,7 @@ function atomium_preprocess_item_list(&$variables, $hook) {
 
       if (is_string($item)) {
         $variables['items'][$key] = array(
-          '#type' => 'html_tag',
+          '#theme' => 'html_tag',
           '#tag' => 'li',
           '#attributes' => $attributes,
           '#value' => $item,

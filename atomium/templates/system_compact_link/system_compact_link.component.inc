@@ -20,7 +20,7 @@ function atomium_atomium_theme_system_compact_link() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_system_compact_link(&$variables) {
+function atomium_preprocess_system_compact_link(&$variables, $hook) {
   $variables['link'] = array(
     '#theme' => 'link',
     '#text' => NULL,
@@ -28,6 +28,11 @@ function atomium_preprocess_system_compact_link(&$variables) {
     '#options' => array(
       'attributes' => array(),
       'query' => drupal_get_destination(),
+    ),
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
+      ),
     ),
   );
 

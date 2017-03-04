@@ -24,7 +24,7 @@ function atomium_atomium_theme_feed_icon() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_feed_icon(&$variables) {
+function atomium_preprocess_feed_icon(&$variables, $hook) {
   $variables['link'] = '';
 
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
@@ -43,6 +43,11 @@ function atomium_preprocess_feed_icon(&$variables) {
         'attributes' => array(
           'class' => array('feed-icon'),
           'title' => $text,
+        ),
+      ),
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
         ),
       ),
     );

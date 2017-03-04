@@ -43,7 +43,7 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
     $items = array();
     foreach ($tipList as $key => $tip) {
       $items[$key] = array(
-        '#type' => 'html_tag',
+        '#theme' => 'html_tag',
         '#tag' => 'li',
         '#attributes' => array(
           'class' => array($name),
