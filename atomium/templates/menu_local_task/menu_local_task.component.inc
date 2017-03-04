@@ -24,7 +24,7 @@ function atomium_atomium_theme_menu_local_task() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_menu_local_task(&$variables) {
+function atomium_preprocess_menu_local_task(&$variables, $hook) {
   $link = $variables['link'];
   $link_text = $link['title'];
 
@@ -50,6 +50,11 @@ function atomium_preprocess_menu_local_task(&$variables) {
       '#options' => array(
         'attributes' => array('title' => $link_text),
         'html' => TRUE,
+      ),
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
       ),
     );
   }

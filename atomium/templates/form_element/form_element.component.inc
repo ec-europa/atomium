@@ -20,7 +20,7 @@ function atomium_atomium_theme_form_element() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_form_element(&$variables) {
+function atomium_preprocess_form_element(&$variables, $hook) {
   $element = &$variables['element'];
 
   // This function is invoked as theme wrapper, but the rendered form element
@@ -78,6 +78,11 @@ function atomium_preprocess_form_element(&$variables) {
       'text' => array(
         '#type' => 'markup',
         '#markup' => $element['#description'],
+      ),
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
       ),
     );
   }
