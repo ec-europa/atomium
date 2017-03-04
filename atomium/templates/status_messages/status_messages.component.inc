@@ -20,9 +20,7 @@ function atomium_atomium_theme_status_messages() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_status_messages(&$variables) {
-  $display = $variables['display'];
-
+function atomium_preprocess_status_messages(&$variables, $hook) {
   $status_heading = array(
     'status' => t('Status message'),
     'error' => t('Error message'),
@@ -30,7 +28,7 @@ function atomium_preprocess_status_messages(&$variables) {
   );
 
   $output = array();
-  foreach (drupal_get_messages($display) as $type => $messages) {
+  foreach (drupal_get_messages($variables['display']) as $type => $messages) {
     $container = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -38,16 +36,24 @@ function atomium_preprocess_status_messages(&$variables) {
           $type,
         ),
       ),
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
+      ),
+      'messages' => array(
+        '#theme' => 'item_list',
+        '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
+        '#items' => $messages,
+        '#type' => 'ul',
+        '#attributes' => array('class' => array()),
+        '#context' => array(
+          'parents' => array(
+            $hook => $variables,
+          ),
+        ),
+      ),
     );
-
-    $item_list = array(
-      '#theme' => 'item_list',
-      '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
-      '#items' => $messages,
-      '#type' => 'ul',
-      '#attributes' => array('class' => array()),
-    );
-    $container['value'] = $item_list;
 
     $output[$type] = $container;
   }
