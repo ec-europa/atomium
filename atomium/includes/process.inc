@@ -68,6 +68,7 @@ function atomium_process(&$variables, $hook) {
     if ('parents' == $name) {
       foreach ($contexts['parents'] as $parent_context) {
         $variables['theme_hook_suggestions'][] = $hook . '__' . $parent_context['theme_hook_original'];
+        $arguments[] = $parent_context['theme_hook_original'];
       }
       unset($variables['context']['parents']);
       continue;
