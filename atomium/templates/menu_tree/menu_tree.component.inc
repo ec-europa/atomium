@@ -24,4 +24,13 @@ function atomium_preprocess_menu_tree(&$variables, $hook) {
   if (isset($variables['theme_hook_original'])) {
     $variables['attributes_array']['class'][] = 'hook__' . $variables['theme_hook_original'];
   }
+
+  // Attach a context to each menu item.
+  foreach (element_children($variables['#tree']) as $item) {
+    $variables['#tree'][$item]['#context'] = array(
+      'parents' => array(
+        $hook => $variables,
+      ),
+    );
+  }
 }
