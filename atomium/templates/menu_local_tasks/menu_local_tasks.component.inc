@@ -32,7 +32,7 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
   $variables['secondary_attributes_array'] = $variables['attributes_array'];
 
   $variables['primary_attributes_array']['class'][] = 'hook__' . $hook . '__primary';
-  $variables['secondary_attributes_array']['class'][] = 'hook__' . $hook . '__primary';
+  $variables['secondary_attributes_array']['class'][] = 'hook__' . $hook . '__secondary';
 
   $variables['primary'] = array(
     '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__primary',
