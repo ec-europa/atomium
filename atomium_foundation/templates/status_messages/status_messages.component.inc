@@ -18,7 +18,7 @@ function atomium_foundation_preprocess_status_messages(&$variables) {
   foreach ($variables['messages'] as $type => &$messages) {
     $messages['#attributes'][] = 'data-closable';
     $messages['#attributes']['class'][] = 'callout';
-    $messages['#attributes']['class'][] = $status_mapping[$type];
+    $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
     $messages['value']['#attributes']['class'][] = 'no-bullet';
 
     // This is the only place where there is HTML.
