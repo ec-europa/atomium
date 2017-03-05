@@ -35,25 +35,17 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
   $variables['secondary_attributes_array']['class'][] = 'hook__' . $hook . '__primary';
 
   $variables['primary'] = array(
-    '#theme' => 'item_list',
+    '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__primary',
     '#items' => $variables['primary'],
     '#type' => $variables['type'],
     '#attributes' => $variables['primary_attributes_array'],
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
-      ),
-    ),
   );
   $variables['secondary'] = array(
-    '#theme' => 'item_list',
+    '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__secondary',
     '#items' => $variables['secondary'],
     '#type' => $variables['type'],
     '#attributes' => $variables['secondary_attributes_array'],
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
-      ),
-    ),
   );
+
+  $variables['context']['parents'][] = array($hook => $variables);
 }

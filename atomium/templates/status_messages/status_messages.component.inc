@@ -42,7 +42,7 @@ function atomium_preprocess_status_messages(&$variables, $hook) {
         ),
       ),
       'messages' => array(
-        '#theme' => 'item_list',
+        '#theme' => 'item_list__' . $variables['theme_hook_original'],
         '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
         '#items' => $messages,
         '#type' => 'ul',

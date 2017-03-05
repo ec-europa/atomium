@@ -35,7 +35,7 @@ function atomium_preprocess_username(&$variables, $hook) {
 
   if (isset($variables['link_path'])) {
     $variables['name'] = array(
-      '#theme' => 'link',
+      '#theme' => 'link__username__uid_' . $variables['uid'],
       '#text' => $variables['name'] . $variables['extra'],
       '#path' => $variables['link_path'],
       '#options' => $variables['link_options'],

@@ -31,7 +31,7 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
   $variables['attributes_array'] = drupal_array_merge_deep($element['#attributes'], $variables['attributes_array']);
   $variables['sub_menu'] = $sub_menu;
   $variables['output'] = array(
-    '#theme' => 'link',
+    '#theme' => 'link__' . $variables['theme_hook_original'],
     '#text' => $element['#title'],
     '#path' => $element['#href'],
     '#options' => $element['#localized_options'],

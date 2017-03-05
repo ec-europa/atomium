@@ -5,16 +5,20 @@
  * Contains template file.
  */
 ?>
-<div class="item-list">
+<div<?php print $attributes; ?>>
   <?php if (isset($title) && $title !== ''):?>
-    <h3><?php print $title; ?></h3>
+      <h3><?php print $title; ?></h3>
   <?php endif; ?>
 
-    <?php if (!empty($variables['items'])): ?>
+  <?php if (!empty($variables['items'])): ?>
+    <?php if ($type): ?>
       <<?php print $type; ?><?php print $attributes; ?>>
-        <?php foreach ($variables['items'] as $item): ?>
-            <?php print render($item); ?>
-        <?php endforeach; ?>
+    <?php endif; ?>
+    <?php foreach ($variables['items'] as $item): ?>
+      <?php print render($item); ?>
+    <?php endforeach; ?>
+    <?php if ($type): ?>
       </<?php print $type; ?>>
     <?php endif; ?>
+  <?php endif; ?>
 </div>

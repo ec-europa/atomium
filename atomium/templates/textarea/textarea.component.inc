@@ -20,7 +20,9 @@ function atomium_atomium_theme_textarea() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_textarea(&$variables) {
+function atomium_preprocess_textarea(&$variables, $hook) {
+  $variables['context']['parents'][] = array($hook => $variables);
+
   $element = &$variables['element'];
 
   element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
@@ -55,4 +57,10 @@ function atomium_preprocess_textarea(&$variables) {
 
   $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
   $variables['wrapper_attributes_array'] = $wrapper_attributes;
+
+  $element['#context'] = array(
+    'parents' => array(
+      $hook => $variables,
+    ),
+  );
 }

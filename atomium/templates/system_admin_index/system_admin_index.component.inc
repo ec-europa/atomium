@@ -34,13 +34,8 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
       $block = array();
       $block['title'] = $module;
       $block['content'] = array(
-        '#theme' => 'admin_block_content',
+        '#theme' => 'admin_block_content__' . $variables['theme_hook_original'],
         '#content' => $items,
-        '#context' => array(
-          'parents' => array(
-            $hook => $variables,
-          ),
-        ),
       );
       $block['description'] = t('@description', array('@description' => $description));
       $block['show'] = TRUE;
@@ -52,13 +47,8 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
       }
       $container[$block['position']]['attributes_array']['class'][] = $block['position'];
       $container[$block['position']]['content'][] = array(
-        '#theme' => 'admin_block',
+        '#theme' => 'admin_block_content__' . $variables['theme_hook_original'],
         '#block' => $block,
-        '#context' => array(
-          'parents' => array(
-            $hook => $variables,
-          ),
-        ),
       );
     }
   }

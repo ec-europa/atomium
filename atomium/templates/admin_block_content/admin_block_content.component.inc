@@ -31,19 +31,15 @@ function atomium_preprocess_admin_block_content(&$variables, $hook) {
       $variables['attributes_array']['class'][] = 'compact';
     }
   }
+  $variables['context']['parents'][] = array($hook => $variables);
 
   foreach ($variables['content'] as &$item) {
     $description = '';
     $link = array(
-      '#theme' => 'link',
+      '#theme' => 'link__' . $variables['theme_hook_original'],
       '#text' => $item['title'],
       '#path' => $item['href'],
       '#options' => $item['localized_options'],
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     );
     if (!$variables['compact'] && isset($item['description'])) {
       $description = array(

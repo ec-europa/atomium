@@ -43,7 +43,7 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
     $items = array();
     foreach ($tipList as $key => $tip) {
       $items[$key] = array(
-        '#theme' => 'html_tag',
+        '#theme' => 'html_tag__' . $variables['theme_hook_original'],
         '#tag' => 'li',
         '#attributes' => array(
           'class' => array($name),
@@ -59,7 +59,7 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
     }
 
     $composer[$name]['tips'] = array(
-      '#theme' => 'item_list',
+      '#theme' => 'item_list__' . $variables['theme_hook_original'],
       '#items' => $items,
       'type' => 'ul',
       '#context' => array(

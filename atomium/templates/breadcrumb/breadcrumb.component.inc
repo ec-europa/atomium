@@ -39,7 +39,7 @@ function atomium_atomium_definition_breadcrumb() {
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
   $variables['links'] = array(
-    '#theme' => 'item_list',
+    '#theme' => 'item_list__' . $variables['theme_hook_original'],
     '#items' => $variables['breadcrumb'],
     '#type' => 'ul',
     '#attributes' => $variables['attributes_array'],

@@ -49,7 +49,7 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
   $variables['required'] = '';
   if (isset($variables['element']['#required']) && $variables['element']['#required'] == TRUE) {
     $variables['required'] = array(
-      '#theme' => 'form_required_marker',
+      '#theme' => 'form_required_marker__' . $variables['theme_hook_original'],
       '#element' => $variables['element'],
       '#context' => array(
         'parents' => array(
@@ -57,11 +57,6 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
         ),
       ),
     );
-  }
-
-  if (isset($variables['element']['#parents'])) {
-    $parents = implode('__', $variables['element']['#parents']);
-    $variables['theme_hook_suggestions'][] = $hook . '__form-element-' . $parents;
   }
 
   if (isset($variables['element']['#name'])) {

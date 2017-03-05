@@ -5,6 +5,6 @@
  * Contains template file.
  */
 ?>
-<?php for ($n = 0; $n < $size; $n++): ?>
-  <div<?php print $attributes; ?>><?php print $indentation; ?></div>
-<?php endfor; ?>
+<?php if ($size): ?>
+    <div<?php print $attributes; ?>><?php print render($indentation); ?></div>
+<?php endif; ?>

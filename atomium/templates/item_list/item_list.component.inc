@@ -72,10 +72,15 @@ function atomium_preprocess_item_list(&$variables, $hook) {
         );
       }
 
+      if (isset($variables['items'][$key]['#theme'])) {
+        $variables['items'][$key]['#theme'] .= '__' . $variables['theme_hook_original'];
+      }
+
       $variables['items'][$key] += array('#attributes' => array());
       $variables['items'][$key]['#attributes'] = drupal_array_merge_deep($variables['items'][$key]['#attributes'], $attributes);
     }
   }
 
   $variables['attributes_array'] = $variables['attributes'];
+  $variables['attributes_array']['class'][] = 'item-list';
 }

@@ -24,7 +24,7 @@ function atomium_atomium_theme_filter_tips_more_info() {
  */
 function atomium_preprocess_filter_tips_more_info(&$variables, $hook) {
   $variables['link'] = array(
-    '#theme' => 'link',
+    '#theme' => 'link__' . $variables['theme_hook_original'],
     '#text' => t('More information about text formats'),
     '#path' => 'filter/tips',
     '#options' => array('attributes' => array('target' => '_blank')),

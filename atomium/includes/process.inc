@@ -57,6 +57,14 @@ function atomium_process(&$variables, $hook) {
   /* Theme hooks suggestions handling. */
   $arguments = arg();
   $contexts = array();
+
+  if (isset($variables['element']['#parents'])) {
+    $arguments = array_merge($arguments, array_filter($variables['element']['#parents']));
+  }
+
+  if (isset($variables['theme_hook_original']) && ($hook != $variables['theme_hook_original'])) {
+    $arguments[] = $variables['theme_hook_original'];
+  }
   if (isset($variables['context'])) {
     $contexts = $variables['context'];
   }
@@ -66,19 +74,20 @@ function atomium_process(&$variables, $hook) {
 
   foreach ($contexts as $name => $context) {
     if ('parents' == $name) {
-      foreach ($contexts['parents'] as $parent_context) {
-        $variables['theme_hook_suggestions'][] = $hook . '__' . $parent_context['theme_hook_original'];
-        $arguments[] = $parent_context['theme_hook_original'];
+      foreach (array_reverse($contexts['parents']) as $parent_context) {
+        if (isset($parent_context['theme_hook_original']) && ($hook != $parent_context['theme_hook_original'])) {
+          $arguments[] = $parent_context['theme_hook_original'];
+        }
       }
       unset($variables['context']['parents']);
       continue;
     }
-    if (!isset($context['theme_hook_original'])) {
+    if (isset($context['theme_hook_original'])) {
+      $arguments[] = $context['theme_hook_original'];
     }
-    $variables['theme_hook_suggestions'][] = $hook . '__' . $context['theme_hook_original'];
-    $arguments[] = $context['theme_hook_original'];
   }
 
+  $arguments = arg();
   // See how we can extend this properly.
   if ($suggestions = theme_get_suggestions($arguments, $hook)) {
     $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], $suggestions);

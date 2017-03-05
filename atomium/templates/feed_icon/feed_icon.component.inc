@@ -35,7 +35,7 @@ function atomium_preprocess_feed_icon(&$variables, $hook) {
     'alt' => $text,
   ))) {
     $variables['link'] = array(
-      '#theme' => 'link',
+      '#theme' => 'link__' . $variables['theme_hook_original'],
       '#text' => $image,
       '#path' => $variables['url'],
       '#options' => array(
