@@ -43,5 +43,4 @@ function atomium_preprocess_image(&$variables) {
   }
 
   $variables['attributes_array'] = $attributes;
-
 }

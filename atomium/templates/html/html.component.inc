@@ -120,7 +120,7 @@ function atomium_preprocess_html(&$variables, $hook) {
 function atomium_process_html(&$variables, $hook) {
   preg_match_all('/<script(?![^>]+src).*?>([\s\S]*?)<\/script>/s', $variables['scripts'], $matches, PREG_SET_ORDER);
   foreach ($matches as $match) {
-    if ($newtag = _atomium_convert_js_inline_to_file($match[1])) {
+    if ($newtag = _atomium_convert_js_inline_to_file($match[1], $variables, $hook)) {
       $variables['scripts'] = str_replace($match[0], $newtag, $variables['scripts']);
     }
   }
@@ -129,7 +129,7 @@ function atomium_process_html(&$variables, $hook) {
 /**
  * Custom callback.
  */
-function _atomium_convert_js_inline_to_file($data) {
+function _atomium_convert_js_inline_to_file($data, $variables, $hook) {
   $directory = "public://js";
   $path = $directory . '/' . sha1($data) . '.js';
 
@@ -150,12 +150,12 @@ function _atomium_convert_js_inline_to_file($data) {
 
   if (file_exists($path)) {
     $element['#attributes']['src'] = file_create_url($path) . '?' . $query_string;
-    return theme('html_tag', array('element' => $element));
+    return theme('html_tag__' . $variables['theme_hook_original'], array('element' => $element));
   }
 
   if ($path = file_unmanaged_save_data($data, $path, FILE_EXISTS_REPLACE)) {
     $element['#attributes']['src'] = file_create_url($path) . '?' . $query_string;
-    return theme('html_tag', array('element' => $element));
+    return theme('html_tag__' . $variables['theme_hook_original'], array('element' => $element));
   }
 
   return FALSE;
