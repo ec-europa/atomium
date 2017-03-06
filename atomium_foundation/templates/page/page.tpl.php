@@ -18,9 +18,7 @@
 <?php endif; ?>
 
 <div class="row">
-  <?php if ($page['sidebar_first']): ?>
-      <aside class="large-3 columns" role="complementary"><?php print render($page['sidebar_first']); ?></aside>
-  <?php endif; ?>
+    <?php print render($page['sidebar_first']); ?>
 
     <main class="large-9 columns" role="main">
       <?php print render($page['highlighted']); ?>
@@ -39,9 +37,7 @@
       <?php print $feed_icons; ?>
     </main>
 
-  <?php if ($page['sidebar_second']): ?>
-      <aside class="large-3 columns" role="complementary"><?php print render($page['sidebar_second']); ?></aside>
-  <?php endif; ?>
+    <?php print render($page['sidebar_second']); ?>
 </div>
 
 <div class="expanded row">
