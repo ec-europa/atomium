@@ -47,7 +47,7 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
       }
       $container[$block['position']]['attributes_array']['class'][] = $block['position'];
       $container[$block['position']]['content'][] = array(
-        '#theme' => 'admin_block_content__' . $variables['theme_hook_original'],
+        '#theme' => 'admin_block__' . $variables['theme_hook_original'],
         '#block' => $block,
       );
     }
