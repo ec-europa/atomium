@@ -34,6 +34,13 @@ function atomium_preprocess_menu_tree(&$variables, $hook) {
     );
   }
 
+  // Guess the depth of the menu tree by checking the depth key of a menu item.
+  $variables['depth'] = 1;
+  if ($item) {
+    $variables['depth'] = $variables['#tree'][$item]['#original_link']['depth'];
+  }
+  $variables['attributes_array']['class'][] = 'menu_tree-level-' . $variables['depth'];
+
   $variables[$hook] = array(
     '#markup' => $variables['tree'],
     '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
