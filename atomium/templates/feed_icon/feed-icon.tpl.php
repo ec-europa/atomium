@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($link); ?>
+<?php print render($feed_icon); ?>

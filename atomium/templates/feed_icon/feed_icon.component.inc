@@ -25,31 +25,28 @@ function atomium_atomium_theme_feed_icon() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_feed_icon(&$variables, $hook) {
-  $variables['link'] = '';
-
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
-  if ($image = theme('image', array(
-    'path' => 'misc/feed.png',
-    'width' => 16,
-    'height' => 16,
-    'alt' => $text,
-  ))) {
-    $variables['link'] = array(
-      '#theme' => 'link__' . $variables['theme_hook_original'],
-      '#text' => $image,
-      '#path' => $variables['url'],
-      '#options' => array(
-        'html' => TRUE,
-        'attributes' => array(
-          'class' => array('feed-icon'),
-          'title' => $text,
-        ),
+  $variables[$hook] = array(
+    '#theme' => 'link__' . $variables['theme_hook_original'],
+    '#text' => array(
+      '#theme' => 'image__' . $variables['theme_hook_original'],
+      '#path' => 'misc/feed.png',
+      '#width' => 16,
+      '#height' => 16,
+      '#alt' => $text,
+    ),
+    '#path' => $variables['url'],
+    '#options' => array(
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array('feed-icon'),
+        'title' => $text,
       ),
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
+    ),
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
       ),
-    );
-  }
+    ),
+  );
 }

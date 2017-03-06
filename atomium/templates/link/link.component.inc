@@ -49,8 +49,16 @@ function atomium_preprocess_link(&$variables, $hook) {
 
   $variables['text'] = ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text']));
 
+  if (is_string($variables['text'])) {
+    $variables['text'] = array(
+      '#markup' => $variables['text'],
+    );
+  }
+
   $variables[$hook] = array(
-    '#markup' => $variables['text'],
+    $hook => array(
+      $variables['text'],
+    ),
     '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
     '#tag' => 'a',
     '#attributes' => $variables['attributes_array'],
