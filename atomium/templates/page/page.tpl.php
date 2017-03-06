@@ -8,7 +8,7 @@
 <header role="banner"><?php print render($page['header']); ?></header>
 
 <?php if ($page['sidebar_first']): ?>
-<aside role="complementary"><?php print render($page['sidebar_first']); ?></aside>
+<?php print render($page['sidebar_first']); ?>
 <?php endif; ?>
 
 <main role="main">
@@ -29,7 +29,7 @@
 </main>
 
 <?php if ($page['sidebar_second']): ?>
-<aside role="complementary"><?php print render($page['sidebar_second']); ?></aside>
+<?php print render($page['sidebar_second']); ?>
 <?php endif; ?>
 
 <footer role="contentinfo"><?php print render($page['footer']); ?></footer>

@@ -27,7 +27,7 @@ if (!empty($page['header'])): ?>
 <div class="container">
     <div class="row">
       <?php if ($page['sidebar_first']): ?>
-          <aside class="col-md-3" role="complementary"><?php print render($page['sidebar_first']); ?></aside>
+          <?php print render($page['sidebar_first']); ?>
       <?php endif; ?>
 
         <main class="col-md-9" role="main">
@@ -46,7 +46,7 @@ if (!empty($page['header'])): ?>
         </main>
 
       <?php if ($page['sidebar_second']): ?>
-          <aside class="col-md-3 columns" role="complementary"><?php print render($page['sidebar_second']); ?></aside>
+          <?php print render($page['sidebar_second']); ?>
       <?php endif; ?>
     </div>
 </div>

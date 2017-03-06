@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_menu_tree().
  */
-function atomium_bootstrap_preprocess_menu_tree(&$variables) {
-  $variables['attributes_array']['class'][] = 'nav';
-  $variables['attributes_array']['class'][] = 'nav-stacked';
+function atomium_bootstrap_preprocess_menu_tree(&$variables, $hook) {
+  $variables[$hook]['#attributes']['class'][] = 'nav';
+  $variables[$hook]['#attributes']['class'][] = 'nav-stacked';
 }

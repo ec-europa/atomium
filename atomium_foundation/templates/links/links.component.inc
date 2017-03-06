@@ -15,4 +15,6 @@ function atomium_foundation_preprocess_links(&$variables) {
 
   $variables['links']['#attributes']['class'][] = 'no-bullet';
   $variables['links']['#attributes']['class'][] = 'menu';
+  $variables['links']['#attributes']['class'][] = 'expanded';
+  $variables['links']['#attributes']['class'][] = 'simple';
 }
