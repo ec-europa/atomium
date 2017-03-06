@@ -5,7 +5,7 @@
  * Contains template file.
  */
 ?>
-<div<?php print $attributes; ?>>
+<div<?php print $wrapper_attributes; ?>>
   <?php if (isset($title) && $title !== ''):?>
       <h3><?php print $title; ?></h3>
   <?php endif; ?>

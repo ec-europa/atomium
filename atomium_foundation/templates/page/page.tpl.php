@@ -25,13 +25,15 @@
     <main class="large-9 columns" role="main">
       <?php print render($page['highlighted']); ?>
       <?php print render($title_prefix); ?>
-      <?php if ($title): ?><h1><?php print $title; ?></h1><?php
-      endif; ?>
+      <?php if ($title): ?>
+          <h1><?php print $title; ?></h1>
+      <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php print render($tabs); ?>
-      <?php if ($action_links): ?><div class="button-group expanded"><?php print render($action_links); ?></div><?php
-      endif; ?>
+      <?php if ($action_links): ?>
+          <div class="menu menu-centered expanded button-group item-list"><?php print render($action_links); ?></div>
+      <?php endif; ?>
       <?php print render($page['help']); ?>
       <?php print render($page['content']); ?>
       <?php print $feed_icons; ?>

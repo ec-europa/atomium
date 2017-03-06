@@ -82,5 +82,5 @@ function atomium_preprocess_item_list(&$variables, $hook) {
   }
 
   $variables['attributes_array'] = $variables['attributes'];
-  $variables['attributes_array']['class'][] = 'item-list';
+  $variables['wrapper_attributes_array']['class'][] = 'item-list';
 }
