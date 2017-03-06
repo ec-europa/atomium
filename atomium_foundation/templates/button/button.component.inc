@@ -29,4 +29,8 @@ function atomium_foundation_preprocess_button(&$variables) {
         $variables['attributes_array']['class'][] = 'secondary';
     }
   }
+
+  if (isset($variables['attributes_array']['value']) && t('Delete') == $variables['attributes_array']['value']) {
+    $variables['attributes_array']['class'][] = 'alert';
+  }
 }
