@@ -5,6 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php if($title): ?>
-    <span<?php print $attributes; ?>><?php print render($title); ?></span>
-<?php endif; ?>
+<?php print render($mark); ?>

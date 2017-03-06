@@ -45,4 +45,14 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
   if (isset($variables['element']['#original_link']['mlid'])) {
     $variables['theme_hook_suggestions'][] = 'menu_link__' . $variables['element']['#original_link']['mlid'];
   }
+
+  $variables[$hook] = array(
+    $hook => array(
+      $variables['output'],
+      $variables['sub_menu'],
+    ),
+    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#tag' => 'li',
+    '#attributes' => $variables['attributes_array'],
+  );
 }

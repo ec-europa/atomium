@@ -32,18 +32,24 @@ function atomium_preprocess_indentation(&$variables, $hook) {
     )
   );
 
-  $variables['indentation'] = array(
-    '#theme' => 'item_list__' . $variables['theme_hook_original'],
-    '#type' => '',
-    '#items' => $variables['indentation'],
-    '#attributes' => array(
-      'class' => array(
-        'indentation',
-        'size_' . $variables['size'],
-      ),
-    ),
-  );
-
   $variables['attributes_array']['class'][] = 'indentation';
-  $variables['wrapper_attributes_array']['class'][] = 'indentation';
+
+  $variables[$hook] = '';
+  if ($variables['size'] > 0) {
+    $variables[$hook] = array(
+      $hook => array(
+        '#theme' => 'item_list__' . $variables['theme_hook_original'],
+        '#type' => '',
+        '#items' => $variables['indentation'],
+        '#attributes' => array(
+          'class' => array(
+            'indentation',
+            'size_' . $variables['size'],
+          ),
+        ),
+      ),
+      '#theme_wrappers' => array('container__' . $variables['theme_hook_original']),
+      '#attributes' => $variables['attributes_array'],
+    );
+  }
 }

@@ -33,4 +33,11 @@ function atomium_preprocess_menu_tree(&$variables, $hook) {
       ),
     );
   }
+
+  $variables[$hook] = array(
+    '#markup' => $variables['tree'],
+    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#tag' => 'ul',
+    '#attributes' => $variables['attributes_array'],
+  );
 }

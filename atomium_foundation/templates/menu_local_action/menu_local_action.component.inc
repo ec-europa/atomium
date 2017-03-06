@@ -8,8 +8,8 @@
 /**
  * Implements hook_preprocess_menu_local_action().
  */
-function atomium_foundation_preprocess_menu_local_action(&$variables) {
-  $variables['menu_link']['#options']['attributes']['class'] = array(
+function atomium_foundation_preprocess_menu_local_action(&$variables, $hook) {
+  $variables[$hook][$hook]['#options']['attributes']['class'] = array(
     'small',
     'button',
     'secondary',

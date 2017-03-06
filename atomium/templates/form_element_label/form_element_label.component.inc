@@ -42,7 +42,9 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
 
   $variables['title'] = '';
   if (isset($element['#title'])) {
-    $variables['title'] = $t(filter_xss_admin($element['#title']));
+    $variables['title'] = array(
+      '#markup' => $t(filter_xss_admin($element['#title'])),
+    );
   }
 
   // TODO: See how we can improve this.
@@ -62,4 +64,14 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
   if (isset($variables['element']['#name'])) {
     $variables['attributes_array']['class'][] = 'hook__' . $hook . '__' . $variables['element']['#name'];
   }
+
+  $variables[$hook] = array(
+    'content' => array(
+      $variables['title'],
+      $variables['required'],
+    ),
+    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#tag' => 'label',
+    '#attributes' => $variables['attributes_array'],
+  );
 }

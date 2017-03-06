@@ -52,5 +52,8 @@ function atomium_preprocess_update_status_label(&$variables) {
   $variables['attributes_array']['class'][] = $class;
   $variables['text'] = array(
     '#markup' => $text,
+    '#attributes' => $variables['attributes_array'],
+    '#theme_wrappers' => array('html_tag__update_status_label'),
+    '#tag' => 'span',
   );
 }

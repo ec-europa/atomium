@@ -32,5 +32,7 @@ function atomium_preprocess_more_link(&$variables, $hook) {
         $hook => $variables,
       ),
     ),
+    '#theme_wrappers' => array('container__' . $variables['theme_hook_original']),
+    '#attributes' => $variables['attributes_array'],
   );
 }

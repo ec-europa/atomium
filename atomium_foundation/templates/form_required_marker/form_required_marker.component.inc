@@ -8,17 +8,15 @@
 /**
  * Implements hook_preprocess_form_required_marker().
  */
-function atomium_foundation_preprocess_form_required_marker(&$variables) {
+function atomium_foundation_preprocess_form_required_marker(&$variables, $hook) {
   $t = get_t();
 
-  $attributes = array(
+  $variables[$hook]['#markup'] = $t('Required');
+  $variables[$hook]['#attributes'] = array(
     'class' => array(
       'label',
       'alert',
     ),
     'title' => $t('Required'),
   );
-
-  $variables['attributes_array'] = $attributes;
-  $variables['title'] = $t('Required');
 }

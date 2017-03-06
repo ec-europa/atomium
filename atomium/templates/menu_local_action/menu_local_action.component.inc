@@ -47,4 +47,10 @@ function atomium_preprocess_menu_local_action(&$variables, $hook) {
     $variables['menu_link'] = check_plain($link['title']);
   }
 
+  $variables[$hook] = array(
+    $hook => $variables['menu_link'],
+    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#tag' => 'li',
+    '#attributes' => $variables['attributes_array'],
+  );
 }

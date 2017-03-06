@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<ul<?php print $attributes; ?>><?php print $variables['tree']; ?></ul>
+<?php print render($menu_tree); ?>

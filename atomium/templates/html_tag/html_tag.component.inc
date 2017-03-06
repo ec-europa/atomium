@@ -39,7 +39,7 @@ function atomium_preprocess_html_tag(&$variables, $hook) {
     $variables['theme_hook_suggestions'][] = 'html_tag__' . $variables['element']['#tag'];
   }
 
-  $element += array('#value' => '');
+  $element += array('#value' => '', '#children' => '');
 
   // Remove type="..." and CDATA prefix/suffix.
   unset($element['#attributes']['type'], $element['#value_prefix'], $element['#value_suffix']);

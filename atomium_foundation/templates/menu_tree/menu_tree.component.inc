@@ -8,8 +8,8 @@
 /**
  * Implements hook_preprocess_menu_tree().
  */
-function atomium_foundation_preprocess_menu_tree(&$variables) {
-  $variables['attributes_array']['class'][] = 'menu';
-  $variables['attributes_array']['class'][] = 'nested';
-  $variables['attributes_array']['class'][] = 'vertical';
+function atomium_foundation_preprocess_menu_tree(&$variables, $hook) {
+  $variables[$hook]['#attributes']['class'][] = 'menu';
+  $variables[$hook]['#attributes']['class'][] = 'nested';
+  $variables[$hook]['#attributes']['class'][] = 'vertical';
 }

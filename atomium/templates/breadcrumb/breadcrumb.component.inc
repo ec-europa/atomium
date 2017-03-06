@@ -38,15 +38,20 @@ function atomium_atomium_definition_breadcrumb() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
-  $variables['links'] = array(
-    '#theme' => 'item_list__' . $variables['theme_hook_original'],
-    '#items' => $variables['breadcrumb'],
-    '#type' => 'ul',
-    '#attributes' => $variables['attributes_array'],
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
+  $variables[$hook] = array(
+    $hook => array(
+      '#theme' => 'item_list__' . $variables['theme_hook_original'],
+      '#items' => $variables['breadcrumb'],
+      '#type' => 'ul',
+      '#attributes' => $variables['attributes_array'],
+      '#context' => array(
+        'parents' => array(
+          $hook => $variables,
+        ),
       ),
     ),
+    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#tag' => 'nav',
+    '#attributes' => $variables['wrapper_attributes_array'],
   );
 }

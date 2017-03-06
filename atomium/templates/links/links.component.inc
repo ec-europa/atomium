@@ -31,7 +31,6 @@ function atomium_atomium_theme_links() {
 function atomium_preprocess_links(&$variables, $hook) {
   global $language_url;
 
-  $links = &$variables['links'];
   $heading = $variables['heading'];
 
   $variables['attributes_array'] = drupal_array_merge_deep(
@@ -40,7 +39,8 @@ function atomium_preprocess_links(&$variables, $hook) {
   );
   $variables['attributes_array']['class'][] = 'links';
 
-  if (count($links) > 0) {
+  $count = count($variables['links']);
+  if ($count > 0) {
     // Treat the heading first if it is present to prepend it to the
     // list of links.
     if (!empty($variables['heading'])) {
@@ -61,10 +61,10 @@ function atomium_preprocess_links(&$variables, $hook) {
       $variables['heading']['text'] = check_plain($variables['heading']['text']);
     }
 
-    $num_links = count($links);
+    $num_links = $count;
     $i = 1;
 
-    foreach ($links as $key => &$link) {
+    foreach ($variables['links'] as $key => $link) {
       $link['attributes_array'] = array('class' => array($key));
       $link['span_attributes_array'] = array();
 
@@ -83,7 +83,7 @@ function atomium_preprocess_links(&$variables, $hook) {
 
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
-        $link['text'] = array(
+        $newlink = array(
           '#theme' => 'link__' . $variables['theme_hook_original'],
           '#text' => $link['title'],
           '#path' => $link['href'],
@@ -93,24 +93,45 @@ function atomium_preprocess_links(&$variables, $hook) {
               $hook => $variables,
             ),
           ),
+          '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+          '#tag' => 'li',
+          '#attributes' => $link['attributes_array'],
         );
       }
-      elseif (!empty($link['title'])) {
-        // Some links are actually not links, but we wrap these in <span> for
-        // adding title and class attributes.
-        if (empty($link['html'])) {
-          $link['text'] = check_plain($link['title']);
-        }
 
+      if (isset($link['title']) && !empty($link['title']) && empty($link['href'])) {
         $link['span_attributes_array'] = array();
         if (isset($link['attributes_array'])) {
           $link['span_attributes_array'] = $link['attributes_array'];
         }
+
+        // Some links are actually not links, but we wrap these in <span> for
+        // adding title and class attributes.
+        if (empty($link['html'])) {
+          $newlink = array(
+            'link' => array(
+              '#markup' => check_plain($link['title']),
+              '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+              '#tag' => 'span',
+              '#attributes' => $link['span_attributes_array'],
+            ),
+            '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+            '#tag' => 'li',
+            '#attributes' => $link['attributes_array'],
+          );
+        }
       }
 
       $i++;
-      $link['attributes'] = atomium_drupal_attributes($link['attributes_array']);
-      $link['span_attributes'] = atomium_drupal_attributes($link['span_attributes_array']);
+
+      $new_links[] = $newlink;
     }
+
+    $variables['links'] = array(
+      '#theme' => 'item_list__' . $variables['theme_hook_original'],
+      '#items' => $new_links,
+      '#type' => 'ul',
+      '#attributes' => $variables['attributes_array'],
+    );
   }
 }

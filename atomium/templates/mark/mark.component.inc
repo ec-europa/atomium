@@ -24,7 +24,7 @@ function atomium_atomium_theme_mark() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_mark(&$variables) {
+function atomium_preprocess_mark(&$variables, $hook) {
   global $user;
   $type = $variables['type'];
 
@@ -36,5 +36,16 @@ function atomium_preprocess_mark(&$variables) {
       $variables['title'] = !empty($variables['title']) ? $variables['title'] : t('updated');
     }
   }
+
   $variables['attributes_array']['class'][] = 'marker';
+
+  $variables[$hook] = '';
+  if (!empty($variables['title'])) {
+    $variables[$hook] = array(
+      '#markup' => $variables['title'],
+      '#theme_wrappers' => array('html_tag__mark'),
+      '#tag' => 'span',
+      '#attributes' => $variables['attributes_array'],
+    );
+  }
 }

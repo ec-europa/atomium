@@ -8,9 +8,8 @@
 /**
  * Implements hook_preprocess_breadcrumb().
  */
-function atomium_foundation_preprocess_breadcrumb(&$variables) {
-  $variables['links']['#attributes']['class'][] = 'no-bullet';
-  $variables['wrapper_attributes_array'] = array(
+function atomium_foundation_preprocess_breadcrumb(&$variables, $hook) {
+  $variables[$hook]['#attributes'] = array(
     'class' => array(
       'breadcrumbs',
     ),
@@ -18,4 +17,5 @@ function atomium_foundation_preprocess_breadcrumb(&$variables) {
     'role' => 'navigation',
     'aria-label' => t('You are here'),
   );
+  $variables[$hook][$hook]['#attributes']['class'][] = 'no-bullet';
 }
