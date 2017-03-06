@@ -203,9 +203,9 @@ function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
     // TODO: Can we do this in another way ?
     $data = array_map('trim', (array) $data);
-    $data = array_filter($data);
+    $data = array_filter($data, 'strlen');
     $data = array_unique($data);
-    $value = implode(' ', $data);
+    $value = implode(' ', (array) $data);
 
     if (!is_numeric($attribute)) {
       $data = $attribute . '="' . check_plain($value) . '"';

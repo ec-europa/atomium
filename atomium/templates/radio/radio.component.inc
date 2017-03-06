@@ -21,7 +21,7 @@ function atomium_atomium_theme_radio() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_radio(&$variables) {
-  $element = $variables['element'];
+  $element = &$variables['element'];
   $element['#attributes']['type'] = 'radio';
   element_set_attributes(
     $element,

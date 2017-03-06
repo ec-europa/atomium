@@ -23,7 +23,10 @@ function atomium_process(&$variables, $hook) {
   foreach ($variables as $variable_name => $variable_content) {
     if (strpos($variable_name, 'attributes_array') !== FALSE && !in_array($variable_name, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
       $variable_content = array_filter($variable_content, function ($value) {
-        return ($value !== NULL && $value !== FALSE && $value !== '' && !empty($value));
+        if (!is_array($value)) {
+          return (strlen($value) != 0);
+        }
+        return $value;
       });
       $new_variable = substr($variable_name, 0, -6);
       $variables[$new_variable] = NULL;

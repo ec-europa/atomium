@@ -126,4 +126,25 @@ function atomium_preprocess_block(&$variables) {
 
   // Create a valid HTML ID and make sure it is unique.
   $variables['block_html_id'] = drupal_html_id('block-' . $variables['block']->module . '-' . $variables['block']->delta);
+
+  $variables['title']['#markup'] = '';
+  if ($variables['block']->title) {
+    $variables['title'] = array(
+      '#markup' => $variables['block']->title,
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#tag' => 'h2',
+      '#attributes' => $variables['title_attributes_array'],
+    );
+  }
+
+  if ($variables['content']) {
+    $variables['content'] = array(
+      '#markup' => $variables['content'],
+      '#theme_wrappers' => array('container__' . $variables['theme_hook_original']),
+      '#attributes' => $variables['content_attributes_array'],
+    );
+  }
+  else {
+    $variables['content'] = '';
+  }
 }
