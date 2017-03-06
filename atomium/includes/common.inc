@@ -202,7 +202,12 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 function atomium_drupal_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
     // TODO: Can we do this in another way ?
-    $data = array_map('trim', (array) $data);
+    $data = array_map(function ($item) {
+      if (!is_object($item)) {
+        return trim($item);
+      }
+      return $item;
+    }, (array) $data);
     $data = array_filter($data, 'strlen');
     $data = array_unique($data);
     $value = implode(' ', (array) $data);
