@@ -9,6 +9,14 @@
     <header role="banner"><?php print render($page['header']); ?></header>
 </div>
 
+<?php if (!empty($page['menu'])): ?>
+    <div class="row">
+        <div class="larger-12 columns">
+          <?php print render($page['menu']); ?>
+        </div>
+    </div>
+<?php endif; ?>
+
 <?php if (!empty($breadcrumb)): ?>
     <div class="row">
         <div class="larger-12 columns">

@@ -22,22 +22,22 @@ function atomium_css_alter(&$css) {
   }
 
   $exclude = array(
-    /*
-     'misc/vertical-tabs.css' => FALSE,
-     'modules/dblog/dblog.css' => FALSE,
-     'modules/file/file.css' => FALSE,
-     'modules/forum/forum.css' => FALSE,
-     'modules/openid/openid.css' => FALSE,
-     'modules/statistics/statistics.css' => FALSE,
-     'modules/syslog/syslog.css' => FALSE,
-     'modules/system/admin.css' => FALSE,
-     'modules/system/maintenance.css' => FALSE,
-     'modules/system/system.css' => FALSE,
-     'modules/system/system.admin.css' => FALSE,
-     'modules/system/system.maintenance.css' => FALSE,
-     'modules/update/update.css' => FALSE,
-     'modules/system/system.base.css' => FALSE,
-    */
+  // 'modules/contextual/contextual.css' => FALSE,.
+  // 'misc/vertical-tabs.css' => FALSE,.
+  // 'modules/update/update.css' => FALSE,.
+    'modules/field/theme/field.css' => FALSE,
+    'modules/dblog/dblog.css' => FALSE,
+    'modules/file/file.css' => FALSE,
+    'modules/forum/forum.css' => FALSE,
+    'modules/openid/openid.css' => FALSE,
+    'modules/statistics/statistics.css' => FALSE,
+    'modules/syslog/syslog.css' => FALSE,
+    'modules/system/maintenance.css' => FALSE,
+    'modules/system/system.css' => FALSE,
+    'modules/system/system.maintenance.css' => FALSE,
+    'modules/system/admin.css' => FALSE,
+    'modules/system/system.admin.css' => FALSE,
+    'modules/system/system.base.css' => FALSE,
     'modules/aggregator/aggregator.css' => FALSE,
     'modules/block/block.css' => FALSE,
     'modules/book/book.css' => FALSE,
@@ -57,5 +57,4 @@ function atomium_css_alter(&$css) {
     'modules/user/user.css' => FALSE,
   );
   $css = array_diff_key($css, $exclude);
-
 }

@@ -16,6 +16,7 @@ features[] = favicon
 regions[header] = "Header"
 regions[highlighted] = "Highlighted"
 regions[help] = "Help"
+regions[menu] = "Menu"
 regions[content] = "Content"
 regions[sidebar_first] = "Sidebar first"
 regions[sidebar_second] = "Sidebar second"
