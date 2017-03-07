@@ -45,11 +45,5 @@ function atomium_preprocess_button(&$variables) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }
 
-  // Remove the content of all "buttons" if they are not of type "button".
-  // Does it make sense? erm...
-  if ('button' != $element['#attributes']['type']) {
-    $element['#value'] = '';
-  }
-
   $variables['attributes_array'] = $element['#attributes'];
 }

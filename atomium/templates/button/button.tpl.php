@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<input<?php print $attributes; ?>><?php print $element['#value']; ?></input>
+<button<?php print $attributes; ?>><?php print render($element['#value']); ?></button>

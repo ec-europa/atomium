@@ -14,5 +14,12 @@ function atomium_foundation_preprocess_menu_tree(&$variables, $hook) {
   }
 
   $variables[$hook]['#attributes']['class'][] = 'menu';
-  $variables[$hook]['#attributes']['class'][] = 'vertical';
+
+  if ('menu_tree__main_menu' == $variables['theme_hook_original']) {
+    $variables[$hook]['#attributes']['class'][] = 'dropdown';
+    $variables[$hook]['#attributes'][] = 'data-dropdown-menu';
+  }
+  else {
+    $variables[$hook]['#attributes']['class'][] = 'vertical';
+  }
 }

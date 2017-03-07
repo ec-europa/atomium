@@ -26,6 +26,7 @@ regions[footer] = "Footer"
 stylesheets[all][] = assets/css/style.css
 
 ;-------------- JS -------------
+scripts[] = assets/js/foundation.behavior.js
 
 ;-------------- Default Settings for theme-settings.php -------------
 settings[toggle_logo] = 0

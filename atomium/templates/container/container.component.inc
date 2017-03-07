@@ -31,8 +31,6 @@ function atomium_preprocess_container(&$variables) {
     if (!isset($element['#attributes']['id'])) {
       $element['#attributes']['id'] = $element['#id'];
     }
-    // Add the 'form-wrapper' class.
-    $element['#attributes']['class'][] = 'form-wrapper';
   }
 
   $variables['attributes_array'] = $element['#attributes'];
