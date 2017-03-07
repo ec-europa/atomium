@@ -12,7 +12,7 @@
 <?php if (!empty($breadcrumb)): ?>
     <div class="row">
         <div class="larger-12 columns">
-          <?php print $breadcrumb; ?>
+          <?php print render($breadcrumb); ?>
         </div>
     </div>
 <?php endif; ?>

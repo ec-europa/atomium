@@ -18,31 +18,28 @@ function atomium_atomium_theme_breadcrumb() {
 }
 
 /**
- * Implements hook_atomium_definition_HOOK().
- */
-function atomium_atomium_definition_breadcrumb() {
-  return array(
-    'label' => 'Breadcrumb',
-    'description' => 'Site breadcrumb.',
-    'preview' => array(
-      'breadcrumb' => array(
-        l(t('Home'), '/'),
-        l(t('News'), '/'),
-        t('My news title'),
-      ),
-    ),
-  );
-}
-
-/**
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
+  foreach ($variables['breadcrumb'] as $key => $item) {
+    if (is_string($item)) {
+      $variables['breadcrumb'][$key] = array(
+        '#markup' => $item,
+      );
+    }
+
+    $variables['breadcrumb'][$key]['#theme_wrappers'] = array('html_tag__' . $variables['theme_hook_original']);
+    $variables['breadcrumb'][$key]['#tag'] = 'li';
+  }
+
+  $variables['wrapper_attributes_array'] = $variables['attributes_array'];
+
   $variables[$hook] = array(
     $hook => array(
       '#theme' => 'item_list__' . $variables['theme_hook_original'],
       '#items' => $variables['breadcrumb'],
       '#type' => 'ul',
+      '#wrapper' => FALSE,
       '#attributes' => $variables['attributes_array'],
       '#context' => array(
         'parents' => array(

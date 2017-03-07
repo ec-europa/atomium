@@ -58,3 +58,15 @@ function atomium_preprocess_page(&$variables, $hook) {
       break;
   }
 }
+
+/**
+ * Implements hook_process_HOOK().
+ */
+function atomium_process_page(&$variables, $hook) {
+  // We override the breadcrumb variable to return render array instead of
+  // an array of html links already rendered.
+  $variables['breadcrumb'] = array(
+    '#theme' => 'breadcrumb',
+    '#breadcrumb' => atomium_drupal_get_breadcrumb(),
+  );
+}

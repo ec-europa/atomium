@@ -15,7 +15,7 @@
 
     <main role="main" class="fl <?php $page['sidebar_second'] ? print 'w-75' : print 'w-50' ?> pa2">
       <?php print render($page['highlighted']); ?>
-      <?php print $breadcrumb; ?>
+      <?php print render($breadcrumb); ?>
       <?php print render($title_prefix); ?>
       <?php if ($title): ?><h1><?php print $title; ?></h1><?php
       endif; ?>
