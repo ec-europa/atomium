@@ -37,4 +37,12 @@ function atomium_foundation_preprocess_button(&$variables) {
     );
     $variables['attributes_array']['class'][] = 'alert';
   }
+
+  // The close-button is only used in status_messages.
+  if (isset($variables['element']['#name']) && 'close-button' == $variables['element']['#name']) {
+    $variables['attributes_array']['class'] = array_diff(
+      $variables['attributes_array']['class'],
+      array('primary', 'alert', 'secondary', 'button')
+    );
+  }
 }

@@ -30,27 +30,17 @@ function atomium_preprocess_status_messages(&$variables, $hook) {
   $output = array();
   foreach (drupal_get_messages($variables['display']) as $type => $messages) {
     $container = array(
-      '#type' => 'container',
-      '#attributes' => array(
-        'class' => array(
-          $type,
-        ),
-      ),
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
       'messages' => array(
-        '#theme' => 'item_list__' . $variables['theme_hook_original'],
+        '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__' . $type,
         '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
         '#items' => $messages,
         '#type' => 'ul',
         '#attributes' => array('class' => array()),
-        '#context' => array(
-          'parents' => array(
-            $hook => $variables,
-          ),
+      ),
+      '#theme_wrappers' => array('container__' . $variables['theme_hook_original'] . '__' . $type),
+      '#attributes' => array(
+        'class' => array(
+          $type,
         ),
       ),
     );

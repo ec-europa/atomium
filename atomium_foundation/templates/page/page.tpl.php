@@ -27,7 +27,7 @@
           <h1><?php print $title; ?></h1>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
-      <?php print $messages; ?>
+      <?php print render($messages); ?>
       <?php print render($tabs); ?>
       <?php if ($action_links): ?>
           <div class="menu menu-centered expanded button-group item-list"><?php print render($action_links); ?></div>

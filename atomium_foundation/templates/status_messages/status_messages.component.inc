@@ -21,9 +21,29 @@ function atomium_foundation_preprocess_status_messages(&$variables) {
     $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
     $messages['value']['#attributes']['class'][] = 'no-bullet';
 
-    // This is the only place where there is HTML.
     $messages['close'] = array(
-      '#markup' => '<button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button>',
+      '#name' => 'close-button',
+      '#type' => 'button',
+      '#attributes' => array(
+        0 => 'data-close',
+        'class' => array(
+          'close-button',
+        ),
+        'aria-label' => t('Dismiss alert'),
+      ),
+      'value' => array(
+        '#markup' => '&times;',
+        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+        '#tag' => 'span',
+        '#attributes' => array(
+          'class' => array(
+            'aria-hidden' => 'true',
+          ),
+        ),
+      ),
     );
   }
+
+  $variables['messages']['#theme_wrappers'] = array('container');
+  $variables['messages']['#attributes'] = $variables['attributes_array'];
 }

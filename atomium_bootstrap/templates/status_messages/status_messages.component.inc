@@ -21,9 +21,26 @@ function atomium_bootstrap_preprocess_status_messages(&$variables) {
     $messages['#attributes']['class'][] = $status_mapping[$type];
     $messages['value']['#attributes']['class'][] = 'list-unstyled';
 
-    // TODO: Use render arrays.
     $messages['close'] = array(
-      '#markup' => '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+      '#name' => 'close-button',
+      '#type' => 'button',
+      '#attributes' => array(
+        'class' => array(
+          'close',
+        ),
+        'aria-label' => t('Dismiss alert'),
+        'data-dismiss' => 'alert',
+      ),
+      'value' => array(
+        '#markup' => '&times;',
+        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+        '#tag' => 'span',
+        '#attributes' => array(
+          'class' => array(
+            'aria-hidden' => 'true',
+          ),
+        ),
+      ),
       '#weight' => -1,
     );
   }

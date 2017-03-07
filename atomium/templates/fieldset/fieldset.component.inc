@@ -38,4 +38,41 @@ function atomium_preprocess_fieldset(&$variables) {
     $variables['element']['#attributes'],
     $variables['attributes_array']
   );
+
+  /* <legend> tag handling */
+  $legend = '';
+  if ($variables['title']) {
+    $legend = array(
+      'content' => array(
+        '#markup' => $variables['title'],
+        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__legend__title'),
+        '#tag' => 'span',
+        '#attributes' => array(
+          'class' => array(
+            'fieldset-legend',
+          ),
+        ),
+      ),
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__legend'),
+      '#tag' => 'legend',
+      '#attributes' => array(),
+    );
+  }
+  $variables['legend'] = $legend;
+
+  /* Fieldset description handling */
+  $description = '';
+  if ($variables['description']) {
+    $description = array(
+      '#markup' => $variables['description'],
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__description'),
+      '#tag' => 'span',
+      '#attributes' => array(
+        'class' => array(
+          'fieldset-description',
+        ),
+      ),
+    );
+  }
+  $variables['description'] = $description;
 }
