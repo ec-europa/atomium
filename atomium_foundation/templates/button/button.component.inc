@@ -18,6 +18,7 @@ function atomium_foundation_preprocess_button(&$variables) {
       case 'edit-update':
       case 'edit-save':
         $variables['attributes_array']['class'][] = 'primary';
+        $variables['attributes_array']['class'][] = 'expanded';
         break;
 
       case 'edit-delete':
