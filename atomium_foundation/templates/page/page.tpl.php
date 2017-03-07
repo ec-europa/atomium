@@ -30,7 +30,7 @@
       <?php print render($messages); ?>
       <?php print render($tabs); ?>
       <?php if ($action_links): ?>
-          <div class="menu menu-centered expanded button-group item-list"><?php print render($action_links); ?></div>
+          <div class="menu expanded button-group item-list"><?php print render($action_links); ?></div>
       <?php endif; ?>
       <?php print render($page['help']); ?>
       <?php print render($page['content']); ?>
