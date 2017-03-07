@@ -5,7 +5,9 @@
  * Contains template file.
  */
 ?>
-<div<?php print $wrapper_attributes; ?>>
+<?php if ($wrapper): ?>
+  <div<?php print $wrapper_attributes; ?>>
+<?php endif; ?>
   <?php if (isset($title) && $title !== ''):?>
       <h3><?php print $title; ?></h3>
   <?php endif; ?>
@@ -21,4 +23,6 @@
       </<?php print $type; ?>>
     <?php endif; ?>
   <?php endif; ?>
-</div>
+<?php if ($wrapper): ?>
+  </div>
+<?php endif; ?>

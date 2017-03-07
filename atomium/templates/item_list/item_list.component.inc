@@ -17,6 +17,7 @@ function atomium_atomium_theme_item_list() {
         'title' => NULL,
         'type' => 'ul',
         'attributes' => array(),
+        'wrapper' => TRUE,
       ),
     ),
   );
