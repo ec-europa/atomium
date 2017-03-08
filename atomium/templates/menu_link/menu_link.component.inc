@@ -28,11 +28,16 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
     $sub_menu = $element['#below'];
   }
 
+  // Ensure "html" is now enabled so l() doesn't double encode. This is now
+  // safe to do since both check_plain() and filter_xss_admin() encode HTML
+  // entities. See: https://www.drupal.org/node/2854978
+  $element['#localized_options']['html'] = TRUE;
+
   $variables['attributes_array'] = drupal_array_merge_deep($element['#attributes'], $variables['attributes_array']);
   $variables['sub_menu'] = $sub_menu;
   $variables['output'] = array(
     '#theme' => 'link__' . $variables['theme_hook_original'],
-    '#text' => $element['#title'],
+    '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
     '#path' => $element['#href'],
     '#options' => $element['#localized_options'],
     '#context' => array(

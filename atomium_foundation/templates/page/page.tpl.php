@@ -5,6 +5,7 @@
  * page.tpl.php
  */
 ?>
+
 <div class="expanded row">
     <header role="banner"><?php print render($page['header']); ?></header>
 </div>

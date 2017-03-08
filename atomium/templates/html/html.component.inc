@@ -124,6 +124,26 @@ function atomium_process_html(&$variables, $hook) {
       $variables['scripts'] = str_replace($match[0], $newtag, $variables['scripts']);
     }
   }
+
+  /*
+  $before = array("/(?<=>)\s+|\s+(?=<)/", "/[\n\r]/");
+  $after = array('', '');
+
+  $variables['page'] = preg_replace($before, $after, $variables['page']);
+  $variables['page_top'] = preg_replace(
+  $before,
+  $after,
+  $variables['page_top']
+  );
+  $variables['page_bottom'] = preg_replace(
+  $before,
+  $after,
+  $variables['page_bottom']
+  );
+  $variables['head'] = preg_replace($before, $after, $variables['head']);
+  $variables['styles'] = preg_replace($before, $after, $variables['styles']);
+  $variables['scripts'] = preg_replace($before, $after, $variables['scripts']);
+   */
 }
 
 /**
