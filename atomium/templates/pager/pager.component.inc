@@ -70,7 +70,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
           ),
         ),
       );
-      $items['pager-first'] = _atomium_pager_item_to_link_helper((isset($tags[0]) ? $tags[0] : t('« first')), array(0 => 0), $element, $options, $variables);
+      $items['pager_first'] = _atomium_pager_item_to_link_helper((isset($tags[0]) ? $tags[0] : t('« first')), array(0 => 0), $element, $options, $variables);
 
       // If we are anywhere but the first page.
       $pager = pager_load_array($pager_page_array[$element] - 1, $element, $pager_page_array);
@@ -86,13 +86,13 @@ function atomium_preprocess_pager(&$variables, $hook) {
           ),
         ),
       );
-      $items['pager-previous'] = _atomium_pager_item_to_link_helper((isset($tags[1]) ? $tags[1] : t('‹ previous')), $pager, $element, $options, $variables);
+      $items['pager_previous'] = _atomium_pager_item_to_link_helper((isset($tags[1]) ? $tags[1] : t('‹ previous')), $pager, $element, $options, $variables);
     }
 
     // When there is more than one page, create the pager list.
     if ($i != $pager_max) {
       if ($i > 1) {
-        $items['pager-ellipsis-' . $i] = array(
+        $items['pager-ellipsis__' . $i] = array(
           '#theme' => 'pager_ellipsis',
           '#attributes' => array(
             'class' => array(
@@ -113,11 +113,11 @@ function atomium_preprocess_pager(&$variables, $hook) {
             ),
           );
           $pager = pager_load_array($pager_page_array[$element] + ($i - $pager_current), $element, $pager_page_array);
-          $items['pager-link-' . $i] = _atomium_pager_item_to_link_helper($i, $pager, $element, $options, $variables);
+          $items['pager_link__' . $i] = _atomium_pager_item_to_link_helper($i, $pager, $element, $options, $variables);
         }
 
         if ($i == $pager_current) {
-          $items['pager-current'] = array(
+          $items['pager_current'] = array(
             '#markup' => $i,
             '#attributes' => array(
               'class' => array(
@@ -129,7 +129,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
       }
 
       if ($i < $pager_max) {
-        $items['pager-ellipsis-' . $i] = array(
+        $items['pager_ellipsis__' . $i] = array(
           '#theme' => 'pager_ellipsis',
           '#attributes' => array(
             'class' => array(
@@ -152,7 +152,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
         ),
       );
       $pager = pager_load_array($pager_page_array[$element] + 1, $element, $pager_page_array);
-      $items['pager-next'] = _atomium_pager_item_to_link_helper((isset($tags[3]) ? $tags[3] : t('next ›')), $pager, $element, $options, $variables);
+      $items['pager_next'] = _atomium_pager_item_to_link_helper((isset($tags[3]) ? $tags[3] : t('next ›')), $pager, $element, $options, $variables);
     }
 
     // If we are anywhere but the last page.
@@ -166,11 +166,11 @@ function atomium_preprocess_pager(&$variables, $hook) {
         ),
       );
       $pager = pager_load_array($pager_total[$element] - 1, $element, $pager_page_array);
-      $items['pager-last'] = _atomium_pager_item_to_link_helper((isset($tags[4]) ? $tags[4] : t('last »')), $pager, $element, $options, $variables);
+      $items['pager_last'] = _atomium_pager_item_to_link_helper((isset($tags[4]) ? $tags[4] : t('last »')), $pager, $element, $options, $variables);
     }
 
-    foreach ($items as &$item) {
-      $item['#theme_wrappers'] = array('html_tag');
+    foreach ($items as $key => &$item) {
+      $item['#theme_wrappers'] = array('html_tag__item_list__' . $variables['theme_hook_original'] . '__' . $key);
       $item['#tag'] = 'li';
       if (isset($item['link'])) {
         $item['#attributes'] = $item['link']['#options']['attributes'];
