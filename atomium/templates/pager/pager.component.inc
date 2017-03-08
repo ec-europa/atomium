@@ -24,7 +24,7 @@ function atomium_atomium_theme_pager() {
 }
 
 /**
- * Implements theme_HOOK().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_pager(&$variables, $hook) {
   $tags = $variables['tags'];

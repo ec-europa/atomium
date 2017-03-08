@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements theme_HOOK().
+ * Implements hook_preprocess_HOOK().
  */
 function atomium_bootstrap_preprocess_pager(&$variables, $hook) {
   $variables['pager']['#attributes']['class'][] = 'pagination';
