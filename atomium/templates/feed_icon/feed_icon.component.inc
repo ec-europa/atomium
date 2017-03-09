@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Contains component file.
+ */
+
+/**
+ * Implements hook_atomium_theme_HOOK().
+ */
+function atomium_atomium_theme_feed_icon() {
+  return array(
+    'feed_icon' => array(
+      'template' => 'feed-icon',
+      'variables' => array(
+        'url' => NULL,
+        'title' => NULL,
+        'link' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function atomium_preprocess_feed_icon(&$variables, $hook) {
+  $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
+  $variables[$hook] = array(
+    '#theme' => 'link__' . $variables['theme_hook_original'],
+    '#text' => array(
+      '#theme' => 'image__' . $variables['theme_hook_original'],
+      '#path' => 'misc/feed.png',
+      '#width' => 16,
+      '#height' => 16,
+      '#alt' => $text,
+    ),
+    '#path' => $variables['url'],
+    '#options' => array(
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array('feed-icon'),
+        'title' => $text,
+      ),
+    ),
+    '#context' => array(
+      'parents' => array(
+        $hook => $variables,
+      ),
+    ),
+  );
+}

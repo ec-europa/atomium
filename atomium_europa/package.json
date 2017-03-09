@@ -1,0 +1,57 @@
+{
+  "name": "atomium_europa",
+  "license": "EUPL-1.1",
+  "version": "0.0.1",
+  "description": "The NextEuropa theme based on Atomium.",
+  "private": true,
+  "scripts": {
+    "build:copy": "node ./scripts/copy.js",
+    "build:scripts": "rollup --config ./rollup.config.js",
+    "build:styles": "node-sass ./src/styles.scss --include-path node_modules | postcss -c postcss.config.js",
+    "build": "npm-run-all --parallel build:* -c",
+    "clean": "rimraf dist",
+    "dist": "npm run clean && cross-env NODE_ENV=production npm run build",
+    "lint:js": "eslint .",
+    "lint:scss": "stylelint './src/**/*.scss'",
+    "lint": "npm-run-all --parallel lint:* -c",
+    "start": "npm-run-all clean build watch",
+    "watch:scripts": "chokidar './src/**/*.js' -c 'eslint {path} && npm run build:scripts'",
+    "watch:styles": "chokidar './src/**/*.scss' -c 'stylelint {path} || true && npm run build:styles'",
+    "watch": "npm-run-all --parallel watch:*"
+  },
+  "devDependencies": {
+    "autoprefixer": "6.7.3",
+    "babel-eslint": "7.1.1",
+    "babel-preset-es2015-rollup": "3.0.0",
+    "chokidar-cli": "1.2.0",
+    "cross-env": "3.1.4",
+    "cssnano": "3.10.0",
+    "dotenv": "4.0.0",
+    "eslint": "3.15.0",
+    "eslint-config-airbnb-base": "11.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "fs-extra": "2.0.0",
+    "node-sass": "4.5.0",
+    "npm-run-all": "4.0.1",
+    "postcss": "5.2.13",
+    "postcss-cli": "2.6.0",
+    "rimraf": "2.5.4",
+    "rollup": "0.41.4",
+    "rollup-plugin-babel": "2.7.1",
+    "rollup-plugin-commonjs": "7.0.0",
+    "rollup-plugin-node-resolve": "2.0.0",
+    "rollup-plugin-uglify": "1.0.1",
+    "stylelint": "7.8.0",
+    "stylelint-config-sass-guidelines": "2.0.0",
+    "stylelint-config-standard": "16.0.0",
+    "stylelint-selector-bem-pattern": "1.0.0",
+    "tachyons": "^4.6.1"
+  },
+  "dependencies": {
+    "@ec-europa/europa-component-library": "git+https://github.com/ec-europa/europa-component-library.git#702c7ca"
+  },
+  "engines": {
+    "node": ">=6.9.5",
+    "yarn": "^0.20.3"
+  }
+}

@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * Status_messages.preprocess.inc.
+ */
+
+/**
+ * Implements hook_preprocess_status_messages().
+ */
+function atomium_foundation_preprocess_status_messages(&$variables) {
+  $status_mapping = array(
+    'error' => 'alert',
+    'status' => 'success',
+    'warning' => 'secondary',
+  );
+
+  foreach ($variables['messages'] as $type => &$messages) {
+    $messages['#attributes'][] = 'data-closable';
+    $messages['#attributes']['class'][] = 'callout';
+    $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
+    $messages['value']['#attributes']['class'][] = 'no-bullet';
+
+    $messages['close'] = array(
+      '#name' => 'close-button',
+      '#type' => 'button',
+      '#attributes' => array(
+        0 => 'data-close',
+        'class' => array(
+          'close-button',
+        ),
+        'aria-label' => t('Dismiss alert'),
+      ),
+      'value' => array(
+        '#markup' => '&times;',
+        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+        '#tag' => 'span',
+        '#attributes' => array(
+          'class' => array(
+            'aria-hidden' => 'true',
+          ),
+        ),
+      ),
+    );
+  }
+
+  $variables['messages']['#theme_wrappers'] = array('container');
+  $variables['messages']['#attributes'] = $variables['attributes_array'];
+}
