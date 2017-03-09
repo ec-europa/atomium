@@ -14,7 +14,6 @@ function atomium_form_system_theme_settings_alter(&$form, $form_state) {
     '#title' => t('Atomium settings'),
     '#weight' => -1,
   );
-
   $form['atomium']['theme_debug'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Theme debug'),
