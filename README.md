@@ -12,7 +12,7 @@ Table of content:
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [Extending](#extending)
-- [Developers note](#notes)
+- [Developers note](#developers-note)
 
 [Go to top](#table-of-content)
 
