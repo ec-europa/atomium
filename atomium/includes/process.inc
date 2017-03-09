@@ -57,45 +57,26 @@ function atomium_process(&$variables, $hook) {
     $variables['classes'] = implode(' ', $classes_array);
   }
 
-  /* Theme hooks suggestions handling. */
-  $arguments = arg();
-  $contexts = array();
-
-  if (isset($variables['element']['#parents'])) {
-    $arguments = array_merge($arguments, array_filter($variables['element']['#parents']));
-  }
-
-  if (isset($variables['theme_hook_original']) && ($hook != $variables['theme_hook_original'])) {
-    $arguments[] = $variables['theme_hook_original'];
-  }
-  if (isset($variables['context'])) {
-    $contexts = $variables['context'];
-  }
-  elseif (isset($variables['element']['#context'])) {
-    $contexts = $variables['element']['#context'];
-  }
-
-  foreach ($contexts as $name => $context) {
-    if ('parents' == $name) {
-      foreach (array_reverse($contexts['parents']) as $parent_context) {
-        if (isset($parent_context['theme_hook_original']) && ($hook != $parent_context['theme_hook_original'])) {
-          $arguments[] = $parent_context['theme_hook_original'];
-        }
-      }
-      unset($variables['context']['parents']);
-      continue;
+  // This needs to be in the process to alter what has been done by the
+  // preprocessing functions before.
+  if (isset($variables[$hook]) && is_array($variables[$hook])) {
+    if (isset($variables[$hook]['#theme'])) {
+      $variables[$hook]['#theme'] .= '__' . $variables['theme_hook_original'];
     }
-    if (isset($context['theme_hook_original'])) {
-      $arguments[] = $context['theme_hook_original'];
+    if (isset($variables[$hook][$hook]['#theme'])) {
+      $variables[$hook][$hook]['#theme'] .= '__' . $variables['theme_hook_original'];
     }
   }
-
-  $arguments = arg();
-  // See how we can extend this properly.
-  if ($suggestions = theme_get_suggestions($arguments, $hook)) {
-    $variables['theme_hook_suggestions'] = array_merge($variables['theme_hook_suggestions'], $suggestions);
+  if (isset($variables[$hook]) && is_array($variables[$hook])) {
+    if (isset($variables[$hook]['#theme_wrappers'])) {
+      $variables[$hook]['#theme_wrappers'] = array_map(function ($wrapper) use ($variables) {
+        return $wrapper . '__' . $variables['theme_hook_original'];
+      }, $variables[$hook]['#theme_wrappers']);
+    }
+    if (isset($variables[$hook][$hook]['#theme_wrappers'])) {
+      $variables[$hook][$hook]['#theme_wrappers'] = array_map(function ($wrapper) use ($variables) {
+        return $wrapper . '__' . $variables['theme_hook_original'];
+      }, $variables[$hook][$hook]['#theme_wrappers']);
+    }
   }
-
-  $variables['theme_hook_suggestions'] = array_unique($variables['theme_hook_suggestions']);
-  /* End of theme hooks suggestions handling. */
 }

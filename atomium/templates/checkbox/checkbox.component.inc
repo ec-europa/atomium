@@ -37,10 +37,4 @@ function atomium_preprocess_checkbox(&$variables, $hook) {
   }
   _form_set_class($element, array('form-checkbox'));
   $variables['attributes_array'] = $element['#attributes'];
-
-  $element['#context'] = array(
-    'parents' => array(
-      $hook => $variables,
-    ),
-  );
 }

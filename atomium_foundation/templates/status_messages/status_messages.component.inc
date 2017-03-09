@@ -8,14 +8,14 @@
 /**
  * Implements hook_preprocess_status_messages().
  */
-function atomium_foundation_preprocess_status_messages(&$variables) {
+function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
   $status_mapping = array(
     'error' => 'alert',
     'status' => 'success',
     'warning' => 'secondary',
   );
 
-  foreach ($variables['messages'] as $type => &$messages) {
+  foreach ($variables[$hook][$hook] as $type => &$messages) {
     $messages['#attributes'][] = 'data-closable';
     $messages['#attributes']['class'][] = 'callout';
     $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
@@ -44,6 +44,6 @@ function atomium_foundation_preprocess_status_messages(&$variables) {
     );
   }
 
-  $variables['messages']['#theme_wrappers'] = array('container');
-  $variables['messages']['#attributes'] = $variables['attributes_array'];
+  $variables[$hook][$hook]['#theme_wrappers'] = array('container');
+  $variables[$hook][$hook]['#attributes'] = $variables['attributes_array'];
 }

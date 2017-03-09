@@ -36,18 +36,13 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
 
   $variables[$hook] = array(
     $hook => array(
-      '#theme' => 'item_list__' . $variables['theme_hook_original'],
+      '#theme' => 'item_list',
       '#items' => $variables['breadcrumb'],
       '#type' => 'ul',
       '#wrapper' => FALSE,
       '#attributes' => $variables['attributes_array'],
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     ),
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'nav',
     '#attributes' => $variables['wrapper_attributes_array'],
   );

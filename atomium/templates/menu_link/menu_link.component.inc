@@ -40,11 +40,6 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
     '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
     '#path' => $element['#href'],
     '#options' => $element['#localized_options'],
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
-      ),
-    ),
   );
 
   if (isset($variables['element']['#original_link']['mlid'])) {
@@ -56,7 +51,7 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
       $variables['output'],
       $variables['sub_menu'],
     ),
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'li',
     '#attributes' => $variables['attributes_array'],
   );

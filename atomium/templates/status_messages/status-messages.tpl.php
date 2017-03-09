@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($messages); ?>
+<?php print render($status_messages); ?>

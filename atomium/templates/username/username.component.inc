@@ -34,16 +34,23 @@ function atomium_preprocess_username(&$variables, $hook) {
   );
 
   if (isset($variables['link_path'])) {
-    $variables['name'] = array(
-      '#theme' => 'link__username__uid_' . $variables['uid'],
-      '#text' => $variables['name'] . $variables['extra'],
-      '#path' => $variables['link_path'],
-      '#options' => $variables['link_options'],
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
+    $variables[$hook] = array(
+      $hook => array(
+        '#theme' => 'link__username__uid_' . $variables['uid'],
+        '#text' => $variables['name'] . $variables['extra'],
+        '#path' => $variables['link_path'],
+        '#options' => $variables['link_options'],
       ),
+    );
+  }
+  else {
+    $variables[$hook] = array(
+      $hook => array(
+        '#markup' => $variables['name'] . $variables['extra'],
+      ),
+      '#theme_wrappers' => array('html_tag'),
+      '#tag' => 'span',
+      '#attributes' => $variables['attributes_array'],
     );
   }
 }

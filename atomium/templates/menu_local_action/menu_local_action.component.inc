@@ -33,11 +33,6 @@ function atomium_preprocess_menu_local_action(&$variables, $hook) {
       '#text' => $link['title'],
       '#path' => $link['href'],
       '#options' => isset($link['localized_options']) ? $link['localized_options'] : array('attributes' => array()),
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     );
   }
   elseif (!empty($link['localized_options']['html'])) {
@@ -48,8 +43,10 @@ function atomium_preprocess_menu_local_action(&$variables, $hook) {
   }
 
   $variables[$hook] = array(
-    $hook => $variables['menu_link'],
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    $hook => array(
+      $variables['menu_link'],
+    ),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'li',
     '#attributes' => $variables['attributes_array'],
   );

@@ -23,13 +23,6 @@ function atomium_atomium_theme_form_element() {
 function atomium_preprocess_form_element(&$variables, $hook) {
   $element = &$variables['element'];
 
-  $element['#context'] = array(
-    'parents' => array(
-      $hook => $variables,
-    ),
-  );
-  $variables['element']['#context'] = $element['#context'];
-
   // This function is invoked as theme wrapper, but the rendered form element
   // may not necessarily have been processed by form_builder().
   $element += array(
@@ -86,11 +79,6 @@ function atomium_preprocess_form_element(&$variables, $hook) {
         '#type' => 'markup',
         '#markup' => $element['#description'],
       ),
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     );
   }
 
@@ -102,11 +90,6 @@ function atomium_preprocess_form_element(&$variables, $hook) {
   $variables['label'] = array(
     '#theme' => 'form_element_label__' . $variables['theme_hook_original'],
     '#element' => $variables['element'],
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
-      ),
-    ),
   );
   $variables['attributes_array'] = drupal_array_merge_deep(
     $variables['attributes_array'],

@@ -27,25 +27,22 @@ function atomium_atomium_theme_feed_icon() {
 function atomium_preprocess_feed_icon(&$variables, $hook) {
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
   $variables[$hook] = array(
-    '#theme' => 'link__' . $variables['theme_hook_original'],
-    '#text' => array(
-      '#theme' => 'image__' . $variables['theme_hook_original'],
-      '#path' => 'misc/feed.png',
-      '#width' => 16,
-      '#height' => 16,
-      '#alt' => $text,
-    ),
-    '#path' => $variables['url'],
-    '#options' => array(
-      'html' => TRUE,
-      'attributes' => array(
-        'class' => array('feed-icon'),
-        'title' => $text,
+    $hook => array(
+      '#theme' => 'link',
+      '#text' => array(
+        '#theme' => 'image__' . $variables['theme_hook_original'],
+        '#path' => 'misc/feed.png',
+        '#width' => 16,
+        '#height' => 16,
+        '#alt' => $text,
       ),
-    ),
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
+      '#path' => $variables['url'],
+      '#options' => array(
+        'html' => TRUE,
+        'attributes' => array(
+          'class' => array('feed-icon'),
+          'title' => $text,
+        ),
       ),
     ),
   );

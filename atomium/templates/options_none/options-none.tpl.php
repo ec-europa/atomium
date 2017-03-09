@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($content); ?>
+<?php print render($options_none); ?>

@@ -23,21 +23,11 @@ function atomium_atomium_theme_filter_tips() {
 function atomium_preprocess_filter_tips(&$variables, $hook) {
   $composer = array(
     '#type' => 'container',
-    '#context' => array(
-      'parents' => array(
-        $hook => $variables,
-      ),
-    ),
   );
 
   foreach ($variables['tips'] as $name => $tipList) {
     $composer[$name] = array(
       '#type' => 'container',
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     );
 
     $items = array();
@@ -50,11 +40,6 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
           'id' => $tip['id'],
         ),
         '#value' => $tip['tip'],
-        '#context' => array(
-          'parents' => array(
-            $hook => $variables,
-          ),
-        ),
       );
     }
 
@@ -62,11 +47,6 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
       '#theme' => 'item_list__' . $variables['theme_hook_original'],
       '#items' => $items,
       'type' => 'ul',
-      '#context' => array(
-        'parents' => array(
-          $hook => $variables,
-        ),
-      ),
     );
   }
 

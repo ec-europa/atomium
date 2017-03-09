@@ -88,11 +88,6 @@ function atomium_preprocess_links(&$variables, $hook) {
           '#text' => $link['title'],
           '#path' => $link['href'],
           '#options' => $link,
-          '#context' => array(
-            'parents' => array(
-              $hook => $variables,
-            ),
-          ),
           '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
           '#tag' => 'li',
           '#attributes' => $link['attributes_array'],
@@ -127,11 +122,13 @@ function atomium_preprocess_links(&$variables, $hook) {
       $new_links[] = $newlink;
     }
 
-    $variables['links'] = array(
-      '#theme' => 'item_list__' . $variables['theme_hook_original'],
-      '#items' => $new_links,
-      '#type' => 'ul',
-      '#attributes' => $variables['attributes_array'],
+    $variables[$hook] = array(
+      $hook => array(
+        '#theme' => 'item_list',
+        '#items' => $new_links,
+        '#type' => 'ul',
+        '#attributes' => $variables['attributes_array'],
+      ),
     );
   }
 }

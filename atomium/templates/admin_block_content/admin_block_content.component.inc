@@ -45,11 +45,6 @@ function atomium_preprocess_admin_block_content(&$variables, $hook) {
       $description = array(
         '#type' => 'markup',
         '#markup' => filter_xss_admin($item['description']),
-        '#context' => array(
-          'parents' => array(
-            $hook => $variables,
-          ),
-        ),
       );
     }
     $item = array(

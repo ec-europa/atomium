@@ -51,11 +51,6 @@ function atomium_preprocess_item_list(&$variables, $hook) {
           '#tag' => 'li',
           '#attributes' => $attributes,
           '#value' => $item['data'],
-          '#context' => array(
-            'parents' => array(
-              $hook => $variables,
-            ),
-          ),
         );
       }
 
@@ -65,11 +60,6 @@ function atomium_preprocess_item_list(&$variables, $hook) {
           '#tag' => 'li',
           '#attributes' => $attributes,
           '#value' => $item,
-          '#context' => array(
-            'parents' => array(
-              $hook => $variables,
-            ),
-          ),
         );
       }
 

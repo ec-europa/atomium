@@ -48,5 +48,7 @@ function atomium_preprocess_status_messages(&$variables, $hook) {
     $output[$type] = $container;
   }
 
-  $variables['messages'] = $output;
+  $variables[$hook] = array(
+    $hook => $output,
+  );
 }

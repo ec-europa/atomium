@@ -21,7 +21,7 @@ function atomium_atomium_theme_update_status_label() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_update_status_label(&$variables) {
+function atomium_preprocess_update_status_label(&$variables, $hook) {
   switch ($variables['status']) {
     case UPDATE_NOT_SECURE:
       $class = 'security-error';
@@ -50,10 +50,12 @@ function atomium_preprocess_update_status_label(&$variables) {
 
   }
   $variables['attributes_array']['class'][] = $class;
-  $variables['text'] = array(
-    '#markup' => $text,
+  $variables[$hook] = array(
+    $hook => array(
+      '#markup' => $text,
+    ),
     '#attributes' => $variables['attributes_array'],
-    '#theme_wrappers' => array('html_tag__update_status_label'),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'span',
   );
 }

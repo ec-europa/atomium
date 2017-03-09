@@ -57,7 +57,7 @@ function atomium_preprocess_link(&$variables, $hook) {
     $hook => array(
       $variables['text'],
     ),
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'a',
     '#attributes' => $variables['attributes_array'],
   );
