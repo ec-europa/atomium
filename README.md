@@ -12,6 +12,7 @@ Table of content:
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [Extending](#extending)
+- [Developers note](#notes)
 
 [Go to top](#table-of-content)
 
@@ -79,5 +80,59 @@ To create a new theme definition:
   automatically loaded.
   
 Do not forget to clear the cache every time new theme definitions or process/preprocess are added or removed.
+
+[Go to top](#table-of-content)
+
+# Developer's note
+
+During the development of this project, a lot of time has been put into analyzing how Drupal's core functions were
+implemented and how to redo the things properly.
+
+A good example of this is the breadcrumb generation.
+
+Let analyse how it's currently done in Drupal and how we've implemented it.
+
+````php
+$variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
+````
+
+By default, Drupal is using the function *drupal_get_breadcrumb()* in its *template_process_page()* hook.
+
+The function *drupal_get_breadcrumb()* returns raw HTML.
+Thus, it's impossible to alter the breadcrumbs links properly.
+
+In order to get a render array, we have to go deeper and rewrite functions accordingly.
+
+*drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*. This is actually, this function that returns HTML.
+
+There is no way to alter the result of that function, it returns an array of raw HTML links.
+
+Unfortunately, in order to do things properly, we have to create two extra functions in Atomium and change the way
+the breadcrumb is generated.
+
+````php
+  $variables['breadcrumb'] = array(
+    '#theme' => 'breadcrumb',
+    '#breadcrumb' => atomium_drupal_get_breadcrumb(),
+  );
+````
+
+*atomium_drupal_get_breadcrumb()* is an atomium internal function written only for the breadcrumb handling.
+Instead of calling *menu_get_active_breadcrumb()*, it calls *atomium_menu_get_active_breadcrumb()* which is also a
+custom Atomium function that, instead of returning an array of raw HTML links, returns an array of render array.
+
+This is why, in *page.tpl.php*, instead of writing:
+
+````php
+<?php print $breadcrumb; ?>
+````
+
+You have to use:
+
+````php
+<?php print render($breadcrumb); ?>
+````
+
+The rendering process is at the very end of the Drupal's chain of preprocess, process and renders functions.
 
 [Go to top](#table-of-content)
