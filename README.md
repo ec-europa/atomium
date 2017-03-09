@@ -15,12 +15,12 @@ Table of content:
 
 [Go to top](#table-of-content)
 
-# Installation
+# [Installation](#atomium-installation)
 [Download the theme manually](https://www.drupal.org/docs/7/extending-drupal/installing-themes) or using [Drush](https://drupal.org/project/drush).
 
 [Go to top](#table-of-content)
 
-# Activation
+# [Activation](#atomium-activation)
 To enable the theme, go to **admin/appearance** and select an Atomium based theme.
 
 Atomium comes with 2 default sub-themes provided as examples.
@@ -35,7 +35,7 @@ These sub-themes are providing examples of *preprocess* functions and templates 
 
 [Go to top](#table-of-content)
 
-# Configuration
+# [Configuration](#atomium-configuration)
 As Atomium is not intended to be a full featured theme as you might find on drupal.org, full of configurable settings
 and with a nice user interface.
 The sole purpose of this theme is to provides a clean markup that you can easily extend.
@@ -56,7 +56,7 @@ in CSS identifiers. In order to allow CSS identifiers to contain double undersco
 
 [Go to top](#table-of-content)
 
-# Contributing
+# [Contributing](#atomium-contributing)
 
 Atomium is licenced under [EUPL Licence](https://en.wikipedia.org/wiki/European_Union_Public_Licence).
 All contribution to Atomium and its sub-themes are made on [Github](https://github.com/ec-europa/atomium), the main
@@ -64,7 +64,7 @@ Atomium's repository.
 
 [Go to top](#table-of-content)
 
-# Extending
+# [Extending](#atomium-extending)
 
 Atomium provides a way to extend just by creating some files without modifying the core Atomium files.
 Each theme definition, core or custom, are treated as a component.
