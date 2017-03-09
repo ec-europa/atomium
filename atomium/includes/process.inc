@@ -12,6 +12,7 @@ function atomium_process(&$variables, $hook) {
   // Trim each variables that goes into the templates.
   // This needs to be done before the attributes processing because
   // drupal_attributes() adds en extra space on purpose.
+  // Do not trim arrays because they might be needed later.
   array_walk($variables, function (&$value) {
     if (is_string($value)) {
       $value = trim($value);
@@ -21,32 +22,12 @@ function atomium_process(&$variables, $hook) {
   // Convert all variables '*_attributes_array' into a valid
   // '*_attributes' variable.
   foreach ($variables as $variable_name => $variable_content) {
-    if (strpos($variable_name, 'attributes_array') !== FALSE && !in_array($variable_name, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
-      $variable_content = array_filter($variable_content, function ($value) {
-        if (!is_array($value)) {
-          return (strlen($value) != 0);
-        }
-        return $value;
-      });
-      $new_variable = substr($variable_name, 0, -6);
-      $variables[$new_variable] = NULL;
-      if (!empty($variable_content) && is_array($variable_content)) {
-        if (isset($variable_content['class'])) {
-          // If this line is enabled, it will cause problem with the filter.js
-          // - are converted to _ and JS is not able to find the right
-          // object having the appropriate class.
-          /*
-           * $variable_content['class'] =
-           * array_map('drupal_html_class', (array) $variable_content['class']);
-           */
-          $variable_content['class'] = array_unique($variable_content['class']);
-        }
-        if (isset($variable_content['placeholder'])) {
-          $variable_content['placeholder'] = array_map('strip_tags', (array) $variable_content['placeholder']);
-        }
-        $variables[$new_variable] = atomium_drupal_attributes($variable_content);
-      }
+    if (strpos($variable_name, 'attributes_array') === FALSE || in_array($variable_name, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
+      continue;
     }
+
+    $new_variable = substr($variable_name, 0, -6);
+    $variables[$new_variable] = atomium_drupal_attributes($variable_content, $variable_name);
   }
   /* End of attributes processing */
 

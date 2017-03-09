@@ -199,7 +199,34 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
  * The only difference is that if a key is a numeric, it will only display the
  * value. Ex: 0="data-closable" will be displayed: data-closable.
  */
-function atomium_drupal_attributes(array $attributes = array()) {
+function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
+  // Remove empty arrays and empty strings.
+  $attributes = array_filter($attributes, function ($value) {
+    if (!is_array($value)) {
+      return (strlen($value) != 0);
+    }
+    return $value;
+  });
+
+  // If empty, just return an empty string.
+  if (empty($attributes)) {
+    return '';
+  }
+
+  if (isset($attributes['class'])) {
+    // If this line is enabled, it will cause problem with the filter.js
+    // - are converted to _ and JS is not able to find the right
+    // object having the appropriate class.
+    /*
+     * $variable_content['class'] =
+     * array_map('drupal_html_class', (array) $variable_content['class']);
+     */
+    $attributes['class'] = array_unique($attributes['class']);
+  }
+  if (isset($attributes['placeholder'])) {
+    $attributes['placeholder'] = array_map('strip_tags', (array) $attributes['placeholder']);
+  }
+
   foreach ($attributes as $attribute => &$data) {
     // TODO: Can we do this in another way ?
     $data = array_map(function ($item) {
