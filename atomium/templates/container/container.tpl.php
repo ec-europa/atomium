@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<div<?php print $attributes; ?>><?php print render($element['#children']); ?></div>
+<?php print render($container); ?>

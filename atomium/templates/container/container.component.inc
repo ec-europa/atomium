@@ -20,8 +20,8 @@ function atomium_atomium_theme_container() {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function atomium_preprocess_container(&$variables) {
-  $element = &$variables['element'];
+function atomium_preprocess_container(&$variables, $hook) {
+  $element = $variables['element'];
   // Ensure #attributes is set.
   $element += array('#attributes' => array());
 
@@ -33,5 +33,12 @@ function atomium_preprocess_container(&$variables) {
     }
   }
 
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables[$hook] = array(
+    $hook => array(
+      '#markup' => $variables['element']['#children'],
+    ),
+    '#theme_wrappers' => array('html_tag'),
+    '#tag' => 'div',
+    '#attributes' => $element['#attributes'],
+  );
 }
