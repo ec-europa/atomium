@@ -1,0 +1,44 @@
+language: php
+
+php:
+  - 5.6
+
+env:
+  global:
+    - PATH=$PATH:/home/travis/.composer/vendor/bin
+
+install:
+  - composer self-update
+
+before_script:
+  # Set sendmail so drush doesn't throw an error during site install.
+  - echo "sendmail_path=`which true`" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
+  # Create database.
+  - mysql -e 'create database drupal'
+  - composer create-project drupal-composer/drupal-project:7.x-dev test-site --stability dev --no-interaction
+  - cd test-site
+  # Install Drupal y target site.
+  - composer require drush/drush:7.*
+  - cd web
+  - ../vendor/bin/drush si standard -y --db-url=mysql://travis:@127.0.0.1/drupal
+  # Test latest commit on current branch.
+  - git clone --branch=$TRAVIS_BRANCH https://github.com/$TRAVIS_REPO_SLUG.git sites/all/themes/atomium
+  - ../vendor/bin/drush en atomium -y
+  - ../vendor/bin/drush vset theme_default atomium
+  - ../vendor/bin/drush dis overlay update -y
+  - ../vendor/bin/drush cc all
+  # Run Drush web server.
+  - ../vendor/bin/drush --debug runserver :8888 > ~/debug.txt 2>&1 &
+  - sleep 4s
+  - chmod -R ug+w sites
+  - cd sites/all/themes/atomium
+  - composer install --prefer-dist
+  - sed -e "s?%ROOT%?$TRAVIS_BUILD_DIR/test-site/web?g" --in-place phpunit.xml.dist
+  - sed -e "s?%URL%?http://127.0.0.1:8888?g" --in-place phpunit.xml.dist
+  - cat phpunit.xml.dist
+
+script:
+  - ./vendor/bin/phpunit
+
+notifications:
+  email: false

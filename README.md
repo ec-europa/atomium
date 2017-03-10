@@ -1,3 +1,6 @@
+# Atomium
+[![Build Status](https://travis-ci.org/ec-europa/atomium.svg?branch=7.x-1.x)](https://travis-ci.org/ec-europa/atomium)
+
 The Atomium theme is a Drupal 7 base theme.
 
 The goal of this base theme is to rewrite most of the core themes functions of Drupal and use proper render arrays and

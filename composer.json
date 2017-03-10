@@ -18,6 +18,14 @@
   },
   "require-dev": {
     "drupal/coder": "^8.2",
-    "phpro/grumphp": "^0.11.3"
+    "phpro/grumphp": "^0.11",
+    "phpunit/phpunit": "^5",
+    "bovigo/assert": "~1.7",
+    "anahkiasen/underscore-php" : "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Drupal\\Tests\\atomium\\": "./tests/src/"
+    }
   }
 }
