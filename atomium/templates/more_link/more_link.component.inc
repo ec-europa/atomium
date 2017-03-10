@@ -13,7 +13,6 @@ function atomium_atomium_theme_more_link() {
     'more_link' => array(
       'render element' => 'element',
       'template' => 'more-link',
-      'variables' => array('url' => NULL, 'title' => NULL),
     ),
   );
 }
@@ -29,7 +28,7 @@ function atomium_preprocess_more_link(&$variables, $hook) {
       '#path' => $variables['url'],
       '#options' => array('attributes' => array('title' => $variables['title'])),
     ),
-    '#theme_wrappers' => array('container__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('container'),
     '#attributes' => $variables['attributes_array'],
   );
 }

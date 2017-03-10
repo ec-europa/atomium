@@ -61,7 +61,12 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
         include_once $file;
         $function_name = $theme . '_atomium_theme_' . $component;
         if (function_exists($function_name)) {
-          $hooks = array_merge((array) call_user_func($function_name), $hooks);
+          $hooks = array_merge(
+            (array) call_user_func_array(
+              $function_name,
+              array(&$existing, $type, $theme, $path)),
+            $hooks
+          );
         }
       }
     }
