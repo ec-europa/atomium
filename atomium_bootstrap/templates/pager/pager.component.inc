@@ -9,17 +9,17 @@
  * Implements hook_preprocess_HOOK().
  */
 function atomium_bootstrap_preprocess_pager(&$variables, $hook) {
-  $variables['pager']['#attributes']['class'][] = 'pagination';
+  $variables[$hook][$hook]['#attributes']['class'][] = 'pagination';
 
-  $variables['pager']['#wrapper'] = FALSE;
-  $variables['pager']['#theme_wrappers'][] = 'html_tag__' . $variables['theme_hook_original'];
-  $variables['pager']['#tag'] = 'nav';
+  $variables[$hook][$hook]['#wrapper'] = FALSE;
+  $variables[$hook][$hook]['#theme_wrappers'][] = 'html_tag__' . $variables['theme_hook_original'];
+  $variables[$hook][$hook]['#tag'] = 'nav';
 
-  if (isset($variables['pager']['#items'])) {
+  if (isset($variables[$hook][$hook]['#items'])) {
 
-    if ($variables['pager']['#items']['pager-current']['#markup']) {
-      $markup = $variables['pager']['#items']['pager-current']['#markup'];
-      $variables['pager']['#items']['pager-current'] = array(
+    if ($variables[$hook][$hook]['#items']['pager_current']['#markup']) {
+      $markup = $variables[$hook][$hook]['#items']['pager_current']['#markup'];
+      $variables[$hook][$hook]['#items']['pager_current'] = array(
         'link' => array(
           '#theme' => 'link',
           '#text' => array(
