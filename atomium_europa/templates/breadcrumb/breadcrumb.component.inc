@@ -38,10 +38,13 @@ function atomium_europa_atomium_definition_breadcrumb() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
+  if (empty($variables[$hook])) {
+    return;
+  }
+
   $variables['attributes_array']['class'][] = 'breadcrumb__segments-wrapper';
   $breadcrumb_items = array();
-
-  foreach ($variables['breadcrumb']['breadcrumb']['#items'] as $key => $item) {
+  foreach ($variables[$hook][$hook]['#items'] as $key => $item) {
     if (isset($item['#text'])) {
       $item['#text'] = array(
         '#markup' => $item['#text'],
@@ -72,8 +75,8 @@ function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
         ),
       ),
     ),
-    'breadcrumb' => array(
-      '#theme' => 'item_list__' . $variables['theme_hook_original'],
+    $hook => array(
+      '#theme' => 'item_list',
       '#items' => $breadcrumb_items,
       '#type' => 'ol',
       '#wrapper' => FALSE,
@@ -90,7 +93,7 @@ function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
         'style' => 'display: none;',
       ),
     ),
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('html_tag'),
     '#tag' => 'nav',
     '#attributes' => array(
       'class' => array(
