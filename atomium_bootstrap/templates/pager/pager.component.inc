@@ -12,7 +12,7 @@ function atomium_bootstrap_preprocess_pager(&$variables, $hook) {
   $variables[$hook][$hook]['#attributes']['class'][] = 'pagination';
 
   $variables[$hook][$hook]['#wrapper'] = FALSE;
-  $variables[$hook][$hook]['#theme_wrappers'][] = 'html_tag__' . $variables['theme_hook_original'];
+  $variables[$hook][$hook]['#theme_wrappers'][] = 'html_tag';
   $variables[$hook][$hook]['#tag'] = 'nav';
 
   if (isset($variables[$hook][$hook]['#items'])) {
