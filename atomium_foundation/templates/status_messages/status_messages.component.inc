@@ -15,7 +15,6 @@ function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
     'warning' => 'secondary',
   );
 
-  $variables[$hook] = '';
   if (!empty($variables[$hook][$hook])) {
     foreach ($variables[$hook][$hook] as $type => &$messages) {
       $messages['#attributes'][] = 'data-closable';
@@ -48,5 +47,8 @@ function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
 
     $variables[$hook][$hook]['#theme_wrappers'] = array('container');
     $variables[$hook][$hook]['#attributes'] = $variables['attributes_array'];
+  }
+  else {
+    $variables[$hook] = '';
   }
 }
