@@ -15,35 +15,38 @@ function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
     'warning' => 'secondary',
   );
 
-  foreach ($variables[$hook][$hook] as $type => &$messages) {
-    $messages['#attributes'][] = 'data-closable';
-    $messages['#attributes']['class'][] = 'callout';
-    $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
-    $messages['value']['#attributes']['class'][] = 'no-bullet';
+  $variables[$hook] = '';
+  if (!empty($variables[$hook][$hook])) {
+    foreach ($variables[$hook][$hook] as $type => &$messages) {
+      $messages['#attributes'][] = 'data-closable';
+      $messages['#attributes']['class'][] = 'callout';
+      $messages['#attributes']['class'][] = isset($status_mapping[$type]) ? $status_mapping[$type] : $status_mapping['status'];
+      $messages['value']['#attributes']['class'][] = 'no-bullet';
 
-    $messages['close'] = array(
-      '#name' => 'close-button',
-      '#type' => 'button',
-      '#attributes' => array(
-        0 => 'data-close',
-        'class' => array(
-          'close-button',
-        ),
-        'aria-label' => t('Dismiss alert'),
-      ),
-      'value' => array(
-        '#markup' => '&times;',
-        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
-        '#tag' => 'span',
+      $messages['close'] = array(
+        '#name' => 'close-button',
+        '#type' => 'button',
         '#attributes' => array(
+          0 => 'data-close',
           'class' => array(
-            'aria-hidden' => 'true',
+            'close-button',
+          ),
+          'aria-label' => t('Dismiss alert'),
+        ),
+        'value' => array(
+          '#markup' => '&times;',
+          '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+          '#tag' => 'span',
+          '#attributes' => array(
+            'class' => array(
+              'aria-hidden' => 'true',
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  $variables[$hook][$hook]['#theme_wrappers'] = array('container');
-  $variables[$hook][$hook]['#attributes'] = $variables['attributes_array'];
+    $variables[$hook][$hook]['#theme_wrappers'] = array('container');
+    $variables[$hook][$hook]['#attributes'] = $variables['attributes_array'];
+  }
 }

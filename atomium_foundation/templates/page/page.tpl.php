@@ -6,9 +6,11 @@
  */
 ?>
 
-<div class="expanded row">
-    <header role="banner"><?php print render($page['header']); ?></header>
-</div>
+<?php if (!empty($page['header'])): ?>
+    <div class="expanded row">
+        <header role="banner"><?php print render($page['header']); ?></header>
+    </div>
+<?php endif; ?>
 
 <?php if (!empty($page['menu'])): ?>
     <div class="row">
@@ -27,7 +29,9 @@
 <?php endif; ?>
 
 <div class="row">
-    <?php print render($page['sidebar_first']); ?>
+    <?php if (!empty($page['sidebar_first'])): ?>
+      <?php print render($page['sidebar_first']); ?>
+    <?php endif; ?>
 
     <main class="large-9 columns" role="main">
       <?php print render($page['highlighted']); ?>
@@ -46,9 +50,13 @@
       <?php print $feed_icons; ?>
     </main>
 
-    <?php print render($page['sidebar_second']); ?>
+    <?php if (!empty($page['sidebar_second'])): ?>
+      <?php print render($page['sidebar_second']); ?>
+    <?php endif; ?>
 </div>
 
-<div class="expanded row">
-    <footer role="contentinfo"><?php print render($page['footer']); ?></footer>
-</div>
+<?php if (!empty($page['footer'])): ?>
+    <div class="expanded row">
+        <footer role="contentinfo"><?php print render($page['footer']); ?></footer>
+    </div>
+<?php endif; ?>

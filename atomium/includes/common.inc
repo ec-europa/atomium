@@ -230,7 +230,7 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
   foreach ($attributes as $attribute => &$data) {
     // TODO: Can we do this in another way ?
     $data = array_map(function ($item) {
-      if (!is_object($item)) {
+      if (is_string($item)) {
         return trim($item);
       }
       return $item;
