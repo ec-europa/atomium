@@ -8,16 +8,16 @@
 /**
  * Implements hook_preprocess_menu_local_task().
  */
-function atomium_foundation_preprocess_menu_local_task(&$variables) {
-  if (is_array($variables['menu_link'])) {
-    $variables['menu_link']['#options']['attributes'] = $variables['attributes'];
-    $variables['menu_link']['#options']['attributes']['class'][] = 'small';
-    $variables['menu_link']['#options']['attributes']['class'][] = 'button';
+function atomium_foundation_preprocess_menu_local_task(&$variables, $hook) {
+  if (is_array($variables[$hook][$hook])) {
+    $variables[$hook][$hook]['#options']['attributes'] = $variables['attributes'];
+    $variables[$hook][$hook]['#options']['attributes']['class'][] = 'small';
+    $variables[$hook][$hook]['#options']['attributes']['class'][] = 'button';
     if ($variables['active'] == TRUE) {
-      $variables['menu_link']['#options']['attributes']['class'][] = 'primary';
+      $variables[$hook][$hook]['#options']['attributes']['class'][] = 'primary';
     }
     else {
-      $variables['menu_link']['#options']['attributes']['class'][] = 'secondary';
+      $variables[$hook][$hook]['#options']['attributes']['class'][] = 'secondary';
     }
   }
 }

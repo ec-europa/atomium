@@ -11,12 +11,8 @@
 function atomium_atomium_theme_menu_local_action() {
   return array(
     'menu_local_action' => array(
+      'render element' => 'element',
       'template' => 'menu-local-action',
-      'variables' => array(
-        'element' => NULL,
-        'link' => NULL,
-        'menu_link' => NULL,
-      ),
     ),
   );
 }
@@ -25,7 +21,7 @@ function atomium_atomium_theme_menu_local_action() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_menu_local_action(&$variables, $hook) {
-  $link = $variables['link'];
+  $link = $variables['element']['#link'];
 
   if (isset($link['href'])) {
     $variables['menu_link'] = array(
