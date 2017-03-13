@@ -39,7 +39,7 @@ function atomium_preprocess_file_icon(&$variables, $hook) {
       '#theme' => 'image',
       '#attributes' => $variables['attributes_array'],
       '#alt' => check_plain($variables['alt']),
-      '#title' => check_plain($file->filemime),
+      '#title' => isset($file->filemime) ? check_plain($file->filemime) : NULL,
       '#path' => file_icon_url($file, $variables['icon_directory']),
     ),
   );
