@@ -8,13 +8,23 @@
 /**
  * Implements hook_preprocess_links().
  */
-function atomium_foundation_preprocess_links(&$variables) {
+function atomium_foundation_preprocess_links(&$variables, $hook) {
   if (!in_array($variables['theme_hook_original'], array('links__node', 'links__comment'))) {
     return;
   }
 
-  $variables['links']['#attributes']['class'][] = 'no-bullet';
-  $variables['links']['#attributes']['class'][] = 'menu';
-  $variables['links']['#attributes']['class'][] = 'expanded';
-  $variables['links']['#attributes']['class'][] = 'simple';
+  $variables[$hook][$hook]['#wrapper'] = FALSE;
+  $variables[$hook][$hook]['#type'] = 'div';
+  $variables[$hook][$hook]['#attributes']['class'][] = 'small';
+  $variables[$hook][$hook]['#attributes']['class'][] = 'expanded';
+  $variables[$hook][$hook]['#attributes']['class'][] = 'secondary';
+  $variables[$hook][$hook]['#attributes']['class'][] = 'button-group';
+
+  if (isset($variables[$hook][$hook]['#items']) && is_array($variables[$hook][$hook]['#items'])) {
+    foreach ($variables[$hook][$hook]['#items'] as &$item) {
+      unset($item['#theme_wrappers']);
+      unset($item['#tag']);
+      $item['#options']['attributes']['class'][] = 'button';
+    }
+  }
 }
