@@ -11,7 +11,6 @@
 function atomium_atomium_theme_progress_bar() {
   return array(
     'progress_bar' => array(
-      'render element' => 'element',
       'template' => 'progress-bar',
       'variables' => array('percent' => NULL, 'message' => NULL),
     ),

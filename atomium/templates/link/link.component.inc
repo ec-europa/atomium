@@ -44,7 +44,6 @@ function atomium_preprocess_link(&$variables, $hook) {
 
   $variables['attributes_array'] = $variables['options']['attributes'];
   $variables['attributes_array'] += array('class' => array());
-  $variables['attributes_array']['class'] = array_merge((array) $variables['attributes_array']['class'], array('hook__' . $hook));
   $variables['attributes_array']['href'] = $path;
 
   if (is_string($variables['text'])) {

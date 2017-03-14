@@ -10,40 +10,33 @@
  */
 function atomium_process(&$variables, $hook) {
 
-  atomium_recursive_foreach($variables, function ($key, &$value) use ($variables, $hook) {
-    if (is_array($value) && $key === '#theme_wrappers') {
-      $value = array_map(function ($wrapper) use ($variables) {
-        return $wrapper . '__' . $variables['theme_hook_original'];
-      }, $value);
-    }
-  });
-
   // Trim each variables that goes into the templates.
   // This needs to be done before the attributes processing because
   // drupal_attributes() adds en extra space on purpose.
   // Do not trim arrays because they might be needed later.
-  array_walk($variables, function (&$value) {
+  atomium_recursive_foreach($variables, function ($key, &$value) use (&$variables, $hook) {
     if (is_string($value)) {
       $value = trim($value);
     }
   });
 
-  // Convert all variables '*_attributes_array' into a valid
-  // '*_attributes' variable.
-  foreach ($variables as $variable_name => $variable_content) {
-    if (strpos($variable_name, 'attributes_array') === FALSE || in_array($variable_name, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
-      continue;
+  atomium_recursive_foreach($variables, function ($key, &$value, &$parent) use (&$variables, $hook) {
+    // #theme_wrappers key handling.
+    if (is_array($value) && '#theme_wrappers' === $key) {
+      $value = array_map(function ($wrapper) use ($variables) {
+        return $wrapper . '__' . $variables['theme_hook_original'];
+      }, $value);
     }
 
-    $new_variable = substr($variable_name, 0, -6);
-    $variables[$new_variable] = atomium_drupal_attributes($variable_content, $variable_name);
-  }
-  /* End of attributes processing */
+    // Convert 'classes_array' into 'classes'.
+    if (is_array($value) && 'classes_array' === $key) {
+      array_walk($value, 'drupal_html_class');
+      $value['classes'] = implode(' ', $value);
+    }
 
-  // Convert 'classes_array' into 'classes'.
-  if (isset($variables['classes_array']) && is_array($variables['classes_array'])) {
-    $classes_array = $variables['classes_array'];
-    array_walk($classes_array, 'drupal_html_class');
-    $variables['classes'] = implode(' ', $classes_array);
-  }
+    // Attributes (*_attributes_array) handling & converting.
+    if (strpos($key, 'attributes_array') !== FALSE && !in_array($key, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
+      $variables[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key);
+    }
+  });
 }

@@ -25,4 +25,9 @@ function atomium_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Allow CSS double underscore'),
     '#default_value' => theme_get_setting('allow_css_double_underscores'),
   );
+  $form['atomium']['atomium_add_hook_classes'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Automatically add special classes based on the hook in use ?'),
+    '#default_value' => theme_get_setting('atomium_add_hook_classes'),
+  );
 }

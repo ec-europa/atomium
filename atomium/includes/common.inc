@@ -416,7 +416,7 @@ function atomium_recursive_foreach(array &$array, callable $callback) {
         atomium_recursive_foreach($value, $callback);
       }
     }
-    call_user_func_array($callback, array($key, &$value));
+    call_user_func_array($callback, array($key, &$value, &$array));
   }
   unset($array['#processed']);
 }

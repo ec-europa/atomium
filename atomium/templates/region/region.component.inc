@@ -10,7 +10,6 @@
  */
 function atomium_preprocess_region(&$variables, $hook) {
   $classes = array(
-    'hook__' . $hook,
     'hook__' . $hook . '__' . $variables['region'],
   );
 
