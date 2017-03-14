@@ -131,7 +131,7 @@ function atomium_preprocess_block(&$variables) {
   if ($variables['block']->title) {
     $variables['title'] = array(
       '#markup' => $variables['block']->title,
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'h2',
       '#attributes' => $variables['title_attributes_array'],
     );
@@ -140,7 +140,7 @@ function atomium_preprocess_block(&$variables) {
   if ($variables['content']) {
     $variables['content'] = array(
       '#markup' => $variables['content'],
-      '#theme_wrappers' => array('container__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => array('container'),
       '#attributes' => $variables['content_attributes_array'],
     );
   }

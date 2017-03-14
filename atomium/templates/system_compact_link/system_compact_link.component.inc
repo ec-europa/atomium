@@ -21,9 +21,8 @@ function atomium_atomium_theme_system_compact_link() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_system_compact_link(&$variables, $hook) {
-  $variables['context']['parents'][] = array($hook => $variables);
   $variables['link'] = array(
-    '#theme' => 'link__' . $variables['theme_hook_original'],
+    '#theme' => 'link',
     '#text' => NULL,
     '#path' => NULL,
     '#options' => array(

@@ -17,7 +17,7 @@ function atomium_foundation_preprocess_mark(&$variables, $hook) {
     $variables[$hook] = array(
       'content' => array(
         'icon' => array(
-          '#theme' => 'html_tag__' . $variables['theme_hook_original'],
+          '#theme' => 'html_tag',
           '#tag' => 'i',
           '#attributes' => array(
             'class' => array(
@@ -29,7 +29,7 @@ function atomium_foundation_preprocess_mark(&$variables, $hook) {
           '#markup' => $variables['title'],
         ),
       ),
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'span',
       '#attributes' => $variables['attributes_array'],
     );

@@ -216,7 +216,7 @@ function _atomium_pager_item_to_link_helper($text = NULL, $pager = NULL, $elemen
 
   return array(
     'link' => array(
-      '#theme' => 'link__' . $variables['theme_hook_original'],
+      '#theme' => 'link',
       '#text' => check_plain($text),
       '#path' => $_GET['q'],
       '#options' => $options,

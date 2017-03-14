@@ -21,8 +21,6 @@ function atomium_atomium_theme_textarea() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_textarea(&$variables, $hook) {
-  $variables['context']['parents'][] = array($hook => $variables);
-
   $element = &$variables['element'];
 
   element_set_attributes($element, array('id', 'name', 'cols', 'rows'));

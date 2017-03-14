@@ -110,7 +110,6 @@ function atomium_preprocess_html(&$variables, $hook) {
     }
   }
 
-  $variables['attributes_array'] += array('class' => array());
   $variables['attributes_array']['class'] = array_merge($variables['attributes_array']['class'], $variables['classes_array']);
 }
 
@@ -170,12 +169,12 @@ function _atomium_convert_js_inline_to_file($data, $variables, $hook) {
 
   if (file_exists($path)) {
     $element['#attributes']['src'] = file_create_url($path) . '?' . $query_string;
-    return theme('html_tag__' . $variables['theme_hook_original'], array('element' => $element));
+    return theme('html_tag', array('element' => $element));
   }
 
   if ($path = file_unmanaged_save_data($data, $path, FILE_EXISTS_REPLACE)) {
     $element['#attributes']['src'] = file_create_url($path) . '?' . $query_string;
-    return theme('html_tag__' . $variables['theme_hook_original'], array('element' => $element));
+    return theme('html_tag', array('element' => $element));
   }
 
   return FALSE;

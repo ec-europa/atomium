@@ -45,7 +45,7 @@ function atomium_preprocess_fieldset(&$variables) {
     $legend = array(
       'content' => array(
         '#markup' => $variables['title'],
-        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__legend__title'),
+        '#theme_wrappers' => array('html_tag'),
         '#tag' => 'span',
         '#attributes' => array(
           'class' => array(

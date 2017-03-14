@@ -22,7 +22,7 @@ function atomium_atomium_theme_admin_page() {
  */
 function atomium_preprocess_admin_page(&$variables, $hook) {
   $variables['toggle_link'] = array(
-    '#theme' => 'system_compact_link__' . $variables['theme_hook_original'],
+    '#theme' => 'system_compact_link',
   );
 
   $stripe = 0;
@@ -37,7 +37,7 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
     }
     $container[$block['position']]['attributes_array']['class'][] = $block['position'];
     $container[$block['position']]['content'][] = array(
-      '#theme' => 'admin_block__' . $variables['theme_hook_original'],
+      '#theme' => 'admin_block',
       '#block' => $block,
     );
   }

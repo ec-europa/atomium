@@ -20,24 +20,17 @@ function atomium_atomium_theme_menu_tree() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_menu_tree(&$variables, $hook) {
-  $variables['attributes_array']['class'][] = 'hook__' . $hook;
-  if (isset($variables['theme_hook_original'])) {
-    $variables['attributes_array']['class'][] = 'hook__' . $variables['theme_hook_original'];
-  }
-
-  $item = NULL;
-
-  // Attach a context to each menu item.
-  foreach (element_children($variables['#tree']) as $item) {
-    // Should we keep this ?
-    $variables['#tree'][$item]['#theme'] .= '__' . $variables['theme_hook_original'];
-  }
-
   // Guess the depth of the menu tree by checking the depth key of a menu item.
   $variables['depth'] = 1;
-  if ($item) {
-    $variables['depth'] = $variables['#tree'][$item]['#original_link']['depth'];
+
+  $children = element_children($variables['#tree']);
+  if (isset($children[0])) {
+    $item = $variables['#tree'][$children[0]];
+    if ($item) {
+      $variables['depth'] = $item['#original_link']['depth'];
+    }
   }
+
   $variables['attributes_array']['class'][] = 'menu_tree-level-' . $variables['depth'];
 
   $variables[$hook] = array(

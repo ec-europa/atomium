@@ -51,7 +51,7 @@ function atomium_preprocess_form_required_marker(&$variables, $hook) {
 
   $variables[$hook] = array(
     '#markup' => $variables['title'],
-    '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+    '#theme_wrappers' => array('html_tag'),
     '#attributes' => $variables['attributes_array'],
     '#tag' => 'span',
   );

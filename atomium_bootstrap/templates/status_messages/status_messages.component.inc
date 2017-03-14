@@ -33,7 +33,7 @@ function atomium_bootstrap_preprocess_status_messages(&$variables, $hook) {
       ),
       'value' => array(
         '#markup' => '&times;',
-        '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+        '#theme_wrappers' => array('html_tag'),
         '#tag' => 'span',
         '#attributes' => array(
           'class' => array(

@@ -394,3 +394,29 @@ function atomium_menu_get_active_breadcrumb() {
   }
   return $breadcrumb;
 }
+
+/**
+ * Custom utility callback that apply to each array element, a callback.
+ *
+ * Unlike array_walk_recursive, this function send the key name if a value is
+ * an array.
+ * As the value is passed by reference, you are able to modify its value within
+ * the callback.
+ *
+ * @param array $array
+ *   The array.
+ * @param callable $callback
+ *   The callback function.
+ */
+function atomium_recursive_foreach(array &$array, callable $callback) {
+  $array['#processed'] = TRUE;
+  foreach ($array as $key => &$value) {
+    if (is_array($value)) {
+      if (!isset($value['#processed'])) {
+        atomium_recursive_foreach($value, $callback);
+      }
+    }
+    call_user_func_array($callback, array($key, &$value));
+  }
+  unset($array['#processed']);
+}

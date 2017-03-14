@@ -9,6 +9,15 @@
  * Implements hook_process().
  */
 function atomium_process(&$variables, $hook) {
+
+  atomium_recursive_foreach($variables, function ($key, &$value) use ($variables, $hook) {
+    if (is_array($value) && $key === '#theme_wrappers') {
+      $value = array_map(function ($wrapper) use ($variables) {
+        return $wrapper . '__' . $variables['theme_hook_original'];
+      }, $value);
+    }
+  });
+
   // Trim each variables that goes into the templates.
   // This needs to be done before the attributes processing because
   // drupal_attributes() adds en extra space on purpose.
@@ -36,28 +45,5 @@ function atomium_process(&$variables, $hook) {
     $classes_array = $variables['classes_array'];
     array_walk($classes_array, 'drupal_html_class');
     $variables['classes'] = implode(' ', $classes_array);
-  }
-
-  // This needs to be in the process to alter what has been done by the
-  // preprocessing functions before.
-  if (isset($variables[$hook]) && is_array($variables[$hook])) {
-    if (isset($variables[$hook]['#theme'])) {
-      $variables[$hook]['#theme'] .= '__' . $variables['theme_hook_original'];
-    }
-    if (isset($variables[$hook][$hook]['#theme'])) {
-      $variables[$hook][$hook]['#theme'] .= '__' . $variables['theme_hook_original'];
-    }
-  }
-  if (isset($variables[$hook]) && is_array($variables[$hook])) {
-    if (isset($variables[$hook]['#theme_wrappers'])) {
-      $variables[$hook]['#theme_wrappers'] = array_map(function ($wrapper) use ($variables) {
-        return $wrapper . '__' . $variables['theme_hook_original'];
-      }, $variables[$hook]['#theme_wrappers']);
-    }
-    if (isset($variables[$hook][$hook]['#theme_wrappers'])) {
-      $variables[$hook][$hook]['#theme_wrappers'] = array_map(function ($wrapper) use ($variables) {
-        return $wrapper . '__' . $variables['theme_hook_original'];
-      }, $variables[$hook][$hook]['#theme_wrappers']);
-    }
   }
 }

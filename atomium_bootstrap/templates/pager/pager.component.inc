@@ -33,7 +33,7 @@ function atomium_bootstrap_preprocess_pager(&$variables, $hook) {
           ),
         ),
         '#theme_wrappers' => array(
-          'html_tag__' . $variables['theme_hook_original'],
+          'html_tag',
         ),
         '#tag' => 'li',
         '#attributes' => array(

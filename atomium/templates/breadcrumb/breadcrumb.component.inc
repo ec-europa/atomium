@@ -28,8 +28,10 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
         '#markup' => $item,
       );
     }
-    $item['#theme_wrappers'] = array('html_tag__' . $variables['theme_hook_original']);
-    $item['#tag'] = 'li';
+    $item += array(
+      '#theme_wrappers' => array('html_tag'),
+      '#tag' => 'li',
+    );
 
     $links[] = $item;
   }

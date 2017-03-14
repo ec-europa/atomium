@@ -30,7 +30,7 @@ function atomium_preprocess_feed_icon(&$variables, $hook) {
     $hook => array(
       '#theme' => 'link',
       '#text' => array(
-        '#theme' => 'image__' . $variables['theme_hook_original'],
+        '#theme' => 'image',
         '#path' => 'misc/feed.png',
         '#width' => 16,
         '#height' => 16,

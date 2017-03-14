@@ -25,7 +25,7 @@ function atomium_preprocess_menu_local_action(&$variables, $hook) {
 
   if (isset($link['href'])) {
     $variables['menu_link'] = array(
-      '#theme' => 'link__' . $variables['theme_hook_original'],
+      '#theme' => 'link',
       '#text' => $link['title'],
       '#path' => $link['href'],
       '#options' => isset($link['localized_options']) ? $link['localized_options'] : array('attributes' => array()),

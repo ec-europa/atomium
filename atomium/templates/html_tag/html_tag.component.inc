@@ -27,7 +27,7 @@ function atomium_preprocess_html_tag(&$variables, $hook) {
   foreach (element_children($variables['element']) as $key) {
     if (isset($variables['element']['#value']) && $variables['element']['#value'] === NULL) {
       // Set this to string to avoid E_NOTICE error when concatenating to NULL.
-      $variables['element']['#value'] = '';
+      $variables['element']['#value'] = array();
     }
     // Concatenate the rendered child onto the element #value.
     $variables['element']['#value'][] = $variables['element'][$key];

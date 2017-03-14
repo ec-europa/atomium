@@ -67,7 +67,7 @@ function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
   $variables[$hook] = array(
     'title' => array(
       '#markup' => t('You are here:'),
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'span',
       '#attributes' => array(
         'class' => array(
@@ -84,7 +84,7 @@ function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
     ),
     'suffix' => array(
       '#markup' => '...',
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'span',
       '#attributes' => array(
         'class' => array(

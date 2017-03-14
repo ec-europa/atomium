@@ -11,7 +11,6 @@
 function atomium_atomium_theme_menu_local_tasks() {
   return array(
     'menu_local_tasks' => array(
-      'render element' => 'element',
       'template' => 'menu-local-tasks',
       'variables' => array(
         'primary' => array(),
@@ -53,6 +52,4 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
       '#wrapper_attributes' => array(),
     );
   }
-
-  $variables['context']['parents'][] = array($hook => $variables);
 }
