@@ -35,7 +35,7 @@ function atomium_process(&$variables, $hook) {
     }
 
     // Attributes (*_attributes_array) handling & converting.
-    if (strpos($key, 'attributes_array') !== FALSE && !in_array($key, array('rdf_template_variable_attributes_array', 'rdf_metadata_attributes_array'))) {
+    if (strpos($key, 'attributes_array') !== FALSE) {
       $variables[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key);
     }
   });
