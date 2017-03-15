@@ -253,7 +253,11 @@ function _atomium_clean_attributes(array $attributes = array()) {
     }, $data);
 
     $data = array_unique(explode(' ', implode(' ', array_filter($data))));
-    asort($data);
+
+    if ('class' == $attribute) {
+      asort($data);
+    }
+
     $data = implode(' ', $data);
 
     if (!is_numeric($attribute)) {
