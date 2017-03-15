@@ -28,6 +28,22 @@ function atomium_process(&$variables, $hook) {
       }, $value);
     }
 
+    // This is currently useless but it will be for later, so I keep it here.
+    if (is_array($value) && ('#theme' === $key || '#theme_wrappers' === $key)) {
+      if (isset($parent['#theme_hook_suggestions'])) {
+        $derived_suggestions = array();
+        foreach ($parent['#theme_hook_suggestions'] as $parent_suggestion) {
+          foreach ($variables['theme_hook_suggestions'] as $suggestion) {
+            $derived_suggestions[] = $suggestion . '__' . $parent_suggestion;
+          }
+        }
+        $variables['theme_hook_suggestions'] = array_merge(
+          $variables['theme_hook_suggestions'],
+          $derived_suggestions
+        );
+      }
+    }
+
     // Convert 'classes_array' into 'classes'.
     if (is_array($value) && 'classes_array' === $key) {
       array_walk($value, 'drupal_html_class');
