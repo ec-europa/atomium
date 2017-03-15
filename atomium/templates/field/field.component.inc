@@ -30,8 +30,16 @@ function atomium_preprocess_field(&$variables) {
   foreach ($variables['items'] as $delta => $item) {
     $classes = array('field-item ', ($delta % 2 ? 'odd' : 'even'));
     $attributes_item[$delta]['class'] = $classes;
-    $attributes_item[$delta] = atomium_drupal_attributes($attributes_item[$delta]);
   }
 
   $variables['attributes_item'] = $attributes_item;
+}
+
+/**
+ * Implements hook_process_HOOK().
+ */
+function atomium_process_field(&$variables) {
+  foreach ($variables['attributes_item'] as &$attribute) {
+    $attribute = atomium_drupal_attributes($attribute);
+  }
 }

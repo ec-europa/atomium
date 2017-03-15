@@ -213,41 +213,56 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
     return '';
   }
 
-  if (isset($attributes['class'])) {
-    // If this line is enabled, it will cause problem with the filter.js
-    // - are converted to _ and JS is not able to find the right
-    // object having the appropriate class.
-    /*
-     * $variable_content['class'] =
-     * array_map('drupal_html_class', (array) $variable_content['class']);
-     */
-    $attributes['class'] = array_unique($attributes['class']);
-  }
-  if (isset($attributes['placeholder'])) {
-    $attributes['placeholder'] = array_map('strip_tags', (array) $attributes['placeholder']);
-  }
+  $attributes = _atomium_clean_attributes($attributes);
+  return $attributes ? ' ' . implode(' ', $attributes) : '';
+}
 
+/**
+ * Helper function to handle attributes cleaning.
+ *
+ * @param array $attributes
+ *   An array of attributes.
+ *
+ * @return array
+ *   The attributes cleaned.
+ */
+function _atomium_clean_attributes(array $attributes = array()) {
   foreach ($attributes as $attribute => &$data) {
-    // TODO: Can we do this in another way ?
-    $data = array_map(function ($item) {
-      if (is_string($item)) {
-        return trim($item);
+    if (is_array($data)) {
+      $data = _atomium_clean_attributes($data);
+    }
+
+    if (is_string($data) || is_numeric($data)) {
+      $data = array($data);
+    }
+
+    $data = array_map(function ($item) use ($attribute, $attributes) {
+      if ('class' === $attribute) {
+        $item = drupal_html_class($item);
       }
-      return $item;
-    }, (array) $data);
-    $data = array_filter($data, 'strlen');
-    $data = array_unique($data);
-    $value = implode(' ', (array) $data);
+
+      if ('placeholder' === $attribute) {
+        $item = strip_tags($item);
+      }
+
+      if ('id' === $attribute) {
+        $item = drupal_html_id($item);
+      }
+
+      return trim(check_plain($item));
+    }, $data);
+
+    $data = array_unique(explode(' ', implode(' ', array_filter($data))));
+    asort($data);
+    $data = implode(' ', $data);
 
     if (!is_numeric($attribute)) {
-      $data = $attribute . '="' . check_plain($value) . '"';
-    }
-    else {
-      $data = $value;
+      $data = sprintf('%s="%s"', $attribute, $data);
     }
   }
 
-  return $attributes ? ' ' . implode(' ', $attributes) : '';
+  asort($attributes);
+  return $attributes;
 }
 
 /**
@@ -411,10 +426,8 @@ function atomium_menu_get_active_breadcrumb() {
 function atomium_recursive_foreach(array &$array, callable $callback) {
   $array['#processed'] = TRUE;
   foreach ($array as $key => &$value) {
-    if (is_array($value)) {
-      if (!isset($value['#processed'])) {
-        atomium_recursive_foreach($value, $callback);
-      }
+    if (is_array($value) && !isset($value['#processed'])) {
+      atomium_recursive_foreach($value, $callback);
     }
     call_user_func_array($callback, array($key, &$value, &$array));
   }
