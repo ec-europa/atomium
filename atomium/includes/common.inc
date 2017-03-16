@@ -252,7 +252,17 @@ function _atomium_clean_attributes(array $attributes = array()) {
       return trim(check_plain($item));
     }, $data);
 
-    $data = array_unique(explode(' ', implode(' ', array_filter($data))));
+    $data = array_unique(
+      explode(' ',
+        implode(' ',
+          array_filter($data,
+            function ($item) {
+              return strlen($item) != 0;
+            }
+          )
+        )
+      )
+    );
 
     if ('class' == $attribute) {
       asort($data);
