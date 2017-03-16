@@ -11,10 +11,14 @@
 function atomium_foundation_preprocess_menu_local_tasks(&$variables) {
   $variables['primary']['#type'] = '';
   $variables['secondary']['#type'] = '';
-  $variables['primary']['#wrapper_attributes_array']['class'][] = 'menu';
-  $variables['primary']['#wrapper_attributes_array']['class'][] = 'expanded';
-  $variables['primary']['#wrapper_attributes_array']['class'][] = 'button-group';
-  $variables['secondary']['#wrapper_attributes_array']['class'][] = 'menu';
-  $variables['secondary']['#wrapper_attributes_array']['class'][] = 'expanded';
-  $variables['secondary']['#wrapper_attributes_array']['class'][] = 'button-group';
+  $variables['primary']['#wrapper_attributes_array']['class'][] = array(
+    'menu',
+    'expanded',
+    'button-group',
+  );
+  $variables['secondary']['#wrapper_attributes_array']['class'][] = array(
+    'menu',
+    'expanded',
+    'button-group',
+  );
 }

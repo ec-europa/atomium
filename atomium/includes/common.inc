@@ -227,14 +227,18 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
  *   The attributes cleaned.
  */
 function _atomium_clean_attributes(array $attributes = array()) {
-  foreach ($attributes as $attribute => &$data) {
-    if (is_array($data)) {
-      $data = _atomium_clean_attributes($data);
+  foreach ($attributes as $attribute => &$raw_data) {
+
+    $data = array();
+    foreach (new RecursiveIteratorIterator(new RecursiveArrayIterator(array($raw_data))) as $v) {
+      $data[$v] = $v;
     }
 
-    if (is_string($data) || is_numeric($data)) {
-      $data = array($data);
-    }
+    $data = array_filter($data,
+      function ($item) {
+        return strlen($item) != 0;
+      }
+    );
 
     $data = array_map(function ($item) use ($attribute, $attributes) {
       if ('class' === $attribute) {
@@ -252,18 +256,6 @@ function _atomium_clean_attributes(array $attributes = array()) {
       return trim(check_plain($item));
     }, $data);
 
-    $data = array_unique(
-      explode(' ',
-        implode(' ',
-          array_filter($data,
-            function ($item) {
-              return strlen($item) != 0;
-            }
-          )
-        )
-      )
-    );
-
     if ('class' == $attribute) {
       asort($data);
     }
@@ -273,6 +265,8 @@ function _atomium_clean_attributes(array $attributes = array()) {
     if (!is_numeric($attribute)) {
       $data = sprintf('%s="%s"', $attribute, $data);
     }
+
+    $raw_data = $data;
   }
 
   asort($attributes);
