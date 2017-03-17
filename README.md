@@ -40,13 +40,13 @@ These sub-themes are providing examples of *preprocess* functions and templates 
 [Go to top](#table-of-content)
 
 # Configuration
-As Atomium is not intended to be a full featured theme as you might find on drupal.org, full of configurable settings
+Atomium is not intended to be a full featured theme as you might find on drupal.org, full of configurable settings
 and with a nice user interface.
 The sole purpose of this theme is to provides a clean markup that you can easily extend.
 
 However, Atomium provides the following settings:
 
- - Enable theme debug,
+ - Enable theme debug mode,
  - Allow CSS double underscore.
  
 As of Drupal 7.33, Drupal core has a theme debug mode that can be enabled and disabled via the
@@ -63,7 +63,7 @@ in CSS identifiers. In order to allow CSS identifiers to contain double undersco
 # Contributing
 
 Atomium is licenced under [EUPL Licence](https://en.wikipedia.org/wiki/European_Union_Public_Licence).
-All contribution to Atomium and its sub-themes are made on [Github](https://github.com/ec-europa/atomium), the main
+All contributions to Atomium and its sub-themes are made on [Github](https://github.com/ec-europa/atomium), the main
 Atomium's repository.
 
 [Go to top](#table-of-content)
@@ -71,46 +71,46 @@ Atomium's repository.
 # Extending
 
 Atomium provides a way to extend just by creating some files without modifying the core Atomium files.
-Each theme definition, core or custom, are treated as a component.
-You can find all the theme definitions in the *templates* directory of each sub-themes.
+Each theme definition, core or custom, is treated as a component.
+You can find all the theme definitions in the *templates* directory of each sub-theme.
 
 To create a new theme definition:
 
- - Create a directory in *templates*, name it as you will, a good practice is to name it the name of the definition.
+ - Create a directory in *templates* and name it as you will. A good practice is to name it like the name of the definition.
  - Create a file *[NAME-OF-THE-THEME-DEFINITION].component.inc*,
  - Create the function *[NAME-OF-THE-THEME]\_atomium_theme\_[NAME-OF-THE-THEME-DEFINITION]\()*,
  - Create a file *[NAME-OF-THE-THEME_DEFINITION].css* and/or *[NAME-OF-THE-THEME_DEFINITION].js* to get these files
   automatically loaded.
   
-Do not forget to clear the cache every time new theme definitions or process/preprocess are added or removed.
+Do not forget to clear the cache every time a new theme definition or process/preprocess is added or removed.
 
 [Go to top](#table-of-content)
 
 # Developer's note
 
 During the development of this project, a lot of time has been put into analyzing how Drupal's core functions were
-implemented and how to redo the things properly.
+implemented and how to improve them for better customization.
 
 A good example of this is the breadcrumb generation.
 
-Let analyse how it's currently done in Drupal and how we've implemented it.
+Let's analyse how it's currently done in Drupal and how we've implemented it.
 
 ````php
 $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
 ````
 
-By default, Drupal is using the function *drupal_get_breadcrumb()* in its *template_process_page()* hook.
+By default, Drupal uses the function *drupal_get_breadcrumb()* in its *template_process_page()* hook.
 
 The function *drupal_get_breadcrumb()* returns raw HTML.
 Thus, it's impossible to alter the breadcrumbs links properly.
 
 In order to get a render array, we have to go deeper and rewrite functions accordingly.
 
-*drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*. This is actually, this function that returns HTML.
+*drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*. This is actually, the function that returns the HTML.
 
-There is no way to alter the result of that function, it returns an array of raw HTML links.
+There is no way to alter the result of that function as it returns an array of raw HTML links.
 
-Unfortunately, in order to do things properly, we have to create two extra functions in Atomium and change the way
+Unfortunately, in order to change this behaviour, we have to create two extra functions in Atomium and change the way
 the breadcrumb is generated.
 
 ````php
@@ -122,7 +122,7 @@ the breadcrumb is generated.
 
 *atomium_drupal_get_breadcrumb()* is an atomium internal function written only for the breadcrumb handling.
 Instead of calling *menu_get_active_breadcrumb()*, it calls *atomium_menu_get_active_breadcrumb()* which is also a
-custom Atomium function that, instead of returning an array of raw HTML links, returns an array of render array.
+custom Atomium function that, instead of returning an array of raw HTML links, returns an array of render arrays.
 
 This is why, in *page.tpl.php*, instead of writing:
 
@@ -136,6 +136,6 @@ You have to use:
 <?php print render($breadcrumb); ?>
 ````
 
-The rendering process is at the very end of the Drupal's chain of preprocess, process and renders functions.
+The rendering process is at the very end of the Drupal's chain of preprocess, process and render functions.
 
 [Go to top](#table-of-content)
