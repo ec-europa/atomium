@@ -32,7 +32,9 @@ function atomium_preprocess_fieldset(&$variables) {
   if (!empty($variables['element']['#description'])) {
     $variables['description'] = $variables['element']['#description'];
   }
-  $variables['attributes_array']['id'] = $variables['element']['#id'];
+  if (isset($variables['element']['#id'])) {
+    $variables['attributes_array']['id'] = $variables['element']['#id'];
+  }
   $variables['attributes_array']['class'][] = 'form-wrapper';
   $variables['attributes_array'] = drupal_array_merge_deep(
     $variables['element']['#attributes'],
