@@ -21,7 +21,7 @@ function atomium_bootstrap_preprocess_pager(&$variables, $hook) {
       $markup = $variables[$hook][$hook]['#items']['pager_current']['#markup'];
       $variables[$hook][$hook]['#items']['pager_current'] = array(
         'link' => array(
-          '#theme' => 'link',
+          '#theme' => array('link'),
           '#text' => array(
             '#markup' => $markup,
           ),

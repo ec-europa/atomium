@@ -70,7 +70,7 @@ function atomium_preprocess_form_element(&$variables, $hook) {
   if (!empty($element['#description'])) {
 
     $variables['description'] = array(
-      '#theme' => 'html_tag__' . $variables['theme_hook_original'] . '__description',
+      '#theme' => array('html_tag__' . $variables['theme_hook_original'] . '__description'),
       '#tag' => 'p',
       '#attributes' => array(
         'class' => array(),
@@ -88,7 +88,7 @@ function atomium_preprocess_form_element(&$variables, $hook) {
   );
 
   $variables['label'] = array(
-    '#theme' => 'form_element_label',
+    '#theme' => array('form_element_label'),
     '#element' => $variables['element'],
   );
   $variables['attributes_array'] = drupal_array_merge_deep(

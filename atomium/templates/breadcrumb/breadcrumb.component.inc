@@ -18,6 +18,23 @@ function atomium_atomium_theme_breadcrumb() {
 }
 
 /**
+ * Implements hook_atomium_definition_HOOK().
+ */
+function atomium_atomium_definition_breadcrumb() {
+  return array(
+    'label' => 'Breadcrumb',
+    'description' => 'Site breadcrumb.',
+    'preview' => array(
+      'breadcrumb' => array(
+        l(t('Home'), '/'),
+        l(t('News'), '/'),
+        t('My news title'),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
@@ -42,7 +59,7 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
   if ($links) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => 'item_list',
+        '#theme' => array('item_list'),
         '#items' => $links,
         '#type' => 'ul',
         '#wrapper' => FALSE,

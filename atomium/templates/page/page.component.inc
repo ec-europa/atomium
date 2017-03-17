@@ -58,9 +58,9 @@ function atomium_preprocess_page(&$variables, $hook) {
       break;
   }
 
-  $variables['messages'] = $variables['show_messages'] ? array('#theme' => 'status_messages') : '';
+  $variables['messages'] = $variables['show_messages'] ? array('#theme' => array('status_messages')) : '';
   $variables['breadcrumb'] = array(
-    '#theme' => 'breadcrumb',
+    '#theme' => array('breadcrumb'),
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
 }

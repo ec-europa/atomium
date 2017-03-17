@@ -15,17 +15,17 @@ function atomium_europa_atomium_definition_breadcrumb() {
     'preview' => array(
       'breadcrumb' => array(
         array(
-          '#theme' => 'link',
+          '#theme' => array('link'),
           '#text' => t('Home'),
           '#href' => '/',
         ),
         array(
-          '#theme' => 'link',
+          '#theme' => array('link'),
           '#text' => t('News'),
           '#href' => '/',
         ),
         array(
-          '#theme' => 'link',
+          '#theme' => array('link'),
           '#text' => t('My news title'),
           '#href' => '/',
         ),
@@ -76,7 +76,7 @@ function atomium_europa_preprocess_breadcrumb(&$variables, $hook) {
       ),
     ),
     $hook => array(
-      '#theme' => 'item_list',
+      '#theme' => array('item_list'),
       '#items' => $breadcrumb_items,
       '#type' => 'ol',
       '#wrapper' => FALSE,

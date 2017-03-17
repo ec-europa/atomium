@@ -21,27 +21,15 @@ function atomium_process(&$variables, $hook) {
   });
 
   atomium_recursive_foreach($variables, function ($key, &$value, &$parent) use (&$variables, $hook) {
+    if (is_string($value) && '#theme' === $key) {
+      $value = array($value);
+    }
+
     // #theme_wrappers key handling.
-    if (is_array($value) && '#theme_wrappers' === $key) {
+    if (is_array($value) && ('#theme_wrappers' === $key || '#theme' === $key)) {
       $value = array_map(function ($wrapper) use ($variables) {
         return $wrapper . '__' . $variables['theme_hook_original'];
       }, $value);
-    }
-
-    // This is currently useless but it will be for later, so I keep it here.
-    if (is_array($value) && ('#theme' === $key || '#theme_wrappers' === $key)) {
-      if (isset($parent['#theme_hook_suggestions'])) {
-        $derived_suggestions = array();
-        foreach ($parent['#theme_hook_suggestions'] as $parent_suggestion) {
-          foreach ($variables['theme_hook_suggestions'] as $suggestion) {
-            $derived_suggestions[] = $suggestion . '__' . $parent_suggestion;
-          }
-        }
-        $variables['theme_hook_suggestions'] = array_merge(
-          $variables['theme_hook_suggestions'],
-          $derived_suggestions
-        );
-      }
     }
 
     // Convert 'classes_array' into 'classes'.
@@ -52,7 +40,7 @@ function atomium_process(&$variables, $hook) {
 
     // Attributes (*_attributes_array) handling & converting.
     if (strpos($key, 'attributes_array') !== FALSE) {
-      $variables[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key);
+      $variables[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key, $hook);
     }
   });
 }

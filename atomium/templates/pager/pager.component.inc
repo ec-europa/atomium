@@ -93,7 +93,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
     if ($i != $pager_max) {
       if ($i > 1) {
         $items['pager-ellipsis__' . $i] = array(
-          '#theme' => 'pager_ellipsis',
+          '#theme' => array('pager_ellipsis'),
           '#attributes' => array(
             'class' => array(
               'pager-ellipsis',
@@ -130,7 +130,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
 
       if ($i < $pager_max) {
         $items['pager_ellipsis__' . $i] = array(
-          '#theme' => 'pager_ellipsis',
+          '#theme' => array('pager_ellipsis'),
           '#attributes' => array(
             'class' => array(
               'pager-ellipsis',
@@ -182,7 +182,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
 
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => 'item_list',
+        '#theme' => array('item_list'),
         '#items' => $items,
         '#attributes' => $variables['attributes_array'],
         '#wrapper' => FALSE,
@@ -216,7 +216,7 @@ function _atomium_pager_item_to_link_helper($text = NULL, $pager = NULL, $elemen
 
   return array(
     'link' => array(
-      '#theme' => 'link',
+      '#theme' => array('link'),
       '#text' => check_plain($text),
       '#path' => $_GET['q'],
       '#options' => $options,

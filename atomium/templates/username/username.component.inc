@@ -38,7 +38,7 @@ function atomium_preprocess_username(&$variables, $hook) {
       // We should find a way to pass an array of suggestions so we can use
       // different templates based on variables.
       $hook => array(
-        '#theme' => 'link__username__uid_' . $variables['uid'],
+        '#theme' => array('link__username__uid_' . $variables['uid']),
         '#text' => $variables['name'] . $variables['extra'],
         '#path' => $variables['link_path'],
         '#options' => $variables['link_options'],

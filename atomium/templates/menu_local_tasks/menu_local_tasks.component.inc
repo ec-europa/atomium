@@ -35,7 +35,7 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
 
   if ($variables['primary']) {
     $variables['primary'] = array(
-      '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__primary',
+      '#theme' => array('item_list__' . $variables['theme_hook_original'] . '__primary'),
       '#items' => $variables['primary'],
       '#type' => $variables['type'],
       '#attributes' => $variables['primary_attributes_array'],
@@ -45,7 +45,7 @@ function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
 
   if ($variables['secondary']) {
     $variables['secondary'] = array(
-      '#theme' => 'item_list__' . $variables['theme_hook_original'] . '__secondary',
+      '#theme' => array('item_list__' . $variables['theme_hook_original'] . '__secondary'),
       '#items' => $variables['secondary'],
       '#type' => $variables['type'],
       '#attributes' => $variables['secondary_attributes_array'],

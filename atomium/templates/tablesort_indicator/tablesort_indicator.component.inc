@@ -23,7 +23,7 @@ function atomium_atomium_theme_tablesort_indicator() {
  */
 function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
   $image = array(
-    '#theme' => 'image',
+    '#theme' => array('image'),
     '#path' => 'misc/arrow-asc.png',
     '#width' => 13,
     '#height' => 13,

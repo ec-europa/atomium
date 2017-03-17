@@ -28,9 +28,9 @@ function atomium_preprocess_feed_icon(&$variables, $hook) {
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
   $variables[$hook] = array(
     $hook => array(
-      '#theme' => 'link',
+      '#theme' => array('link'),
       '#text' => array(
-        '#theme' => 'image',
+        '#theme' => array('image'),
         '#path' => 'misc/feed.png',
         '#width' => 16,
         '#height' => 16,

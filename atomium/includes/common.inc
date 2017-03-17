@@ -199,7 +199,24 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
  * The only difference is that if a key is a numeric, it will only display the
  * value. Ex: 0="data-closable" will be displayed: data-closable.
  */
-function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
+
+/**
+ * Copy of the drupal_attributes function.
+ *
+ * The only difference is that if a key is a numeric, it will only display the
+ * value. Ex: 0="data-closable" will be displayed: data-closable.
+ *
+ * @param array $attributes
+ *   The attributes array.
+ * @param string $name
+ *   The name of the key holding the attributes.
+ * @param string $hook
+ *   The hook being processed.
+ *
+ * @return string
+ *   The attributes in a single string, cleaned.
+ */
+function atomium_drupal_attributes(array $attributes = array(), $name = NULL, $hook = NULL) {
   // Remove empty arrays and empty strings.
   $attributes = array_filter($attributes, function ($value) {
     if (!is_array($value)) {
@@ -213,7 +230,7 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
     return '';
   }
 
-  $attributes = _atomium_clean_attributes($attributes);
+  $attributes = _atomium_clean_attributes($attributes, $name, $hook);
   return $attributes ? ' ' . implode(' ', $attributes) : '';
 }
 
@@ -222,11 +239,15 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL) {
  *
  * @param array $attributes
  *   An array of attributes.
+ * @param string $name
+ *   The name of the key holding the attributes.
+ * @param string $hook
+ *   The hook being processed.
  *
  * @return array
  *   The attributes cleaned.
  */
-function _atomium_clean_attributes(array $attributes = array()) {
+function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $hook = NULL) {
   foreach ($attributes as $attribute => &$raw_data) {
 
     $data = array();
@@ -240,9 +261,13 @@ function _atomium_clean_attributes(array $attributes = array()) {
       }
     );
 
-    $data = array_map(function ($item) use ($attribute, $attributes) {
+    $data = array_map(function ($item) use ($attribute, $hook) {
       if ('class' === $attribute) {
-        $item = drupal_html_class($item);
+        // Disabled for now or else it breaks the javascript in the
+        // filter tips component.
+        if ('filter_tips' === $hook) {
+          $item = drupal_html_class($item);
+        }
       }
 
       if ('placeholder' === $attribute) {
@@ -329,7 +354,7 @@ function atomium_get_component_definitions() {
           $definition['preview'] = array_merge($element, $definition['preview']);
         }
         else {
-          $definition['preview']['#theme'] = $component;
+          $definition['preview']['#theme'] = array($component);
         }
 
         $definitions[$component] = $definition;
@@ -408,7 +433,7 @@ function atomium_menu_get_active_breadcrumb() {
 
     foreach ($active_trail as $parent) {
       $breadcrumb[] = array(
-        '#theme' => 'link',
+        '#theme' => array('link'),
         '#text' => $parent['title'],
         '#href' => $parent['href'],
         '#options' => $parent['localized_options'],

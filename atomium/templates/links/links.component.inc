@@ -84,7 +84,7 @@ function atomium_preprocess_links(&$variables, $hook) {
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
         $newlink = array(
-          '#theme' => 'link',
+          '#theme' => array('link'),
           '#text' => $link['title'],
           '#path' => $link['href'],
           '#options' => $link,
@@ -124,7 +124,7 @@ function atomium_preprocess_links(&$variables, $hook) {
 
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => 'item_list',
+        '#theme' => array('item_list'),
         '#items' => $new_links,
         '#type' => 'ul',
         '#attributes' => $variables['attributes_array'],

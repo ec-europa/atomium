@@ -23,7 +23,7 @@ function atomium_atomium_theme_more_link() {
 function atomium_preprocess_more_link(&$variables, $hook) {
   $variables[$hook] = array(
     $hook => array(
-      '#theme' => 'link',
+      '#theme' => array('link'),
       '#text' => t('More'),
       '#path' => $variables['url'],
       '#options' => array('attributes' => array('title' => $variables['title'])),

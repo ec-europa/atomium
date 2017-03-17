@@ -38,7 +38,7 @@ function atomium_preprocess_indentation(&$variables, $hook) {
   if ($variables['size'] > 0) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => 'item_list',
+        '#theme' => array('item_list'),
         '#type' => '',
         '#items' => $variables['indentation'],
         '#attributes' => array(

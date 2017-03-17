@@ -17,7 +17,7 @@ function atomium_foundation_preprocess_mark(&$variables, $hook) {
     $variables[$hook] = array(
       'content' => array(
         'icon' => array(
-          '#theme' => 'html_tag',
+          '#theme' => array('html_tag'),
           '#tag' => 'i',
           '#attributes' => array(
             'class' => array(

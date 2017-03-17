@@ -50,7 +50,7 @@ function atomium_preprocess_file_link(&$variables, $hook) {
   $mimetype = file_get_mimetype($file->uri);
 
   $icon = array(
-    '#theme' => 'file_icon',
+    '#theme' => array('file_icon'),
     '#file' => $file,
     '#icon_directory' => $icon_directory,
     '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
@@ -77,7 +77,7 @@ function atomium_preprocess_file_link(&$variables, $hook) {
     $hook => array(
       $icon,
       array(
-        '#theme' => 'link',
+        '#theme' => array('link'),
         '#text' => $link_text,
         '#path' => $url,
         '#options' => $options,

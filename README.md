@@ -115,7 +115,7 @@ the breadcrumb is generated.
 
 ````php
   $variables['breadcrumb'] = array(
-    '#theme' => 'breadcrumb',
+    '#theme' => array('breadcrumb'),
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
 ````
