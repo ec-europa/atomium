@@ -9,7 +9,7 @@
  * Implements hook_preprocess_links().
  */
 function atomium_foundation_preprocess_links(&$variables, $hook) {
-  if (!in_array($variables['theme_hook_original'], array('links__node', 'links__comment'))) {
+  if (in_array($variables['theme_hook_original'], array('links__contextual'))) {
     return;
   }
 
