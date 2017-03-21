@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($link); ?>
+<a<?php print $attributes; ?>><?php print render($text); ?></a>
