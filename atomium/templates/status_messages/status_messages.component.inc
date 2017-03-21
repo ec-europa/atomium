@@ -11,7 +11,10 @@
 function atomium_atomium_theme_status_messages() {
   return array(
     'status_messages' => array(
-      'variables' => array('display' => NULL),
+      'variables' => array(
+        'display' => NULL,
+        'messages' => array(),
+      ),
       'template' => 'status-messages',
     ),
   );
@@ -28,7 +31,10 @@ function atomium_preprocess_status_messages(&$variables, $hook) {
   );
 
   $output = array();
-  foreach (drupal_get_messages($variables['display']) as $type => $messages) {
+
+  $variables += array('messages' => array());
+  $status_messages = drupal_array_merge_deep($variables['messages'], drupal_get_messages($variables['display']));
+  foreach ($status_messages as $type => $messages) {
     $container = array(
       'messages' => array(
         '#theme' => array('item_list__' . $variables['theme_hook_original'] . '__' . $type),
