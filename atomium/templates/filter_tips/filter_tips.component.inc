@@ -46,7 +46,6 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
     $composer[$name]['tips'] = array(
       '#theme' => array('item_list'),
       '#items' => $items,
-      'type' => 'ul',
     );
   }
 
