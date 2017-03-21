@@ -344,8 +344,10 @@ function atomium_get_component_definitions() {
 
         // Prepend hash to all preview properties.
         foreach ($definition['preview'] as $key => $value) {
-          $definition['preview']["#{$key}"] = $value;
-          unset($definition['preview'][$key]);
+          if (!is_numeric($key)) {
+            $definition['preview']["#{$key}"] = $value;
+            unset($definition['preview'][$key]);
+          }
         }
 
         // Handle preview differently whereas a component is an element or not.
