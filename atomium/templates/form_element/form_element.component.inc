@@ -89,7 +89,7 @@ function atomium_preprocess_form_element(&$variables, $hook) {
 
   $variables['label'] = array(
     '#theme' => array('form_element_label'),
-    '#element' => $variables['element'],
+    'form_element_label' => $variables['element'],
   );
   $variables['attributes_array'] = drupal_array_merge_deep(
     $variables['attributes_array'],
