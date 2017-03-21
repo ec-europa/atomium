@@ -22,6 +22,8 @@ function atomium_atomium_theme_tablesort_indicator() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
+  $variables['theme_hook_suggestions'][] = $hook . '__' . $variables['style'];
+
   $image = array(
     '#theme' => array('image'),
     '#path' => 'misc/arrow-asc.png',
@@ -45,6 +47,7 @@ function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
     $image['#alt'] = $image['#title'] = t('sort descending');
   }
 
-  $variables['image'] = $image;
-  $variables['theme_hook_suggestions'][] = $hook . '__' . $variables['style'];
+  $variables[$hook] = array(
+    $hook => $image,
+  );
 }

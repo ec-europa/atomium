@@ -49,12 +49,7 @@ function atomium_preprocess_file_link(&$variables, $hook) {
 
   $mimetype = file_get_mimetype($file->uri);
 
-  $icon = array(
-    '#theme' => array('file_icon'),
-    '#file' => $file,
-    '#icon_directory' => $icon_directory,
-    '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
-  );
+  $icon =
 
   // Set options as per anchor format described at
   // http://microformats.org/wiki/file-format-examples
@@ -73,22 +68,20 @@ function atomium_preprocess_file_link(&$variables, $hook) {
     $options['attributes']['title'] = check_plain($file->filename);
   }
 
+  $variables['attributes_array']['class'][] = 'file';
+
   $variables[$hook] = array(
-    $hook => array(
-      $icon,
-      array(
-        '#theme' => array('link'),
-        '#text' => $link_text,
-        '#path' => $url,
-        '#options' => $options,
-      ),
+    'file_icon' => array(
+      '#theme' => array('file_icon'),
+      '#file' => $file,
+      '#icon_directory' => $icon_directory,
+      '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
     ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'span',
-    '#attributes' => array(
-      'class' => array(
-        'file',
-      ),
+    'file_link' => array(
+      '#theme' => array('link'),
+      '#text' => $link_text,
+      '#path' => $url,
+      '#options' => $options,
     ),
   );
 }

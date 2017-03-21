@@ -21,11 +21,14 @@ function atomium_atomium_theme_filter_guidelines() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_filter_guidelines(&$variables) {
-  $variables['attributes_array']['class'][] = 'filter-guidelines-item';
-  $variables['attributes_array']['class'][] = 'filter-guidelines-' . $variables['format']->format;
-
-  $variables['attributes_array']['class'] = array_diff($variables['attributes_array']['class'], array('hook__filter_guidelines'));
+  $variables['attributes_array']['class'][] = array(
+    'filter-guidelines-item',
+    'filter-guidelines-' . $variables['format']->format,
+  );
 
   $variables['name'] = check_plain($variables['format']->name);
-  $variables['tips'] = theme('filter_tips', array('tips' => _filter_tips($variables['format']->format, FALSE)));
+  $variables['tips'] = array(
+    '#theme' => 'filter_tips',
+    '#tips' => _filter_tips($variables['format']->format, FALSE),
+  );
 }

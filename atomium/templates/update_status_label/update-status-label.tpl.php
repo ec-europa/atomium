@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($update_status_label); ?>
+<span<?php print $attributes; ?>><?php print render($update_status_label); ?></span>

@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($image); ?>
+<?php print render($tablesort_indicator); ?>
