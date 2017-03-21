@@ -13,15 +13,11 @@ function atomium_preprocess(&$variables, $hook) {
 
   if (theme_get_setting('atomium_add_hook_classes')) {
     atomium_recursive_foreach($variables, function ($key, &$value, &$parent) use ($variables, $hook) {
-      if ('html_tag' == $hook) {
-        return;
-      }
-
       if (is_array($value)) {
-        if (($key === 'attributes_array')) {
-          if (!isset($value['class'])) {
-            $value['class'] = array();
-          }
+        if (strpos($key, 'attributes_array') !== FALSE) {
+          $value += array(
+            'class' => array(),
+          );
           if (is_array($value['class'])) {
             $value['class'][] = 'hook__' . $hook;
             if ($hook != $variables['theme_hook_original']) {

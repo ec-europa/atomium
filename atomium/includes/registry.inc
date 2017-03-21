@@ -57,7 +57,6 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
     foreach ($theme_data as $component => $component_data) {
 
       $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
-      $path .= sprintf('templates/%s', $component_data['directory']);
       if (file_exists($file)) {
         include_once $file;
         $function_name = $theme . '_atomium_theme_' . $component;
@@ -69,7 +68,7 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
             $hooks
           );
           foreach ($hooks as &$hook) {
-            $hook += array('path' => $path);
+            $hook += array('path' => $component_data['directory']);
           }
         }
       }

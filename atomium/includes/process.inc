@@ -27,9 +27,17 @@ function atomium_process(&$variables, $hook) {
 
     // #theme_wrappers key handling.
     if (is_array($value) && ('#theme_wrappers' === $key || '#theme' === $key)) {
+      // The dashboard modules use multidimensionnal arrays in the
+      // #theme_wrappers values. We need to deal with that as well.
+      // This is why we are using this to flatten the array properly.
+      $value_iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($value));
+      $values = array();
+      foreach ($value_iterator as $value_item) {
+        $values[] = $value_item;
+      }
       $value = array_map(function ($wrapper) use ($variables) {
         return $wrapper . '__' . $variables['theme_hook_original'];
-      }, $value);
+      }, $values);
     }
 
     // Convert 'classes_array' into 'classes'.
