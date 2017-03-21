@@ -35,13 +35,4 @@ function atomium_preprocess_menu_tree(&$variables, $hook) {
   }
 
   $variables['attributes_array']['class'][] = 'menu_tree-level-' . $variables['depth'];
-
-  $variables[$hook] = array(
-    $hook => array(
-      '#markup' => $variables['tree'],
-    ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'ul',
-    '#attributes' => $variables['attributes_array'],
-  );
 }

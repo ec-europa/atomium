@@ -10,16 +10,16 @@
  */
 function atomium_foundation_preprocess_menu_tree(&$variables, $hook) {
   if (1 != $variables['depth']) {
-    $variables[$hook]['#attributes']['class'][] = 'nested';
+    $variables['attributes_array']['class'][] = 'nested';
   }
 
-  $variables[$hook]['#attributes']['class'][] = 'menu';
+  $variables['attributes_array']['class'][] = 'menu';
 
   if ('menu_tree__main_menu' == $variables['theme_hook_original']) {
-    $variables[$hook]['#attributes']['class'][] = 'dropdown';
-    $variables[$hook]['#attributes'][] = 'data-dropdown-menu';
+    $variables['attributes_array']['class'][] = 'dropdown';
+    $variables['attributes_array'][] = 'data-dropdown-menu';
   }
   else {
-    $variables[$hook]['#attributes']['class'][] = 'vertical';
+    $variables['attributes_array']['class'][] = 'vertical';
   }
 }

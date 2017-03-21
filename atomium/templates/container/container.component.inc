@@ -33,12 +33,6 @@ function atomium_preprocess_container(&$variables, $hook) {
     }
   }
 
-  $variables[$hook] = array(
-    $hook => array(
-      '#markup' => $variables['element']['#children'],
-    ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'div',
-    '#attributes' => $element['#attributes'],
-  );
+  $variables['attributes_array'] = $element['#attributes'];
+  $variables['container'] = $element['#children'];
 }
