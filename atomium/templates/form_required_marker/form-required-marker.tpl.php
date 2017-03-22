@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($form_required_marker); ?>
+<span<?php print $attributes; ?>><?php print render($form_required_marker); ?></span>

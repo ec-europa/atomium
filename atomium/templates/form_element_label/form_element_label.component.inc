@@ -59,16 +59,11 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
   }
 
   $variables[$hook] = array(
-    $hook => array(
-      'title' => array(
-        $variables['title'],
-      ),
-      'required' => array(
-        $variables['required'],
-      ),
+    'title' => array(
+      $variables['title'],
     ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'label',
-    '#attributes' => $variables['attributes_array'],
+    'required' => array(
+      $variables['required'],
+    ),
   );
 }

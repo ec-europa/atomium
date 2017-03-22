@@ -49,10 +49,5 @@ function atomium_preprocess_form_required_marker(&$variables, $hook) {
 
   $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $attributes);
 
-  $variables[$hook] = array(
-    '#markup' => $variables['title'],
-    '#theme_wrappers' => array('html_tag'),
-    '#attributes' => $variables['attributes_array'],
-    '#tag' => 'span',
-  );
+  $variables[$hook] = $variables['title'];
 }

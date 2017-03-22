@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($form_element_label); ?>
+<label<?php print $attributes; ?>><?php print render($form_element_label['title']); ?><?php print render($form_element_label['required']); ?></label>

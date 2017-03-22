@@ -23,27 +23,22 @@ function atomium_atomium_theme_menu_local_action() {
 function atomium_preprocess_menu_local_action(&$variables, $hook) {
   $link = $variables['element']['#link'];
 
+  $link += array('localized_options' => array());
+  $link['localized_options'] += array('attributes' => array());
+  $options = drupal_array_merge_deep($link['localized_options']['attributes'], $variables['attributes_array']);
+
   if (isset($link['href'])) {
-    $variables['menu_link'] = array(
+    $variables[$hook] = array(
       '#theme' => array('link'),
       '#text' => $link['title'],
       '#path' => $link['href'],
-      '#options' => isset($link['localized_options']) ? $link['localized_options'] : array('attributes' => array()),
+      '#options' => $options,
     );
   }
   elseif (!empty($link['localized_options']['html'])) {
-    $variables['menu_link'] = $link['title'];
+    $variables[$hook] = $link['title'];
   }
   else {
-    $variables['menu_link'] = check_plain($link['title']);
+    $variables[$hook] = check_plain($link['title']);
   }
-
-  $variables[$hook] = array(
-    $hook => array(
-      $variables['menu_link'],
-    ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'li',
-    '#attributes' => $variables['attributes_array'],
-  );
 }

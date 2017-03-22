@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($menu_local_action); ?>
+<li<?php print $attributes; ?>><?php print render($menu_local_action); ?></li>
