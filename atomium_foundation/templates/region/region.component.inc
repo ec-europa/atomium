@@ -10,7 +10,7 @@
  */
 function atomium_foundation_preprocess_region(&$variables, $hook) {
   if (strpos($variables['elements']['#region'], 'sidebar') !== FALSE) {
-    $variables[$hook]['#attributes']['class'][] = 'large-3';
-    $variables[$hook]['#attributes']['class'][] = 'columns';
+    $variables['attributes_array']['class'][] = 'large-3';
+    $variables['attributes_array']['class'][] = 'columns';
   }
 }

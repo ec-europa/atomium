@@ -10,6 +10,6 @@
  */
 function atomium_bootstrap_preprocess_region(&$variables, $hook) {
   if (strpos($variables['elements']['#region'], 'sidebar') !== FALSE) {
-    $variables[$hook]['#attributes']['class'][] = 'col-md-3';
+    $variables['attributes_array']['class'][] = 'col-md-3';
   }
 }

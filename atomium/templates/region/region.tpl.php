@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($region); ?>
+<aside<?php print $attributes; ?>><?php print render($region); ?></aside>

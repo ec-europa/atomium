@@ -18,12 +18,5 @@ function atomium_preprocess_region(&$variables, $hook) {
   $variables['attributes_array']['class'] = $variables['classes_array'];
   $variables['attributes_array']['role'] = 'complementary';
 
-  $variables[$hook] = array(
-    $hook => array(
-      '#markup' => $variables['content'],
-    ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'aside',
-    '#attributes' => $variables['attributes_array'],
-  );
+  $variables[$hook] = $variables['content'];
 }
