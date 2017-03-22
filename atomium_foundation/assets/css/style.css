@@ -8,3 +8,7 @@
   overflow: hidden;
   height: 1px;
 }
+
+.handle {
+  box-sizing: initial;
+}
