@@ -265,7 +265,7 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
       if ('class' === $attribute) {
         // Disabled for now or else it breaks the javascript in the
         // filter tips component.
-        if ('filter_tips' === $hook) {
+        if ('filter_guidelines' !== $hook) {
           $item = drupal_html_class($item);
         }
       }
