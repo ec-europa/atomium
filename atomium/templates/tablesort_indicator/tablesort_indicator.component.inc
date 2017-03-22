@@ -11,7 +11,6 @@
 function atomium_atomium_theme_tablesort_indicator() {
   return array(
     'tablesort_indicator' => array(
-      'render element' => 'element',
       'template' => 'tablesort-indicator',
       'variables' => array('style' => NULL),
     ),

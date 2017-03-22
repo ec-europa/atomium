@@ -8,14 +8,11 @@
 /**
  * Implements hook_atomium_theme_HOOK().
  */
-function atomium_atomium_theme_form_element_mark() {
+function atomium_atomium_theme_form_required_marker() {
   return array(
-    'form_element_mark' => array(
+    'form_required_marker' => array(
       'render element' => 'element',
       'template' => 'form-required-marker',
-      'variables' => array(
-        'element' => NULL,
-      ),
     ),
   );
 }

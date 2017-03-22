@@ -11,7 +11,6 @@
 function atomium_atomium_theme_link() {
   return array(
     'link' => array(
-      'render element' => 'element',
       'template' => 'link',
       'variables' => array(
         'text' => NULL,

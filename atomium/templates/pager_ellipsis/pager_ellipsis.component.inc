@@ -11,7 +11,6 @@
 function atomium_atomium_theme_pager_ellipsis() {
   return array(
     'pager_ellipsis' => array(
-      'render element' => 'element',
       'template' => 'pager-ellipsis',
       'variables' => array(
         'text' => '…',

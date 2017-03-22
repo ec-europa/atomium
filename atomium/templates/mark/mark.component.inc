@@ -11,7 +11,6 @@
 function atomium_atomium_theme_mark() {
   return array(
     'mark' => array(
-      'render element' => 'element',
       'template' => 'mark',
       'variables' => array(
         'title' => NULL,

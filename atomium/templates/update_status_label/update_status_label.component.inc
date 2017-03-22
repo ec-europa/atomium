@@ -11,7 +11,6 @@
 function atomium_atomium_theme_update_status_label() {
   return array(
     'update_status_label' => array(
-      'render element' => 'element',
       'template' => 'update-status-label',
       'variables' => array('status' => NULL),
     ),

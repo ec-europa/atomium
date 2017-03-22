@@ -11,7 +11,6 @@
 function atomium_atomium_theme_username() {
   return array(
     'username' => array(
-      'render element' => 'element',
       'template' => 'username',
       'variables' => array('account' => NULL),
     ),

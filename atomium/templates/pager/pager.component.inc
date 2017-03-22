@@ -11,7 +11,6 @@
 function atomium_atomium_theme_pager() {
   return array(
     'pager' => array(
-      'render element' => 'element',
       'template' => 'pager',
       'variables' => array(
         'tags' => array(),
