@@ -41,13 +41,6 @@ function atomium_preprocess_mark(&$variables, $hook) {
 
   $variables[$hook] = '';
   if (!empty($variables['title'])) {
-    $variables[$hook] = array(
-      $hook => array(
-        '#markup' => $variables['title'],
-      ),
-      '#theme_wrappers' => array('html_tag'),
-      '#tag' => 'span',
-      '#attributes' => $variables['attributes_array'],
-    );
+    $variables[$hook] = $variables['title'];
   }
 }
