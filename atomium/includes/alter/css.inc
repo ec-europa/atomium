@@ -37,7 +37,8 @@ function atomium_css_alter(&$css) {
     'modules/system/system.maintenance.css' => FALSE,
     'modules/system/admin.css' => FALSE,
     'modules/system/system.admin.css' => FALSE,
-    'modules/system/system.base.css' => FALSE,
+    // We need this for table draghandle and autocomplete inputs.
+    // 'modules/system/system.base.css' => FALSE,.
     'modules/aggregator/aggregator.css' => FALSE,
     'modules/block/block.css' => FALSE,
     'modules/book/book.css' => FALSE,
