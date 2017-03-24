@@ -6,10 +6,10 @@
  */
 
 /**
- * Implements hook_preprocess_menu_local_action().
+ * Implements hook_preprocess_HOOK().
  */
-function atomium_bootstrap_preprocess_menu_local_action(&$variables) {
-  $variables['menu_link']['#options']['attributes']['class'] = array(
+function atomium_bootstrap_preprocess_menu_local_action(&$variables, $hook) {
+  $variables[$hook]['#options']['attributes']['class'] = array(
     'btn',
     'btn-default',
   );

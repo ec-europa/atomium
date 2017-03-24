@@ -69,6 +69,5 @@ function atomium_preprocess_item_list(&$variables, $hook) {
   }
 
   $variables['attributes_array'] = $variables['attributes'];
-  $variables['wrapper_attributes_array'] = drupal_array_merge_deep($variables['wrapper_attributes_array'], $variables['attributes']);
   $variables['wrapper_attributes_array']['class'][] = 'item-list';
 }

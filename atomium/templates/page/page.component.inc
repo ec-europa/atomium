@@ -63,4 +63,13 @@ function atomium_preprocess_page(&$variables, $hook) {
     '#theme' => array('breadcrumb'),
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
+  $variables['action_links'] = array(
+    '#theme' => array('item_list'),
+    '#items' => menu_local_actions(),
+    '#attributes' => array(
+      'class' => array(
+        'action_links',
+      ),
+    ),
+  );
 }
