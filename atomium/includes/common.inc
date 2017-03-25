@@ -275,7 +275,9 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
       }
 
       if ('id' === $attribute) {
-        $item = drupal_html_id($item);
+        // Disabled for now, it's causing issue in
+        // admin/structure/views/settings.
+        //$item = drupal_html_id($item);
       }
 
       return trim(check_plain($item));
@@ -437,7 +439,7 @@ function atomium_menu_get_active_breadcrumb() {
       $breadcrumb[] = array(
         '#theme' => array('link'),
         '#text' => $parent['title'],
-        '#href' => $parent['href'],
+        '#path' => $parent['href'],
         '#options' => $parent['localized_options'],
       );
     }

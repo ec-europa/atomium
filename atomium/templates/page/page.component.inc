@@ -72,4 +72,6 @@ function atomium_preprocess_page(&$variables, $hook) {
       ),
     ),
   );
+
+  unset($variables['page']['content']['#theme_wrappers']);
 }

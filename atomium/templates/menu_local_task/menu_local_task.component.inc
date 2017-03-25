@@ -56,5 +56,5 @@ function atomium_preprocess_menu_local_task(&$variables, $hook) {
     );
   }
 
-  $variables['attributes_array']['class'][] = !empty($variables['element']['#active']) ? 'active' : '';
+  $variables['attributes_array']['class'][] = !empty($variables['active']) ? 'active' : '';
 }
