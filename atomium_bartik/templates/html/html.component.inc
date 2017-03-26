@@ -27,8 +27,8 @@ function atomium_bartik_preprocess_html(&$variables, $hook) {
   }
 
   // Add conditional stylesheets for IE
-  drupal_add_css(path_to_theme() . '/css/ie.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
-  drupal_add_css(path_to_theme() . '/css/ie6.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'IE 6', '!IE' => FALSE), 'preprocess' => FALSE));
+  drupal_add_css(path_to_theme() . '/assets/css/ie.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
+  drupal_add_css(path_to_theme() . '/assets/css/ie6.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'IE 6', '!IE' => FALSE), 'preprocess' => FALSE));
 
   // Add information about the number of sidebars.
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
@@ -45,17 +45,6 @@ function atomium_bartik_preprocess_html(&$variables, $hook) {
   else {
     $variables['classes_array'][] = 'no-sidebars';
   }
-
-  $path = drupal_get_path('module', 'system');
-  // Add the CSS for this module. These aren't in system.info, because they
-  // need to be in the CSS_SYSTEM group rather than the CSS_DEFAULT group.
-  drupal_add_css($path . '/system.base.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
-  if (path_is_admin(current_path())) {
-    drupal_add_css($path . '/system.admin.css', array('group' => CSS_SYSTEM));
-  }
-  drupal_add_css($path . '/system.menus.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
-  drupal_add_css($path . '/system.messages.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
-  drupal_add_css($path . '/system.theme.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
 }
 
 /**
