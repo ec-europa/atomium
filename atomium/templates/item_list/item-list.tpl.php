@@ -8,8 +8,8 @@
 <?php if ($wrapper): ?>
   <div<?php print $wrapper_attributes; ?>>
 <?php endif; ?>
-  <?php if (isset($title) && $title !== ''):?>
-      <h3><?php print $title; ?></h3>
+  <?php if ($title): ?>
+      <?php print render($title); ?>
   <?php endif; ?>
 
   <?php if (!empty($variables['items'])): ?>
