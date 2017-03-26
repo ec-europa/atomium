@@ -58,9 +58,6 @@ function atomium_preprocess_form_element(&$variables, $hook) {
     $attributes['class'][] = 'form-disabled';
   }
 
-  if ((isset($element['#title']) && $element['#title'] != 'Language') && (isset($element['#required']) && $element['#required'])) {
-    $attributes['class'][] = 'form-required';
-  }
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
     $element['#title_display'] = 'none';
