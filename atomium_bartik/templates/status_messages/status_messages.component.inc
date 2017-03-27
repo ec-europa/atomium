@@ -20,8 +20,8 @@ function atomium_bartik_preprocess_status_messages(&$variables, $hook) {
       '#attributes' => array(
         'class' => array(
           'element-invisible',
-        )
-      )
+        ),
+      ),
     );
   }
 }

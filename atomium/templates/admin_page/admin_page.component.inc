@@ -33,7 +33,7 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
       $block['position'] = ++$stripe % 2 ? 'left' : 'right';
     }
     if (!isset($container[$block['position']])) {
-      //$container[$block['position']] = '';
+      $container[$block['position']] = '';
     }
     $container[$block['position']]['attributes_array']['class'][] = $block['position'];
     $container[$block['position']]['content'][] = array(

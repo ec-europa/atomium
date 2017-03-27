@@ -10,8 +10,8 @@
  */
 function atomium_css_alter(&$css) {
   $theme_key = $GLOBALS['theme_key'];
-  // Exclude specified CSS files from theme.
 
+  // Exclude specified CSS files from theme.
   $excludes = atomium_get_theme_info($theme_key, 'exclude][css', FALSE);
 
   if (!empty($excludes)) {

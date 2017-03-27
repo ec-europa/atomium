@@ -277,7 +277,7 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
       if ('id' === $attribute) {
         // Disabled for now, it's causing issue in
         // admin/structure/views/settings.
-        //$item = drupal_html_id($item);
+        // $item = drupal_html_id($item);.
       }
 
       return trim(check_plain($item));
