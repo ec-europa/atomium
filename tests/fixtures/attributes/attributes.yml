@@ -1,0 +1,67 @@
+-
+  actual:
+    class:
+      'a simple string'
+  expected:
+    ' class="a-simple-string"'
+
+-
+  actual:
+    class:
+      - testing
+      - array
+  expected:
+    ' class="array testing"'
+
+-
+  actual:
+    class:
+      - testing
+      - sub
+      -
+        - array
+        -
+          - deep
+  expected:
+    ' class="array deep sub testing"'
+
+-
+  actual:
+    class:
+      - hello
+      - I
+      - love
+      - you
+    id:
+      - plop
+  expected:
+    ' class="hello i love you" id="plop"'
+
+-
+  actual:
+    class:
+      - Bonjour Madame
+    id:
+      - Bonjour Monsieur
+  expected:
+    ' class="bonjour-madame" id="Bonjour Monsieur"'
+
+-
+  actual:
+    placeholder:
+      - This is an <b>html tag</b>
+  expected:
+    ' placeholder="This is an html tag"'
+
+-
+  actual:
+    class:
+      - hello
+      - I
+      - love
+      - you
+      -
+        - another
+        - subarray
+  expected:
+    ' class="another hello i love subarray you"'
