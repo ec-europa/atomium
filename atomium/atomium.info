@@ -33,15 +33,12 @@ settings[atomium_add_hook_classes] = 1
 
 ; CSS
 ; --------------
-; Necessary module CSS.
-
-;exclude[css][] = 'modules/block/block.css'
-;exclude[css][] = 'modules/node/node.css'
-;exclude[css][] = 'modules/system/admin.css'
-;exclude[css][] = 'modules/system/system.css'
-;exclude[css][] = 'modules/system/system.admin.css'
-;exclude[css][] = 'modules/system/system.base.css'
-
+exclude[css][] = 'modules/block/block.css'
+exclude[css][] = 'modules/node/node.css'
+exclude[css][] = 'modules/system/admin.css'
+exclude[css][] = 'modules/system/system.css'
+exclude[css][] = 'modules/system/system.admin.css'
+exclude[css][] = 'modules/system/system.base.css'
 exclude[css][] = 'misc/vertical-tabs.css'
 exclude[css][] = 'modules/aggregator/aggregator.css'
 exclude[css][] = 'modules/book/book.css'
