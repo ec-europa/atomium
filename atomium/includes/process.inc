@@ -48,7 +48,7 @@ function atomium_process(&$variables, $hook) {
 
     // Attributes (*_attributes_array) handling & converting.
     if (strpos($key, 'attributes_array') !== FALSE) {
-      $variables[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key, $hook);
+      $parent[substr($key, 0, -6)] = atomium_drupal_attributes($value, $key, $hook);
     }
   });
 }

@@ -39,10 +39,9 @@ function atomium_preprocess_link(&$variables, $hook) {
   if (($path == '/' . $_GET['q'] || ($path == '<front>' && drupal_is_front_page())) &&
     (empty($variables['options']['language']) || $variables['options']['language']->language == $language_url->language)) {
     $variables['options']['attributes']['class'][] = 'active';
+    $variables['attributes_array']['class'][] = 'active';
   }
 
-  $variables['attributes_array'] = $variables['options']['attributes'];
-  $variables['attributes_array'] += array('class' => array());
   $variables['attributes_array']['href'] = $path;
 
   if (is_string($variables['text'])) {

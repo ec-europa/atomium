@@ -33,7 +33,7 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
       $block['position'] = ++$stripe % 2 ? 'left' : 'right';
     }
     if (!isset($container[$block['position']])) {
-      $container[$block['position']] = '';
+      //$container[$block['position']] = '';
     }
     $container[$block['position']]['attributes_array']['class'][] = $block['position'];
     $container[$block['position']]['content'][] = array(
@@ -42,10 +42,14 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
     );
   }
 
-  foreach ($container as $id => &$data) {
+  $variables['container'] = $container;
+}
+
+/**
+ * Implements hook_process_HOOK().
+ */
+function atomium_process_admin_page(&$variables, $hook) {
+  foreach ($variables['container'] as $id => &$data) {
     $data['attributes'] = atomium_drupal_attributes($data['attributes_array']);
   }
-
-  $variables['container'] = $container;
-  $variables['attributes_array']['class'][] = 'admin';
 }
