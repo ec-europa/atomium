@@ -1,0 +1,37 @@
+-
+  actual:
+    hook:
+      'block'
+    variables:
+      attributes_array:
+        class:
+          - 'drupal'
+  expected:
+    attributes_array:
+      class:
+        - 'drupal'
+        - 'hook__block'
+    attributes:
+      ' class="drupal hook__block"'
+
+-
+  actual:
+    hook:
+      'block'
+    variables:
+      theme_hook_original:
+        'block_ftw'
+      attributes_array:
+        class:
+          - 'drupal'
+  expected:
+    theme_hook_original:
+        'block_ftw'
+    attributes_array:
+      class:
+        - 'drupal'
+        - 'hook__block'
+        - 'hook__block_ftw'
+    attributes:
+      ' class="drupal hook__block hook__block-ftw"'
+

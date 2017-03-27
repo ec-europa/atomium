@@ -52,4 +52,42 @@ abstract class AbstractTest extends TestCase {
     return $data;
   }
 
+  /**
+   * Return preprocess fixtures.
+   *
+   * @return array
+   *   List of variables fixtures.
+   */
+  public function variablesPreprocessProvider() {
+    $data = [];
+
+    $finder = new Finder();
+    $finder->files()->in(realpath(__DIR__ . '/../fixtures/preprocess'));
+    foreach ($finder as $file) {
+      $data[] = [
+        'variable_fixture' => Yaml::parse($file->getContents()),
+      ];
+    }
+    return $data;
+  }
+
+  /**
+   * Return process fixtures.
+   *
+   * @return array
+   *   List of variables fixtures.
+   */
+  public function variablesProcessProvider() {
+    $data = [];
+
+    $finder = new Finder();
+    $finder->files()->in(realpath(__DIR__ . '/../fixtures/process'));
+    foreach ($finder as $file) {
+      $data[] = [
+        'variable_fixture' => Yaml::parse($file->getContents()),
+      ];
+    }
+    return $data;
+  }
+
 }

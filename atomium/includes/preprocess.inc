@@ -20,8 +20,10 @@ function atomium_preprocess(&$variables, $hook) {
           );
           if (is_array($value['class'])) {
             $value['class'][] = 'hook__' . $hook;
-            if ($hook != $variables['theme_hook_original']) {
-              $value['class'][] = 'hook__' . $variables['theme_hook_original'];
+            if (isset($variables['theme_hook_original'])) {
+              if ($hook != $variables['theme_hook_original']) {
+                $value['class'][] = 'hook__' . $variables['theme_hook_original'];
+              }
             }
           }
         }
