@@ -1,4 +1,3 @@
-
 /* ---------- General Layout ---------- */
 
 body,
@@ -33,7 +32,9 @@ body {
   padding: 0;
   border: none;
 }
-#triptych-first, #triptych-middle, #triptych-last {
+#triptych-first,
+#triptych-middle,
+#triptych-last {
   width: 250px;
 }
 

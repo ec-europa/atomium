@@ -117,7 +117,7 @@
     <div class="link-wrapper">
       <?php print $links; ?>
     </div>
-  <?php endif; ?>
+    <?php endif; ?>
 
   <?php print render($content['comments']); ?>
 

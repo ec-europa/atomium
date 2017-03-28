@@ -11,10 +11,10 @@
 function atomium_bartik_preprocess_menu_local_tasks(&$variables) {
   $variables['primary']['#attributes']['class'][] = array(
     'nav',
-    'primary'
+    'primary',
   );
   $variables['secondary']['#attributes']['class'][] = array(
     'tabs',
-    'secondary'
+    'secondary',
   );
 }

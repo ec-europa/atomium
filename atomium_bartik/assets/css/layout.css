@@ -1,9 +1,8 @@
-
 /* ---------- Basic Layout Styles ----------- */
 
 html,
 body,
-#page  {
+#page {
   height: 100%;
 }
 #page-wrapper {

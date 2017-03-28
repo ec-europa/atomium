@@ -26,12 +26,27 @@ function atomium_bartik_preprocess_html(&$variables, $hook) {
     $variables['classes_array'][] = 'footer-columns';
   }
 
-  // Add conditional stylesheets for IE
-  drupal_add_css(path_to_theme() . '/assets/css/ie.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
-  drupal_add_css(path_to_theme() . '/assets/css/ie6.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'IE 6', '!IE' => FALSE), 'preprocess' => FALSE));
+  // Add conditional stylesheets for IE.
+  drupal_add_css(
+    path_to_theme() . '/assets/css/ie.css',
+      array(
+        'group' => CSS_THEME,
+        'browsers' => array('IE' => 'lte IE 7', '!IE' => FALSE),
+        'preprocess' => FALSE,
+      )
+  );
+  drupal_add_css(
+    path_to_theme() . '/assets/css/ie6.css',
+      array(
+        'group' => CSS_THEME,
+        'browsers' => array('IE' => 'IE 6', '!IE' => FALSE),
+        'preprocess' => FALSE,
+      )
+  );
 
   // Add information about the number of sidebars.
-  if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
+  if (
+    !empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['classes_array'][] = 'two-sidebars';
   }
   elseif (!empty($variables['page']['sidebar_first'])) {
