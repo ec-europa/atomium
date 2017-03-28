@@ -35,15 +35,17 @@ function atomium_process(&$variables, $hook) {
       foreach ($value_iterator as $value_item) {
         $values[] = $value_item;
       }
-      $value = array_map(function ($wrapper) use ($variables) {
-        return $wrapper . '__' . $variables['theme_hook_original'];
-      }, $values);
+      if (isset($variables['theme_hook_original'])) {
+        $value = array_map(function ($wrapper) use ($variables) {
+          return $wrapper . '__' . $variables['theme_hook_original'];
+        }, $values);
+      }
     }
 
     // Convert 'classes_array' into 'classes'.
     if (is_array($value) && 'classes_array' === $key) {
       array_walk($value, 'drupal_html_class');
-      $value['classes'] = implode(' ', $value);
+      $parent['classes'] = implode(' ', $value);
     }
 
     // Attributes (*_attributes_array) handling & converting.

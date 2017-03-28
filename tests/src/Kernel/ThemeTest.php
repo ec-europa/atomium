@@ -58,7 +58,6 @@ class ThemeTest extends AbstractThemeTest {
   public function testThemeVariablesProcess($variables) {
     foreach ($variables as $variable) {
       $input = $variable['actual']['variables'];
-      atomium_preprocess($input, $variable['actual']['hook']);
       atomium_process($input, $variable['actual']['hook']);
       assert($input, isSameAs($variable['expected']));
     }
