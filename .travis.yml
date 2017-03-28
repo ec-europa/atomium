@@ -38,6 +38,7 @@ before_script:
   - cat phpunit.xml.dist
 
 script:
+  - ./vendor/bin/phpcs --standard=vendor/drupal/coder/coder_sniffer/Drupal/ --ignore=vendor
   - ./vendor/bin/phpunit
 
 notifications:
