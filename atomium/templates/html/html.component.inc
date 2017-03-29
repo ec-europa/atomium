@@ -117,32 +117,14 @@ function atomium_preprocess_html(&$variables, $hook) {
  * Implements hook_process_HOOK().
  */
 function atomium_process_html(&$variables, $hook) {
-  preg_match_all('/<script(?![^>]+src).*?>([\s\S]*?)<\/script>/s', $variables['scripts'], $matches, PREG_SET_ORDER);
-  foreach ($matches as $match) {
-    if ($newtag = _atomium_convert_js_inline_to_file($match[1], $variables, $hook)) {
-      $variables['scripts'] = str_replace($match[0], $newtag, $variables['scripts']);
+  if (theme_get_setting('atomium_convert_inline_js_into_files')) {
+    preg_match_all('/<script(?![^>]+src).*?>([\s\S]*?)<\/script>/s', $variables['scripts'], $matches, PREG_SET_ORDER);
+    foreach ($matches as $match) {
+      if ($newtag = _atomium_convert_js_inline_to_file($match[1], $variables, $hook)) {
+        $variables['scripts'] = str_replace($match[0], $newtag, $variables['scripts']);
+      }
     }
   }
-
-  /*
-  $before = array("/(?<=>)\s+|\s+(?=<)/", "/[\n\r]/");
-  $after = array('', '');
-
-  $variables['page'] = preg_replace($before, $after, $variables['page']);
-  $variables['page_top'] = preg_replace(
-  $before,
-  $after,
-  $variables['page_top']
-  );
-  $variables['page_bottom'] = preg_replace(
-  $before,
-  $after,
-  $variables['page_bottom']
-  );
-  $variables['head'] = preg_replace($before, $after, $variables['head']);
-  $variables['styles'] = preg_replace($before, $after, $variables['styles']);
-  $variables['scripts'] = preg_replace($before, $after, $variables['scripts']);
-   */
 }
 
 /**

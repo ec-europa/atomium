@@ -31,4 +31,10 @@ function atomium_form_system_theme_settings_alter(&$form, $form_state) {
     '#title'         => t('Automatically add special classes based on the hook in use ?'),
     '#default_value' => theme_get_setting('atomium_add_hook_classes'),
   );
+  $form['atomium']['atomium_convert_inline_js_into_files'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Move inline Javascript into files ?'),
+    '#default_value' => theme_get_setting('atomium_add_hook_classes'),
+    '#description' => t('Atomium allows you to move inline Javascript (like the Drupal settings) into a file that is automatically loaded as a regular JS file.'),
+  );
 }
