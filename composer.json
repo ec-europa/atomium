@@ -21,7 +21,8 @@
     "phpro/grumphp": "^0.11",
     "phpunit/phpunit": "^5",
     "bovigo/assert": "~1.7",
-    "anahkiasen/underscore-php" : "dev-master"
+    "anahkiasen/underscore-php" : "dev-master",
+    "composer/installer": "~1.0"
   },
   "autoload": {
     "psr-4": {
