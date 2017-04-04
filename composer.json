@@ -22,7 +22,7 @@
     "phpunit/phpunit": "^5",
     "bovigo/assert": "~1.7",
     "anahkiasen/underscore-php" : "dev-master",
-    "composer/installer": "~1.0"
+    "composer/installers": "~1.0"
   },
   "autoload": {
     "psr-4": {
