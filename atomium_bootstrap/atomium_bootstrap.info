@@ -32,13 +32,17 @@ settings[toggle_logo] = 0
 
 ; CSS
 ; --------------
-exclude[css][] = 'modules/block/block.css'
-exclude[css][] = 'modules/node/node.css'
-exclude[css][] = 'modules/system/admin.css'
-exclude[css][] = 'modules/system/system.css'
-exclude[css][] = 'modules/system/system.admin.css'
-exclude[css][] = 'modules/system/system.base.css'
-exclude[css][] = 'misc/vertical-tabs.css'
+; Necessary module CSS.
+
+;exclude[css][] = 'modules/block/block.css'
+;exclude[css][] = 'modules/node/node.css'
+;exclude[css][] = 'modules/system/admin.css'
+;exclude[css][] = 'modules/system/system.css'
+;exclude[css][] = 'modules/system/system.admin.css'
+;exclude[css][] = 'modules/system/system.base.css'
+;exclude[css][] = 'misc/vertical-tabs.css'
+;exclude[css][] = 'modules/filter/filter.css'
+
 exclude[css][] = 'modules/aggregator/aggregator.css'
 exclude[css][] = 'modules/book/book.css'
 exclude[css][] = 'modules/block/block.css'
@@ -46,7 +50,6 @@ exclude[css][] = 'modules/comment/comment.css'
 exclude[css][] = 'modules/dblog/dblog.css'
 exclude[css][] = 'modules/field/theme/field.css'
 exclude[css][] = 'modules/file/file.css'
-exclude[css][] = 'modules/filter/filter.css'
 exclude[css][] = 'modules/forum/forum.css'
 exclude[css][] = 'modules/help/help.css'
 exclude[css][] = 'modules/menu/menu.css'
