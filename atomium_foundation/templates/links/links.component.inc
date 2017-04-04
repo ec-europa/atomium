@@ -24,7 +24,7 @@ function atomium_foundation_preprocess_links(&$variables, $hook) {
     foreach ($variables[$hook][$hook]['#items'] as &$item) {
       unset($item['#theme_wrappers']);
       unset($item['#tag']);
-      $item['#options']['attributes']['class'][] = 'button';
+      $item['link']['#options']['attributes_array']['class'][] = 'button';
     }
   }
 }

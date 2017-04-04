@@ -27,6 +27,10 @@ function atomium_atomium_theme_link() {
 function atomium_preprocess_link(&$variables, $hook) {
   global $language_url;
 
+  if (isset($variables['options']['attributes_array'])) {
+    $variables['attributes_array'] = $variables['options']['attributes_array'];
+  }
+
   $variables += array('options' => array('attributes' => array()));
   $variables['options'] += array(
     'html' => FALSE,

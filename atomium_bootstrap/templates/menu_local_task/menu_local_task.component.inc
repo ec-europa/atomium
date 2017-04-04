@@ -10,7 +10,7 @@
  */
 function atomium_bootstrap_preprocess_menu_local_task(&$variables) {
   if (is_array($variables['menu_link'])) {
-    $variables['menu_link']['#options']['attributes']['class'] = array(
+    $variables['menu_link']['#options']['attributes_array']['class'] = array(
       'btn',
     );
   }
