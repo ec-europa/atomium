@@ -45,7 +45,9 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
         '#markup' => $item,
       );
     }
-    $item += array(
+
+    $item = array(
+      'link' => $item,
       '#theme_wrappers' => array('html_tag'),
       '#tag' => 'li',
     );
