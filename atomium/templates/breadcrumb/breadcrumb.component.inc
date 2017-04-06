@@ -26,8 +26,16 @@ function atomium_atomium_definition_breadcrumb() {
     'description' => 'Site breadcrumb.',
     'preview' => array(
       'breadcrumb' => array(
-        l(t('Home'), '/'),
-        l(t('News'), '/'),
+        array(
+          '#theme' => 'link',
+          '#text' => 'Home',
+          '#path' => '/',
+        ),
+        array(
+          '#theme' => 'link',
+          '#text' => 'News',
+          '#path' => '/',
+        ),
         t('My news title'),
       ),
     ),
@@ -46,13 +54,11 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
       );
     }
 
-    $item = array(
+    $links[] = array(
       'link' => $item,
       '#theme_wrappers' => array('html_tag'),
       '#tag' => 'li',
     );
-
-    $links[] = $item;
   }
 
   $variables['wrapper_attributes_array'] = $variables['attributes_array'];
