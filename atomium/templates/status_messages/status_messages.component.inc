@@ -21,6 +21,29 @@ function atomium_atomium_theme_status_messages() {
 }
 
 /**
+ * Implements hook_atomium_definition_HOOK().
+ */
+function atomium_atomium_definition_status_messages() {
+  return array(
+    'label' => 'Status messages',
+    'description' => 'Status messages.',
+    'preview' => array(
+      'messages' => array(
+        'error' => array(
+          t('Error message'),
+        ),
+        'status' => array(
+          t('Status message'),
+        ),
+        'warning' => array(
+          t('Warning message'),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_status_messages(&$variables, $hook) {
