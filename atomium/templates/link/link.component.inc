@@ -27,15 +27,18 @@ function atomium_atomium_theme_link() {
 function atomium_preprocess_link(&$variables, $hook) {
   global $language_url;
 
-  if (isset($variables['options']['attributes_array'])) {
-    $variables['attributes_array'] = $variables['options']['attributes_array'];
-  }
-
   $variables += array('options' => array('attributes' => array()));
   $variables['options'] += array(
     'html' => FALSE,
     'attributes' => array(),
   );
+
+  if (isset($variables['options']['attributes_array'])) {
+    $variables['attributes_array'] = $variables['options']['attributes_array'];
+  }
+  if (isset($variables['options']['attributes'])) {
+    $variables['attributes_array'] = drupal_array_merge_deep((array) $variables['options']['attributes'], $variables['attributes_array']);
+  }
 
   $path = url($variables['path'], $variables['options']);
 
