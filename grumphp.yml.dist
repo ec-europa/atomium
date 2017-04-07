@@ -12,6 +12,6 @@ parameters:
         - inc
     git_commit_message:
       matchers:
-        - '/^#\d+: [A-Z].+\./'
+        - '/^(([A-Z]+\-\d+)|(#\d+)): [A-Z].+\./'
       case_insensitive: false
       multiline: false

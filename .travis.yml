@@ -1,5 +1,8 @@
 language: php
 
+git:
+  depth: 1
+
 php:
   - 5.6
 
@@ -11,6 +14,14 @@ install:
   - composer self-update
 
 before_script:
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  - sudo cp -f .travis.vhost /etc/apache2/sites-available/default
+  - sudo sed -e "s,/var/www,$TRAVIS_BUILD_DIR/test-site/web,g" --in-place /etc/apache2/sites-available/default
+  - sudo service apache2 restart
   # Set sendmail so drush doesn't throw an error during site install.
   - echo "sendmail_path=`which true`" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
   # Create database.
@@ -27,19 +38,38 @@ before_script:
   - ../vendor/bin/drush vset theme_default atomium
   - ../vendor/bin/drush dis overlay update -y
   - ../vendor/bin/drush cc all
-  # Run Drush web server.
-  - ../vendor/bin/drush --debug runserver :8888 > ~/debug.txt 2>&1 &
-  - sleep 4s
   - chmod -R ug+w sites
   - cd sites/all/themes/atomium
   - composer install --prefer-dist
   - sed -e "s?%ROOT%?$TRAVIS_BUILD_DIR/test-site/web?g" --in-place phpunit.xml.dist
-  - sed -e "s?%URL%?http://127.0.0.1:8888?g" --in-place phpunit.xml.dist
-  - cat phpunit.xml.dist
+  - sed -e "s?%URL%?http://127.0.0.1/?g" --in-place phpunit.xml.dist
 
 script:
   - ./vendor/bin/grumphp run
   - ./vendor/bin/phpunit
+
+after_success:
+  - cd $TRAVIS_BUILD_DIR/test-site/web
+  - drush dl zen mothership bootstrap
+  - ../vendor/bin/drush vset theme_default bartik
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default zen
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default mothership
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default atomium
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush en realistic_dummy_content devel -y
+  - ../vendor/bin/drush en devel_generate -y
+  - ../vendor/bin/drush generate-content 50
+  - ../vendor/bin/drush vset theme_default bartik
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default zen
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default mothership
+  - ab -n 500 -kc 10 http://127.0.0.1/
+  - ../vendor/bin/drush vset theme_default atomium
+  - ab -n 500 -kc 10 http://127.0.0.1/
 
 notifications:
   email: false

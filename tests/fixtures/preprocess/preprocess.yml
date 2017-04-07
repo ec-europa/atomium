@@ -10,7 +10,6 @@
     attributes_array:
       class:
         - 'drupal'
-        - 'hook__block'
 
 -
   actual:
@@ -28,6 +27,3 @@
     attributes_array:
       class:
         - 'drupal'
-        - 'hook__block'
-        - 'hook__block_ftw'
-
