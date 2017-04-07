@@ -21,7 +21,7 @@ function atomium_atomium_theme_form_element_label() {
  * Implements hook_preprocess_HOOK().
  */
 function atomium_preprocess_form_element_label(&$variables, $hook) {
-  $element = &$variables['element'][$hook];
+  $element = &$variables['element']['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
 
