@@ -91,7 +91,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
     // When there is more than one page, create the pager list.
     if ($i != $pager_max) {
       if ($i > 1) {
-        $items['pager-ellipsis__' . $i] = array(
+        $items['pager_ellipsis__' . $i] = array(
           '#theme' => array('pager_ellipsis'),
           '#attributes' => array(
             'class' => array(
