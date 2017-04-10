@@ -17,6 +17,9 @@ function atomium_atomium_theme_pager() {
         'element' => 0,
         'parameters' => array(),
         'quantity' => 9,
+        // This is only for hook_atomium_definition_hook().
+        'pager_page_array' => NULL,
+        'pager_total' => NULL,
       ),
     ),
   );
@@ -31,6 +34,14 @@ function atomium_preprocess_pager(&$variables, $hook) {
   $quantity = $variables['quantity'];
   $items = array();
   global $pager_page_array, $pager_total;
+
+  // This is for the hook_atomium_definition_HOOK() to work.
+  if (isset($variables['pager_page_array']) && !is_null($variables['pager_page_array'])) {
+    $pager_page_array = $variables['pager_page_array'];
+  }
+  if (isset($variables['pager_total']) && !is_null($variables['pager_total'])) {
+    $pager_total = $variables['pager_total'];
+  }
 
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
