@@ -11,7 +11,7 @@
 function atomium_atomium_theme_comment() {
   return array(
     'comment' => array(
-      'render element' => 'element',
+      'render element' => 'elements',
       'template' => 'comment',
     ),
   );

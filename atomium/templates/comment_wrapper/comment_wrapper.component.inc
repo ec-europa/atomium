@@ -11,8 +11,8 @@
 function atomium_atomium_theme_comment_wrapper() {
   return array(
     'comment_wrapper' => array(
-      'render element' => 'element',
-      'template' => 'comment_wrapper',
+      'render element' => 'content',
+      'template' => 'comment-wrapper',
     ),
   );
 }
