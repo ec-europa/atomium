@@ -252,7 +252,9 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
 
     $data = array();
     foreach (new RecursiveIteratorIterator(new RecursiveArrayIterator(array($raw_data))) as $v) {
-      $data[$v] = $v;
+      foreach (explode(' ', $v) as $item) {
+        $data[] = $item;
+      }
     }
 
     $data = array_filter($data,
