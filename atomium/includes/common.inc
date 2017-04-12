@@ -357,7 +357,21 @@ function atomium_get_component_definitions() {
         // Handle preview differently whereas a component is an element or not.
         $element = element_info($component);
         if (!empty($element)) {
-          $definition['preview'] = array_merge($element, $definition['preview']);
+          $elements = array();
+          foreach ($definition['preview'] as $preview) {
+            // Prepend hash to all preview properties.
+            foreach ($preview as $key => $value) {
+              if (!is_numeric($key)) {
+                $preview["#{$key}"] = $value;
+                unset($preview[$key]);
+              }
+            }
+            $elements[] = array_merge($element, $preview);
+          }
+          $definition['preview'] = array(
+            '#theme' => 'item_list',
+            '#items' => $elements,
+          );
         }
         else {
           $definition['preview']['#theme'] = array($component);

@@ -25,8 +25,10 @@ function atomium_atomium_definition_button() {
     'label' => 'Button',
     'description' => 'Button template.',
     'preview' => array(
-      'type' => 'submit',
-      'value' => 'Save',
+      array(
+        'type' => 'submit',
+        'value' => 'Save',
+      ),
     ),
   );
 }
