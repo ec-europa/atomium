@@ -36,8 +36,8 @@ function atomium_preprocess_link(&$variables, $hook) {
   if (isset($variables['options']['attributes_array'])) {
     $variables['attributes_array'] = $variables['options']['attributes_array'];
   }
-  if (isset($variables['options']['attributes'])) {
-    $variables['attributes_array'] = drupal_array_merge_deep((array) $variables['options']['attributes'], $variables['attributes_array']);
+  if (isset($variables['options']['attributes']) && is_array($variables['options']['attributes'])) {
+    $variables['attributes_array'] = drupal_array_merge_deep($variables['options']['attributes'], $variables['attributes_array']);
   }
 
   $path = url($variables['path'], $variables['options']);
