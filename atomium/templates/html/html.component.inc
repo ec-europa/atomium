@@ -35,8 +35,8 @@ function atomium_preprocess_html(&$variables, $hook) {
 
   $variables['html_attributes_array']['prefix'] = $variables['rdf_namespaces'];
 
-  // Classes for body element. Allows advanced theming based on context
-  // (home page, node of certain type, etc.)
+  // Classes for body element. Allows advanced theming based
+  // on context (home page, node of certain type, etc.).
   if (!$variables['is_front']) {
     // Add unique class for each page.
     $path = drupal_get_path_alias($_GET['q']);

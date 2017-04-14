@@ -3,7 +3,6 @@ description = The NextEuropa base theme
 screenshot = assets/images/screenshot.png
 engine = phptemplate
 core = 7.x
-php = 5.2
 
 ;-------------- F E A T U R E S -------------
 features[] = logo

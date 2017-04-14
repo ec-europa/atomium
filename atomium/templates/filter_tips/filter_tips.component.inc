@@ -25,13 +25,13 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
     '#type' => 'container',
   );
 
-  foreach ($variables['tips'] as $name => $tipList) {
+  foreach ($variables['tips'] as $name => $tip_list) {
     $composer[$name] = array(
       '#type' => 'container',
     );
 
     $items = array();
-    foreach ($tipList as $key => $tip) {
+    foreach ($tip_list as $key => $tip) {
       $items[$key] = array(
         '#theme' => array('html_tag'),
         '#tag' => 'li',

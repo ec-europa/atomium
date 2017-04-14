@@ -3,7 +3,6 @@ description = The core Bartik theme based on Atomium
 screenshot = assets/images/screenshot.png
 engine = phptemplate
 core = 7.x
-php = 5.2
 base theme = atomium
 
 ;-------------- F E A T U R E S -------------

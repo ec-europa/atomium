@@ -49,8 +49,6 @@ function atomium_preprocess_file_link(&$variables, $hook) {
 
   $mimetype = file_get_mimetype($file->uri);
 
-  $icon =
-
   // Set options as per anchor format described at
   // http://microformats.org/wiki/file-format-examples
   $options = array(
