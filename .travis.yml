@@ -29,7 +29,9 @@ before_script:
   - composer create-project drupal-composer/drupal-project:7.x-dev test-site --stability dev --no-interaction
   - cd test-site
   # Install Drupal y target site.
-  - composer require drush/drush:7.*
+  - composer require drush/drush
+  - composer require drupal/realistic_dummy_content
+  - composer require drupal/devel
   - cd web
   - ../vendor/bin/drush si standard -y --db-url=mysql://travis:@127.0.0.1/drupal
   # Test latest commit on current branch.
