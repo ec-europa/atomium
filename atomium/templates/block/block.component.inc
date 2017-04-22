@@ -128,9 +128,9 @@ function atomium_preprocess_block(&$variables) {
   $variables['block_html_id'] = drupal_html_id('block-' . $variables['block']->module . '-' . $variables['block']->delta);
 
   $variables['title']['#markup'] = '';
-  if ($variables['block']->title) {
+  if ($variables['block']->subject) {
     $variables['title'] = array(
-      '#markup' => $variables['block']->title,
+      '#markup' => $variables['block']->subject,
       '#theme_wrappers' => array('html_tag'),
       '#tag' => 'h2',
       '#attributes' => $variables['title_attributes_array'],
