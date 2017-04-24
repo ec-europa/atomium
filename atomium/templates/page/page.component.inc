@@ -32,6 +32,29 @@ function atomium_preprocess_page(&$variables, $hook) {
   // Remove the block template wrapper from the main content block.
   $variables['page']['content']['system_main']['#theme_wrappers'] = array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
 
+  /*-
+  USER ACCOUNT TABS
+  Removes the tabs from user login, register & password
+  fixes the titles to so no more "user account" all over
+   */
+  switch (current_path()) {
+    case 'user':
+      drupal_set_title(t('Log in'));
+      break;
+
+    case 'user/register':
+      drupal_set_title(t('Create new account'));
+      break;
+
+    case 'user/password':
+      drupal_set_title(t('Request new password'));
+      break;
+
+    default:
+      // code...
+      break;
+  }
+
   $variables['messages'] = $variables['show_messages'] ? array('#theme' => array('status_messages')) : '';
   $variables['breadcrumb'] = array(
     '#theme' => array('breadcrumb'),
