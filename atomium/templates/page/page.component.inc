@@ -39,18 +39,15 @@ function atomium_preprocess_page(&$variables, $hook) {
    */
   switch (current_path()) {
     case 'user':
-      $variables['title'] = t('Login');
-      unset($variables['tabs']);
+      drupal_set_title(t('Log in'));
       break;
 
     case 'user/register':
-      $variables['title'] = t('New account');
-      unset($variables['tabs']);
+      drupal_set_title(t('Create new account'));
       break;
 
     case 'user/password':
-      $variables['title'] = t('I forgot my password');
-      unset($variables['tabs']);
+      drupal_set_title(t('Request new password'));
       break;
 
     default:
