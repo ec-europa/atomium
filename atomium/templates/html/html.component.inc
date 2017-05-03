@@ -82,25 +82,12 @@ function atomium_preprocess_html(&$variables, $hook) {
     }
   }
 
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('html')));
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('not-front')));
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('front')));
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('logged-in')));
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('not-logged-in')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('two-sidebars')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('one-sidebar sidebar-first')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('one-sidebar sidebar-second')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('no-sidebars')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('toolbar')));
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('toolbar-drawer')));
-  $variables['classes_array'] = preg_grep('/^page-node/', $variables['classes_array'], PREG_GREP_INVERT);
-  $variables['classes_array'] = preg_grep('/^node-type/', $variables['classes_array'], PREG_GREP_INVERT);
-  $path_all = drupal_get_path_alias($_GET['q']);
-  $variables['classes_array'][] = 'path-' . $path_all;
-  $path = explode('/', $_SERVER['REQUEST_URI']);
-  if ($path['1']) {
-    $variables['classes_array'][] = 'pathone-' . $path['1'];
-  }
 
   $headers = drupal_get_http_header();
   if (isset($headers['status'])) {
