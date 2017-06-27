@@ -342,7 +342,9 @@ function atomium_get_component_definitions() {
 
       $function_name = $theme . '_atomium_definition_' . $component;
       if (function_exists($function_name)) {
-        $definition = call_user_func($function_name);
+        $definition = (array) call_user_func($function_name) + array(
+          'preview' => array(),
+        );
 
         // Prepend hash to all preview properties.
         foreach ($definition['preview'] as $key => $value) {
