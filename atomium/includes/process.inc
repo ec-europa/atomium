@@ -10,16 +10,6 @@
  */
 function atomium_process(&$variables, $hook) {
 
-  // Trim each variables that goes into the templates.
-  // This needs to be done before the attributes processing because
-  // drupal_attributes() adds en extra space on purpose.
-  // Do not trim arrays because they might be needed later.
-  atomium_recursive_foreach($variables, function ($key, &$value) use (&$variables, $hook) {
-    if (is_string($value)) {
-      $value = trim($value);
-    }
-  });
-
   atomium_recursive_foreach($variables, function ($key, &$value, &$parent) use (&$variables, $hook) {
     if (is_string($value) && '#theme' === $key) {
       $value = array($value);

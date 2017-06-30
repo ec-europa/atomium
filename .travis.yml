@@ -48,7 +48,7 @@ before_script:
 
 script:
   - ./vendor/bin/grumphp run
-  - ./vendor/bin/phpunit
+#  - ./vendor/bin/phpunit
 
 after_success:
   - cd $TRAVIS_BUILD_DIR/test-site/web
