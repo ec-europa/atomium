@@ -479,12 +479,13 @@ function atomium_menu_get_active_breadcrumb() {
 function atomium_recursive_foreach(array &$array, callable $callback) {
   $array['#processed'] = TRUE;
   foreach ($array as $key => &$value) {
-    $value += array(
-      '#atomium_recursive' => FALSE,
-    );
-
-    if (is_array($value) && !isset($value['#processed']) && $value['#atomium_recursive'] == TRUE) {
-      atomium_recursive_foreach($value, $callback);
+    if (is_array($value) && !isset($value['#processed'])) {
+      $value += array(
+        '#atomium_recursive' => FALSE,
+      );
+      if ($value['#atomium_recursive'] == TRUE) {
+        atomium_recursive_foreach($value, $callback);
+      }
     }
     call_user_func_array($callback, array($key, &$value, &$array));
   }
