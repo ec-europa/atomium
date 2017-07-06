@@ -488,3 +488,60 @@ function atomium_recursive_foreach(array &$array, callable $callback) {
   }
   unset($array['#processed']);
 }
+
+/**
+ * Invokes a specific suggestion's preprocess functions.
+ *
+ * @param array $variables
+ *   The theme implementation variables array.
+ */
+function _atomium_preprocess_theme_suggestion(array &$variables) {
+  $registry = theme_get_registry();
+  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']]['preprocess functions'])) {
+    // Save the suggestion as the hook to pass to the function.
+    $hook = $variables['theme_hook_suggestion'];
+
+    // Iterate over the preprocess functions.
+    foreach ($registry[$hook]['preprocess functions'] as $function) {
+      // Ensure that the function is not this one (recursive) and exists.
+      if ($function !== __FUNCTION__ && function_exists($function)) {
+        // Invoke theme hook suggestion preprocess function.
+        $function($variables, $hook);
+
+        // Unset the theme_hook_suggestion so the suggestion's preprocess
+        // functions can provide theme_hook_suggestions if needed.
+        if (!empty($variables['theme_hook_suggestions'])) {
+          unset($variables['theme_hook_suggestion']);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Invokes a specific suggestion's process functions.
+ *
+ * @param array $variables
+ *   The theme implementation variables array.
+ */
+function _atomium_process_theme_suggestion(array &$variables) {
+  $registry = theme_get_registry();
+  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']]['process functions'])) {
+    // Save the suggestion as the hook to pass to the function.
+    $hook = $variables['theme_hook_suggestion'];
+
+    // Iterate over the process functions.
+    foreach ($registry[$hook]['process functions'] as $function) {
+      if (function_exists($function)) {
+        // Invoke theme hook suggestion process function.
+        $function($variables, $hook);
+
+        // Unset the theme_hook_suggestion so the suggestion's preprocess
+        // functions can provide theme_hook_suggestions if needed.
+        if (!empty($variables['theme_hook_suggestions'])) {
+          unset($variables['theme_hook_suggestion']);
+        }
+      }
+    }
+  }
+}
