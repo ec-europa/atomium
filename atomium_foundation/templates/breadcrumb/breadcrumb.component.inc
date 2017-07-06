@@ -9,6 +9,9 @@
  * Implements hook_preprocess_breadcrumb().
  */
 function atomium_foundation_preprocess_breadcrumb(&$variables, $hook) {
+  if (empty($variables[$hook][$hook])) {
+    return;
+  }
   $variables[$hook]['#attributes'] = array(
     'class' => array(
       'breadcrumbs',
