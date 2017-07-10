@@ -496,36 +496,7 @@ function atomium_recursive_foreach(array &$array, callable $callback) {
  *   The theme implementation variables array.
  */
 function _atomium_preprocess_theme_suggestion(array &$variables, $hook) {
-  $registry = theme_get_registry();
-
-  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']]['preprocess functions'])) {
-    // Save the suggestion as the hook to pass to the function.
-    $hook = $variables['theme_hook_suggestion'];
-
-    // Iterate over the preprocess functions.
-    $preprocess = array();
-    foreach ($registry[$hook]['preprocess functions'] as $function) {
-      $preprocess[$function] = $function;
-      while (($function = substr($function, 0, strrpos($function, '__')))) {
-        $preprocess[$function] = $function;
-      }
-    }
-
-    // Iterate over the preprocess functions.
-    foreach (array_reverse($preprocess) as $function) {
-      // Ensure that the function is not this one (recursive) and exists.
-      if ($function !== __FUNCTION__ && function_exists($function)) {
-        // Invoke theme hook suggestion preprocess function.
-        $function($variables, $hook);
-
-        // Unset the theme_hook_suggestion so the suggestion's preprocess
-        // functions can provide theme_hook_suggestions if needed.
-        if (!empty($variables['theme_hook_suggestions'])) {
-          unset($variables['theme_hook_suggestion']);
-        }
-      }
-    }
-  }
+  _atomium_preprocess_process_theme_suggestion('preprocess', $variables, $hook);
 }
 
 /**
@@ -534,29 +505,51 @@ function _atomium_preprocess_theme_suggestion(array &$variables, $hook) {
  * @param array $variables
  *   The theme implementation variables array.
  */
-function _atomium_process_theme_suggestion(array &$variables) {
-  $registry = theme_get_registry();
-  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']]['process functions'])) {
-    // Save the suggestion as the hook to pass to the function.
-    $hook = $variables['theme_hook_suggestion'];
+function _atomium_process_theme_suggestion(array &$variables, $hook) {
+  _atomium_preprocess_process_theme_suggestion('process', $variables, $hook);
+}
 
-    // Iterate over the process functions.
-    $process = array();
-    foreach ($registry[$hook]['process functions'] as $function) {
-      $process[$function] = $function;
+/**
+ * Custom callback.
+ *
+ * This is to avoid duplicate code while invoking specific theme
+ * suggestions pre and process functions.
+ *
+ * @param string $phase
+ *   This can be either 'preprocess' or 'process'.
+ * @param array $variables
+ *   The theme implementation variables array.
+ * @param string $hook
+ *   The hook in use.
+ */
+function _atomium_preprocess_process_theme_suggestion($phase, array &$variables, $hook) {
+  $registry = theme_get_registry();
+  $phases = array(
+    'preprocess' => 'preprocess functions',
+    'process' => 'process functions',
+  );
+
+  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']][$phases[$phase]])) {
+    // Save the suggestion as the hook to pass to the function.
+    $hook_suggestion = $variables['theme_hook_suggestion'];
+
+    // Iterate over the current phase functions.
+    $preprocess = array();
+    foreach ($registry[$hook_suggestion][$phases[$phase]] as $function) {
+      $preprocess[$function] = $function;
       while (($function = substr($function, 0, strrpos($function, '__')))) {
-        $process[$function] = $function;
+        $preprocess[$function] = $function;
       }
     }
 
-    // Iterate over the process functions.
-    foreach (array_reverse($process) as $function) {
+    // Iterate over the current phase functions.
+    foreach (array_reverse($preprocess) as $function) {
       // Ensure that the function is not this one (recursive) and exists.
       if ($function !== __FUNCTION__ && function_exists($function)) {
-        // Invoke theme hook suggestion process function.
-        $function($variables, $hook);
+        // Invoke theme hook suggestion current phase function.
+        $function($variables, $hook_suggestion);
 
-        // Unset the theme_hook_suggestion so the suggestion's process
+        // Unset the theme_hook_suggestion so the suggestion's current phase
         // functions can provide theme_hook_suggestions if needed.
         if (!empty($variables['theme_hook_suggestions'])) {
           unset($variables['theme_hook_suggestion']);
