@@ -365,6 +365,11 @@ function _atomium_process_theme_registry_suggestions(array &$registry, $themes) 
             // Determine the current theme implementation.
             $hook = substr($match, strlen($prefix) + 1);
             $base_hook = $hook;
+            // If calling theme('custom__var1__var2'), we need to find the
+            // very base hook: custom
+            // This specific behavior allows us to have a fully working
+            // cascading preprocessing for hook themes.
+            list($original_hook) = explode('__', $base_hook);
 
             // If there's no current theme implementation, keep checking for
             // more generic base hooks. If there's still no implementation,
@@ -403,10 +408,11 @@ function _atomium_process_theme_registry_suggestions(array &$registry, $themes) 
                 $registry[$hook] = array(
                   $hook_type => $registry[$base_hook][$hook_type],
                   $arg_name => $registry[$base_hook][$arg_name],
-                  'base hook' => $base_hook,
+                  'base hook' => $original_hook,
                   'type' => $registry[$base_hook]['type'],
                   'preprocess functions' => array(),
                   'process functions' => array(),
+                  'includes' => $registry[$base_hook]['includes'],
                 );
                 if (isset($registry[$base_hook]['path'])) {
                   $registry[$hook]['path'] = $registry[$base_hook]['path'];
