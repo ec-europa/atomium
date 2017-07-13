@@ -242,46 +242,47 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL, $h
  */
 function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $hook = NULL) {
   foreach ($attributes as $attribute => &$raw_data) {
-
     $data = array();
+
+    // Flatten the array.
     foreach (new RecursiveIteratorIterator(new RecursiveArrayIterator(array($raw_data))) as $v) {
       $data[$v] = $v;
     }
 
+    // Remove empty strings.
     $data = array_filter($data,
       function ($item) {
         return strlen($item) != 0;
       }
     );
 
+    // Cleanup specific attributes.
     $data = array_map(function ($item) use ($attribute, $hook) {
-      if ('class' === $attribute) {
-        // Disabled for now or else it breaks the javascript in the
-        // filter tips component.
-        if ('filter_guidelines' !== $hook) {
-          $item = drupal_html_class($item);
-        }
-      }
-
       if ('placeholder' === $attribute) {
         $item = strip_tags($item);
       }
 
-      if ('id' === $attribute) {
-        // Disabled for now, it's causing issue in
-        // admin/structure/views/settings.
-        // $item = drupal_html_id($item);.
-      }
+      /*
+       * Disabled for now, it's causing issue in
+       * admin/structure/views/settings.
+       *
+       * if ('id' === $attribute) {
+       *   $item = drupal_html_id($item);.
+       * }
+       */
 
       return trim(check_plain($item));
     }, $data);
 
-    if ('class' == $attribute) {
+    // By default, sort the value of the class attribute.
+    if ('class' === $attribute) {
       asort($data);
     }
 
     $data = implode(' ', $data);
 
+    // If the attribute is numeric, just display the value.
+    // Ex: 0="data-closable" will be displayed: data-closable.
     if (!is_numeric($attribute)) {
       $data = sprintf('%s="%s"', $attribute, $data);
     }
@@ -289,6 +290,7 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
     $raw_data = $data;
   }
 
+  // Sort the attributes.
   asort($attributes);
   return $attributes;
 }
