@@ -6,14 +6,18 @@
       attributes_array:
         class:
           - 'drupal'
-          - ' this class should be trimmed '
+          - 'this class should be trimmed'
+          -
+            - 'subclass'
   expected:
     attributes_array:
       class:
         - 'drupal'
         - 'this class should be trimmed'
+        -
+          - 'subclass'
     attributes:
-      ' class="drupal this-class-should-be-trimmed"'
+      ' class="drupal subclass this-class-should-be-trimmed"'
 
 -
   actual:
@@ -23,11 +27,11 @@
       attributes_array:
         class:
           - 'drupal'
-          - ' this class should be trimmed '
+          - 'this class should be trimmed'
           -
-            - ' another class to trim '
+            - 'another class to trim'
             -
-              - ' does it works with subarrays '
+              - 'does it works with subarrays'
   expected:
     attributes_array:
         class:
@@ -110,7 +114,7 @@
         'foo'
       'classes_array':
         - 'class1'
-        - ' class2 '
+        - 'class2'
         - 'class3 class4'
   expected:
       'theme_hook_original':
@@ -132,16 +136,17 @@
       test_attributes_array:
         class:
           - 'class1'
-          - ' class2 '
+          - 'class2'
           - 'class3 class4'
-          - 'class5 '
+          - 'class5'
         id:
           - 'myid'
       render_item:
+        '#atomium_recursive': true
         another_attributes_array:
           class:
             - 'class1'
-            - ' class2 '
+            - 'class2'
             - 'class3 class4'
           id:
             - 'anotherid'
@@ -158,6 +163,7 @@
         id:
           - 'myid'
       render_item:
+        '#atomium_recursive': true
         another_attributes_array:
           class:
             - 'class1'

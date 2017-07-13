@@ -198,13 +198,6 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
  *
  * The only difference is that if a key is a numeric, it will only display the
  * value. Ex: 0="data-closable" will be displayed: data-closable.
- */
-
-/**
- * Copy of the drupal_attributes function.
- *
- * The only difference is that if a key is a numeric, it will only display the
- * value. Ex: 0="data-closable" will be displayed: data-closable.
  *
  * @param array $attributes
  *   The attributes array.
