@@ -537,6 +537,8 @@ function _atomium_preprocess_process_theme_suggestion($phase, array &$variables,
       }
     }
 
+    $preprocess = array_slice($preprocess, 0, -1);
+
     // Iterate over the current phase functions.
     foreach (array_reverse($preprocess) as $function) {
       // Ensure that the function is not this one (recursive) and exists.
