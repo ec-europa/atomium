@@ -9,7 +9,26 @@
  * Implements hook_form_alter().
  */
 function atomium_form_alter(&$form, &$form_state, $form_id) {
-  // This could be removed.
+  // Custom recursive function to alter all the #theme keys of form elements.
+  _atomium_form_element_theme_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Custom callback.
+ *
+ * This function will alter all the element in a form and update their
+ * #theme key to append the $form_id at the end so we can preprocess them.
+ */
+function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
+  foreach (element_children($form) as $key) {
+    if (isset($form[$key]['#type']) && empty($form[$key]['#defaults_loaded']) && ($info = element_info($form[$key]['#type']))) {
+      if (isset($info['#theme'])) {
+        $form[$key]['#theme'] = $info['#theme'] . '__' . $form_id;
+      }
+    }
+
+    _atomium_form_element_theme_alter($form[$key], $form_state, $form_id);
+  }
 }
 
 /**
