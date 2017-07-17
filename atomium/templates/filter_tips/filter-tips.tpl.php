@@ -6,4 +6,4 @@
  */
 ?>
 <h2><?php print t('Text Formats');?></h2>
-<?php print render($tips); ?>
+<?php print render($filter_tips); ?>
