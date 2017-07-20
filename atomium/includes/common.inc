@@ -466,22 +466,37 @@ function atomium_menu_get_active_breadcrumb() {
  * As the value is passed by reference, you are able to modify its value within
  * the callback.
  *
- * @param array $array
+ * @param array $variables
  *   The array.
  * @param callable $callback
  *   The callback function.
  */
-function atomium_recursive_foreach(array &$array, callable $callback) {
-  $array['#processed'] = TRUE;
-  foreach ($array as $key => &$value) {
+function atomium_recursive_foreach(array &$variables, callable $callback) {
+  $variables['#processed'] = TRUE;
+
+  // By default set the recursive to FALSE.
+  $variables += array(
+    '#atomium_recursive' => FALSE,
+  );
+
+  foreach ($variables as $key => &$value) {
     if (is_array($value) && !isset($value['#processed'])) {
-      if (isset($value['#atomium_recursive']) && $value['#atomium_recursive'] == TRUE) {
+
+      // If no recursive is set, take the value by default.
+      $value += array(
+        '#atomium_recursive' => $variables['#atomium_recursive'],
+      );
+
+      if ($value['#atomium_recursive'] == TRUE) {
         atomium_recursive_foreach($value, $callback);
       }
+
+      // Remove the key to avoid poluting the array with unwanted values.
+      unset($value['#atomium_recursive']);
     }
-    call_user_func_array($callback, array($key, &$value, &$array));
+    call_user_func_array($callback, array($key, &$value, &$variables));
   }
-  unset($array['#processed']);
+  unset($variables['#processed']);
 }
 
 /**
