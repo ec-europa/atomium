@@ -16,8 +16,8 @@
         - 'this class should be trimmed'
         -
           - 'subclass'
-    attributes:
-      ' class="drupal subclass this-class-should-be-trimmed"'
+    '#atomium_recursive': false
+    attributes: ' class="drupal subclass this class should be trimmed"'
 
 -
   actual:
@@ -41,8 +41,9 @@
             - 'another class to trim'
             -
               - 'does it works with subarrays'
+    '#atomium_recursive': false
     attributes:
-      ' class="another-class-to-trim does-it-works-with-subarrays drupal this-class-should-be-trimmed"'
+      ' class="another class to trim does it works with subarrays drupal this class should be trimmed"'
 
 -
   actual:
@@ -56,10 +57,9 @@
          ''
   expected:
     attributes_array:
-        value:
-          '0'
-        placeholder:
-         ''
+        value: '0'
+        placeholder: ''
+    '#atomium_recursive': false
     attributes:
       ' value="0"'
 
@@ -73,6 +73,7 @@
   expected:
     '#theme':
       - 'string'
+    '#atomium_recursive': false
 
 -
   actual:
@@ -104,6 +105,8 @@
       - 'twrapper4__foo'
       - 'twrapper5__foo'
       - 'twrapper6__foo'
+    '#atomium_recursive': false
+
 
 -
   actual:
@@ -123,6 +126,7 @@
         - 'class1'
         - 'class2'
         - 'class3 class4'
+      '#atomium_recursive': false
       'classes':
         'class1 class2 class3 class4'
 
@@ -131,6 +135,7 @@
     hook:
       'block'
     variables:
+      '#atomium_recursive': true
       theme_hook_original:
         'foo'
       test_attributes_array:
@@ -142,7 +147,6 @@
         id:
           - 'myid'
       render_item:
-        '#atomium_recursive': true
         another_attributes_array:
           class:
             - 'class1'
@@ -152,6 +156,7 @@
             - 'anotherid'
 
   expected:
+      '#atomium_recursive': true
       theme_hook_original:
         'foo'
       test_attributes_array:
@@ -163,7 +168,6 @@
         id:
           - 'myid'
       render_item:
-        '#atomium_recursive': true
         another_attributes_array:
           class:
             - 'class1'
@@ -172,6 +176,48 @@
           id:
             - 'anotherid'
         another_attributes:
-          ' class="class1 class2 class3-class4" id="anotherid"'
+          ' class="class1 class2 class3 class4" id="anotherid"'
       test_attributes:
-        ' class="class1 class2 class3-class4 class5" id="myid"'
+        ' class="class1 class2 class3 class4 class5" id="myid"'
+
+-
+  actual:
+    hook:
+      'block'
+    variables:
+      '#atomium_recursive': true
+      theme_hook_original: block
+      render_item:
+        '#theme': item_list
+        render_subitem:
+          '#theme': subitem_list
+
+  expected:
+    '#atomium_recursive': true
+    theme_hook_original: block
+    render_item:
+      '#theme':
+        - item_list__block
+      render_subitem:
+        '#theme':
+          - subitem_list__block
+
+-
+  actual:
+    hook:
+      'block'
+    variables:
+      '#atomium_recursive': false
+      theme_hook_original: block
+      render_item:
+        '#theme': item_list
+        render_subitem:
+          '#theme': subitem_list
+
+  expected:
+    '#atomium_recursive': false
+    theme_hook_original: block
+    render_item:
+      '#theme': item_list
+      render_subitem:
+        '#theme': subitem_list

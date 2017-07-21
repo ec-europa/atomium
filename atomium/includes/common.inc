@@ -491,7 +491,7 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
         atomium_recursive_foreach($value, $callback);
       }
 
-      // Remove the key to avoid poluting the array with unwanted values.
+      // Remove the key to avoid polluting the array with unwanted values.
       unset($value['#atomium_recursive']);
     }
     call_user_func_array($callback, array($key, &$value, &$variables));

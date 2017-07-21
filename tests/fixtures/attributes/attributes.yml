@@ -3,7 +3,7 @@
     class:
       'a simple string'
   expected:
-    ' class="a-simple-string"'
+    ' class="a simple string"'
 
 -
   actual:
@@ -35,7 +35,7 @@
     id:
       - plop
   expected:
-    ' class="hello i love you" id="plop"'
+    ' class="I hello love you" id="plop"'
 
 -
   actual:
@@ -44,7 +44,7 @@
     id:
       - Bonjour Monsieur
   expected:
-    ' class="bonjour-madame" id="Bonjour Monsieur"'
+    ' class="Bonjour Madame" id="Bonjour Monsieur"'
 
 -
   actual:
@@ -64,4 +64,4 @@
         - another
         - subarray
   expected:
-    ' class="another hello i love subarray you"'
+    ' class="I another hello love subarray you"'
