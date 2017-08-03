@@ -1,19 +1,19 @@
 {
   "name": "drupal/atomium",
-  "description": "The NextEuropa clean base theme.",
+  "description": "A clean and atomic base theme.",
   "type": "drupal-theme",
   "license": "GPL-2.0",
   "homepage": "https://drupal.org/project/atomium",
   "authors": [
     {
-      "name": "Pol Dellaiera (Pol)",
+      "name": "Pol Dellaiera",
       "homepage": "https://www.drupal.org/u/pol",
       "role": "Author"
     }
   ],
   "support": {
     "docs": "https://drupal.org/project/atomium",
-    "issues": "https://drupal.org/project/issues/atomium",
+    "issues": "https://github.com/ec-europa/atomium/issues",
     "source": "https://drupal.org/project/atomium"
   },
   "require-dev": {

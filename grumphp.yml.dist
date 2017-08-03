@@ -15,3 +15,5 @@ parameters:
         - '/^(([A-Z]+\-\d+)|(#\d+)): [A-Z].+\./'
       case_insensitive: false
       multiline: false
+    phpunit:
+      always_execute: false

@@ -16,6 +16,7 @@ Table of content:
 - [Contributing](#contributing)
 - [Extending](#extending)
 - [Developers note](#developers-note)
+- [In the press](#in-the-press)
 
 [Go to top](#table-of-content)
 
@@ -30,10 +31,12 @@ To enable the theme, go to **admin/appearance** and select an Atomium based them
 Atomium comes with 2 default sub-themes provided as examples.
 
  - Atomium Bootstrap,
- - Atomium Foundation.
+ - Atomium Foundation,
+ - Atomium Bartik.
  
 Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com/).
 Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
+Atomium Bartik is a fork on the Bartik core theme using the Atomium mechanisms.
 
 These sub-themes are providing examples of *preprocess* functions and templates so you can craft your own theme quickly.
 
@@ -65,6 +68,25 @@ in CSS identifiers. In order to allow CSS identifiers to contain double undersco
 Atomium is licenced under [EUPL Licence](https://en.wikipedia.org/wiki/European_Union_Public_Licence).
 All contributions to Atomium and its sub-themes are made on [Github](https://github.com/ec-europa/atomium), the main
 Atomium's repository.
+
+To ensure its code quality, Atomium depends on [GrumPHP](https://github.com/phpro/grumphp).
+
+In order to use it and pass the automated tests, run:
+
+`composer install`
+
+in the root directory.
+
+To run the automated tests, Atomium needs a proper Drupal instance.
+
+You also need to copy the file `phpunit.xml.dist` to `phpunit.xml` and replace the strings:
+ 
+* `%ROOT%` with the root installation directory of Drupal,
+* `%URL%` with the URL of your Drupal instance.
+
+The best way to submit code is by providing a pull request on Github.
+
+This also helps us to have the automated tests triggered automatically and save times on checking code styles.
 
 [Go to top](#table-of-content)
 
@@ -137,5 +159,11 @@ You have to use:
 ````
 
 The rendering process is at the very end of the Drupal's chain of preprocess, process and render functions.
+
+[Go to top](#table-of-content)
+
+# In the press
+
+* [A word about Atomium](http://not-a-number.io/2017/a-word-about-atomium)
 
 [Go to top](#table-of-content)
