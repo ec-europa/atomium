@@ -25,13 +25,19 @@ function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
   foreach (element_children($form) as $key) {
     if (isset($form[$key]['#type']) && empty($form[$key]['#defaults_loaded']) && ($info = element_info($form[$key]['#type']))) {
       if (isset($info['#theme'])) {
+        // We must ensure lowercase values because get_defined_functions()
+        // in drupal_group_functions_by_prefix() returns functions in
+        // lower case.
+        // @see http://php.net/manual/en/function.get-defined-functions.php
         $form[$key]['#theme'] = array(
-          implode(
-            '__',
-            array(
-              $info['#theme'],
-              $form_id,
-              $key,
+          drupal_strtolower(
+            implode(
+              '__',
+              array(
+                $info['#theme'],
+                $form_id,
+                $key,
+              )
             )
           ),
         );
@@ -40,8 +46,13 @@ function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
         $form[$key] += array('#theme_wrappers' => array());
         $form[$key]['#theme_wrappers'] = array_merge($form[$key]['#theme_wrappers'], $info['#theme_wrappers']);
         $form[$key]['#theme_wrappers'] = array_map(function ($item) use ($form_id, $key) {
+          // We must ensure lowercase values because get_defined_functions()
+          // in drupal_group_functions_by_prefix() returns functions in
+          // lower case.
+          // @see http://php.net/manual/en/function.get-defined-functions.php
+          //
           // It is better if the $form_id doesn't start with underscore.
-          return $item . '__' . $form_id . '__' . $key;
+          return drupal_strtolower($item . '__' . $form_id . '__' . $key);
         }, $info['#theme_wrappers']);
       }
     }
