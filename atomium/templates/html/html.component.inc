@@ -28,7 +28,7 @@ function atomium_preprocess_html(&$variables, $hook) {
     $prefixes = array();
     foreach (explode("\n  ", ltrim($variables['rdf_namespaces'])) as $namespace) {
       // Remove xlmns: and ending quote and fix prefix formatting.
-      $prefixes[] = str_replace('="', ': ', substr($namespace, 6, -1));
+      $prefixes[] = str_replace('="', ': ', drupal_substr($namespace, 6, -1));
     }
     $variables['rdf_namespaces'] = implode(' ', $prefixes);
   }

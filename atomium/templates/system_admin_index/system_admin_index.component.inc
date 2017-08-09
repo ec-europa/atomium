@@ -53,7 +53,7 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
     }
   }
 
-  foreach ($container as $id => &$data) {
+  foreach ($container as &$data) {
     $data['attributes'] = atomium_drupal_attributes($data['attributes_array']);
   }
 

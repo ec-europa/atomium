@@ -47,7 +47,7 @@ function atomium_atomium_definition_breadcrumb() {
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
   $links = array();
-  foreach ($variables['breadcrumb'] as $key => $item) {
+  foreach ($variables['breadcrumb'] as $item) {
     if (is_string($item)) {
       $item = array(
         '#markup' => $item,

@@ -17,12 +17,12 @@
     "source": "https://drupal.org/project/atomium"
   },
   "require-dev": {
-    "drupal/coder": "^8.2",
     "phpro/grumphp": "^0.11",
     "phpunit/phpunit": "^5",
     "bovigo/assert": "~1.7",
     "anahkiasen/underscore-php" : "dev-master",
-    "composer/installers": "~1.0"
+    "composer/installers": "~1.0",
+    "ec-europa/qa-automation": "~3.0.0"
   },
   "autoload": {
     "psr-4": {

@@ -180,7 +180,7 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
       foreach (drupal_system_listing($regexp, $path . '/templates', 'name', 0) as $name => $file) {
         // Strip off the extension.
         if (($pos = strpos($name, '.')) !== FALSE) {
-          $name = substr($name, 0, $pos);
+          $name = drupal_substr($name, 0, $pos);
         }
 
         // Transform "-" in file names to "_" to match theme hook naming scheme.
@@ -363,7 +363,7 @@ function _atomium_process_theme_registry_suggestions(array &$registry, $themes) 
         if (isset($grouped_functions[$first_prefix]) && ($matches = preg_grep('/^' . $prefix . '_' . $pattern . '/', $grouped_functions[$first_prefix]))) {
           foreach ($matches as $match) {
             // Determine the current theme implementation.
-            $hook = substr($match, strlen($prefix) + 1);
+            $hook = drupal_substr($match, drupal_strlen($prefix) + 1);
             $base_hook = $hook;
             // If calling theme('custom__var1__var2'), we need to find the
             // very base hook: custom
@@ -379,7 +379,7 @@ function _atomium_process_theme_registry_suggestions(array &$registry, $themes) 
               // Iteratively strip everything after the last '__' delimiter,
               // until an implementation is found.
               while ($pos = strrpos($base_hook, '__')) {
-                $base_hook = substr($base_hook, 0, $pos);
+                $base_hook = drupal_substr($base_hook, 0, $pos);
                 if (isset($registry[$base_hook])) {
                   break;
                 }

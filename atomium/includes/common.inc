@@ -213,7 +213,7 @@ function atomium_drupal_attributes(array $attributes = array(), $name = NULL, $h
   // Remove empty arrays and empty strings.
   $attributes = array_filter($attributes, function ($value) {
     if (!is_array($value)) {
-      return (strlen($value) != 0);
+      return (drupal_strlen($value) != 0);
     }
     return $value;
   });
@@ -252,19 +252,19 @@ function _atomium_clean_attributes(array $attributes = array(), $name = NULL, $h
     // Remove empty strings.
     $data = array_filter($data,
       function ($item) {
-        return strlen($item) != 0;
+        return drupal_strlen($item) != 0;
       }
     );
 
     // Cleanup specific attributes.
-    $data = array_map(function ($item) use ($attribute, $hook) {
+    $data = array_map(function ($item) use ($attribute) {
       if ('placeholder' === $attribute) {
         $item = strip_tags($item);
       }
 
       /*
-       * Disabled for now, it's causing issue in
-       * admin/structure/views/settings.
+       * @todo: Disabled for now, it's causing issue in
+       * @todo: admin/structure/views/settings.
        *
        * if ('id' === $attribute) {
        *   $item = drupal_html_id($item);.
@@ -547,7 +547,7 @@ function _atomium_preprocess_process_theme_suggestion($phase, array &$variables,
     $preprocess = array();
     foreach ($registry[$hook_suggestion][$phases[$phase]] as $function) {
       $preprocess[$function] = $function;
-      while (($function = substr($function, 0, strrpos($function, '__')))) {
+      while (($function = drupal_substr($function, 0, strrpos($function, '__')))) {
         $preprocess[$function] = $function;
       }
     }

@@ -15,14 +15,6 @@ use function Drupal\Tests\atomium\predicate\containsArray;
 class ThemeTest extends AbstractThemeTest {
 
   /**
-   * {@inheritdoc}
-   */
-  protected function setUp() {
-    parent::setUp();
-    $settings = &drupal_static('theme_get_setting');
-  }
-
-  /**
    * Test arguments received by theme functions just before being rendered.
    *
    * @dataProvider componentsProvider

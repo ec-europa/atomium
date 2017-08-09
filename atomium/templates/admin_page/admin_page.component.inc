@@ -49,7 +49,7 @@ function atomium_preprocess_admin_page(&$variables, $hook) {
  * Implements hook_process_HOOK().
  */
 function atomium_process_admin_page(&$variables, $hook) {
-  foreach ($variables['container'] as $id => &$data) {
+  foreach ($variables['container'] as &$data) {
     $data['attributes'] = atomium_drupal_attributes($data['attributes_array']);
   }
 }

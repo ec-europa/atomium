@@ -28,6 +28,7 @@ function atomium_preprocess_filter_tips_more_info(&$variables, $hook) {
       '#theme' => array('link'),
       '#text' => t('More information about text formats'),
       '#path' => 'filter/tips',
+      // @codingStandardsIgnoreLine: False positive.
       '#options' => array('attributes' => array('target' => '_blank')),
     ),
   );

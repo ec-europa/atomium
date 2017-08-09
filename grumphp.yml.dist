@@ -3,13 +3,14 @@ parameters:
   bin_dir: vendor/bin
   tasks:
     phpcs:
-      standard: vendor/drupal/coder/coder_sniffer/Drupal/
+      standard: vendor/ec-europa/qa-automation/phpcs/SubStandards/QA
       ignore_patterns:
         - vendor/
       triggered_by:
         - php
         - module
         - inc
+        - js
     git_commit_message:
       matchers:
         - '/^(([A-Z]+\-\d+)|(#\d+)): [A-Z].+\./'

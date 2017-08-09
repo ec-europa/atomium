@@ -20,7 +20,7 @@
 /**
  * Include common functions used through out theme.
  */
-include_once dirname(__FILE__) . '/includes/common.inc';
+include_once drupal_dirname(__FILE__) . '/includes/common.inc';
 
 atomium_include('atomium', 'includes/config.inc');
 atomium_include('atomium', 'includes/preprocess.inc');

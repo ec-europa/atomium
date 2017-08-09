@@ -23,10 +23,11 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
+    // @codingStandardsIgnoreLine: False positive.
     $finder->files()->in(realpath(__DIR__ . '/../fixtures/components'));
     foreach ($finder as $file) {
       $data[] = [
-        'hook' => basename($file->getRelativePathname(), '.yml'),
+        'hook' => drupal_basename($file->getRelativePathname(), '.yml'),
         'content' => Yaml::parse($file->getContents()),
       ];
     }
@@ -43,6 +44,7 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
+    // @codingStandardsIgnoreLine: False positive.
     $finder->files()->in(realpath(__DIR__ . '/../fixtures/attributes'));
     foreach ($finder as $file) {
       $data[] = [
@@ -62,7 +64,7 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
-    $finder->files()->in(realpath(__DIR__ . '/../fixtures/preprocess'));
+    $finder->files()->in(drupal_realpath(__DIR__ . '/../fixtures/preprocess'));
     foreach ($finder as $file) {
       $data[] = [
         'variable_fixture' => Yaml::parse($file->getContents()),
@@ -81,7 +83,7 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
-    $finder->files()->in(realpath(__DIR__ . '/../fixtures/process'));
+    $finder->files()->in(drupal_realpath(__DIR__ . '/../fixtures/process'));
     foreach ($finder as $file) {
       $data[] = [
         'variable_fixture' => Yaml::parse($file->getContents()),

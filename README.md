@@ -3,10 +3,11 @@
 
 The Atomium theme is a Drupal 7 base theme.
 
-The goal of this base theme is to rewrite most of the core themes functions of Drupal and use proper render arrays and
+The goal of this base theme is to rewrite most of the core themes functions of
+Drupal and use proper render arrays and
 templates instead.
-This will allow users to customize at will most of the elements in a custom sub-theme using preprocess functions or by
-providing a custom template.
+This will allow users to customize at will most of the elements in a custom
+sub-theme using preprocess functions or by providing a custom template.
 
 Table of content:
 =================
@@ -26,7 +27,8 @@ Table of content:
 [Go to top](#table-of-content)
 
 # Activation
-To enable the theme, go to **admin/appearance** and select an Atomium based theme.
+To enable the theme, go to **admin/appearance** and select an Atomium
+based theme.
 
 Atomium comes with 2 default sub-themes provided as examples.
 
@@ -38,28 +40,32 @@ Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com
 Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
 Atomium Bartik is a fork on the Bartik core theme using the Atomium mechanisms.
 
-These sub-themes are providing examples of *preprocess* functions and templates so you can craft your own theme quickly.
+These sub-themes are providing examples of *preprocess* functions and templates
+so you can craft your own theme quickly.
 
 [Go to top](#table-of-content)
 
 # Configuration
-Atomium is not intended to be a full featured theme as you might find on drupal.org, full of configurable settings
-and with a nice user interface.
-The sole purpose of this theme is to provides a clean markup that you can easily extend.
+Atomium is not intended to be a full featured theme as you might find on
+drupal.org, full of configurable settings and with a nice user interface.
+The sole purpose of this theme is to provides a clean markup that you can
+easily extend.
 
 However, Atomium provides the following settings:
 
  - Enable theme debug mode,
  - Allow CSS double underscore.
  
-As of Drupal 7.33, Drupal core has a theme debug mode that can be enabled and disabled via the
-**theme_debug** variable.
-Theme debug mode can be used to see possible template suggestions and the locations of template files right in your HTML
-markup (as HTML comments).
+As of Drupal 7.33, Drupal core has a theme debug mode that can be enabled and
+disabled via the **theme_debug** variable.
+Theme debug mode can be used to see possible template suggestions and the
+locations of template files right in your HTML markup (as HTML comments).
 
-As of Drupal 7.51, a new **allow_css_double_underscores** variable has been added to allow for double underscores
-in CSS identifiers. In order to allow CSS identifiers to contain double underscores (*.example__selector*) for Drupal's
-[BEM-style naming standards](http://getbem.com/), this variable can be set to TRUE.
+As of Drupal 7.51, a new **allow_css_double_underscores** variable has been
+added to allow for double underscores in CSS identifiers. In order to allow
+CSS identifiers to contain double underscores (*.example__selector*) for
+Drupal's [BEM-style naming standards](http://getbem.com/), this variable
+can be set to TRUE.
 
 [Go to top](#table-of-content)
 
@@ -79,39 +85,46 @@ in the root directory.
 
 To run the automated tests, Atomium needs a proper Drupal instance.
 
-You also need to copy the file `phpunit.xml.dist` to `phpunit.xml` and replace the strings:
+You also need to copy the file `phpunit.xml.dist` to `phpunit.xml` and replace
+the strings:
  
 * `%ROOT%` with the root installation directory of Drupal,
 * `%URL%` with the URL of your Drupal instance.
 
 The best way to submit code is by providing a pull request on Github.
 
-This also helps us to have the automated tests triggered automatically and save times on checking code styles.
+This also helps us to have the automated tests triggered automatically and save
+times on checking code styles.
 
 [Go to top](#table-of-content)
 
 # Extending
 
-Atomium provides a way to extend just by creating some files without modifying the core Atomium files.
+Atomium provides a way to extend just by creating some files without modifying
+the core Atomium files.
 Each theme definition, core or custom, is treated as a component.
-You can find all the theme definitions in the *templates* directory of each sub-theme.
+You can find all the theme definitions in the *templates* directory of
+each sub-theme.
 
 To create a new theme definition:
 
- - Create a directory in *templates* and name it as you will. A good practice is to name it like the name of the definition.
+ - Create a directory in *templates* and name it as you will. A good practice
+ is to name it like the name of the definition.
  - Create a file *[NAME-OF-THE-THEME-DEFINITION].component.inc*,
  - Create the function *[NAME-OF-THE-THEME]\_atomium_theme\_[NAME-OF-THE-THEME-DEFINITION]\()*,
  - Create a file *[NAME-OF-THE-THEME_DEFINITION].css* and/or *[NAME-OF-THE-THEME_DEFINITION].js* to get these files
   automatically loaded.
   
-Do not forget to clear the cache every time a new theme definition or process/preprocess is added or removed.
+Do not forget to clear the cache every time a new theme definition or
+process/preprocess is added or removed.
 
 [Go to top](#table-of-content)
 
 # Developer's note
 
-During the development of this project, a lot of time has been put into analyzing how Drupal's core functions were
-implemented and how to improve them for better customization.
+During the development of this project, a lot of time has been put into
+analyzing how Drupal's core functions were implemented and how to improve them
+for better customization.
 
 A good example of this is the breadcrumb generation.
 
@@ -121,18 +134,23 @@ Let's analyse how it's currently done in Drupal and how we've implemented it.
 $variables['breadcrumb'] = theme('breadcrumb', array('breadcrumb' => drupal_get_breadcrumb()));
 ````
 
-By default, Drupal uses the function *drupal_get_breadcrumb()* in its *template_process_page()* hook.
+By default, Drupal uses the function *drupal_get_breadcrumb()* in its
+*template_process_page()* hook.
 
 The function *drupal_get_breadcrumb()* returns raw HTML.
 Thus, it's impossible to alter the breadcrumbs links properly.
 
-In order to get a render array, we have to go deeper and rewrite functions accordingly.
+In order to get a render array, we have to go deeper and rewrite functions
+accordingly.
 
-*drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*. This is actually, the function that returns the HTML.
+*drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*.
+This is actually, the function that returns the HTML.
 
-There is no way to alter the result of that function as it returns an array of raw HTML links.
+There is no way to alter the result of that function as it returns an array of
+raw HTML links.
 
-Unfortunately, in order to change this behaviour, we have to create two extra functions in Atomium and change the way
+Unfortunately, in order to change this behaviour, we have to create two extra
+functions in Atomium and change the way
 the breadcrumb is generated.
 
 ````php
@@ -142,9 +160,11 @@ the breadcrumb is generated.
   );
 ````
 
-*atomium_drupal_get_breadcrumb()* is an atomium internal function written only for the breadcrumb handling.
-Instead of calling *menu_get_active_breadcrumb()*, it calls *atomium_menu_get_active_breadcrumb()* which is also a
-custom Atomium function that, instead of returning an array of raw HTML links, returns an array of render arrays.
+*atomium_drupal_get_breadcrumb()* is an atomium internal function written only
+for the breadcrumb handling. Instead of calling *menu_get_active_breadcrumb()*,
+it calls *atomium_menu_get_active_breadcrumb()* which is also a
+custom Atomium function that, instead of returning an array of raw HTML links,
+returns an array of render arrays.
 
 This is why, in *page.tpl.php*, instead of writing:
 
@@ -158,7 +178,8 @@ You have to use:
 <?php print render($breadcrumb); ?>
 ````
 
-The rendering process is at the very end of the Drupal's chain of preprocess, process and render functions.
+The rendering process is at the very end of the Drupal's chain of preprocess,
+process and render functions.
 
 [Go to top](#table-of-content)
 
