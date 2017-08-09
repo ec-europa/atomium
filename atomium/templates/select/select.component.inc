@@ -18,9 +18,9 @@ function atomium_atomium_theme_select() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_select(&$variables) {
+function atomium_preprocess_select(&$variables, $hook) {
   $element = &$variables['element'];
   element_set_attributes($element, array('id', 'name', 'size'));
   _form_set_class($element, array('form-select'));

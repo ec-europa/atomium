@@ -11,8 +11,10 @@
 function atomium_atomium_theme_form_required_marker() {
   return array(
     'form_required_marker' => array(
-      'render element' => 'element',
       'template' => 'form-required-marker',
+      'variables' => array(
+        'title' => '*',
+      ),
     ),
   );
 }
@@ -30,21 +32,5 @@ function atomium_preprocess_form_required_marker(&$variables, $hook) {
     'title' => $t('This field is required.'),
   );
 
-  $variables['title'] = '*';
-  if (isset($variables['element']['#field_name'])) {
-    $variables['theme_hook_suggestions'][] = 'form_required_marker__' . $variables['element']['#field_name'];
-  }
-
-  if (isset($variables['element']['#parents'])) {
-    $parents = implode('__', $variables['element']['#parents']);
-    $variables['theme_hook_suggestions'][] = $hook . '__form-element--' . $parents;
-  }
-
-  if (isset($variables['element']['#name'])) {
-    $attributes['class'] = 'hook__' . $hook . '__' . $variables['element']['#name'];
-  }
-
   $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $attributes);
-
-  $variables[$hook] = $variables['title'];
 }

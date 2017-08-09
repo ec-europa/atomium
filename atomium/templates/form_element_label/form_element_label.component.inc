@@ -38,24 +38,20 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
     $variables['attributes_array']['for'][] = $element['#id'];
   }
 
-  $variables['title'] = '';
-  if (isset($element['#title'])) {
+  $variables += array(
+    'title' => '',
+    'required' => '',
+  );
+  if (isset($element['#title']) && !empty($element['#title'])) {
     $variables['title'] = array(
       '#markup' => $t(filter_xss_admin($element['#title'])),
     );
   }
 
-  // TODO: See how we can improve this.
-  $variables['required'] = '';
-  if (isset($element['#required']) && $element['#required'] == TRUE) {
+  if (isset($element['#required']) && $element['#required']) {
     $variables['required'] = array(
-      '#theme' => array('form_required_marker'),
-      '#element' => $variables['element'],
+      '#theme' => array('form_required_marker__' . $variables['theme_hook_original']),
     );
-  }
-
-  if (isset($variables['element']['#name'])) {
-    $variables['attributes_array']['class'][] = 'hook__' . $hook . '__' . $variables['element']['#name'];
   }
 
   $variables[$hook] = array(
