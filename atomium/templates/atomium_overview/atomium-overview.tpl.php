@@ -23,10 +23,20 @@
     <fieldset>
       <legend><?php print t('Preview') ?></legend>
       <div>
-        <p><?php print $definition['description'] ?></p>
-        <div class="clearfix">
-          <?php print render($definition['preview']) ?>
-        </div>
+        <?php if (isset($definition['description'])):?>
+          <p><?php print $definition['description'] ?></p>
+        <?php endif; ?>
+        <?php if (isset($definition['preview'])):?>
+          <div class="clearfix">
+            <?php print render($definition['preview']) ?>
+          </div>
+        <?php endif; ?>
+        <?php if (isset($definition['form'])):?>
+          <div class="clearfix">
+            <?php print render($definition['form']) ?>
+          </div>
+        <?php endif; ?>
+
       </div>
     </fieldset>
   <?php endforeach; ?>

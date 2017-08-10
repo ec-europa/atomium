@@ -363,19 +363,28 @@ function atomium_get_component_definitions() {
             }
             $elements[] = array_merge($element, $preview);
           }
-          $definition['preview'] = array(
-            '#theme' => 'item_list',
-            '#items' => $elements,
-          );
+          if (!empty($elements)) {
+            $definition['preview'] = array(
+              '#theme' => 'item_list',
+              '#items' => $elements,
+            );
+          }
         }
         else {
           $definition['preview']['#theme'] = array($component);
         }
 
-        $definitions[$component] = $definition;
+        // Allow the use of a form.
+        $function_name = $theme . '_atomium_definition_form_' . $component;
+        if (function_exists($function_name)) {
+          $definition['form'] = drupal_get_form($function_name);
+        }
+
+        $definitions[$component] = array_filter($definition);
       }
     }
   }
+
   return $definitions;
 }
 
