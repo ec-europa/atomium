@@ -329,7 +329,6 @@ function atomium_get_component_definitions() {
   $definitions = array();
   foreach (atomium_find_templates() as $theme => $theme_data) {
     foreach ($theme_data as $component => $component_data) {
-
       $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
       if (file_exists($file)) {
         include_once $file;
@@ -338,6 +337,7 @@ function atomium_get_component_definitions() {
       $function_name = $theme . '_atomium_definition_' . $component;
       if (function_exists($function_name)) {
         $definition = (array) call_user_func($function_name) + array(
+          'disable' => FALSE,
           'preview' => array(),
         );
 
@@ -378,6 +378,11 @@ function atomium_get_component_definitions() {
         $function_name = $theme . '_atomium_definition_form_' . $component;
         if (function_exists($function_name)) {
           $definition['form'] = drupal_get_form($function_name);
+        }
+
+        // Disable the preview if we explicitely set the key disable to TRUE.
+        if (TRUE == $definition['disable']) {
+          unset($definition['preview']);
         }
 
         $definitions[$component] = array_filter($definition);
