@@ -23,7 +23,6 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
-    // @codingStandardsIgnoreLine: False positive.
     $finder->files()->in(realpath(__DIR__ . '/../fixtures/components'));
     foreach ($finder as $file) {
       $data[] = [
@@ -44,7 +43,6 @@ abstract class AbstractTest extends TestCase {
     $data = [];
 
     $finder = new Finder();
-    // @codingStandardsIgnoreLine: False positive.
     $finder->files()->in(realpath(__DIR__ . '/../fixtures/attributes'));
     foreach ($finder as $file) {
       $data[] = [
