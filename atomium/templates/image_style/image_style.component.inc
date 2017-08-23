@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_image_style() {
   return array(
@@ -26,7 +26,7 @@ function atomium_atomium_theme_image_style() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_image_style(&$variables, $hook) {
   // Determine the dimensions of the styled image.

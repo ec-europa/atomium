@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_html(&$variables, $hook) {
   // Add variables and paths needed for HTML5 and responsive support.
@@ -101,7 +101,7 @@ function atomium_preprocess_html(&$variables, $hook) {
 }
 
 /**
- * Implements hook_process_HOOK().
+ * Implements hook_process_hook().
  */
 function atomium_process_html(&$variables, $hook) {
   if (theme_get_setting('atomium_convert_inline_js_into_files')) {

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_block() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_block() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_block(&$variables) {
   // Add BEM style classes to the block.

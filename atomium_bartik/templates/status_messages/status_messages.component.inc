@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bartik_preprocess_status_messages(&$variables, $hook) {
   foreach ($variables['status_messages']['status_messages'] as &$data) {

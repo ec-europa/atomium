@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_system_admin_index() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_system_admin_index() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_system_admin_index(&$variables, $hook) {
   $container = array('left' => '', 'right' => '');

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_menu_local_task() {
   return array(
@@ -22,7 +22,7 @@ function atomium_atomium_theme_menu_local_task() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_menu_local_task(&$variables, $hook) {
   $link = $variables['link'];

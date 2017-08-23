@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_filter_guidelines() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_filter_guidelines() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_guidelines(&$variables) {
   $variables['attributes_array']['class'][] = array(

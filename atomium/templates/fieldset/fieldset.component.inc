@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_fieldset() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_fieldset() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_fieldset(&$variables) {
   $variables += array(
@@ -68,7 +68,7 @@ function atomium_preprocess_fieldset(&$variables) {
     $description = array(
       '#markup' => $variables['description'],
       '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__description'),
-      '#tag' => 'span',
+      '#tag' => 'div',
       '#attributes' => array(
         'class' => array(
           'fieldset-description',

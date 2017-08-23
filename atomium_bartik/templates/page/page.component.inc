@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_process_HOOK().
+ * Implements hook_process_hook().
  */
 function atomium_bartik_preprocess_page(&$variables, $hook) {
   if (isset($variables['page']['content']['#theme_wrappers'])) {
@@ -16,7 +16,7 @@ function atomium_bartik_preprocess_page(&$variables, $hook) {
 }
 
 /**
- * Implements hook_process_HOOK().
+ * Implements hook_process_hook().
  */
 function atomium_bartik_process_page(&$variables, $hook) {
   // Hook into color.module.

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_pager() {
   return array(
@@ -26,7 +26,7 @@ function atomium_atomium_theme_pager() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_pager(&$variables, $hook) {
   $tags = $variables['tags'];
@@ -35,7 +35,7 @@ function atomium_preprocess_pager(&$variables, $hook) {
   $items = array();
   global $pager_page_array, $pager_total;
 
-  // This is for the hook_atomium_definition_HOOK() to work.
+  // This is for the hook_atomium_definition_hook() to work.
   if (isset($variables['pager_page_array']) && !is_null($variables['pager_page_array'])) {
     $pager_page_array = $variables['pager_page_array'];
   }

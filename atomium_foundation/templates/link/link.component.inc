@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_link(&$variables, $hook) {
   if (isset($variables['attributes_array']['id']) && 'edit-cancel' == $variables['attributes_array']['id']) {

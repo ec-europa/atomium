@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_form_required_marker() {
   return array(
@@ -20,7 +20,7 @@ function atomium_atomium_theme_form_required_marker() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_form_required_marker(&$variables, $hook) {
   $t = get_t();

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_container() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_container() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_container(&$variables, $hook) {
   $element = $variables['element'];
@@ -35,4 +35,8 @@ function atomium_preprocess_container(&$variables, $hook) {
 
   $variables['attributes_array'] = $element['#attributes'];
   $variables['container'] = $element['#children'];
+
+  // If this is not added, it will cause issue with the #states mechanisms.
+  // Especially in the theme settings form.
+  $variables['attributes_array']['class'][] = 'form-wrapper';
 }

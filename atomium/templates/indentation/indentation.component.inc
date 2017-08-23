@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_indentation() {
   return array(
@@ -21,7 +21,7 @@ function atomium_atomium_theme_indentation() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_indentation(&$variables, $hook) {
   $variables['indentation'] = array_fill(

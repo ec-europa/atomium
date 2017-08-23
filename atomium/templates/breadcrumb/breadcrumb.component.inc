@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_breadcrumb() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_breadcrumb() {
 }
 
 /**
- * Implements hook_atomium_definition_HOOK().
+ * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_breadcrumb() {
   return array(
@@ -43,7 +43,7 @@ function atomium_atomium_definition_breadcrumb() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_breadcrumb(&$variables, $hook) {
   $links = array();

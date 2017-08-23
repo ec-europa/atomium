@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_atomium_overview() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_atomium_overview() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_atomium_overview(&$variables, $hook) {
   $variables['definitions'] = atomium_get_component_definitions();

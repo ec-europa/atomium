@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_admin_block_content() {
   return array(
@@ -20,7 +20,7 @@ function atomium_atomium_theme_admin_block_content() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_admin_block_content(&$variables, $hook) {
   $variables['compact'] = FALSE;

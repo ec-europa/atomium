@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_menu_tree() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_menu_tree() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_menu_tree(&$variables, $hook) {
   // Guess the depth of the menu tree by checking the depth key of a menu item.

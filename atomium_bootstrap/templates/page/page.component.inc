@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bootstrap_preprocess_page(&$variables, $hook) {
   // This is important to set this variable to an empty string.

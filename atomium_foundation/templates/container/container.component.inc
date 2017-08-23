@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_container(&$variables, $hook) {
   if (isset($variables['element']['#type']) && $type = $variables['element']['#type']) {

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bootstrap_preprocess_menu_local_tasks(&$variables, $hook) {
   $variables['primary']['#attributes']['class'][] = 'nav';

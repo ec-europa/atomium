@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_form_element() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_form_element() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_form_element(&$variables, $hook) {
   $element = &$variables['element'];
@@ -65,17 +65,7 @@ function atomium_preprocess_form_element(&$variables, $hook) {
 
   $variables['description'] = '';
   if (!empty($element['#description'])) {
-    $variables['description'] = array(
-      '#theme' => array('html_tag__' . $variables['theme_hook_original'] . '__description'),
-      '#tag' => 'div',
-      '#attributes' => array(
-        'class' => array('description'),
-      ),
-      'text' => array(
-        '#type' => 'markup',
-        '#markup' => $element['#description'],
-      ),
-    );
+    $variables['description'] = $element['#description'];
   }
 
   $variables['element'] += array(

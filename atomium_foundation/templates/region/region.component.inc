@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_region(&$variables, $hook) {
   if (strpos($variables['elements']['#region'], 'sidebar') !== FALSE) {

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_item_list() {
   return array(
@@ -24,7 +24,7 @@ function atomium_atomium_theme_item_list() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_item_list(&$variables, $hook) {
   // Only output the list container and title, if there are any list items.

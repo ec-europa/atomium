@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_radios() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_radios() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_radios(&$variables) {
   $element = &$variables['element'];

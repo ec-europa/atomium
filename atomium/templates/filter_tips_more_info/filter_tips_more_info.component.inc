@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_filter_tips_more_info() {
   return array(
@@ -20,7 +20,7 @@ function atomium_atomium_theme_filter_tips_more_info() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_tips_more_info(&$variables, $hook) {
   $variables[$hook] = array(

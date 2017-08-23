@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_admin_block() {
   return array(
@@ -17,7 +17,7 @@ function atomium_atomium_theme_admin_block() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_admin_block(&$variables, $hook) {
   // If you want classes with double underscore.

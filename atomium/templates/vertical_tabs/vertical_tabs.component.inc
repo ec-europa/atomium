@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_vertical_tabs() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_vertical_tabs() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_vertical_tabs(&$variables) {
   drupal_add_library('system', 'drupal.vertical-tabs');

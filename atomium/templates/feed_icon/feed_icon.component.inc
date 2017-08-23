@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_feed_icon() {
   return array(
@@ -22,7 +22,7 @@ function atomium_atomium_theme_feed_icon() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_feed_icon(&$variables, $hook) {
   $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_atomium_theme_HOOK().
+ * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_button() {
   return array(
@@ -18,7 +18,7 @@ function atomium_atomium_theme_button() {
 }
 
 /**
- * Implements hook_atomium_definition_HOOK().
+ * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_button() {
   return array(
@@ -34,7 +34,7 @@ function atomium_atomium_definition_button() {
 }
 
 /**
- * Implements hook_preprocess_HOOK().
+ * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_button(&$variables) {
   $element = &$variables['element'];
