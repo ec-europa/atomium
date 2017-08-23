@@ -21,7 +21,7 @@ function atomium_atomium_theme_system_admin_index() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_system_admin_index(&$variables, $hook) {
-  $container = array('left' => '', 'right' => '');
+  $container = array('left' => array(), 'right' => array());
   $flip = array('left' => 'right', 'right' => 'left');
   $position = 'left';
 
@@ -59,4 +59,8 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
 
   $variables['container'] = $container;
   $variables['attributes_array']['class'][] = 'admin';
+
+  $variables['toggle_link'] = array(
+    '#theme' => array('system_compact_link'),
+  );
 }
