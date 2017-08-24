@@ -36,6 +36,11 @@ function atomium_preprocess_container(&$variables, $hook) {
   $variables['attributes_array'] = $element['#attributes'];
   $variables['container'] = $element['#children'];
 
+  // Ensure #attributes->class is an array.
+  if (!is_array($variables['attributes_array']['class'])) {
+    $variables['attributes_array']['class'] = array($variables['attributes_array']['class']);
+  }
+
   // If this is not added, it will cause issue with the #states mechanisms.
   // Especially in the theme settings form.
   $variables['attributes_array']['class'][] = 'form-wrapper';

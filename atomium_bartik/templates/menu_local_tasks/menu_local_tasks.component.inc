@@ -19,7 +19,7 @@ function atomium_bartik_preprocess_menu_local_tasks(&$variables) {
     $variables['secondary']['#attributes']['class'][] = array(
       'tabs',
       'secondary',
-      'clearfix'
+      'clearfix',
     );
   }
 }
