@@ -6,7 +6,5 @@
  */
 ?>
 <form<?php print $attributes; ?>>
-    <div>
-      <?php print render($element['#children']); ?>
-    </div>
+  <?php print render($element['#children']); ?>
 </form>
