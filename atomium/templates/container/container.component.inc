@@ -36,7 +36,8 @@ function atomium_preprocess_container(&$variables, $hook) {
   $variables['attributes_array'] = $element['#attributes'];
   $variables['container'] = $element['#children'];
 
-  // Ensure #attributes->class is an array.
+  // Ensure $attributes_array['class'] is set and an array.
+  $variables['attributes_array'] += array('class' => array());
   if (!is_array($variables['attributes_array']['class'])) {
     $variables['attributes_array']['class'] = array($variables['attributes_array']['class']);
   }
