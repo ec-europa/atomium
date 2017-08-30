@@ -26,11 +26,16 @@ function atomium_preprocess_page(&$variables, $hook) {
     $variables['theme_hook_suggestions'][] = 'page__404';
   }
 
-  // Remove the "theres no content default yadi yada" from the frontpage.
-  unset($variables['page']['content']['system_main']['default_message']);
-
-  // Remove the block template wrapper from the main content block.
-  $variables['page']['content']['system_main']['#theme_wrappers'] = array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
+  if (isset($variables['page']['content']['system_main'])) {
+    if (!empty($variables['page']['content']['system_main']['default_message'])) {
+      // Remove the "theres no content default yadi yada" from the frontpage.
+      unset($variables['page']['content']['system_main']['default_message']);
+    }
+    if (!empty($variables['page']['content']['system_main']['#theme_wrappers'])) {
+      // Remove the block template wrapper from the main content block.
+      $variables['page']['content']['system_main']['#theme_wrappers'] = array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
+    }
+  }
 
   /*-
   USER ACCOUNT TABS
