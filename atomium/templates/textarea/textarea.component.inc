@@ -30,14 +30,20 @@ function atomium_preprocess_textarea(&$variables, $hook) {
     $element['#attributes']['placeholder'] = $element['#title'];
   }
 
-  $wrapper_attributes = array(
+  // We do not check if the placeholder is empty on purpose so we can
+  // disable it if we want to.
+  if (isset($element['#placeholder'])) {
+    $element['#attributes']['placeholder'] = $element['#placeholder'];
+  }
+
+  $wrapper_attributes_array = array(
     'class' => array('form-textarea-wrapper'),
   );
 
   // Add resizable behavior.
   if (!empty($element['#resizable'])) {
     drupal_add_library('system', 'drupal.textarea');
-    $wrapper_attributes['class'][] = 'resizable';
+    $wrapper_attributes_array['class'][] = 'resizable';
   }
 
   if (isset($element['#field_name'])) {
@@ -54,5 +60,5 @@ function atomium_preprocess_textarea(&$variables, $hook) {
   }
 
   $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
-  $variables['wrapper_attributes_array'] = $wrapper_attributes;
+  $variables['wrapper_attributes_array'] = $wrapper_attributes_array;
 }
