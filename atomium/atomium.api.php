@@ -29,3 +29,38 @@ function hook_atomium_theme_hook(&$existing, $type, $theme, $path) {
     ),
   );
 }
+
+/**
+ * Allows you to define a preview in the /atomium-overview page.
+ *
+ * It must live in: [path_to_theme]/templates/[hook]/[hook].component.inc
+ */
+function hook_atomium_definition_hook(&$existing, $type, $theme, $path) {
+  return array(
+    'hook' => array(
+      'name' => 'My component name',
+      'description' => 'My component description',
+      'disable' => FALSE, // Set to TRUE to disable the preview.
+      'preview' => array(
+        'title' => 'The title variable of my component',
+      ),
+    ),
+  );
+}
+
+/**
+ * Allows you to define a preview using a form in the /atomium-overview page.
+ *
+ * It must live in: [path_to_theme]/templates/[hook]/[hook].component.inc
+ *
+ * @return array $form
+ *   The Drupal form.
+ */
+function hook_atomium_definition_form_hook($form, &$form_state) {
+  $form['component'] = array(
+    '#theme' => 'username',
+    '#account' => user_load(1),
+  );
+
+  return $form;
+}

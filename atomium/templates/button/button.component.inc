@@ -38,11 +38,13 @@ function atomium_atomium_definition_button() {
  */
 function atomium_preprocess_button(&$variables) {
   $element = &$variables['element'];
+  $element += array('#button_type' => 'submit');
+
   // This allows us to modify the type of button we want.
-  $element['#attributes']['type'] = $element['#button_type'] ?: 'submit';
+  $element['#attributes']['type'] = $element['#button_type'];
   element_set_attributes($element, array('id', 'name', 'value'));
 
-  $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
+  $element['#attributes']['class'][] = 'form-button-' . $element['#button_type'];
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }

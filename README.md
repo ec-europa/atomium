@@ -115,6 +115,20 @@ To create a new theme definition:
  - Create a file *[NAME-OF-THE-THEME_DEFINITION].css* and/or *[NAME-OF-THE-THEME_DEFINITION].js* to get these files
   automatically loaded.
   
+Atomium provides a custom page available on the path: **atomium-overview**.
+This particular page is only available to users with _administer themes_ permission.
+
+This page act as a showcase page of components.
+To add a component in there, your component needs to define one or two hooks:
+ - hook_atomium_definition_hook().
+   
+   This hook allows you to define simply a component.
+ - hook_atomium_definition_form_hook().
+   
+   This hook allows you to define one or multiple components in a Drupal form.
+   
+For a better understanding and examples, see the [atomium.api.php](https://github.com/ec-europa/atomium/blob/7.x-1.x/atomium/atomium.api.php) file.
+  
 Do not forget to clear the cache every time a new theme definition or
 process/preprocess is added or removed.
 
