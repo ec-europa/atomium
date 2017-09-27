@@ -69,3 +69,7 @@ exclude[css][] = 'modules/taxonomy/taxonomy.css'
 exclude[css][] = 'modules/tracker/tracker.css'
 exclude[css][] = 'modules/update/update.css'
 exclude[css][] = 'modules/user/user.css'
+
+; We must use a string to store these data so each subtheme is able to customize it.
+; If an array was used, removing values from it was not possible.
+settings[field_attach_view_alter][keys] = field_type,formatter,field_name,entity_type,view_mode,bundle

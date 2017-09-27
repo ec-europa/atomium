@@ -77,10 +77,3 @@ function atomium_bootstrap_form_image_style_form_alter(array &$form, array &$for
 function atomium_bootstrap_form_path_admin_filter_form_alter(array &$form, array &$form_state = array(), $form_id = NULL) {
   $form['basic']['filter']['#input_group_button'] = TRUE;
 }
-
-/**
- * Implements hook_form_alter().
- */
-function atomium_bootstrap_form_alter(array &$form, array &$form_state = array(), $form_id = NULL) {
-
-}

@@ -32,7 +32,6 @@ function atomium_include($theme, $path) {
     if (is_file($file)) {
       include_once $file;
     }
-
     return TRUE;
   }
 
@@ -53,15 +52,19 @@ function atomium_include($theme, $path) {
  */
 function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE) {
   static $themes;
+
   if (!isset($theme_key)) {
     $theme_key = $GLOBALS['theme_key'];
   }
+
   if (!isset($themes[$theme_key])) {
     $themes[$theme_key] = array_unique(array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
   }
+
   if ($include_theme_key) {
     $themes[$theme_key][] = $theme_key;
   }
+
   return array_unique($themes[$theme_key]);
 }
 
@@ -85,6 +88,7 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
   if (!isset($theme_key)) {
     $theme_key = !empty($GLOBALS['theme_key']) ? $GLOBALS['theme_key'] : FALSE;
   }
+
   if ($theme_key) {
     $themes = list_themes();
     if (!empty($themes[$theme_key])) {
@@ -141,6 +145,7 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
       return $theme->info;
     }
   }
+
   return FALSE;
 }
 

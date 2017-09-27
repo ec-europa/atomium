@@ -54,5 +54,4 @@ function atomium_bartik_process_page(&$variables, $hook) {
     // Make sure the shortcut link is the first item in title_suffix.
     $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
   }
-
 }

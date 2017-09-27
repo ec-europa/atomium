@@ -33,5 +33,4 @@ function atomium_preprocess_date(&$variables) {
   $attributes['class'][] = 'container-inline';
   $variables['attributes_array'] = $attributes;
   $variables['date'] = $variables['element'];
-
 }

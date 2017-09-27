@@ -22,7 +22,7 @@
     "bovigo/assert": "~1.7",
     "anahkiasen/underscore-php" : "dev-master",
     "composer/installers": "~1.0",
-    "ec-europa/qa-automation": "^3.0"
+    "ec-europa/qa-automation": "3.0.1"
   },
   "autoload": {
     "psr-4": {

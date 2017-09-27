@@ -18,5 +18,4 @@ function atomium_bartik_preprocess_block(&$variables) {
   $variables['content_attributes_array']['class'][] = 'content';
   $variables['attributes_array']['class'] = $variables['classes_array'];
   $variables['attributes_array']['id'] = $variables['block_html_id'];
-
 }

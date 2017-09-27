@@ -2,11 +2,8 @@
 
 /**
  * @file
- * Contains config.inc.php.
+ * config.inc
  */
-?>
-
-<?php
 
 global $conf;
 
