@@ -20,21 +20,29 @@ function atomium_atomium_theme_radio() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_radio(&$variables) {
-  $element = &$variables['element'];
-  $element['#attributes']['type'] = 'radio';
+function atomium_preprocess_radio(&$variables, $hook) {
+  _form_set_class($variables['element'], array('form-radio'));
   element_set_attributes(
-    $element,
+    $variables['element'],
     array(
       0 => 'id',
       1 => 'name',
       '#return_value' => 'value',
     )
   );
+  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes['type'] = 'radio';
 
-  if (isset($element['#return_value']) && $element['#value'] !== FALSE && $element['#value'] == $element['#return_value']) {
-    $element['#attributes']['checked'] = 'checked';
+  if (isset($variables['element']['#return_value']) &&
+    $variables['element']['#value'] !== FALSE &&
+    $variables['element']['#value'] == $variables['element']['#return_value']) {
+    $attributes['checked'] = 'checked';
   }
-  _form_set_class($element, array('form-radio'));
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
+
+  if (isset($variables['element']['#atomium']['attributes']['element'])) {
+    $variables['atomium']['attributes']['element']
+      ->merge($variables['element']['#atomium']['attributes']['element']);
+  }
+
+  $variables['atomium']['attributes']['element']->merge($attributes);
 }

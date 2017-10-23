@@ -51,7 +51,7 @@ function atomium_preprocess_username(&$variables, $hook) {
       ),
       '#theme_wrappers' => array('html_tag'),
       '#tag' => 'span',
-      '#attributes' => $variables['attributes_array'],
+      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
     );
   }
 }

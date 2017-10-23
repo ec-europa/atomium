@@ -56,26 +56,21 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
 
     $links[] = array(
       'link' => $item,
-      '#theme_wrappers' => array('html_tag'),
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__li'),
       '#tag' => 'li',
     );
   }
-
-  $variables['wrapper_attributes_array'] = $variables['attributes_array'];
 
   $variables[$hook] = '';
   if ($links) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('item_list'),
+        '#theme' => array('item_list__' . $variables['theme_hook_original']),
         '#items' => $links,
         '#type' => 'ul',
         '#wrapper' => FALSE,
-        '#attributes' => $variables['attributes_array'],
+        '#attributes' => array(),
       ),
-      '#theme_wrappers' => array('html_tag'),
-      '#tag' => 'nav',
-      '#attributes' => $variables['wrapper_attributes_array'],
     );
   }
 }

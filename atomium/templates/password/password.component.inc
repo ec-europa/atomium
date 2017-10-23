@@ -20,11 +20,20 @@ function atomium_atomium_theme_password() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_password(&$variables) {
-  $element = $variables['element'];
-  $element['#attributes']['type'] = 'password';
-  element_set_attributes($element, array('id', 'name', 'size', 'maxlength'));
-  _form_set_class($element, array('form-text'));
+function atomium_preprocess_password(&$variables, $hook) {
+  element_set_attributes(
+    $variables['element'],
+    array('id', 'name', 'size', 'maxlength')
+  );
+  _form_set_class($variables['element'], array('form-text'));
 
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
+  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes['type'] = 'password';
+
+  if (isset($variables['element']['#atomium']['attributes']['element'])) {
+    $variables['atomium']['attributes']['element']
+      ->merge($variables['element']['#atomium']['attributes']['element']);
+  }
+
+  $variables['atomium']['attributes']['element']->merge($attributes);
 }

@@ -236,25 +236,9 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
           $registry[$hook]['variables']['context'] = array();
         }
 
-        // Setup some default variables.
-        // @see https://drupal.org/node/2219965
-        if (isset($info['variables']) && !isset($info['variables']['attributes_array'])) {
-          $registry[$hook]['variables']['attributes_array'] = array();
-          // Special case, this must stay an array or else, you'll get error
-          // When visiting admin/reports/updates.
-          $registry[$hook]['variables']['attributes'] = array();
-        }
-        if (isset($info['variables']) && !isset($info['variables']['content_attributes_array'])) {
-          $registry[$hook]['variables']['content_attributes_array'] = array();
-          $registry[$hook]['variables']['content_attributes'] = '';
-        }
-        if (isset($info['variables']) && !isset($info['variables']['wrapper_attributes_array'])) {
-          $registry[$hook]['variables']['wrapper_attributes_array'] = array();
-          $registry[$hook]['variables']['wrapper_attributes'] = '';
-        }
-        if (isset($info['variables']) && !isset($info['variables']['title_attributes_array'])) {
-          $registry[$hook]['variables']['title_attributes_array'] = array();
-          $registry[$hook]['variables']['title_attributes'] = '';
+        // Setup a default "atomium" variable.
+        if (isset($info['variables']) && !isset($info['variables']['atomium'])) {
+          $registry[$hook]['variables']['atomium'] = array();
         }
       }
     }

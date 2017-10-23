@@ -21,20 +21,27 @@ function atomium_atomium_theme_checkbox() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_checkbox(&$variables, $hook) {
-  $element = &$variables['element'];
-  $element['#attributes']['type'] = 'checkbox';
+  _form_set_class($variables['element'], array('form-checkbox'));
   element_set_attributes(
-    $element,
+    $variables['element'],
     array(
       0 => 'id',
       1 => 'name',
+      2 => 'checked',
       '#return_value' => 'value',
     )
   );
+  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes['type'] = 'checkbox';
 
-  if (!empty($element['#checked'])) {
-    $element['#attributes']['checked'] = 'checked';
+  if (isset($attributes['checked']) && $attributes['checked'] == TRUE) {
+    $attributes['checked'] = 'checked';
   }
-  _form_set_class($element, array('form-checkbox'));
-  $variables['attributes_array'] = $element['#attributes'];
+
+  if (isset($variables['element']['#atomium']['attributes']['element'])) {
+    $variables['atomium']['attributes']['element']
+      ->merge($variables['element']['#atomium']['attributes']['element']);
+  }
+
+  $variables['atomium']['attributes']['element']->merge($attributes);
 }

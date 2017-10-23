@@ -5,12 +5,14 @@
  * Contains template file.
  */
 ?>
-<article<?php print $attributes; ?>>
+<article<?php print $atomium['attributes']['wrapper']; ?>>
   <?php if ($title_prefix || $title_suffix || $unpublished || $preview || !$page && $title): ?>
       <header>
         <?php print render($title_prefix); ?>
         <?php if (!$page && $title): ?>
-            <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+            <h2<?php print $title_attributes; ?>><a
+                        href="<?php print $node_url; ?>"><?php print $title; ?></a>
+            </h2>
         <?php endif; ?>
         <?php print render($title_suffix); ?>
 
@@ -34,13 +36,17 @@
   <?php if ($display_submitted): ?>
       <footer>
         <?php print $user_picture; ?>
-          <span class="author"><?php print t('Written by'); ?> <?php print $name; ?></span>
+          <span class="author"><?php print t('Written by'); ?><?php print $name; ?></span>
           <span class="date">
-            <?php print t('On the'); ?> <time datetime="<?php print format_date($created, $type = 'custom', $format = 'Y-m-d\TH:i:sP') ?>"><?php print $date; ?></time>
+            <?php print t('On the'); ?>
+              <time datetime="<?php print format_date($created,
+                $type = 'custom',
+                $format = 'Y-m-d\TH:i:sP') ?>"><?php print $date; ?></time>
           </span>
 
         <?php if (module_exists('comment')): ?>
-            <span class="comments"><?php print $comment_count; ?> Comments</span>
+            <span class="comments"><?php print $comment_count; ?>
+                Comments</span>
         <?php endif; ?>
       </footer>
   <?php endif; ?>

@@ -20,6 +20,6 @@ function atomium_atomium_theme_system_modules_incompatible() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_system_modules_incompatible(&$variables) {
-  $variables['attributes_array']['class'][] = 'incompatible';
+function atomium_preprocess_system_modules_incompatible(&$variables, $hook) {
+  $variables['atomium']['attributes']['wrapper']->append('class', 'incompatible');
 }

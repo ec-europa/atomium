@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<select<?php print $attributes; ?>><?php print $options;?></select>
+<select<?php print $atomium['attributes']['element']; ?>><?php print form_select_options($element); ?></select>

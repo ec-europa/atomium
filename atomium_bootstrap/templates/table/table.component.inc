@@ -6,12 +6,12 @@
  */
 
 /**
- * Implements hook_preprocess_table().
+ * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_table(&$variables) {
-  // As this template is not (yet?) rewritten,
-  // we have to use the 'attributes' key instead of 'attributes_array'.
-  $variables['attributes_array']['class'][] = 'table';
-  $variables['attributes_array']['class'][] = 'table-hover';
-  $variables['attributes_array']['class'][] = 'table-condensed';
+function atomium_bootstrap_preprocess_table(&$variables, $hook) {
+  $variables['atomium']['attributes']['wrapper']->append('class', array(
+    'table',
+    'table-hover',
+    'table-condensed',
+  ));
 }

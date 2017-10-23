@@ -6,14 +6,15 @@
  */
 
 /**
- * Implements hook_preprocess_menu_local_tasks().
+ * Implements hook_preprocess_hook().
  */
-function atomium_bartik_preprocess_menu_local_tasks(&$variables) {
+function atomium_bartik_preprocess_menu_local_tasks(&$variables, $hook) {
   if (!empty($variables['primary'])) {
     $variables['primary']['#attributes']['class'][] = array(
       'nav',
       'primary',
     );
+
   }
   if (!empty($variables['secondary'])) {
     $variables['secondary']['#attributes']['class'][] = array(

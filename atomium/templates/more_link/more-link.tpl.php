@@ -5,4 +5,6 @@
  * Contains template file.
  */
 ?>
-<?php print render($more_link);?>
+<div<?php print $atomium['attributes']['wrapper']; ?>>
+  <?php print render($more_link); ?>
+</div>

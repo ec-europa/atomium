@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_links().
+ * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_links(&$variables, $hook) {
   if (in_array($variables['theme_hook_original'], array('links__contextual'))) {

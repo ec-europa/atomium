@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<<?php print $element['#tag'];?><?php print $attributes; ?>>
+<<?php print $element['#tag']; ?><?php print $atomium['attributes']['element']; ?>>

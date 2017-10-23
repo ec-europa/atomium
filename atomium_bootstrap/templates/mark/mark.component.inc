@@ -6,8 +6,8 @@
  */
 
 /**
- * Implements hook_preprocess_mark().
+ * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_mark(&$variables) {
-  $variables['attributes_array']['class'][] = 'badge';
+function atomium_bootstrap_preprocess_mark(&$variables, $hook) {
+  $variables['atomium']['attributes']['wrapper']->append('class', 'badge');
 }

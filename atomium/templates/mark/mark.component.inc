@@ -36,7 +36,7 @@ function atomium_preprocess_mark(&$variables, $hook) {
     }
   }
 
-  $variables['attributes_array']['class'][] = 'marker';
+  $variables['atomium']['attributes']['wrapper']->append('class', 'marker');
 
   $variables[$hook] = '';
   if (!empty($variables['title'])) {

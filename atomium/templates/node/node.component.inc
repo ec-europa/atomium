@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_node(&$variables) {
+function atomium_preprocess_node(&$variables, $hook) {
   // One unified node teaser template.
   $variables['theme_hook_suggestions'][] = 'node__' . $variables['view_mode'];
 
@@ -82,8 +82,7 @@ function atomium_preprocess_node(&$variables) {
   }
   $variables['classes_array'][] = 'node-' . $variables['nid'];
 
-  $variables['attributes_array'] += array('class' => array());
-  $variables['attributes_array']['class'] = array_merge($variables['classes_array'], $variables['attributes_array']['class']);
-  $variables['attributes_array']['role'] = 'article';
-  $variables['attributes_array']['id'] = 'node-' . $variables['nid'];
+  $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['wrapper']->append('role', 'article');
+  $variables['atomium']['attributes']['wrapper']->append('id', 'node-' . $variables['nid']);
 }

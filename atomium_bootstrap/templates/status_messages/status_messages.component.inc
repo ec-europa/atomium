@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_status_messages().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bootstrap_preprocess_status_messages(&$variables, $hook) {
   $status_mapping = array(

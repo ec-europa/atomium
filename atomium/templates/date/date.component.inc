@@ -20,7 +20,7 @@ function atomium_atomium_theme_date() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_date(&$variables) {
+function atomium_preprocess_date(&$variables, $hook) {
   $element = $variables['element'];
 
   $attributes = array();
@@ -31,6 +31,6 @@ function atomium_preprocess_date(&$variables) {
     $attributes['class'] = (array) $element['#attributes']['class'];
   }
   $attributes['class'][] = 'container-inline';
-  $variables['attributes_array'] = $attributes;
   $variables['date'] = $variables['element'];
+  $variables['atomium']['attributes']['wrapper']->merge($attributes);
 }

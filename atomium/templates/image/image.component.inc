@@ -27,14 +27,12 @@ function atomium_atomium_theme_image() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_image(&$variables) {
-  $attributes = $variables['attributes'];
-  $attributes['src'] = file_create_url($variables['path']);
+function atomium_preprocess_image(&$variables, $hook) {
+  $variables['atomium']['attributes']['element']->append('src', file_create_url($variables['path']));
 
   foreach (array('width', 'height', 'alt', 'title') as $key) {
-
     if (isset($variables[$key])) {
-      $attributes[$key] = $variables[$key];
+      $variables['atomium']['attributes']['element']->append($key, $variables[$key]);
     }
   }
 
@@ -42,5 +40,6 @@ function atomium_preprocess_image(&$variables) {
     $variables['theme_hook_suggestions'][] = 'image__' . $variables['style_name'];
   }
 
-  $variables['attributes_array'] = $attributes;
+  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
+  $variables['atomium']['attributes']['element']->merge($variables['attributes']);
 }

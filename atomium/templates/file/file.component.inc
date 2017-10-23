@@ -20,11 +20,11 @@ function atomium_atomium_theme_file() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_file(&$variables) {
-  $element = $variables['element'];
-  $element['#attributes']['type'] = 'file';
-  element_set_attributes($element, array('id', 'name', 'size'));
-  _form_set_class($element, array('form-file'));
+function atomium_preprocess_file(&$variables, $hook) {
+  _form_set_class($variables['element'], array('form-file'));
+  element_set_attributes($variables['element'], array('id', 'name', 'size'));
+  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes['type'] = 'file';
 
-  $variables['attributes_array'] = $element['#attributes'];
+  $variables['atomium']['attributes']['file']->merge($attributes);
 }

@@ -33,11 +33,12 @@ function atomium_preprocess_file_icon(&$variables, $hook) {
     $variables['theme_hook_suggestions'][] = $variables['theme_hook_original'] . '__' . $mimetype;
   }
 
-  $variables['attributes_array']['class'][] = 'file-icon';
+  $variables['atomium']['attributes']['wrapper']->append('class', 'file-icon');
+
   $variables[$hook] = array(
     $hook => array(
       '#theme' => array('image'),
-      '#attributes' => $variables['attributes_array'],
+      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
       '#alt' => check_plain($variables['alt']),
       '#title' => isset($file->filemime) ? check_plain($file->filemime) : NULL,
       '#path' => file_icon_url($file, $variables['icon_directory']),

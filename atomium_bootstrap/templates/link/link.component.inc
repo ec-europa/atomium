@@ -6,13 +6,13 @@
  */
 
 /**
- * Implements hook_preprocess_link().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bootstrap_preprocess_link(&$variables, $hook) {
-  if (isset($variables['attributes_array']['id'])) {
-    if ('edit-cancel' == $variables['attributes_array']['id']) {
-      $variables['attributes_array']['class'][] = 'btn';
-      $variables['attributes_array']['class'][] = 'btn-danger';
+  if (isset($variables['options']['attributes']['id'])) {
+    if ('edit-cancel' == $variables['options']['attributes']['id']) {
+      $variables['atomium']['attributes']['element']
+        ->append('class', array('btn', 'btn-danger'));
     }
   }
 }

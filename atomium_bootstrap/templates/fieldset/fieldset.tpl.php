@@ -5,7 +5,7 @@
  * fieldset.tpl.php
  */
 ?>
-<fieldset <?php print $attributes; ?>>
+<fieldset<?php print $atomium['attributes']['wrapper']; ?>>
   <?php if ($title): ?>
     <?php if ($collapsible): ?>
       <legend class="panel-heading">

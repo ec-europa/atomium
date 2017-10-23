@@ -28,7 +28,5 @@ function atomium_preprocess_more_link(&$variables, $hook) {
       '#path' => $variables['url'],
       '#options' => array('attributes' => array('title' => $variables['title'])),
     ),
-    '#theme_wrappers' => array('container'),
-    '#attributes' => $variables['attributes_array'],
   );
 }

@@ -18,19 +18,3 @@ function atomium_atomium_theme_form_required_marker() {
     ),
   );
 }
-
-/**
- * Implements hook_preprocess_hook().
- */
-function atomium_preprocess_form_required_marker(&$variables, $hook) {
-  $t = get_t();
-
-  $attributes = array(
-    'class' => array(
-      'form-required',
-    ),
-    'title' => $t('This field is required.'),
-  );
-
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $attributes);
-}

@@ -34,40 +34,47 @@ function atomium_preprocess_item_list(&$variables, $hook) {
     $num_items = count($variables['items']);
     $i = 0;
     foreach ($variables['items'] as $key => $item) {
-      $attributes = array('class' => array());
       $i++;
       if ($i == 1) {
-        $attributes['class'][] = 'first';
+        $variables['atomium']['attributes'][$key]->append('class', 'first');
       }
       if ($i == $num_items) {
-        $attributes['class'][] = 'last';
+        $variables['atomium']['attributes'][$key]->append('class', 'last');
       }
 
       if (is_array($item) && isset($item['data'])) {
         $item += array('class' => array());
-        $attributes['class'] = drupal_array_merge_deep($attributes['class'], $item['class']);
+        $variables['atomium']['attributes'][$key]->append('class', $item['class']);
         $variables['items'][$key] = array(
-          '#theme' => array('html_tag'),
+          '#theme' => 'html_tag__' . $variables['theme_hook_original'],
           '#tag' => 'li',
-          '#attributes' => $attributes,
+          '#atomium' => array(
+            'attributes' => array(
+              'element' => $variables['atomium']['attributes'][$key],
+            ),
+          ),
           '#value' => $item['data'],
         );
       }
 
       if (is_string($item)) {
         $variables['items'][$key] = array(
-          '#theme' => array('html_tag'),
+          '#theme' => 'html_tag__' . $variables['theme_hook_original'],
           '#tag' => 'li',
-          '#attributes' => $attributes,
+          '#atomium' => array(
+            'attributes' => array(
+              'element' => $variables['atomium']['attributes'][$key],
+            ),
+          ),
           '#value' => $item,
         );
       }
 
       $variables['items'][$key] += array('#attributes' => array());
-      $variables['items'][$key]['#attributes'] = drupal_array_merge_deep($variables['items'][$key]['#attributes'], $attributes);
     }
   }
 
-  $variables['attributes_array'] = $variables['attributes'];
-  $variables['wrapper_attributes_array']['class'][] = 'item-list';
+  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
+  $variables['atomium']['attributes']['list']->merge($variables['attributes']);
+  $variables['atomium']['attributes']['wrapper']->append('class', 'item-list');
 }

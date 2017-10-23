@@ -27,10 +27,20 @@ function atomium_atomium_theme_menu_local_task() {
 function atomium_preprocess_menu_local_task(&$variables, $hook) {
   $link = $variables['link'];
   $link_text = $link['title'];
+  $active = NULL;
 
-  if (!empty($variables['element']['#active'])) {
+  if (!empty($variables['active']) && TRUE == $variables['active']) {
     // Add text to indicate active tab for non-visual users.
-    $active = '<span class="element-invisible">' . t('(active tab)') . '</span>';
+    $active = array(
+      '#markup' => t('(active tab)'),
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#tag' => 'span',
+      '#attributes' => array(
+        'class' => array(
+          'element-invisible',
+        ),
+      ),
+    );
 
     // If the link does not contain HTML already, check_plain() it now.
     // After we set 'html'=TRUE the link will not be sanitized by l().
@@ -38,23 +48,25 @@ function atomium_preprocess_menu_local_task(&$variables, $hook) {
       $link['title'] = check_plain($link['title']);
     }
     $link['localized_options']['html'] = TRUE;
-    $link_text = t('!local-task-title!active', array('!local-task-title' => $link['title'], '!active' => $active));
   }
 
   $variables[$hook] = $link_text;
   if (isset($link['href'])) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('link'),
-        '#text' => $link_text,
+        '#theme' => array('link__' . $variables['theme_hook_original']),
+        '#text' => array(
+          array('#markup' => $link['title']),
+          $active,
+        ),
         '#path' => $link['href'],
         '#options' => array(
-          'attributes' => array('title' => $link_text),
+          'attributes' => array('title' => $link['title']),
           'html' => TRUE,
         ),
       ),
     );
   }
 
-  $variables['attributes_array']['class'][] = !empty($variables['active']) ? 'active' : '';
+  $variables['atomium']['attributes']['wrapper']->append('class', !empty($variables['active']) ? 'active' : '');
 }

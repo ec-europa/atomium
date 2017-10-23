@@ -20,9 +20,10 @@ function atomium_atomium_theme_comment() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_comment(&$variables) {
+function atomium_preprocess_comment(&$variables, $hook) {
   if (isset($variables['elements']['#comment']->new) && $variables['elements']['#comment']->new) {
     $variables['classes_array'][] = 'new';
+
   }
 
   if ($variables['status'] == "comment-unpublished") {
@@ -35,5 +36,6 @@ function atomium_preprocess_comment(&$variables) {
   // Remove inline class from the ul links.
   $variables['content']['links']['#attributes']['class'] = array_values(array_diff($variables['content']['links']['#attributes']['class'], array('inline')));
 
-  $variables['attributes_array']['class'] = $variables['classes_array'];
+  $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['content']->append('class', 'content');
 }

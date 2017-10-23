@@ -6,12 +6,13 @@
  */
 
 /**
- * Implements hook_preprocess_menu_local_tasks().
+ * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_menu_local_tasks(&$variables) {
+function atomium_foundation_preprocess_menu_local_tasks(&$variables, $hook) {
   if (!empty($variables['primary'])) {
     if (isset($variables['primary']['#type'])) {
       $variables['primary']['#type'] = '';
+
     }
     $variables['primary']['#wrapper_attributes_array']['class'][] = array(
       'menu',

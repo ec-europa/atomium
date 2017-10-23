@@ -11,6 +11,28 @@
 function atomium_form_alter(&$form, &$form_state, $form_id) {
   // Custom recursive function to alter all the #theme keys of form elements.
   _atomium_form_element_theme_alter($form, $form_state, $form_id);
+
+  /*
+   * Prevent user-facing field styling from screwing up node edit forms by
+   * renaming the classes on the node edit form's field wrappers.
+   *
+   * Remove if #1245218 is backported to D7 core.
+   */
+  foreach (array_keys($form) as $item) {
+    if (strpos($item, 'field_') === 0) {
+      if (!empty($form[$item]['#attributes']['class'])) {
+        foreach ($form[$item]['#attributes']['class'] as &$class) {
+          // Core bug: the field-type-text-with-summary class
+          // is used as a JS hook.
+          if ($class != 'field-type-text-with-summary' && strpos($class,
+              'field-type-') === 0 || strpos($class, 'field-name-') === 0) {
+            // Make the class different from that used in theme_field().
+            $class = 'form-' . $class;
+          }
+        }
+      }
+    }
+  }
 }
 
 /**
@@ -35,6 +57,7 @@ function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
               '__',
               array(
                 $info['#theme'],
+                'form',
                 $form_id,
                 $key,
               )
@@ -52,7 +75,7 @@ function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
           // @see http://php.net/manual/en/function.get-defined-functions.php
           //
           // It is better if the $form_id doesn't start with underscore.
-          return drupal_strtolower($item . '__' . $form_id . '__' . $key);
+          return drupal_strtolower($item . '__form__' . $form_id . '__' . $key);
         }, $info['#theme_wrappers']);
       }
     }

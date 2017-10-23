@@ -6,24 +6,24 @@
  */
 
 /**
- * Implements hook_preprocess_html().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bartik_preprocess_html(&$variables, $hook) {
   if (!empty($variables['page']['featured'])) {
-    $variables['classes_array'][] = 'featured';
+    $variables['atomium']['attributes']['body']->append('class', 'featured');
   }
 
   if (!empty($variables['page']['triptych_first'])
     || !empty($variables['page']['triptych_middle'])
     || !empty($variables['page']['triptych_last'])) {
-    $variables['classes_array'][] = 'triptych';
+    $variables['atomium']['attributes']['body']->append('class', 'triptych');
   }
 
   if (!empty($variables['page']['footer_firstcolumn'])
     || !empty($variables['page']['footer_secondcolumn'])
     || !empty($variables['page']['footer_thirdcolumn'])
     || !empty($variables['page']['footer_fourthcolumn'])) {
-    $variables['classes_array'][] = 'footer-columns';
+    $variables['atomium']['attributes']['body']->append('class', 'footer-columns');
   }
 
   // Add conditional stylesheets for IE.
@@ -47,27 +47,26 @@ function atomium_bartik_preprocess_html(&$variables, $hook) {
   // Add information about the number of sidebars.
   if (
     !empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
-    $variables['classes_array'][] = 'two-sidebars';
+    $variables['atomium']['attributes']['body']->append('class', 'two-sidebars');
   }
   elseif (!empty($variables['page']['sidebar_first'])) {
-    $variables['classes_array'][] = 'one-sidebar';
-    $variables['classes_array'][] = 'sidebar-first';
+    $variables['atomium']['attributes']['body']->append('class', array('one-sidebar', 'sidebar-first'));
   }
   elseif (!empty($variables['page']['sidebar_second'])) {
-    $variables['classes_array'][] = 'one-sidebar';
-    $variables['classes_array'][] = 'sidebar-second';
+    $variables['atomium']['attributes']['body']->append('class', array('one-sidebar', 'sidebar-second'));
   }
   else {
-    $variables['classes_array'][] = 'no-sidebars';
+    $variables['atomium']['attributes']['body']->append('class', 'no-sidebars');
   }
 }
 
 /**
  * Implements hook_process_html().
  */
-function atomium_bartik_process_html(&$variables) {
+function atomium_bartik_process_html(&$variables, $hook) {
   // Hook into color.module.
   if (module_exists('color')) {
     _color_html_alter($variables);
+
   }
 }

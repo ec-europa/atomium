@@ -13,10 +13,10 @@ function atomium_preprocess_html(&$variables, $hook) {
   $variables['base_path'] = base_path();
 
   // Attributes for html element.
-  $variables['html_attributes_array'] = array(
+  $variables['atomium']['attributes']['html']->merge(array(
     'lang' => $variables['language']->language,
     'dir' => $variables['language']->dir,
-  );
+  ));
 
   // Return early, so the maintenance page does not call any of the code below.
   if ('html' != $hook) {
@@ -33,7 +33,7 @@ function atomium_preprocess_html(&$variables, $hook) {
     $variables['rdf_namespaces'] = implode(' ', $prefixes);
   }
 
-  $variables['html_attributes_array']['prefix'] = $variables['rdf_namespaces'];
+  $variables['atomium']['attributes']['html']->append('prefix', $variables['rdf_namespaces']);
 
   // Classes for body element. Allows advanced theming based
   // on context (home page, node of certain type, etc.).
@@ -97,7 +97,7 @@ function atomium_preprocess_html(&$variables, $hook) {
     }
   }
 
-  $variables['attributes_array']['class'] = array_merge($variables['attributes_array']['class'], $variables['classes_array']);
+  $variables['atomium']['attributes']['body']->append('class', $variables['classes_array']);
 }
 
 /**

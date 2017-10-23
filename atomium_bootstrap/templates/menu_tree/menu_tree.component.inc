@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_menu_tree().
+ * Implements hook_preprocess_hook().
  */
 function atomium_bootstrap_preprocess_menu_tree(&$variables, $hook) {
   $variables[$hook]['#attributes']['class'][] = 'nav';

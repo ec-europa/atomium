@@ -33,11 +33,8 @@ function atomium_preprocess_links(&$variables, $hook) {
 
   $heading = $variables['heading'];
 
-  $variables['attributes_array'] = drupal_array_merge_deep(
-    $variables['attributes_array'],
-    $variables['attributes']
-  );
-  $variables['attributes_array']['class'][] = 'links';
+  $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
+  $variables['atomium']['attributes']['wrapper']->append('class', 'links');
 
   $count = count($variables['links']);
   if ($count > 0) {
@@ -54,15 +51,16 @@ function atomium_preprocess_links(&$variables, $hook) {
         );
       }
       if (!empty($variables['heading']['class'])) {
-        $variables['heading_attributes_array'] = array(
+        $variables['atomium']['attributes']['heading']->merge(array(
           'class' => $heading['class'],
-        );
+        ));
       }
       $variables['heading']['text'] = check_plain($variables['heading']['text']);
     }
 
     $num_links = $count;
     $i = 1;
+    $new_links = array();
 
     foreach ($variables['links'] as $key => $link) {
       $link['attributes_array'] = array('class' => array($key));
@@ -81,6 +79,7 @@ function atomium_preprocess_links(&$variables, $hook) {
         $link['attributes_array']['class'][] = 'active';
       }
 
+      $newlink = '';
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
         $newlink = array(
@@ -126,10 +125,14 @@ function atomium_preprocess_links(&$variables, $hook) {
 
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('item_list'),
+        '#theme' => array('item_list__' . $variables['theme_hook_original']),
         '#items' => $new_links,
         '#type' => 'ul',
-        '#attributes' => $variables['attributes_array'],
+        '#atomium' => array(
+          'attributes' => array(
+            'list' => $variables['atomium']['attributes']['wrapper'],
+          ),
+        ),
       ),
     );
   }

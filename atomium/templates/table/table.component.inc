@@ -13,12 +13,12 @@ function atomium_atomium_theme_table() {
     'table' => array(
       'template' => 'table',
       'variables' => array(
+        'attributes' => array(),
         'caption' => NULL,
         'header' => array(),
         'colgroups' => array(),
         'rows' => array(),
         'footer' => array(),
-        'attributes' => array(),
         'sticky' => TRUE,
         'empty' => '',
       ),
@@ -35,10 +35,9 @@ function atomium_preprocess_table(&$variables, $hook) {
   $sticky = $variables['sticky'];
   $empty = $variables['empty'];
 
-  if (isset($variables['attributes']['class']) && !is_array($variables['attributes']['class'])) {
-    $variables['attributes']['class'] = array($variables['attributes']['class']);
+  if (isset($variables['attributes'])) {
+    $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
   }
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes'], $variables['attributes_array']);
 
   // Allows to have multiple lines in the header.
   foreach ($variables['header'] as $item) {
@@ -53,7 +52,7 @@ function atomium_preprocess_table(&$variables, $hook) {
     drupal_add_js('misc/tableheader.js');
     // Add 'sticky-enabled' class to the table to identify it for JS.
     // This is needed to target tables constructed by this function.
-    $variables['attributes_array']['class'][] = 'sticky-enabled';
+    $variables['atomium']['attributes']['wrapper']->append('class', 'sticky-enabled');
   }
 
   // Add the 'empty' row message if available.
@@ -79,34 +78,16 @@ function atomium_preprocess_table(&$variables, $hook) {
   $ts = count($header) ? tablesort_init($header[0]) : array();
 
   // Format the table colgroups row.
-  $variables['colgroups'] = _atomium_table_format_rows(array($variables['colgroups']), $header, $ts);
+  $variables['colgroups'] = _atomium_table_format_rows('colgroup', array($variables['colgroups']), $header, $ts, FALSE, $variables);
 
   // Format the table header rows.
-  $variables['header'] = _atomium_table_format_rows($variables['header'], $header, $ts, TRUE);
+  $variables['header'] = _atomium_table_format_rows('header', $variables['header'], $header, $ts, TRUE, $variables);
 
   // Format the table footer rows.
-  $variables['rows'] = _atomium_table_format_rows($variables['rows'], $header, $ts);
+  $variables['rows'] = _atomium_table_format_rows('body', $variables['rows'], $header, $ts, FALSE, $variables);
 
   // Format the table footer rows.
-  $variables['footer'] = _atomium_table_format_rows($variables['footer'], $header, $ts);
-}
-
-/**
- * Implements hook_process_hook().
- */
-function atomium_process_table(&$variables, $hook) {
-  foreach (array('colgroups', 'header', 'rows', 'footer') as $group) {
-    foreach ($variables[$group] as &$row) {
-      if (isset($row['#attributes_array'])) {
-        $row['attributes'] = atomium_drupal_attributes($row['#attributes_array']);
-      }
-      foreach ($row['cells'] as &$cell) {
-        if (isset($cell['#attributes_array'])) {
-          $cell['attributes'] = atomium_drupal_attributes($cell['#attributes_array']);
-        }
-      }
-    }
-  }
+  $variables['footer'] = _atomium_table_format_rows('footer', $variables['footer'], $header, $ts, FALSE, $variables);
 }
 
 /**
@@ -115,7 +96,7 @@ function atomium_process_table(&$variables, $hook) {
  * @return array
  *   A proper render array of rows.
  */
-function _atomium_table_format_rows(array $rows, $header, $ts, $is_header = FALSE) {
+function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header = FALSE, array &$variables = array()) {
   $rows_array = array();
 
   if (isset($header[0])) {
@@ -143,18 +124,13 @@ function _atomium_table_format_rows(array $rows, $header, $ts, $is_header = FALS
       }
 
       if (count($cells)) {
-        $rows_array['row-' . $rowid] = array(
-          '#attributes_array' => array(),
-        );
-
         // Add odd/even class.
         if (!$no_striping) {
           $class = $flip[$class];
           $attributes['class'][] = $class;
         }
-        $attributes['class'][] = 'row-' . $rowid;
 
-        $rows_array['row-' . $rowid]['#attributes_array'] = $attributes;
+        $variables['atomium']['attributes'][$type . '-row-' . $rowid]->merge($attributes);
 
         // Build row.
         $i = 0;
@@ -163,27 +139,15 @@ function _atomium_table_format_rows(array $rows, $header, $ts, $is_header = FALS
           $cell = ($is_header) ? tablesort_header($cell, $header, $ts) : tablesort_cell($cell, $header, $ts, $i++);
 
           // @todo: Check this part of code.
-          $attributes_array = array('class' => array());
+          $attributes_array = array();
           if (is_array($cell)) {
             $cell += array('data' => '');
             $attributes_array = array_diff_key($cell, array('data' => 'data', 'header' => 'header'));
             $cell = $cell['data'];
           }
 
-          $attributes_array += array('class' => array());
-          if (!is_array($attributes_array['class'])) {
-            $attributes_array['class'] = array($attributes_array['class']);
-          }
-          $attributes_array['class'][] = 'cell-' . $cellid;
-
-          if ($is_header) {
-            $attributes_array['scope'] = 'col';
-          }
-
-          $rows_array['row-' . $rowid]['cells']['cell-' . $cellid] = array(
-            '#attributes_array' => $attributes_array,
-            'cell' => $cell,
-          );
+          $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $cellid] = $attributes_array;
+          $rows_array['row-' . $rowid]['cells']['cell-' . $cellid] = $cell;
         }
       }
     }

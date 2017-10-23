@@ -15,8 +15,8 @@ function atomium_preprocess_region(&$variables, $hook) {
 
   $variables['classes_array'] = array_merge($variables['classes_array'], $classes);
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('region')));
-  $variables['attributes_array']['class'] = $variables['classes_array'];
-  $variables['attributes_array']['role'] = 'complementary';
+  $variables['atomium']['attributes']['region']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['region']->append('role', 'complementary');
 
   $variables[$hook] = $variables['content'];
 }

@@ -33,7 +33,8 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
   // entities. See: https://www.drupal.org/node/2854978
   $element['#localized_options']['html'] = TRUE;
 
-  $variables['attributes_array'] = drupal_array_merge_deep($element['#attributes'], $variables['attributes_array']);
+  $variables['atomium']['attributes']['wrapper']->merge($element['#attributes']);
+
   $variables['sub_menu'] = $sub_menu;
   $variables['output'] = array(
     '#theme' => array('link'),
@@ -51,8 +52,5 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
       $variables['output'],
       $variables['sub_menu'],
     ),
-    '#theme_wrappers' => array('html_tag'),
-    '#tag' => 'li',
-    '#attributes' => $variables['attributes_array'],
   );
 }

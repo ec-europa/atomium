@@ -2,9 +2,11 @@
 
 namespace Drupal\Tests\atomium;
 
+use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
+use Underscore\Types\Arrays;
 
 /**
  * Class AbstractTest.
@@ -12,6 +14,26 @@ use Symfony\Component\Yaml\Yaml;
  * @package Drupal\Tests\atomium
  */
 abstract class AbstractTest extends TestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp() {
+    parent::setUp();
+
+    $assertion = Leo::assertion();
+    $assertion->addMethod('containsArray', function (array $value) {
+      foreach (Arrays::flatten($this->getActual()) as $dotted => $item) {
+        $expected = Arrays::get($value, $dotted);
+        if ($item != $expected) {
+          $this->failing = [$dotted, $item];
+          $this->expected = $expected;
+          return FALSE;
+        }
+      }
+      return TRUE;
+    });
+  }
 
   /**
    * Return component fixtures.

@@ -20,13 +20,12 @@ function atomium_atomium_theme_block() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_block(&$variables) {
+function atomium_preprocess_block(&$variables, $hook) {
   // Add BEM style classes to the block.
-  $variables['attributes_array']['class'][] = 'hook__block__' . $variables['block']->module . '__' . $variables['block']->delta;
+  $variables['atomium']['attributes']['wrapper']->append('class', 'hook__block__' . $variables['block']->module . '__' . $variables['block']->delta);
 
   $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('block')));
   $variables['classes_array'] = preg_grep('/^block-/', $variables['classes_array'], PREG_GREP_INVERT);
-  $variables['id_block'] = ' id="' . $variables['block_html_id'] . '"';
   $variables['classes_array'][] = $variables['block_html_id'];
   $variables['classes_array'][] = $variables['block_zebra'];
 
@@ -36,9 +35,6 @@ function atomium_preprocess_block(&$variables) {
   if (isset($variables['block']->classes) && is_array($variables['block']->classes)) {
     $variables['classes_array'] = array_merge($variables['classes_array'], (array) $variables['block']->classes);
   }
-
-  $variables['title_attributes_array']['class'][] = 'title';
-  $variables['content_attributes_array']['class'][] = 'block-content';
 
   if (
     ($variables['elements']['#block']->module == "system" and $variables['elements']['#block']->delta == "navigation") or
@@ -50,8 +46,8 @@ function atomium_preprocess_block(&$variables) {
     $variables['theme_hook_suggestions'][] = 'block__menu';
   }
 
-  $variables['attributes_array']['class'] = array_merge($variables['attributes_array']['class'], $variables['classes_array']);
-  $variables['attributes_array']['id'] = $variables['block_html_id'];
+  $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['wrapper']->append('id', $variables['block_html_id']);
 
   // Add Aria Roles via attributes.
   switch ($variables['block']->module) {
@@ -63,12 +59,12 @@ function atomium_preprocess_block(&$variables) {
 
         case 'help':
         case 'powered-by':
-          $variables['attributes_array']['role'] = 'complementary';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'complementary');
           break;
 
         default:
           // Any other "system" block is a menu block.
-          $variables['attributes_array']['role'] = 'navigation';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'navigation');
           break;
       }
       break;
@@ -81,11 +77,11 @@ function atomium_preprocess_block(&$variables) {
     case 'forum':
     case 'shortcut':
     case 'statistics':
-      $variables['attributes_array']['role'] = 'navigation';
+      $variables['atomium']['attributes']['wrapper']->append('role', 'navigation');
       break;
 
     case 'search':
-      $variables['attributes_array']['role'] = 'search';
+      $variables['atomium']['attributes']['wrapper']->append('role', 'search');
       break;
 
     case 'help':
@@ -93,17 +89,17 @@ function atomium_preprocess_block(&$variables) {
     case 'locale':
     case 'poll':
     case 'profile':
-      $variables['attributes_array']['role'] = 'complementary';
+      $variables['atomium']['attributes']['wrapper']->append('role', 'complementary');
       break;
 
     case 'node':
       switch ($variables['block']->delta) {
         case 'syndicate':
-          $variables['attributes_array']['role'] = 'complementary';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'complementary');
           break;
 
         case 'recent':
-          $variables['attributes_array']['role'] = 'navigation';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'navigation');
           break;
       }
       break;
@@ -111,40 +107,26 @@ function atomium_preprocess_block(&$variables) {
     case 'user':
       switch ($variables['block']->delta) {
         case 'login':
-          $variables['attributes_array']['role'] = 'form';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'form');
           break;
 
         case 'new':
         case 'online':
-          $variables['attributes_array']['role'] = 'complementary';
+          $variables['atomium']['attributes']['wrapper']->append('role', 'complementary');
           break;
       }
       break;
   }
 
-  $variables['classes_array'][] = drupal_html_class('block-' . $variables['block']->module);
-
-  // Create a valid HTML ID and make sure it is unique.
-  $variables['block_html_id'] = drupal_html_id('block-' . $variables['block']->module . '-' . $variables['block']->delta);
+  $variables['atomium']['attributes']['wrapper']->append('class', drupal_html_class('block-' . $variables['block']->module));
 
   $variables['title']['#markup'] = '';
   if ($variables['block']->subject) {
     $variables['title'] = array(
       '#markup' => $variables['block']->subject,
-      '#theme_wrappers' => array('html_tag'),
+      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__h2'),
       '#tag' => 'h2',
       '#attributes' => $variables['title_attributes_array'],
     );
-  }
-
-  if ($variables['content']) {
-    $variables['content'] = array(
-      '#markup' => $variables['content'],
-      '#theme_wrappers' => array('container'),
-      '#attributes' => $variables['content_attributes_array'],
-    );
-  }
-  else {
-    $variables['content'] = '';
   }
 }

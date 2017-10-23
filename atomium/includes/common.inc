@@ -28,6 +28,9 @@ function atomium_include($theme, $path) {
       foreach (glob($file . '/*.{inc}', GLOB_BRACE) as $file_to_include) {
         include_once $file_to_include;
       }
+      foreach (glob($file . '/*.{php}', GLOB_BRACE) as $file_to_include) {
+        include_once $file_to_include;
+      }
     }
     if (is_file($file)) {
       include_once $file;
@@ -344,7 +347,26 @@ function atomium_get_component_definitions() {
         $definition = (array) call_user_func($function_name) + array(
           'disable' => FALSE,
           'preview' => array(),
+          'dependencies' => array(),
         );
+
+        if (!is_array($definition['dependencies'])) {
+          $definition['dependencies'] = array($definition['dependencies']);
+        }
+
+        $errors = array();
+        foreach ($definition['dependencies'] as $dependency) {
+          if (!module_exists($dependency)) {
+            $message = t(
+              'The component <em>@component</em> has been disabled because the module <em>@module</em> is missing.',
+              array('@component' => $component, '@module' => $dependency)
+            );
+            $errors[$component][$dependency] = array(
+              '#markup' => $message,
+            );
+            drupal_set_message($message, 'warning', FALSE);
+          }
+        }
 
         // Prepend hash to all preview properties.
         foreach ($definition['preview'] as $key => $value) {
@@ -391,6 +413,13 @@ function atomium_get_component_definitions() {
         }
 
         $definitions[$component] = array_filter($definition);
+        if (!empty($errors)) {
+          unset($definitions[$component]['form']);
+          $definitions[$component]['preview'] = array(
+            '#theme' => 'item_list',
+            '#items' => $errors[$component],
+          );
+        }
       }
     }
   }

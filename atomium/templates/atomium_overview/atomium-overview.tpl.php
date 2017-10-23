@@ -8,9 +8,9 @@
 
 <ul>
   <?php foreach ($definitions as $name => $definition): ?>
-    <li>
-      <a href="#<?php print $name?>"><?php print $definition['label'] ?></a>
-    </li>
+      <li>
+          <a href="#<?php print $name ?>"><?php print $definition['label'] ?></a>
+      </li>
   <?php endforeach; ?>
 </ul>
 
@@ -18,26 +18,26 @@
 
 <div>
   <?php foreach ($definitions as $name => $definition): ?>
-    <a name="<?php print $name?>"></a>
-    <h4><?php print $definition['label'] ?></h4>
-    <fieldset>
-      <legend><?php print t('Preview') ?></legend>
-      <div>
-        <?php if (isset($definition['description'])):?>
-          <p><?php print $definition['description'] ?></p>
-        <?php endif; ?>
-        <?php if (isset($definition['preview'])):?>
-          <div class="clearfix">
-            <?php print render($definition['preview']) ?>
-          </div>
-        <?php endif; ?>
-        <?php if (isset($definition['form'])):?>
-          <div class="clearfix">
-            <?php print render($definition['form']) ?>
-          </div>
-        <?php endif; ?>
+      <a name="<?php print $name ?>"></a>
+      <h4><?php print $definition['label'] ?></h4>
+      <fieldset>
+          <legend><?php print t('Preview') ?></legend>
+          <div>
+            <?php if (isset($definition['description'])): ?>
+                <p><?php print $definition['description'] ?></p>
+            <?php endif; ?>
+            <?php if (isset($definition['preview'])): ?>
+                <div class="clearfix">
+                  <?php print render($definition['preview']) ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($definition['form'])): ?>
+                <div class="clearfix">
+                  <?php print render($definition['form']) ?>
+                </div>
+            <?php endif; ?>
 
-      </div>
-    </fieldset>
+          </div>
+      </fieldset>
   <?php endforeach; ?>
 </div>

@@ -6,7 +6,6 @@
  */
 
 require_once './vendor/autoload.php';
-require_once './tests/src/predicate/predicates.php';
 
 // Directory change necessary since Drupal often uses relative paths.
 chdir(DRUPAL_ROOT);

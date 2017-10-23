@@ -36,18 +36,23 @@ function atomium_atomium_definition_button() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_button(&$variables) {
-  $element = &$variables['element'];
-  $element += array('#button_type' => 'submit');
+function atomium_preprocess_button(&$variables, $hook) {
+  element_set_attributes($variables['element'], array('id', 'name', 'value'));
+
+  $attributes = _atomium_get_attributes($variables['element']);
 
   // This allows us to modify the type of button we want.
-  $element['#attributes']['type'] = $element['#button_type'];
-  element_set_attributes($element, array('id', 'name', 'value'));
+  $attributes += array('type' => 'submit');
+  $attributes['class'][] = 'form-button-' . $attributes['type'];
 
-  $element['#attributes']['class'][] = 'form-button-' . $element['#button_type'];
-  if (!empty($element['#attributes']['disabled'])) {
-    $element['#attributes']['class'][] = 'form-button-disabled';
+  if (!empty($variables['element']['#attributes']['disabled'])) {
+    $attributes['class'][] = 'form-button-disabled';
   }
 
-  $variables['attributes_array'] = $element['#attributes'];
+  if (isset($variables['element']['#atomium']['attributes']['element'])) {
+    $variables['atomium']['attributes']['element']
+      ->merge($variables['element']['#atomium']['attributes']['element']);
+  }
+
+  $variables['atomium']['attributes']['element']->merge($attributes);
 }

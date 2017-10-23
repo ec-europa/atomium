@@ -13,6 +13,8 @@ abstract class AbstractThemeTest extends AbstractKernelTest {
    * {@inheritdoc}
    */
   protected function setUp() {
+    parent::setUp();
+
     global $theme_engine;
     global $conf;
 

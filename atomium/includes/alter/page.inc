@@ -16,6 +16,13 @@ function atomium_page_alter(&$page) {
     $count = 0;
     $blocks = element_children($page[$region]);
     $block_count = count($blocks);
+
+    if (isset($page[$region]['#theme_wrappers'])) {
+      $page[$region]['#theme_wrappers'] = array_map(function ($item) use ($region) {
+        return sprintf('%s__%s', $item, $region);
+      }, $page[$region]['#theme_wrappers']);
+    }
+
     foreach ($blocks as $block) {
       if ($count == 0) {
         $page[$region][$block]['#block']->classes[] = 'first';
@@ -28,6 +35,22 @@ function atomium_page_alter(&$page) {
       if ($count == $block_count) {
         $page[$region][$block]['#block']->classes[] = 'last';
       }
+
+      $adder = str_replace(
+        '-',
+        '_',
+        sprintf(
+          '%s__%s__%s',
+          $region,
+          $page[$region][$block]['#block']->module,
+          $page[$region][$block]['#block']->delta
+        )
+      );
+
+      $page[$region][$block]['#theme_wrappers'] = array_map(function ($item) use ($adder) {
+        return sprintf('%s__%s', $item, $adder);
+      }, $page[$region][$block]['#theme_wrappers']);
+
     }
   }
 }

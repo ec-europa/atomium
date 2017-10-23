@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_status_messages().
+ * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
   $status_mapping = array(
@@ -46,7 +46,6 @@ function atomium_foundation_preprocess_status_messages(&$variables, $hook) {
     }
 
     $variables[$hook][$hook]['#theme_wrappers'] = array('container');
-    $variables[$hook][$hook]['#attributes'] = $variables['attributes_array'];
   }
   else {
     $variables[$hook] = '';

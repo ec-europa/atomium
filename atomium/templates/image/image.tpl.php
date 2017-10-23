@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<img<?php print $attributes; ?>/>
+<img<?php print $atomium['attributes']['element']; ?>/>

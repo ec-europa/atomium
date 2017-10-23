@@ -23,6 +23,7 @@ function atomium_atomium_theme_update_status_label() {
 function atomium_preprocess_update_status_label(&$variables, $hook) {
   $text = '';
   $class = '';
+
   switch ($variables['status']) {
     case UPDATE_NOT_SECURE:
       $class = 'security-error';
@@ -50,6 +51,7 @@ function atomium_preprocess_update_status_label(&$variables, $hook) {
       break;
 
   }
-  $variables['attributes_array']['class'][] = $class;
+
+  $variables['atomium']['attributes']['wrapper']->append('class', $class);
   $variables[$hook] = $text;
 }

@@ -20,11 +20,11 @@ function atomium_atomium_theme_fieldset() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_fieldset(&$variables) {
+function atomium_preprocess_fieldset(&$variables, $hook) {
   $variables += array(
-    'attributes_array' => array(),
     'description' => '',
   );
+
   $variables['title'] = '';
   if (isset($variables['element']['#title'])) {
     $variables['title'] = $variables['element']['#title'];
@@ -33,13 +33,10 @@ function atomium_preprocess_fieldset(&$variables) {
     $variables['description'] = $variables['element']['#description'];
   }
   if (isset($variables['element']['#id'])) {
-    $variables['attributes_array']['id'] = $variables['element']['#id'];
+    $variables['atomium']['attributes']['wrapper']->append('id', $variables['element']['#id']);
   }
-  $variables['attributes_array']['class'][] = 'form-wrapper';
-  $variables['attributes_array'] = drupal_array_merge_deep(
-    $variables['element']['#attributes'],
-    $variables['attributes_array']
-  );
+  $variables['atomium']['attributes']['wrapper']->append('class', 'form-wrapper');
+  $variables['atomium']['attributes']['wrapper']->merge($variables['element']['#attributes']);
 
   /* <legend> tag handling */
   $legend = '';

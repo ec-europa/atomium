@@ -5,4 +5,6 @@
  * Contains template file.
  */
 ?>
-<?php print render($breadcrumb); ?>
+<nav<?php print $atomium['attributes']['wrapper']; ?>>
+  <?php print render($breadcrumb); ?>
+</nav>

@@ -6,7 +6,7 @@
  */
 ?>
 <?php if ($content): ?>
-  <div class="<?php print $classes; ?>">
+  <div<?php print $atomium['attributes']['wrapper']->append('class', 'region'); ?>>
     <?php print $content; ?>
   </div>
 <?php endif; ?>

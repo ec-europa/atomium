@@ -25,14 +25,13 @@ function atomium_preprocess_menu_local_action(&$variables, $hook) {
 
   $link += array('localized_options' => array());
   $link['localized_options'] += array('attributes' => array());
-  $options = drupal_array_merge_deep($link['localized_options']['attributes'], $variables['attributes_array']);
 
   if (isset($link['href'])) {
     $variables[$hook] = array(
       '#theme' => array('link'),
       '#text' => $link['title'],
       '#path' => $link['href'],
-      '#options' => $options,
+      '#options' => array(),
     );
   }
   elseif (!empty($link['localized_options']['html'])) {

@@ -5,4 +5,6 @@
  * Contains template file.
  */
 ?>
-<ul class="menu clearfix"><?php print $tree; ?></ul>
+<ul<?php print $atomium['attributes']['wrapper']->append('class', array('menu', 'clearfix')); ?>>
+  <?php print render($tree); ?>
+</ul>

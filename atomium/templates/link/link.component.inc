@@ -27,17 +27,13 @@ function atomium_atomium_theme_link() {
 function atomium_preprocess_link(&$variables, $hook) {
   global $language_url;
 
-  $variables += array('options' => array('attributes' => array()));
+  $variables += array('options' => array('html' => FALSE));
   $variables['options'] += array(
     'html' => FALSE,
-    'attributes' => array(),
   );
 
-  if (isset($variables['options']['attributes_array'])) {
-    $variables['attributes_array'] = $variables['options']['attributes_array'];
-  }
-  if (isset($variables['options']['attributes']) && is_array($variables['options']['attributes'])) {
-    $variables['attributes_array'] = drupal_array_merge_deep($variables['options']['attributes'], $variables['attributes_array']);
+  if (isset($variables['options']['attributes'])) {
+    $variables['atomium']['attributes']['element']->merge($variables['options']['attributes']);
   }
 
   $path = url($variables['path'], $variables['options']);
@@ -45,16 +41,19 @@ function atomium_preprocess_link(&$variables, $hook) {
   // Append active class.
   if (($path == '/' . $_GET['q'] || ($path == '<front>' && drupal_is_front_page())) &&
     (empty($variables['options']['language']) || $variables['options']['language']->language == $language_url->language)) {
-    $variables['options']['attributes']['class'][] = 'active';
-    $variables['attributes_array']['class'][] = 'active';
+    $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 
-  $variables['attributes_array']['href'] = (strpos($variables['path'], '#') === 0) ? $variables['path'] : $path;
-  $variables['attributes_array']['href'] = (strpos($variables['path'], 'javascript:') === 0) ? $variables['path'] : $path;
+  // @todo: Fix this.
+  $href = (strpos($variables['path'], '#') === 0) ? $variables['path'] : $path;
+  $href = (strpos($variables['path'], 'javascript:') === 0) ? $variables['path'] : $path;
+  $variables['atomium']['attributes']['element']->append('href', $href);
 
   if (is_string($variables['text'])) {
     $variables['text'] = array(
       '#markup' => ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])),
     );
   }
+
+  // @todo: the specific title attribute should be 'strip_tagged()'.
 }

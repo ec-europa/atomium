@@ -21,19 +21,18 @@ function atomium_atomium_theme_textarea() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_textarea(&$variables, $hook) {
-  $element = &$variables['element'];
+  element_set_attributes(
+    $variables['element'],
+    array('id', 'name', 'cols', 'rows', 'title', 'placeholder')
+  );
+  _form_set_class($variables['element'], array('form-textarea'));
 
-  element_set_attributes($element, array('id', 'name', 'cols', 'rows'));
-  _form_set_class($element, array('form-textarea'));
+  $attributes = _atomium_get_attributes($variables['element']);
 
-  if (isset($element['#title']) && !empty($element['#title'])) {
-    $element['#attributes']['placeholder'] = $element['#title'];
-  }
-
-  // We do not check if the placeholder is empty on purpose so we can
-  // disable it if we want to.
-  if (isset($element['#placeholder'])) {
-    $element['#attributes']['placeholder'] = $element['#placeholder'];
+  if (isset($attributes['placeholder'])) {
+    if (isset($attributes['title']) && !empty($attributes['title'])) {
+      $attributes['placeholder'] = $attributes['title'];
+    }
   }
 
   $wrapper_attributes_array = array(
@@ -41,24 +40,42 @@ function atomium_preprocess_textarea(&$variables, $hook) {
   );
 
   // Add resizable behavior.
-  if (!empty($element['#resizable'])) {
+  if (!empty($variables['element']['#resizable'])) {
     drupal_add_library('system', 'drupal.textarea');
     $wrapper_attributes_array['class'][] = 'resizable';
   }
 
-  if (isset($element['#field_name'])) {
-    $variables['theme_hook_suggestions'][] = 'textarea__' . $element['#field_name'];
+  if (isset($variables['element']['#field_name'])) {
+    $variables['theme_hook_suggestions'][] = 'textarea__' .
+      $variables['element']['#field_name'];
   }
-  if (isset($element['#entity_type'])) {
-    $variables['theme_hook_suggestions'][] = 'textarea__' . $element['#entity_type'];
-    if (isset($element['#field_name'])) {
-      $variables['theme_hook_suggestions'][] = 'textarea__' . $element['#entity_type'] . '__' . $element['#field_name'];
+  if (isset($variables['element']['#entity_type'])) {
+    $variables['theme_hook_suggestions'][] = 'textarea__' .
+      $variables['element']['#entity_type'];
+    if (isset($variables['element']['#field_name'])) {
+      $variables['theme_hook_suggestions'][] = 'textarea__' .
+        $variables['element']['#entity_type'] . '__' .
+        $variables['element']['#field_name'];
     }
-    if (isset($element['#bundle'])) {
-      $variables['theme_hook_suggestions'][] = 'textarea__' . $element['#entity_type'] . '__' . $element['#bundle'];
+    if (isset($variables['element']['#bundle'])) {
+      $variables['theme_hook_suggestions'][] = 'textarea__' .
+        $variables['element']['#entity_type'] . '__' .
+        $variables['element']['#bundle'];
     }
   }
 
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
-  $variables['wrapper_attributes_array'] = $wrapper_attributes_array;
+  if (isset($variables['element']['#atomium']['attributes']['element'])) {
+    $variables['atomium']['attributes']['element']
+      ->merge($variables['element']['#atomium']['attributes']['element']);
+  }
+
+  $variables['atomium']['attributes']['element']->merge($attributes);
+
+  if (isset($variables['element']['#atomium']['attributes']['wrapper'])) {
+    $variables['atomium']['attributes']['wrapper']
+      ->merge($variables['element']['#atomium']['attributes']['wrapper']);
+  }
+
+  $variables['atomium']['attributes']['wrapper']
+    ->merge($wrapper_attributes_array);
 }

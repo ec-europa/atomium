@@ -1,0 +1,87 @@
+-
+  given:
+    class: ['one', 'two']
+  run:
+    - append: ['class', 'three']
+    - remove: ['class', 'two']
+  expect:
+    - toArray:
+        return:
+         class: ['one', 'three']
+    - __toString:
+        return: ' class="one three"'
+
+-
+  given:
+    class: ['one', 'two', 'three']
+  run: []
+  expect:
+    - contains:
+        arguments: ['class', 'tw']
+        return: true
+
+-
+  given:
+    class: ['one', 'two', 'three']
+  run:
+    - replace: ['class', 'two', 'four']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'four', 'three']
+    - __toString:
+        return: ' class="four one three"'
+
+-
+  given:
+    class: ['one', 'two', 'three']
+  run:
+    - remove: ['class', 'one']
+    - remove: ['class', 'two']
+    - remove: ['class', 'three']
+  expect:
+    - toArray:
+        return:
+         class: []
+    - __toString:
+        return: ''
+
+-
+  given:
+    - class: [['one', 'two'], 'three']
+    - id: ['custom_id']
+  run:
+    - setAttributes: ['id', 'id']
+  expect:
+    - toArray:
+        return:
+          - class: ['one', 'two', 'three']
+          - id: 'id'
+    - __toString:
+        return: ' class="one two three" id="id"'
+
+-
+  given:
+    - class: ['one', ['two', 'three']]
+    - id: 'custom_id'
+  run:
+    - setAttributes: ['id', ['id']]
+  expect:
+    - toArray:
+        return:
+          - class: ['one', 'two', 'three']
+          - id: 'id'
+    - __toString:
+        return: ' class="one two three" id="id"'
+
+-
+  given:
+    - class: ['one class']
+  run:
+    - append: ['class', 'second class']
+  expect:
+    - toArray:
+        return:
+          - class: ['one', 'class', 'second']
+    - __toString:
+        return: ' class="class one second"'

@@ -20,7 +20,8 @@ function atomium_atomium_theme_vertical_tabs() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_vertical_tabs(&$variables) {
+function atomium_preprocess_vertical_tabs(&$variables, $hook) {
   drupal_add_library('system', 'drupal.vertical-tabs');
-  $variables['attributes_array']['class'][] = 'vertical-tabs-panes';
+
+  $variables['atomium']['attributes']['wrapper']->append('class', 'vertical-tabs-panes');
 }

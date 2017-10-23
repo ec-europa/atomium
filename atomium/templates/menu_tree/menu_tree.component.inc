@@ -27,12 +27,12 @@ function atomium_preprocess_menu_tree(&$variables, $hook) {
   if (isset($variables['#tree'])) {
     $children = element_children($variables['#tree']);
     if (isset($children[0])) {
-      $item = $variables['#tree'][$children[0]];
-      if ($item) {
+      if ($item = $variables['#tree'][$children[0]]) {
         $variables['depth'] = $item['#original_link']['depth'];
       }
     }
   }
 
-  $variables['attributes_array']['class'][] = 'menu_tree-level-' . $variables['depth'];
+  $variables['atomium']['attributes']['wrapper']
+    ->append('class', 'menu_tree-level-' . $variables['depth']);
 }

@@ -19,9 +19,9 @@
   "require-dev": {
     "phpro/grumphp": "^0.11",
     "phpunit/phpunit": "^5",
-    "bovigo/assert": "~1.7",
     "anahkiasen/underscore-php" : "dev-master",
     "composer/installers": "~1.0",
+    "peridot-php/leo": "~1.0",
     "ec-europa/qa-automation": "3.0.1"
   },
   "autoload": {

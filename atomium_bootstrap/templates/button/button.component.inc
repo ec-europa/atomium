@@ -6,17 +6,17 @@
  */
 
 /**
- * Implements hook_preprocess_button().
+ * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_button(&$variables) {
-  $variables['attributes_array']['class'][] = 'btn';
+function atomium_bootstrap_preprocess_button(&$variables, $hook) {
+  $variables['atomium']['attributes']['element']->append('class', 'btn');
 
   if (isset($variables['element']['#attributes']['id'])) {
     if ('edit-submit' == $variables['element']['#attributes']['id']) {
-      $variables['attributes_array']['class'][] = 'btn-success';
+      $variables['atomium']['attributes']['element']->append('class', 'btn-success');
     }
     if ('edit-delete' == $variables['element']['#attributes']['id']) {
-      $variables['attributes_array']['class'][] = 'btn-danger';
+      $variables['atomium']['attributes']['element']->append('class', 'btn-danger');
     }
   }
 }

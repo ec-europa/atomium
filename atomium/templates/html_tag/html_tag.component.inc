@@ -33,7 +33,13 @@ function atomium_preprocess_html_tag(&$variables, $hook) {
     $variables['element']['#value'][] = $variables['element'][$key];
   }
 
-  $variables['attributes_array'] = $variables['element']['#attributes'];
+  if (!empty($variables['element']['#atomium']['attributes'])) {
+    foreach ($variables['element']['#atomium']['attributes'] as $attribute => $data) {
+      $variables['atomium']['attributes'][$attribute]->attributes($data);
+    }
+  }
+  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
+  $variables['atomium']['attributes']['element']->merge($variables['element']['#attributes']);
 
   if (isset($variables['element']['#tag'])) {
     $variables['theme_hook_suggestions'][] = 'html_tag__' . $variables['element']['#tag'];

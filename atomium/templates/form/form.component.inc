@@ -20,7 +20,7 @@ function atomium_atomium_theme_form() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_form(&$variables) {
+function atomium_preprocess_form(&$variables, $hook) {
   $variables['theme_hook_suggestions'][] = 'form--' . $variables['element']['#form_id'];
 
   $element = &$variables['element'];
@@ -33,5 +33,5 @@ function atomium_preprocess_form(&$variables) {
     $element['#attributes']['accept-charset'] = "UTF-8";
   }
 
-  $variables['attributes_array'] = drupal_array_merge_deep($variables['attributes_array'], $element['#attributes']);
+  $variables['atomium']['attributes']['element']->merge($element['#attributes']);
 }

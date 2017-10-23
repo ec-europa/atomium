@@ -6,14 +6,15 @@
  */
 
 /**
- * Implements hook_preprocess_links().
+ * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_links(&$variables) {
+function atomium_bootstrap_preprocess_links(&$variables, $hook) {
   if (!in_array($variables['theme_hook_original'], array('links__node', 'links__comment'))) {
     return;
+
   }
 
-  $variables['attributes_array']['class'][] = 'nav';
-  $variables['attributes_array']['class'][] = 'nav-pills';
-  $variables['attributes_array']['class'][] = 'nav-justified';
+  // @todo: fix this.
+  $variables['atomium']['attributes']['wrapper']
+    ->append('class', array('nav', 'nav-pills', 'nav-justified'));
 }

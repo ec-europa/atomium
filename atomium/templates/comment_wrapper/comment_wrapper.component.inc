@@ -20,10 +20,8 @@ function atomium_atomium_theme_comment_wrapper() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_comment_wrapper(&$variables) {
-  $variables['attributes_array'] += array('class' => array());
-  $variables += array('classes_array' => array());
+function atomium_preprocess_comment_wrapper(&$variables, $hook) {
+  $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
 
-  $variables['attributes_array']['class'] = array_merge($variables['attributes_array']['class'], $variables['classes_array']);
-  $variables['attributes_array']['id'] = 'comments-wrapper-' . $variables['node']->nid;
+  $variables['atomium']['attributes']['wrapper']->append('id', 'comments-wrapper-' . $variables['node']->nid);
 }
