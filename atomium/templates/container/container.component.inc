@@ -23,6 +23,12 @@ function atomium_atomium_theme_container() {
 function atomium_preprocess_container(&$variables, $hook) {
   $element = $variables['element'];
 
+  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
+  // Doing this to remove warnings.
+  $element += array(
+    '#attributes' => array(),
+  );
+
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
     // Assign an html ID.
