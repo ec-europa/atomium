@@ -35,6 +35,10 @@ function atomium_preprocess_table(&$variables, $hook) {
   $sticky = $variables['sticky'];
   $empty = $variables['empty'];
 
+  if (isset($variables['#atomium'])) {
+    $variables['atomium'] = $variables['#atomium'];
+  }
+
   if (isset($variables['attributes'])) {
     $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
   }
@@ -134,7 +138,6 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
 
         // Build row.
         $i = 0;
-
         foreach ($cells as $cellid => $cell) {
           $cell = ($is_header) ? tablesort_header($cell, $header, $ts) : tablesort_cell($cell, $header, $ts, $i++);
 
@@ -146,6 +149,7 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
             $cell = $cell['data'];
           }
 
+          $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $i] = $attributes_array;
           $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $cellid] = $attributes_array;
           $rows_array['row-' . $rowid]['cells']['cell-' . $cellid] = $cell;
         }
