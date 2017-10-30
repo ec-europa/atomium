@@ -36,7 +36,7 @@
   <?php if ($display_submitted): ?>
       <footer>
         <?php print $user_picture; ?>
-          <span class="author"><?php print t('Written by'); ?><?php print $name; ?></span>
+          <span class="author"><?php print t('Written by !name', array('!name' => render($name))); ?></span>
           <span class="date">
             <?php print t('On the'); ?>
               <time datetime="<?php print format_date($created,
