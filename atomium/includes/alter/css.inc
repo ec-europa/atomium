@@ -24,7 +24,7 @@ function atomium_css_alter(&$css) {
     foreach ($theme_data as $component => $component_data) {
       $css_file = sprintf('%s/%s.css', $component_data['directory'], $component);
       if (file_exists($css_file)) {
-        $css = drupal_add_js($css_file, array(
+        $css = drupal_add_css($css_file, array(
           'group' => CSS_THEME,
           'every_page' => TRUE,
         ));
