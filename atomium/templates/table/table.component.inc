@@ -35,10 +35,6 @@ function atomium_preprocess_table(&$variables, $hook) {
   $sticky = $variables['sticky'];
   $empty = $variables['empty'];
 
-  if (isset($variables['#atomium'])) {
-    $variables['atomium'] = $variables['#atomium'];
-  }
-
   if (isset($variables['attributes'])) {
     $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
   }
