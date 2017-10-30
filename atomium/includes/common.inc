@@ -608,12 +608,6 @@ function _atomium_preprocess_process_theme_suggestion($phase, array &$variables,
       if ($function !== __FUNCTION__ && function_exists($function)) {
         // Invoke theme hook suggestion current phase function.
         call_user_func_array($function, array(&$variables, $hook_suggestion));
-
-        // Unset the theme_hook_suggestion so the suggestion's current phase
-        // functions can provide theme_hook_suggestions if needed.
-        if (!empty($variables['theme_hook_suggestions'])) {
-          unset($variables['theme_hook_suggestion']);
-        }
       }
     }
   }
