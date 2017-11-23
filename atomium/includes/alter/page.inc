@@ -13,9 +13,6 @@ function atomium_page_alter(&$page) {
     if (empty($page[$region])) {
       continue;
     }
-    $count = 0;
-    $blocks = element_children($page[$region]);
-    $block_count = count($blocks);
 
     if (isset($page[$region]['#theme_wrappers'])) {
       $page[$region]['#theme_wrappers'] = array_map(function ($item) use ($region) {
@@ -23,34 +20,13 @@ function atomium_page_alter(&$page) {
       }, $page[$region]['#theme_wrappers']);
     }
 
+    $block_index_in_region = 0;
+    $blocks = element_children($page[$region]);
+    $total_blocks_in_region = count($blocks);
+
+    // Alter each blocks to provides relevant variables in the block preprocess.
     foreach ($blocks as $block) {
-      if ($count == 0) {
-        $page[$region][$block]['#block']->classes[] = 'first';
-      }
-
-      if (isset($page[$region][$block]['#block']) && is_object($page[$region][$block]['#block'])) {
-        $page[$region][$block]['#block']->order = $count++;
-      }
-
-      if ($count == $block_count) {
-        $page[$region][$block]['#block']->classes[] = 'last';
-      }
-
-      $adder = str_replace(
-        '-',
-        '_',
-        sprintf(
-          '%s__%s__%s',
-          $region,
-          $page[$region][$block]['#block']->module,
-          $page[$region][$block]['#block']->delta
-        )
-      );
-
-      $page[$region][$block]['#theme_wrappers'] = array_map(function ($item) use ($adder) {
-        return sprintf('%s__%s', $item, $adder);
-      }, $page[$region][$block]['#theme_wrappers']);
-
+      _atomium_update_block_render_array($page[$region][$block], $region, $block_index_in_region++, $total_blocks_in_region);
     }
   }
 }
