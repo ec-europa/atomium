@@ -150,6 +150,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $attributes[$key] = array();
     }
 
+    if (!is_array($attributes[$key])) {
+      $attributes[$key] = array($attributes[$key]);
+    }
+
     if (!is_array($value)) {
       $value = explode(' ', $value);
     }
