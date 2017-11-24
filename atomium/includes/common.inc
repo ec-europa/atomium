@@ -674,9 +674,12 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
   $block = block_load($module, $delta);
 
   $block_render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  $block_array = $block_render_array[$module . '_' . $delta];
 
-  _atomium_update_block_render_array($block_array);
+  $block_array = array();
+  if (isset($block_render_array[$module . '_' . $delta])) {
+    $block_array = $block_render_array[$module . '_' . $delta];
+    _atomium_update_block_render_array($block_array);
+  }
 
   return $block_array;
 }
