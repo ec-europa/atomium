@@ -627,6 +627,9 @@ function _atomium_preprocess_process_theme_suggestion($phase, array &$variables,
  *   The position of the block in the region, if any.
  * @param int $total_blocks_in_region
  *   The total number of blocks in the region.
+ *
+ * @return array
+ *   The block render array.
  */
 function _atomium_update_block_render_array(array &$block_array, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
   $block_array['#block']->atomium['block_index_in_region'] = $block_index_in_region;
@@ -648,4 +651,32 @@ function _atomium_update_block_render_array(array &$block_array, $region = NULL,
   $block_array['#theme_wrappers'] = array_map(function ($item) use ($adder) {
     return sprintf('%s__%s', $item, $adder);
   }, $block_array['#theme_wrappers']);
+}
+
+/**
+ * Get the render array of a block.
+ *
+ * @param string $module
+ *   The module.
+ * @param string $delta
+ *   The module delta.
+ * @param string|null $region
+ *   The region where the block is placed.
+ * @param int $block_index_in_region
+ *   The position of the block in the region, if any.
+ * @param int $total_blocks_in_region
+ *   The total number of blocks in the region.
+ *
+ * @return array
+ *   The block render array.
+ */
+function _atomium_block_get_render_array($module, $delta, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
+  $block = block_load($module, $delta);
+
+  $block_render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  $block_array = $block_render_array[$module . '_' . $delta];
+
+  _atomium_update_block_render_array($block_array);
+
+  return $block_array;
 }
