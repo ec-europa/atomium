@@ -520,7 +520,7 @@ function atomium_menu_get_active_breadcrumb() {
  *   The callback function.
  */
 function atomium_recursive_foreach(array &$variables, callable $callback) {
-  $variables['#processed'] = TRUE;
+  $variables['#atomium_recursive_processed'] = TRUE;
 
   // By default set the recursive to FALSE.
   $variables += array(
@@ -528,7 +528,7 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
   );
 
   foreach ($variables as $key => &$value) {
-    if (is_array($value) && !isset($value['#processed'])) {
+    if (is_array($value) && !isset($value['#atomium_recursive_processed'])) {
 
       // If no recursive is set, take the value by default.
       $value += array(
@@ -542,9 +542,11 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
       // Remove the key to avoid polluting the array with unwanted values.
       unset($value['#atomium_recursive']);
     }
+
     call_user_func_array($callback, array($key, &$value, &$variables));
   }
-  unset($variables['#processed']);
+
+  unset($variables['#atomium_recursive_processed']);
 }
 
 /**
