@@ -15,9 +15,7 @@ function atomium_page_alter(&$page) {
     }
 
     if (isset($page[$region]['#theme_wrappers'])) {
-      $page[$region]['#theme_wrappers'] = array_map(function ($item) use ($region) {
-        return sprintf('%s__%s', $item, $region);
-      }, $page[$region]['#theme_wrappers']);
+      $page[$region]['#theme_wrappers'] = _atomium_extend_with_suggestions($page[$region]['#theme_wrappers'], array($region));
     }
 
     $block_index_in_region = 0;

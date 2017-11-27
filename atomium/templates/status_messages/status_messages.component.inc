@@ -60,13 +60,19 @@ function atomium_preprocess_status_messages(&$variables, $hook) {
   foreach ($status_messages as $type => $messages) {
     $container = array(
       'messages' => array(
-        '#theme' => array('item_list__' . $variables['theme_hook_original'] . '__' . $type),
+        '#theme' => _atomium_extend_with_suggestions(
+          array('item_list'),
+          array($variables['theme_hook_original'], $type)
+        ),
         '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
         '#items' => $messages,
         '#type' => 'ul',
         '#attributes' => array('class' => array()),
       ),
-      '#theme_wrappers' => array('container__' . $variables['theme_hook_original'] . '__' . $type),
+      '#theme_wrappers' => _atomium_extend_with_suggestions(
+        array('container'),
+        array($variables['theme_hook_original'], $type)
+      ),
       '#attributes' => array(
         'class' => array(
           $type,

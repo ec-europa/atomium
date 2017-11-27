@@ -19,9 +19,9 @@
 function atomium_include($theme, $path) {
   static $themes = array();
 
-  if (!isset($themes[$theme])) {
-    $themes[$theme] = drupal_get_path('theme', $theme);
-  }
+  $themes += array(
+    $theme => drupal_get_path('theme', $theme),
+  );
 
   if ($themes[$theme] && ($file = DRUPAL_ROOT . '/' . $themes[$theme] . '/' . $path) && file_exists($file)) {
     if (is_dir($file)) {
@@ -56,9 +56,7 @@ function atomium_include($theme, $path) {
 function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE) {
   static $themes;
 
-  if (!isset($theme_key)) {
-    $theme_key = $GLOBALS['theme_key'];
-  }
+  $theme_key = ($theme_key) ?: $GLOBALS['theme_key'];
 
   if (!isset($themes[$theme_key])) {
     $themes[$theme_key] = array_unique(array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
@@ -178,25 +176,27 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
     isset($element['#theme_wrappers']) ||
     isset($element["#$property"])
   ) {
-    if (!isset($element["#$property"])) {
-      $element["#$property"] = array();
-    }
+    $element += array(
+      '#' . $property => array(),
+    );
+
     return $element["#$property"];
   }
   // Treat $element as if it were a [pre]process function $variables parameter
   // and look for a renderable "element".
   elseif (isset($element['element'])) {
-    if (!isset($element['element']["#$property"])) {
-      $element['element']["#$property"] = array();
-    }
+    $element['element'] += array(
+      '#' . $property => array(),
+    );
+
     return $element['element']["#$property"];
   }
 
   // If all else fails, create (if needed) a default "attributes" array. This
   // will, at the very least, either work or cause an error that can be tracked.
-  if (!isset($element[$property])) {
-    $element[$property] = array();
-  }
+  $element += array(
+    $property => array(),
+  );
 
   return $element[$property];
 }
@@ -629,30 +629,19 @@ function _atomium_preprocess_process_theme_suggestion($phase, array &$variables,
  *   The position of the block in the region, if any.
  * @param int $total_blocks_in_region
  *   The total number of blocks in the region.
- *
- * @return array
- *   The block render array.
  */
 function _atomium_update_block_render_array(array &$block_array, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
   $block_array['#block']->atomium['block_index_in_region'] = $block_index_in_region;
   $block_array['#block']->atomium['total_blocks_in_regions'] = $total_blocks_in_region;
 
-  $adder = str_replace(
-    '-',
-    '_',
-    implode('__', array_filter(
-        array(
-          is_string($region) ? $region : NULL,
-          $block_array['#block']->module,
-          $block_array['#block']->delta,
-        )
-      )
+  $block_array['#theme_wrappers'] = _atomium_extend_with_suggestions(
+    $block_array['#theme_wrappers'],
+    array(
+      is_string($region) ? $region : NULL,
+      $block_array['#block']->module,
+      $block_array['#block']->delta,
     )
   );
-
-  $block_array['#theme_wrappers'] = array_map(function ($item) use ($adder) {
-    return sprintf('%s__%s', $item, $adder);
-  }, $block_array['#theme_wrappers']);
 }
 
 /**
@@ -684,4 +673,34 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
   }
 
   return $block_array;
+}
+
+/**
+ * Extends strings with an array of suggestions.
+ *
+ * @param array $items
+ *   The strings to extend.
+ * @param array $suggestions
+ *   The suggestions to add.
+ *
+ * @example
+ *   $items = array('container', 'block');
+ *   $suggestions = array('foo', 'bar');
+ *
+ *   The result will be: array('container__foo__bar', 'block__foo__bar')
+ *
+ *   Quick note about the drupal_strtolower() call:
+ *   We must ensure lowercase values because get_defined_functions()
+ *   in drupal_group_functions_by_prefix() returns functions in lower case.
+ *
+ * @see http://php.net/manual/en/function.get-defined-functions.php
+ *
+ * @return array
+ *   The extended strings.
+ */
+function _atomium_extend_with_suggestions(array $items = array(''), array $suggestions = array()) {
+  return array_map(function ($item) use ($suggestions) {
+    array_unshift($suggestions, $item);
+    return str_replace('-', '_', drupal_strtolower(implode('__', array_filter($suggestions))));
+  }, $items);
 }

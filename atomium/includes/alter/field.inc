@@ -28,7 +28,10 @@ function atomium_field_attach_view_alter(&$output, $context) {
     }, $suggestion_data));
 
     if (isset($output[$key]['#theme']) && !empty($suggestions)) {
-      $output[$key]['#theme'] = array($output[$key]['#theme'] . '__' . implode('__', $suggestions));
+      $output[$key]['#theme'] = _atomium_extend_with_suggestions(
+        (array) $output[$key]['#theme'],
+        $suggestions
+      );
     }
   }
 }

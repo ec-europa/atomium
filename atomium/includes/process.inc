@@ -20,9 +20,10 @@ function atomium_process(&$variables, $hook) {
       // #theme_wrappers values. We need to deal with that as well.
       // This is why we are using this to flatten the array properly.
       if (isset($variables['theme_hook_original'])) {
-        $value = array_map(function ($wrapper) use ($variables) {
-          return $wrapper . '__' . $variables['theme_hook_original'];
-        }, iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($value)), FALSE));
+        $value = _atomium_extend_with_suggestions(
+          iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($value)), FALSE),
+          array($variables['theme_hook_original'])
+        );
       }
     }
   });

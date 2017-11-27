@@ -180,7 +180,10 @@ function atomium_preprocess_pager(&$variables, $hook) {
     }
 
     foreach ($items as $key => &$item) {
-      $item['#theme_wrappers'] = array('html_tag__item_list__' . $variables['theme_hook_original'] . '__' . $key);
+      $item['#theme_wrappers'] = _atomium_extend_with_suggestions(
+        array('html_tag'),
+        array('item_list', $variables['theme_hook_original'], $key)
+      );
       $item['#tag'] = 'li';
       if (isset($item['link'])) {
         $item['#attributes'] = $item['link']['#options']['attributes'];

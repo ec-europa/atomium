@@ -45,9 +45,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function &offsetGet($name) {
-    if (!isset($this->storage[$name])) {
-      $this->storage[$name] = array();
-    }
+    $this->storage += array($name => array());
 
     return $this->storage[$name];
   }
@@ -56,9 +54,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function offsetSet($name, $value) {
-    if (!isset($this->storage[$name])) {
-      $this->storage[$name] = array();
-    }
+    $this->storage += array($name => array());
 
     if (!is_array($value)) {
       $value = explode(' ', $value);
@@ -145,10 +141,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     $attributes = $this->storage;
-
-    if (!isset($attributes[$key])) {
-      $attributes[$key] = array();
-    }
+    $attributes += array($key => array());
 
     if (!is_array($attributes[$key])) {
       $attributes[$key] = array($attributes[$key]);

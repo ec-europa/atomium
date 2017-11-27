@@ -79,10 +79,9 @@ function atomium_preprocess_menu_overview_form(&$variables, $hook) {
   }
 
   $variables['form']['table'] = array(
-    '#theme' => array(
-      'table__' .
-      $variables['theme_hook_original'] .
-      '__' . str_replace('-', '_', $variables['form']['#menu']['menu_name']),
+    '#theme' => _atomium_extend_with_suggestions(
+      array('table'),
+      array($variables['theme_hook_original'], $variables['form']['#menu']['menu_name'])
     ),
     '#header' => $header,
     '#rows' => $rows,
