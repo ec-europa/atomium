@@ -18,6 +18,11 @@ function atomium_atomium_theme_item_list() {
         'type' => 'ul',
         'attributes' => array(),
         'wrapper' => TRUE,
+        'wrapper_attributes' => array(
+          'class' => array(
+            'item-list',
+          ),
+        ),
       ),
     ),
   );
@@ -76,5 +81,5 @@ function atomium_preprocess_item_list(&$variables, $hook) {
 
   // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
   $variables['atomium']['attributes']['list']->merge($variables['attributes']);
-  $variables['atomium']['attributes']['wrapper']->append('class', 'item-list');
+  $variables['atomium']['attributes']['wrapper']->merge($variables['wrapper_attributes']);
 }
