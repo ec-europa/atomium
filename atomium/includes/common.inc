@@ -664,6 +664,11 @@ function _atomium_update_block_render_array(array &$block_array, $region = NULL,
 function _atomium_block_get_render_array($module, $delta, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
   $block = block_load($module, $delta);
 
+  // If not block has been loaded, return empty array.
+  if (!isset($block->status)) {
+    return array();
+  }
+
   $block_render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
 
   $block_array = array();
