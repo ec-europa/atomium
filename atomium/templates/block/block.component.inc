@@ -126,11 +126,6 @@ function atomium_preprocess_block(&$variables, $hook) {
 
   $variables['title']['#markup'] = '';
   if ($variables['block']->subject) {
-    $variables['title'] = array(
-      '#markup' => $variables['block']->subject,
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__h2'),
-      '#tag' => 'h2',
-      '#attributes' => $variables['title_attributes_array'],
-    );
+    $variables['title']['#markup'] = $variables['block']->subject;
   }
 }
