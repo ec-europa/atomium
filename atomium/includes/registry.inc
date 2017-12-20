@@ -6,41 +6,6 @@
  */
 
 /**
- * @addtogroup registry
- * @{
- */
-
-// Define additional sub-groups for creating lists for all the theme files.
-/**
- * @defgroup theme_functions Theme Functions (.func.php)
- *
- * List of theme functions used in the Drupal Atomium base theme.
- *
- * View the parent topic for additional documentation.
- */
-/**
- * @defgroup theme_preprocess Theme Preprocess Functions (.vars.php)
- *
- * List of theme preprocess functions used in the Drupal Atomium base theme.
- *
- * View the parent topic for additional documentation.
- */
-/**
- * @defgroup theme_process Theme Process Functions (.vars.php)
- *
- * List of theme process functions used in the Drupal Atomium base theme.
- *
- * View the parent topic for additional documentation.
- */
-/**
- * @defgroup templates Theme Templates (.tpl.php)
- *
- * List of theme templates used in the Drupal Atomium base theme.
- *
- * View the parent topic for additional documentation.
- */
-
-/**
  * Stub implementation for atomium_theme().
  *
  * This base-theme's custom theme hook implementations. Never define "path"
@@ -223,6 +188,10 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
 
         // Correct the type that is implementing this override.
         $registry[$hook]['type'] = $GLOBALS['theme_path'] === $registry[$hook]['theme path'] ? 'theme' : 'base_theme';
+
+        $registry[$hook] += array(
+          $phase_key => array(),
+        );
 
         // Sort the phase functions.
         // @see https://www.drupal.org/node/2098551
@@ -461,7 +430,3 @@ if (!function_exists('drupal_group_functions_by_prefix')) {
   }
 
 }
-
-/**
- * @} End of "addtogroup registry".
- */
