@@ -1,6 +1,5 @@
 name = Atomium Bootstrap
-description = The NextEuropa theme based on Bootstrap Framework
-screenshot = assets/images/screenshot.png
+description = A theme based on Atomium and Bootstrap 4 framework
 engine = phptemplate
 core = 7.x
 base theme = atomium

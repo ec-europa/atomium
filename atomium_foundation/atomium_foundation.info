@@ -1,6 +1,5 @@
 name = Atomium Foundation
-description = The NextEuropa theme based on Zurb Foundation Framework
-screenshot = assets/images/screenshot.png
+description = A theme based on Atomium and Zurb Foundation framework
 engine = phptemplate
 core = 7.x
 base theme = atomium
