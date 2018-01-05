@@ -6,6 +6,7 @@ parameters:
       standard: vendor/ec-europa/qa-automation/phpcs/SubStandards/QA
       ignore_patterns:
         - vendor/
+        - RoboFile.php
       triggered_by:
         - php
         - module
@@ -13,7 +14,7 @@ parameters:
         - js
     git_commit_message:
       matchers:
-        - '/^(([A-Z]+\-\d+)|(#\d+)): [A-Z].+\./'
+        - '/^([A-Z]+\-\d+|Issue #\d+): [A-Z].+\./'
       case_insensitive: false
       multiline: false
     phpunit:

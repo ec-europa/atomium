@@ -1,0 +1,22 @@
+drupal:
+  core: "7"
+  base-url: "http://127.0.0.1:8888"
+  database:
+    host: "127.0.0.1"
+    port: "3306"
+    name: "atomium"
+    user: "root"
+    password: ""
+  settings:
+    conf:
+      theme_default: atomium
+      file_scan_ignore_directories:
+        - node_modules
+        - bower_components
+        - build
+        - vendor
+        - sites/all/themes/atomium/build
+        - build/sites/all/themes/atomium/build
+  post_install:
+      - ./vendor/bin/drush --root=$(pwd)/build en -y atomium devel realistic_dummy_content composer_autoloader
+      - ./vendor/bin/drush --root=$(pwd)/build dis -y overlay update help comment rdf search

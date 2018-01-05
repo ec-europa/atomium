@@ -3,50 +3,27 @@ dist: precise
 language: php
 
 git:
-  depth: 1
+  depth: 10000
 
 php:
   - 5.6
+  - 7.1
+  - 7.2
 
 env:
   global:
-    - PATH=$PATH:/home/travis/.composer/vendor/bin
+    - PATH=$PATH:/home/travis/.composer/vendor/bin:$TRAVIS_BUILD_DIR/vendor/bin
 
 install:
   - composer self-update
+  - composer install
 
 before_script:
-  - sudo apt-get install apache2 libapache2-mod-fastcgi
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - sudo a2enmod rewrite actions fastcgi alias
-  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-  - sudo cp -f .travis.vhost /etc/apache2/sites-available/default
-  - sudo sed -e "s,/var/www,$TRAVIS_BUILD_DIR/test-site/web,g" --in-place /etc/apache2/sites-available/default
-  - sudo service apache2 restart
   # Set sendmail so drush doesn't throw an error during site install.
   - echo "sendmail_path=`which true`" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
-  # Create database.
-  - mysql -e 'create database drupal'
-  - composer create-project drupal-composer/drupal-project:7.x-dev test-site --stability dev --no-interaction
-  - cd test-site
-  # Install Drupal y target site.
-  - composer require drush/drush
-  - composer require drupal/realistic_dummy_content
-  - composer require drupal/devel
-  - cd web
-  - ../vendor/bin/drush si standard -y --db-url=mysql://travis:@127.0.0.1/drupal
-  # Test latest commit on current branch.
-  - git clone --branch=$TRAVIS_BRANCH https://github.com/$TRAVIS_REPO_SLUG.git sites/all/themes/atomium
-  - ../vendor/bin/drush en atomium -y
-  - ../vendor/bin/drush vset theme_default atomium
-  - ../vendor/bin/drush dis overlay update -y
-  - ../vendor/bin/drush cc all
-  - chmod -R ug+w sites
-  - cd sites/all/themes/atomium
-  - composer install --prefer-dist
-  - sed -e "s?%ROOT%?$TRAVIS_BUILD_DIR/test-site/web?g" --in-place phpunit.xml.dist
-  - sed -e "s?%URL%?http://127.0.0.1/?g" --in-place phpunit.xml.dist
+  - run drupal:site-install
+  - drush --root=$PWD/build --debug runserver :8888 > ~/debug.txt 2>&1 &
+  - sleep 4s
 
 script:
   - ./vendor/bin/grumphp run

@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: fpfis/mysql56
+
+pipeline:
+  install:
+    image: fpfis/php56-dev
+    commands:
+      - composer self-update
+      - composer install
+  test:
+    image: fpfis/php56-dev
+    commands:
+      - './vendor/bin/run drupal:site-install --database-host=mysql'
+      - ./vendor/bin/drush --root=$PWD/build --debug runserver :8888 > ~/debug.txt 2>&1 &
+      - sleep 4s
+      - ./vendor/bin/grumphp run

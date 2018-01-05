@@ -4,6 +4,8 @@
   "type": "drupal-theme",
   "license": "GPL-2.0",
   "homepage": "https://drupal.org/project/atomium",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Pol Dellaiera",
@@ -20,13 +22,54 @@
     "phpro/grumphp": "^0.12",
     "phpunit/phpunit": "^5",
     "anahkiasen/underscore-php" : "dev-master",
-    "composer/installers": "~1.0",
     "peridot-php/leo": "~1.0",
-    "ec-europa/qa-automation": "3.0.1"
+    "ec-europa/qa-automation": "3.0.1",
+    "composer/installers": "^1.2",
+    "cweagans/composer-patches": "^1.6",
+    "drupal-composer/preserve-paths": "^0.1",
+    "drupal/drupal": "~7.0",
+    "drupal/composer_autoloader": "^1.0",
+    "drush/drush": "~8.0",
+    "webflo/drupal-finder": "^1.0.0",
+    "webmozart/path-util": "^2.3",
+    "mikey179/vfsstream": "~1.2",
+    "nuvoleweb/robo-config": "~0.1",
+    "drupal/drupal-extension": "~3.4",
+    "drupal/realistic_dummy_content": "*",
+    "drupal/devel": "*",
+    "ec-europa/oe-task-runner": "~0.1"
   },
   "autoload": {
     "psr-4": {
       "Drupal\\Tests\\atomium\\": "./tests/src/"
     }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/7"
+    }
+  ],
+  "scripts": {
+    "post-update-cmd": "./vendor/bin/run drupal:component-scaffold",
+    "post-install-cmd": "./vendor/bin/run drupal:component-scaffold",
+    "grumphp": "./vendor/bin/grumphp run"
+  },
+  "extra": {
+    "patches": {
+      "drupal/drupal": {
+        "https://www.drupal.org/node/2482549": "https://www.drupal.org/files/issues/ignore_node_module-2482549-27_0.patch"
+      }
+    },
+    "installer-paths": {
+      "build/": ["type:drupal-core"],
+      "build/profiles/{$name}/": ["type:drupal-profile"],
+      "build/sites/all/drush/{$name}/": ["type:drupal-drush"],
+      "build/sites/all/modules/contrib/{$name}/": ["type:drupal-module"],
+      "build/sites/all/themes/contrib/{$name}/": ["type:drupal-theme"]
+    },
+    "preserve-paths": [
+      "build/sites/default"
+    ]
   }
 }

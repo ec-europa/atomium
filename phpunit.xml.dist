@@ -10,8 +10,8 @@
     <ini name="error_reporting" value="32767"/>
     <!-- Do not limit the amount of memory tests take to run. -->
     <ini name="memory_limit" value="-1"/>
-    <const name="DRUPAL_ROOT" value="%ROOT%"/>
-    <const name="BASE_URL" value="%URL%"/>
-    <server name="REMOTE_ADDR" value="127.0.0.1"/>
+    <const name="DRUPAL_ROOT" value="${drupal.root_absolute}"/>
+    <const name="BASE_URL" value="${drupal.base_url}"/>
+    <server name="REMOTE_ADDR" value="${drupal.base_url}"/>
   </php>
 </phpunit>
