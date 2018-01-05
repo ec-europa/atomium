@@ -1,0 +1,5 @@
+version: "3"
+services:
+  backstopjs:
+    image: garris/BackstopJS:3.0.37
+
