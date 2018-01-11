@@ -31,7 +31,7 @@ script:
   - ./vendor/bin/grumphp run
 
 after_success:
-  - cd $TRAVIS_BUILD_DIR/test-site/web
+  - cd $TRAVIS_BUILD_DIR/build
   - drush dl zen mothership bootstrap
   - drush vset theme_default bartik
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
