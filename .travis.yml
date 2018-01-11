@@ -33,24 +33,24 @@ script:
 after_success:
   - cd $TRAVIS_BUILD_DIR/test-site/web
   - drush dl zen mothership bootstrap
-  - ../vendor/bin/drush vset theme_default bartik
+  - drush vset theme_default bartik
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default zen
+  - drush vset theme_default zen
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default mothership
+  - drush vset theme_default mothership
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default atomium
+  - drush vset theme_default atomium
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush en realistic_dummy_content devel -y
-  - ../vendor/bin/drush en devel_generate -y
-  - ../vendor/bin/drush generate-content 50
-  - ../vendor/bin/drush vset theme_default bartik
+  - drush en realistic_dummy_content devel -y
+  - drush en devel_generate -y
+  - drush generate-content 50
+  - drush vset theme_default bartik
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default zen
+  - drush vset theme_default zen
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default mothership
+  - drush vset theme_default mothership
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
-  - ../vendor/bin/drush vset theme_default atomium
+  - drush vset theme_default atomium
   - ab -n 500 -kc 10 http://127.0.0.1:8888/
 
 notifications:
