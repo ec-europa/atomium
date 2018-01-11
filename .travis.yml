@@ -3,7 +3,7 @@ dist: precise
 language: php
 
 git:
-  depth: 10000
+  depth: 1
 
 php:
   - 5.6
@@ -19,6 +19,8 @@ install:
   - composer install
 
 before_script:
+  # Install apache just to have the ab command.
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
   # Set sendmail so drush doesn't throw an error during site install.
   - echo "sendmail_path=`which true`" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
   - run drupal:site-install
