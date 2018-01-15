@@ -80,17 +80,26 @@ To ensure its code quality, Atomium depends on [GrumPHP](https://github.com/phpr
 
 In order to use it and pass the automated tests, run:
 
-`composer install`
+`$ composer install`
 
-in the root directory.
+This will:
 
-To run the automated tests, Atomium needs a proper Drupal instance.
+  1. Build a target test site in `./build`
+  2. Run `$ ./vendor/bin/run drupal:site-setup` which will setup site and tests configuration files, such as `phpunit.xml`
 
-You also need to copy the file `phpunit.xml.dist` to `phpunit.xml` and replace
-the strings:
- 
-* `%ROOT%` with the root installation directory of Drupal,
-* `%URL%` with the URL of your Drupal instance.
+After that:
+
+  1. Copy `runner.yml.dist` into `runner.yml` and customize it according to your local environment
+  2. Install the site by running `$ ./vendor/bin/run drupal:site-install`
+
+For a list of available commands run:
+
+```
+./vendor/bin/run
+```
+
+For more information about how to customise the building process check the [OpenEuropa Task Runner](https://github.com/ec-europa/oe-task-runner)
+project page.
 
 The best way to submit code is by providing a pull request on Github.
 

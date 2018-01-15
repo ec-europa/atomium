@@ -20,3 +20,13 @@ drupal:
   post_install:
       - ./vendor/bin/drush --root=$(pwd)/build en -y atomium devel realistic_dummy_content composer_autoloader
       - ./vendor/bin/drush --root=$(pwd)/build dis -y overlay update help comment rdf search
+
+commands:
+  drupal:site-setup:
+    - { task: "chmod", file: "${drupal.root}/sites", permissions: 0774, recursive: true }
+    - { task: "symlink", from: "../../../../..", to: "${drupal.root}/sites/all/themes/custom/atomium" }
+    - { task: "run", command: "drupal:drush-setup" }
+    - { task: "run", command: "drupal:settings-setup" }
+    - { task: "run", command: "setup:phpunit" }
+  setup:phpunit:
+    - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }

@@ -14,8 +14,6 @@ parameters:
         - js
     git_commit_message:
       matchers:
-        - '/^([A-Z]+\-\d+|Issue #\d+): [A-Z].+\./'
-      case_insensitive: false
-      multiline: false
+        - '/^(Issue #\d+|#\d+): [A-Z].+\./'
     phpunit:
       always_execute: false
