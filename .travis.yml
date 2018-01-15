@@ -20,7 +20,7 @@ install:
 
 before_script:
   # Install apache just to have the ab command.
-  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  - sudo apt-get install apache2
   # Set sendmail so drush doesn't throw an error during site install.
   - echo "sendmail_path=`which true`" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
   - run drupal:site-install

@@ -13,9 +13,11 @@ parameters:
         - inc
         - js
     git_commit_message:
+      enforce_no_subject_trailing_period: false
+      max_subject_width: 200
+      case_insensitive: true
+      multiline: true
       matchers:
-        - '/^([A-Z]+\-\d+|Issue #\d+): [A-Z].+\./'
-      case_insensitive: false
-      multiline: false
+        - '/^(Issue #\d+|#\d+): [A-Z].+\./'
     phpunit:
       always_execute: false
