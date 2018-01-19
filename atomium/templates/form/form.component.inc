@@ -21,7 +21,9 @@ function atomium_atomium_theme_form() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_form(&$variables, $hook) {
-  $variables['theme_hook_suggestions'][] = 'form--' . $variables['element']['#form_id'];
+  if (isset($variables['element']['#form_id'])) {
+    $variables['theme_hook_suggestions'][] = 'form--' . $variables['element']['#form_id'];
+  }
 
   $element = &$variables['element'];
 
