@@ -60,10 +60,14 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $value = explode(' ', $value);
     }
 
+    $value = array_map(function ($val) {
+      return explode(' ', $val);
+    }, $value);
+
     $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
 
     $data = array();
-    foreach (iterator_to_array($value_iterator, FALSE) as $item) {
+    foreach ($value_iterator as $item) {
       $data[] = trim($item);
     }
 
@@ -151,7 +155,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $value = explode(' ', $value);
     }
 
-    foreach ($value as $item) {
+    $value = array_map(function ($val) {
+      return explode(' ', $val);
+    }, $value);
+
+    $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
+
+    foreach ($value_iterator as $item) {
       $attributes[$key][] = trim($item);
     }
 

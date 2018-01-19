@@ -9,8 +9,6 @@
  * Implements hook_css_alter().
  */
 function atomium_css_alter(&$css) {
-  $theme_key = $GLOBALS['theme_key'];
-
   // Automatically includes css file from a component if it exists.
   foreach (atomium_find_templates() as $theme_data) {
     foreach ($theme_data as $component => $component_data) {
@@ -25,7 +23,7 @@ function atomium_css_alter(&$css) {
   }
 
   // Exclude specified CSS files from theme.
-  $excludes = atomium_get_theme_info($theme_key, 'exclude][css', FALSE);
+  $excludes = atomium_get_settings('alter.css_alter.exclude', FALSE);
 
   if (!empty($excludes)) {
     $excludes = array_merge($excludes, str_replace('.css', '-rtl.css', $excludes));

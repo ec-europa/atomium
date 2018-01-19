@@ -9,10 +9,6 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_block(&$variables, $hook) {
-  // Add BEM style classes to the block.
-  $variables['atomium']['attributes']['wrapper']->append('class', 'hook__block__' . $variables['block']->module . '__' . $variables['block']->delta);
-
-  $variables['classes_array'] = array_values(array_diff($variables['classes_array'], array('block')));
   $variables['classes_array'] = preg_grep('/^block-/', $variables['classes_array'], PREG_GREP_INVERT);
   $variables['classes_array'][] = $variables['block_html_id'];
   $variables['classes_array'][] = $variables['block_zebra'];
@@ -51,6 +47,8 @@ function atomium_preprocess_block(&$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['wrapper']->remove('class', atomium_get_settings('preprocess.block.classes_to_remove', TRUE));
+
   $variables['atomium']['attributes']['wrapper']->append('id', $variables['block_html_id']);
 
   // Add Aria Roles via attributes.

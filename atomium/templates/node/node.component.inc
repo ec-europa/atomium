@@ -48,13 +48,6 @@ function atomium_preprocess_node(&$variables, $hook) {
     $variables['theme_hook_suggestions'][] = 'node__noderef__' . $variables['type'] . '__' . $variables['view_mode'];
   }
 
-  $variables['classes_array'] = array_values(
-    array_diff(
-      $variables['classes_array'],
-      array('node', 'node-sticky', 'node-unpublished', 'node-promoted')
-    )
-  );
-
   $variables['id_node'] = 'node-' . $variables['nid'];
 
   // Remove class from the ul that holds the links <ul class="inline links">.
@@ -83,6 +76,7 @@ function atomium_preprocess_node(&$variables, $hook) {
   $variables['classes_array'][] = 'node-' . $variables['nid'];
 
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
+  $variables['atomium']['attributes']['wrapper']->remove('class', atomium_get_settings('preprocess.node.classes_to_remove', TRUE));
   $variables['atomium']['attributes']['wrapper']->append('role', 'article');
   $variables['atomium']['attributes']['wrapper']->append('id', 'node-' . $variables['nid']);
 }

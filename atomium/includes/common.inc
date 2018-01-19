@@ -709,3 +709,109 @@ function _atomium_extend_with_suggestions(array $items = array(''), array $sugge
     return str_replace('-', '_', drupal_strtolower(implode('__', array_filter($suggestions))));
   }, $items);
 }
+
+/**
+ * Flatten an array.
+ *
+ * If input array is:
+ *
+ * $input = array(
+ *   'parent1' => 'valueA'
+ *   'parent2' => array(
+ *     'subparent2' => 'valueB',
+ *   'parent3' => array(
+ *     'subparent3' => array(
+ *       'valueC1',
+ *       'valueC2',
+ *       'valueC3',
+ *       'valueC4',
+ *     )
+ *   )
+ * );
+ *
+ * The output array $storage will be:
+ *
+ * array(
+ *   'parent1' => 'valueA',
+ *   'parent2.subparent2' => 'valueB',
+ *   'parent3.subparent3' => array(
+ *       'valueC1',
+ *       'valueC2',
+ *       'valueC3',
+ *       'valueC4',
+ *   ),
+ * );
+ *
+ * @param array $array
+ *   The input array.
+ * @param array $storage
+ *   The output array.
+ * @param string $parentKey
+ *   The parent key where to start from.
+ */
+function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') {
+  foreach ($array as $key => $value) {
+    $itemKey = $parentKey;
+
+    if (!is_numeric($key)) {
+      $itemKey .= (($parentKey) ? '.' : '') . $key;
+    }
+
+    if (is_array($value)) {
+      _atomium_array_flatten($value, $storage, $itemKey);
+    }
+    else {
+      if (is_numeric($key)) {
+        $storage += array($itemKey => array());
+        $storage[$itemKey][] = $value;
+      }
+      else {
+        $storage[$itemKey] = $value;
+      }
+    }
+  }
+}
+
+/**
+ * Get settings from the current theme info file.
+ *
+ * @param string $setting_keys
+ *   The settings to get, flattened (concatenated with ".")
+ * @param bool $base_themes
+ *   TRUE to get the value in the base_themes
+ *   if the settings is not found in current theme,
+ *   FALSE otherwise.
+ * @param array $value_callbacks
+ *   The list of callbacks to apply to retrieved values.
+ *
+ * @return array
+ *   The settings as an array.
+ */
+function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_callbacks = array('trim')) {
+  $theme_key = $GLOBALS['theme_key'];
+
+  $settings = array();
+
+  _atomium_array_flatten(
+    atomium_get_theme_info($theme_key, 'settings', $base_themes),
+    $settings
+  );
+
+  $setting_value = array();
+
+  if (isset($settings[$setting_keys])) {
+    if (is_string($settings[$setting_keys])) {
+      $setting_value = explode(',', $settings[$setting_keys]);
+    }
+
+    if (is_array($settings[$setting_keys])) {
+      $setting_value = $settings[$setting_keys];
+    }
+
+    foreach ($value_callbacks as $value_callback) {
+      $setting_value = array_map($value_callback, $setting_value);
+    }
+  }
+
+  return array_values(array_filter($setting_value));
+}
