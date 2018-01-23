@@ -37,7 +37,7 @@ function hook_atomium_theme_hook(&$existing, $type, $theme, $path) {
  * It must live in: [path_to_theme]/templates/[hook]/[hook].component.inc.
  * 'disable': Set to TRUE to disable the preview.
  */
-function hook_atomium_definition_hook(&$existing, $type, $theme, $path) {
+function hook_atomium_definition_hook() {
   return array(
     'label' => 'My component name',
     'description' => 'My component description.',

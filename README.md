@@ -3,13 +3,12 @@
 
 The Atomium theme is a Drupal 7 base theme.
 
-The goal of this base theme is to rewrite most of the core themes functions of
-Drupal and use proper render arrays and
-templates instead.
+The goal of this base theme is to rewrite most of the core theme functions of
+Drupal and use proper render arrays and templates instead.
 This will allow users to customize at will most of the elements in a custom
 sub-theme using preprocess functions or by providing a custom template.
 
-Table of content:
+Table of contents:
 =================
 - [Installation](#installation)
 - [Activation](#activation)
@@ -41,7 +40,7 @@ Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com
 Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
 Atomium Bartik is a fork on the Bartik core theme using the Atomium mechanisms.
 
-These sub-themes are providing examples of *preprocess* functions and templates
+These sub-themes provide examples of *preprocess* functions and templates
 so you can craft your own theme quickly.
 
 [Go to top](#table-of-content)
@@ -49,12 +48,12 @@ so you can craft your own theme quickly.
 # Configuration
 Atomium is not intended to be a full featured theme as you might find on
 drupal.org, full of configurable settings and with a nice user interface.
-The sole purpose of this theme is to provides a clean markup that you can
+The sole purpose of this theme is to provide clean markup that you can
 easily extend.
 
 However, Atomium provides the following settings:
 
- - Enable theme debug mode,
+ - Enable theme debug mode.
  - Allow CSS double underscore.
  
 As of Drupal 7.33, Drupal core has a theme debug mode that can be enabled and
@@ -72,9 +71,9 @@ can be set to TRUE.
 
 # Contributing
 
-Atomium is licenced under [EUPL Licence](https://en.wikipedia.org/wiki/European_Union_Public_Licence).
+Atomium is licenced under the [EUPL Licence](https://en.wikipedia.org/wiki/European_Union_Public_Licence).
 All contributions to Atomium and its sub-themes are made on [Github](https://github.com/ec-europa/atomium), the main
-Atomium's repository.
+Atomium repository.
 
 To ensure its code quality, Atomium depends on [GrumPHP](https://github.com/phpro/grumphp).
 
@@ -110,7 +109,7 @@ times on checking code styles.
 
 # Extending
 
-Atomium provides a way to extend just by creating some files without modifying
+Atomium provides a way of extending just by creating some files without modifying
 the core Atomium files.
 Each theme definition, core or custom, is treated as a component.
 You can find all the theme definitions in the *templates* directory of
@@ -119,7 +118,7 @@ each sub-theme.
 To create a new theme definition:
 
  - Create a directory in *templates* and name it as you will. A good practice
- is to name it like the name of the definition.
+ is to give it the name of the definition.
  - Create a file *[NAME-OF-THE-THEME-DEFINITION].component.inc*,
  - Create the function *[NAME-OF-THE-THEME]\_atomium_theme\_[NAME-OF-THE-THEME-DEFINITION]\()*,
  - Create a file *[NAME-OF-THE-THEME_DEFINITION].css* and/or *[NAME-OF-THE-THEME_DEFINITION].js* to get these files
@@ -128,8 +127,8 @@ To create a new theme definition:
 Atomium provides a custom page available on the path: **atomium-overview**.
 This particular page is only available to users with _administer themes_ permission.
 
-This page act as a showcase page of components.
-To add a component in there, your component needs to define one or two hooks:
+This page acts as a showcase page of components.
+To add a component in there, your component needs to define two hooks:
  - hook_atomium_definition_hook().
    
    This hook allows you to define simply a component.
@@ -168,7 +167,7 @@ In order to get a render array, we have to go deeper and rewrite functions
 accordingly.
 
 *drupal_get_breadcrumb()* calls *menu_get_active_breadcrumb()*.
-This is actually, the function that returns the HTML.
+This is actually the function that returns the HTML.
 
 There is no way to alter the result of that function as it returns an array of
 raw HTML links.
