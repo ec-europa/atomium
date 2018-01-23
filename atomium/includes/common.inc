@@ -792,10 +792,12 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
 
   $settings = array();
 
-  _atomium_array_flatten(
-    atomium_get_theme_info($theme_key, 'settings', $base_themes),
-    $settings
-  );
+  if ($theme_settings = atomium_get_theme_info($theme_key, 'settings', $base_themes)) {
+    _atomium_array_flatten(
+      $theme_settings,
+      $settings
+    );
+  }
 
   $setting_value = array();
 
