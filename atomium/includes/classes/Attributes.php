@@ -433,6 +433,14 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * Returns the whole array.
    */
   public function getStorage() {
+    // Flatten the array.
+    array_walk($this->storage, function (&$member) {
+      $value_iterator = new \RecursiveIteratorIterator(
+        new \RecursiveArrayIterator((array) $member)
+      );
+      $member = iterator_to_array($value_iterator);
+    });
+
     return $this->storage;
   }
 
