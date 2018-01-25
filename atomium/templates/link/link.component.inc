@@ -39,21 +39,20 @@ function atomium_preprocess_link(&$variables, $hook) {
   $path = url($variables['path'], $variables['options']);
 
   // Append active class.
-  if (($path == '/' . $_GET['q'] || ($path == '<front>' && drupal_is_front_page())) &&
+  if (($path == '/' . $_GET['q'] || ($path == url('<front>', $variables['options']) && drupal_is_front_page())) &&
     (empty($variables['options']['language']) || $variables['options']['language']->language == $language_url->language)) {
     $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 
-  // @todo: Fix this.
-  $href = (strpos($variables['path'], '#') === 0) ? $variables['path'] : $path;
-  $href = (strpos($variables['path'], 'javascript:') === 0) ? $variables['path'] : $path;
-  $variables['atomium']['attributes']['element']->append('href', $href);
+  if ((0 === strpos($variables['path'], '#')) || (0 === strpos($variables['path'], 'javascript:'))) {
+    $path = $variables['path'];
+  }
+
+  $variables['atomium']['attributes']['element']->setAttribute('href', $path);
 
   if (is_string($variables['text'])) {
     $variables['text'] = array(
       '#markup' => ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])),
     );
   }
-
-  // @todo: the specific title attribute should be 'strip_tagged()'.
 }
