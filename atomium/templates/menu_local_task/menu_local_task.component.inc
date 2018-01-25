@@ -33,7 +33,7 @@ function atomium_preprocess_menu_local_task(&$variables, $hook) {
     // Add text to indicate active tab for non-visual users.
     $active = array(
       '#markup' => t('(active tab)'),
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original']),
+      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
       '#tag' => 'span',
       '#attributes' => array(
         'class' => array(
@@ -54,7 +54,7 @@ function atomium_preprocess_menu_local_task(&$variables, $hook) {
   if (isset($link['href'])) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('link__' . $variables['theme_hook_original']),
+        '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
         '#text' => array(
           array('#markup' => $link['title']),
           $active,

@@ -22,7 +22,7 @@ function atomium_atomium_theme_system_admin_index() {
  */
 function atomium_preprocess_system_admin_index(&$variables, $hook) {
   $variables['toggle_link'] = array(
-    '#theme' => array('system_compact_link'),
+    '#theme' => _atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
   );
 
   $container = array('left' => array(), 'right' => array());
@@ -38,7 +38,7 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
       $block = array();
       $block['title'] = $module;
       $block['content'] = array(
-        '#theme' => array('admin_block_content'),
+        '#theme' => _atomium_extend_theme_hook('admin_block_content', $variables['theme_hook_original']),
         '#content' => $items,
       );
       $block['description'] = t('@description', array('@description' => $description));
@@ -50,7 +50,7 @@ function atomium_preprocess_system_admin_index(&$variables, $hook) {
         $position = $flip[$position];
       }
       $container[$block['position']][] = array(
-        '#theme' => array('admin_block'),
+        '#theme' => _atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
         '#block' => $block,
       );
     }

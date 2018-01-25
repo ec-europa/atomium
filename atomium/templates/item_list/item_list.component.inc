@@ -51,7 +51,7 @@ function atomium_preprocess_item_list(&$variables, $hook) {
         $item += array('class' => array());
         $variables['atomium']['attributes'][$key]->append('class', $item['class']);
         $variables['items'][$key] = array(
-          '#theme' => 'html_tag__' . $variables['theme_hook_original'],
+          '#theme' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
           '#tag' => 'li',
           '#atomium' => array(
             'attributes' => array(
@@ -64,7 +64,7 @@ function atomium_preprocess_item_list(&$variables, $hook) {
 
       if (is_string($item)) {
         $variables['items'][$key] = array(
-          '#theme' => 'html_tag__' . $variables['theme_hook_original'],
+          '#theme' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
           '#tag' => 'li',
           '#atomium' => array(
             'attributes' => array(

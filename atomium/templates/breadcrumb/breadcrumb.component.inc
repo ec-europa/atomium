@@ -27,12 +27,12 @@ function atomium_atomium_definition_breadcrumb() {
     'preview' => array(
       'breadcrumb' => array(
         array(
-          '#theme' => 'link',
+          '#theme' => _atomium_extend_theme_hook('link'),
           '#text' => 'Home',
           '#path' => '/',
         ),
         array(
-          '#theme' => 'link',
+          '#theme' => _atomium_extend_theme_hook('link'),
           '#text' => 'News',
           '#path' => '/',
         ),
@@ -56,7 +56,7 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
 
     $links[] = array(
       'link' => $item,
-      '#theme_wrappers' => array('html_tag__' . $variables['theme_hook_original'] . '__li'),
+      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original'] . '__li'),
       '#tag' => 'li',
     );
   }
@@ -65,7 +65,7 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
   if ($links) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('item_list__' . $variables['theme_hook_original']),
+        '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => $links,
         '#type' => 'ul',
         '#wrapper' => FALSE,

@@ -15,11 +15,11 @@ function atomium_preprocess_user_list(&$variables, $hook) {
   if (!empty($users)) {
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => 'item_list__' . $variables['theme_hook_original'],
+        '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => array_map(function ($user) use ($variables) {
           return array(
             'data' => array(
-              '#theme' => 'username__' . $variables['theme_hook_original'],
+              '#theme' => _atomium_extend_theme_hook('username', $variables['theme_hook_original']),
               '#account' => $user,
             ),
           );

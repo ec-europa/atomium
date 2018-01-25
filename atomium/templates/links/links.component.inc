@@ -84,12 +84,12 @@ function atomium_preprocess_links(&$variables, $hook) {
         // Pass in $link as $options, they share the same keys.
         $newlink = array(
           'link' => array(
-            '#theme' => array('link'),
+            '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
             '#text' => $link['title'],
             '#path' => $link['href'],
             '#options' => $link,
           ),
-          '#theme_wrappers' => array('html_tag'),
+          '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
           '#tag' => 'li',
           '#attributes' => $link['attributes_array'],
         );
@@ -107,11 +107,11 @@ function atomium_preprocess_links(&$variables, $hook) {
           $newlink = array(
             'link' => array(
               '#markup' => check_plain($link['title']),
-              '#theme_wrappers' => array('html_tag'),
+              '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
               '#tag' => 'span',
               '#attributes' => $link['span_attributes_array'],
             ),
-            '#theme_wrappers' => array('html_tag'),
+            '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
             '#tag' => 'li',
             '#attributes' => $link['attributes_array'],
           );
@@ -125,7 +125,7 @@ function atomium_preprocess_links(&$variables, $hook) {
 
     $variables[$hook] = array(
       $hook => array(
-        '#theme' => array('item_list__' . $variables['theme_hook_original']),
+        '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => array_filter($new_links),
         '#type' => 'ul',
         '#atomium' => array(

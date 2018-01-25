@@ -392,7 +392,7 @@ function atomium_get_component_definitions() {
           }
           if (!empty($elements)) {
             $definition['preview'] = array(
-              '#theme' => 'item_list',
+              '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
               '#items' => $elements,
             );
           }
@@ -416,7 +416,7 @@ function atomium_get_component_definitions() {
         if (!empty($errors)) {
           unset($definitions[$component]['form']);
           $definitions[$component]['preview'] = array(
-            '#theme' => 'item_list',
+            '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
             '#items' => $errors[$component],
           );
         }
@@ -496,13 +496,14 @@ function atomium_menu_get_active_breadcrumb() {
 
     foreach ($active_trail as $parent) {
       $breadcrumb[] = array(
-        '#theme' => array('link'),
+        '#theme' => _atomium_extend_theme_hook('link', 'breadcrumb'),
         '#text' => $parent['title'],
         '#path' => $parent['href'],
         '#options' => $parent['localized_options'],
       );
     }
   }
+
   return $breadcrumb;
 }
 
@@ -704,10 +705,47 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
  *   The extended strings.
  */
 function _atomium_extend_with_suggestions(array $items = array(''), array $suggestions = array()) {
-  return array_map(function ($item) use ($suggestions) {
-    array_unshift($suggestions, $item);
-    return str_replace('-', '_', drupal_strtolower(implode('__', array_filter($suggestions))));
+  return array_map(function ($base_hook) use ($suggestions) {
+    if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
+      return $hook[0];
+    }
   }, $items);
+}
+
+/**
+ * Extend a theme hook with suggestions.
+ *
+ * @param string|null $base
+ *   The base hook.
+ * @param string|array $suggestions
+ *   The suggestions.
+ *
+ * @return array|false
+ *   An array containing the theme hook extended,
+ *   FALSE if the base hook is null.
+ */
+function _atomium_extend_theme_hook($base = NULL, $suggestions = array()) {
+  if (empty($base) || !is_string($base)) {
+    return FALSE;
+  }
+
+  $suggestions = (array) $suggestions;
+  array_unshift($suggestions, $base);
+
+  return array(
+    str_replace(
+      '-',
+      '_',
+      drupal_strtolower(
+        implode(
+          '__',
+          array_filter(
+            $suggestions
+          )
+        )
+      )
+    ),
+  );
 }
 
 /**

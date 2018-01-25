@@ -74,7 +74,7 @@ function atomium_preprocess_form_element(&$variables, $hook) {
   );
 
   $variables['label'] = array(
-    '#theme' => array('form_element_label__' . $variables['theme_hook_original']),
+    '#theme' => _atomium_extend_theme_hook('form_element_label', $variables['theme_hook_original']),
     'element' => $variables['element'],
   );
 

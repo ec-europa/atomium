@@ -59,20 +59,20 @@ function atomium_preprocess_user_picture(&$variables, $hook) {
       // don't load image styles.
       if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
         $variables[$hook] += array(
-          '#theme' => 'image_style__' . $variables['theme_hook_original'],
+          '#theme' => _atomium_extend_theme_hook('image_style', $variables['theme_hook_original']),
           '#style_name' => $style,
         );
       }
       else {
         $variables[$hook] += array(
-          '#theme' => 'image__' . $variables['theme_hook_original'],
+          '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
         );
       }
 
       if (!empty($account->uid) && user_access('access user profiles')) {
         $variables[$hook] = array(
           $hook => array(
-            '#theme' => 'link__' . $variables['theme_hook_original'],
+            '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
             '#text' => $variables['user_picture'],
             '#path' => 'user/' . $account->uid,
             '#options' => array(

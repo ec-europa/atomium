@@ -28,7 +28,7 @@ function atomium_preprocess_text_format_wrapper(&$variables, $hook) {
       '#markup' => $element['#children'],
       '#weight' => 5,
     ),
-    '#theme_wrappers' => array('html_tag'),
+    '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
     '#tag' => 'div',
     '#attributes' => array(
       'class' => array(
@@ -42,7 +42,7 @@ function atomium_preprocess_text_format_wrapper(&$variables, $hook) {
       'description' => array(
         '#markup' => $element['#description'],
         '#weight' => 10,
-        '#theme_wrappers' => array('html_tag'),
+        '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
         '#tag' => 'div',
         '#attributes' => array(
           'class' => array(

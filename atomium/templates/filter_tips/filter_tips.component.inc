@@ -29,7 +29,7 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
   foreach ($variables['tips'] as $name => $tip_list) {
     foreach ($tip_list as $key => $tip) {
       $items[$key] = array(
-        '#theme' => array('html_tag__' . $variables['theme_hook_original']),
+        '#theme' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
@@ -46,11 +46,9 @@ function atomium_preprocess_filter_tips(&$variables, $hook) {
 
   $variables[$hook] = array(
     $hook => array(
-      '#theme' => array('item_list__' . $variables['theme_hook_original']),
+      '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
       '#items' => $items,
-      '#theme_wrapper' => array(
-        'container',
-      ),
+      '#theme_wrappers' => _atomium_extend_theme_hook('container', $variables['theme_hook_original']),
     ),
   );
 }

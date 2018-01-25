@@ -57,7 +57,7 @@ function hook_atomium_definition_hook() {
  */
 function hook_atomium_definition_form_hook($form, &$form_state) {
   $form['component'] = array(
-    '#theme' => 'username',
+    '#theme' => array('username'),
     '#account' => user_load(1),
   );
 

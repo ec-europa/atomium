@@ -35,7 +35,7 @@ function atomium_preprocess_admin_block_content(&$variables, $hook) {
   foreach ($variables['content'] as &$item) {
     $description = '';
     $link = array(
-      '#theme' => array('link'),
+      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => $item['title'],
       '#path' => $item['href'],
       '#options' => $item['localized_options'],

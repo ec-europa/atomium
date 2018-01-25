@@ -22,7 +22,7 @@ function atomium_atomium_theme_system_compact_link() {
  */
 function atomium_preprocess_system_compact_link(&$variables, $hook) {
   $variables['link'] = array(
-    '#theme' => array('link'),
+    '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
     '#text' => NULL,
     '#path' => NULL,
     '#options' => array(

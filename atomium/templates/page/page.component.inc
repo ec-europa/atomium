@@ -60,13 +60,20 @@ function atomium_preprocess_page(&$variables, $hook) {
       break;
   }
 
-  $variables['messages'] = $variables['show_messages'] ? array('#theme' => array('status_messages')) : '';
+  $variables['messages'] = NULL;
+  if ($variables['show_messages']) {
+    $variables['messages'] = array(
+      '#theme' => _atomium_extend_theme_hook('status_messages', $variables['theme_hook_original']),
+    );
+  }
+
   $variables['breadcrumb'] = array(
-    '#theme' => array('breadcrumb'),
+    '#theme' => _atomium_extend_theme_hook('breadcrumb', $variables['theme_hook_original']),
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
+
   $variables['action_links'] = array(
-    '#theme' => array('item_list'),
+    '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
     '#items' => menu_local_actions(),
     '#attributes' => array(
       'class' => array(
