@@ -19,7 +19,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function __construct(array $attributes = array()) {
-    $this->attributes($attributes);
+    $this->setAttributes($attributes);
   }
 
   /**
@@ -27,15 +27,22 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param array|Attributes $attributes
    *   The attributes.
+   *
+   * @return $this
    */
-  public function attributes($attributes = array()) {
+  public function setAttributes($attributes = array()) {
     if ($attributes instanceof Attributes) {
       $this->storage = $attributes->toArray();
       $attributes = array();
     }
 
     foreach ($attributes as $name => $value) {
-      $this->offsetSet($name, $value);
+      if (is_numeric($name)) {
+        $this->offsetSet($value);
+      }
+      else {
+        $this->offsetSet($name, $value);
+      }
     }
 
     return $this;
@@ -47,28 +54,29 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function &offsetGet($name) {
     $this->storage += array($name => array());
 
-    return $this->storage[$name];
+    return array_values($this->storage[$name]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function offsetSet($name, $value) {
+  public function offsetSet($name, $value = FALSE) {
     $this->storage += array($name => array());
 
-    if (!is_array($value)) {
-      $value = explode(' ', $value);
+    if (is_bool($value)) {
+      $data = $value;
     }
+    else {
+      $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
-    $value = array_map(function ($val) {
-      return explode(' ', $val);
-    }, $value);
+      $data = array();
 
-    $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
+      foreach ($value_iterator as $item) {
+        $data = array_merge($data, explode(' ', $item));
+      }
 
-    $data = array();
-    foreach ($value_iterator as $item) {
-      $data[] = trim($item);
+      $data = array_values(array_filter($data));
+      $data = array_combine($data, $data);
     }
 
     $this->storage[$name] = $data;
@@ -93,12 +101,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $attribute
    *   Name of the attribute.
-   * @param string|array $value
+   * @param string|array|bool $value
    *   Value(s) to set for the given attribute key.
    *
    * @return $this
    */
-  public function setAttribute($attribute, $value) {
+  public function setAttribute($attribute, $value = FALSE) {
     $this->offsetSet($attribute, $value);
 
     return $this;
@@ -134,36 +142,33 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   The attribute's name.
-   * @param string|array $value
+   * @param string|array|bool $value
    *   The attribute's value.
    *
    * @return $this
    */
-  public function append($key, $value) {
-    if (empty($value) || empty($key)) {
+  public function append($key, $value = FALSE) {
+    $attributes = $this->storage;
+
+    if (is_bool($value)) {
+      $attributes[$key] = $value;
+      $this->storage = $attributes;
+    }
+
+    if (empty($value) || empty($key) || is_bool($value)) {
       return $this;
     }
 
-    $attributes = $this->storage;
     $attributes += array($key => array());
 
-    if (!is_array($attributes[$key])) {
-      $attributes[$key] = array($attributes[$key]);
-    }
+    $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
-    if (!is_array($value)) {
-      $value = explode(' ', $value);
-    }
-
-    $value = array_map(function ($val) {
-      return explode(' ', $val);
-    }, $value);
-
-    $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
-
+    $data = array();
     foreach ($value_iterator as $item) {
-      $attributes[$key][] = trim($item);
+      $data = array_merge($data, explode(' ', $item));
     }
+
+    $attributes[$key] = array_merge((array) $attributes[$key], array_values(array_filter($data)));
 
     $this->storage = $attributes;
 
@@ -175,25 +180,50 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   The attribute's name.
-   * @param string|array $value
+   * @param string|array|bool $value
    *   The attribute's value.
    *
    * @return $this
    */
-  public function remove($key, $value) {
+  public function remove($key, $value = FALSE) {
     $attributes = $this->storage;
 
     if (!isset($attributes[$key])) {
       return $this;
     }
 
-    if (!is_array($value)) {
-      $value = explode(' ', $value);
+    if (is_bool($value)) {
+      unset($attributes[$key]);
+    }
+    else {
+      if (!is_array($value)) {
+        $value = explode(' ', $value);
+      }
+
+      $attributes[$key] = array_values(array_diff($attributes[$key], $value));
     }
 
-    $attributes[$key] = array_values(array_diff($attributes[$key], $value));
-
     $this->storage = $attributes;
+
+    return $this;
+  }
+
+  /**
+   * Delete an attribute.
+   *
+   * @param string|array $name
+   *   The name of the attribute key to delete.
+   *
+   * @return $this
+   */
+  public function delete($name = array()) {
+    $value_iterator = new \RecursiveIteratorIterator(
+      new \RecursiveArrayIterator((array) $name)
+    );
+
+    foreach ($value_iterator as $item) {
+      $this->offsetUnset($item);
+    }
 
     return $this;
   }
@@ -227,7 +257,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @return $this
    */
   public function replace($key, $value, $replacement) {
-    $attributes = $this->storage();
+    $attributes = $this->getStorage();
 
     if (isset($attributes[$key])) {
       $attributes[$key] = array_replace($attributes[$key],
@@ -330,7 +360,50 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function __toString() {
-    return atomium_drupal_attributes($this->storage);
+    $attributes = $this->getStorage();
+
+    // If empty, just return an empty string.
+    if (empty($attributes)) {
+      return '';
+    }
+
+    foreach ($attributes as $attribute => &$data) {
+      if (is_numeric($attribute) || is_bool($data)) {
+        $data = sprintf('%s', trim(check_plain($attribute)));
+      }
+      else {
+        $data = array_map(function ($item) use ($attribute) {
+          if ('placeholder' === $attribute) {
+            $item = strip_tags($item);
+          }
+
+          /*
+           * @todo: Disabled for now, it's causing issue in
+           * @todo: admin/structure/views/settings.
+           *
+           * if ('id' === $attribute) {
+           *   $item = drupal_html_id($item);.
+           * }
+           */
+
+          return trim(check_plain($item));
+        }, (array) $data);
+
+        // By default, sort the value of the class attribute.
+        if ('class' === $attribute) {
+          asort($data);
+        }
+
+        // If the attribute is numeric, just display the value.
+        // Ex: 0="data-closable" will be displayed: data-closable.
+        $data = sprintf('%s="%s"', $attribute, implode(' ', $data));
+      }
+    }
+
+    // Sort the attributes.
+    asort($attributes);
+
+    return $attributes ? ' ' . implode(' ', $attributes) : '';
   }
 
   /**
@@ -342,8 +415,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function toArray() {
     $return = array();
 
-    foreach ($this->storage as $name => $value) {
-      $return[$name] = $value;
+    foreach ($this->getStorage() as $name => $value) {
+      $return[$name] = array_filter(array_values((array) $value));
     }
 
     return $return;
@@ -353,13 +426,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function getIterator() {
-    return new \ArrayIterator($this->storage);
+    return new \ArrayIterator($this->getStorage());
   }
 
   /**
    * Returns the whole array.
    */
-  public function storage() {
+  public function getStorage() {
     return $this->storage;
   }
 

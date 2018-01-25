@@ -35,7 +35,7 @@ function atomium_preprocess_html_tag(&$variables, $hook) {
 
   if (!empty($variables['element']['#atomium']['attributes'])) {
     foreach ($variables['element']['#atomium']['attributes'] as $attribute => $data) {
-      $variables['atomium']['attributes'][$attribute]->attributes($data);
+      $variables['atomium']['attributes'][$attribute]->setAttributes($data);
     }
   }
   // @Todo: Remove this, it shouldn't be used anymore but it's too early now.

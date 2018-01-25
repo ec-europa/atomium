@@ -42,46 +42,104 @@
   expect:
     - toArray:
         return:
-         class: []
+          class: []
+    - __toString:
+        return: ' class=""'
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - setAttribute: ['id', 'id']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'two', 'three']
+          id: ['id']
+    - __toString:
+        return: ' class="one three two" id="id"'
+
+-
+  given:
+    class: 'foo bar'
+  run:
+    - append: ['class', 'durpal']
+    - replace: ['class', 'durpal', 'drupal']
+  expect:
+    - toArray:
+        return:
+          class: ['foo', 'bar', 'drupal']
+    - __toString:
+        return: ' class="bar drupal foo"'
+
+-
+  given:
+    class: 'foo '
+  run: []
+  expect:
+    - toArray:
+        return:
+          class: ['foo']
+    - __toString:
+        return: ' class="foo"'
+
+-
+  given: []
+  run:
+    - append: ['data-closable ']
+  expect:
+    - toArray:
+        return:
+          'data-closable ': []
+    - __toString:
+        return: ' data-closable'
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - delete: [['id', 'class']]
+  expect:
+    - toArray:
+        return: []
     - __toString:
         return: ''
 
 -
   given:
-    - class: [['one', 'two'], 'three']
-    - id: ['custom_id']
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
   run:
-    - setAttributes: ['id', 'id']
+    - delete: ['id']
   expect:
     - toArray:
         return:
-          - class: ['one', 'two', 'three']
-          - id: 'id'
+          class: ['one', 'two', 'three']
     - __toString:
-        return: ' class="one two three" id="id"'
+        return: ' class="one three two"'
 
 -
   given:
-    - class: ['one', ['two', 'three']]
-    - id: 'custom_id'
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
   run:
-    - setAttributes: ['id', ['id']]
+    - delete: []
   expect:
     - toArray:
         return:
-          - class: ['one', 'two', 'three']
-          - id: 'id'
+          class: ['one', 'two', 'three']
+          id: ['custom_id']
     - __toString:
-        return: ' class="one two three" id="id"'
+        return: ' class="one three two" id="custom_id"'
 
 -
   given:
-    - class: ['one class']
+    class: [['one', 'two'], 'three']
+    id: ['']
   run:
-    - append: ['class', 'second class']
+    - append: ['data-closable']
   expect:
-    - toArray:
-        return:
-          - class: ['one', 'class', 'second']
     - __toString:
-        return: ' class="class one second"'
+        return: ' class="one three two" data-closable id=""'

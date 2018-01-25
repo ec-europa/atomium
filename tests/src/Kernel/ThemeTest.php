@@ -21,15 +21,4 @@ class ThemeTest extends AbstractThemeTest {
     }
   }
 
-  /**
-   * Test attributes generation.
-   *
-   * @dataProvider attributesProvider
-   */
-  public function testThemeAttributes($attributes) {
-    foreach ($attributes as $attribute) {
-      expect(atomium_drupal_attributes($attribute['actual']))->to->equal($attribute['expected']);
-    }
-  }
-
 }

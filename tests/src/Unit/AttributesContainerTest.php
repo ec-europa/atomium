@@ -47,7 +47,7 @@ class AttributesContainerTest extends AbstractUnitTest {
 
     unset($container['foo']);
     expect($container['foo'])->to->be->instanceof('drupal\atomium\Attributes');
-    expect($container['foo']->storage())->to->be->empty();
+    expect($container['foo']->getStorage())->to->be->empty();
   }
 
   /**

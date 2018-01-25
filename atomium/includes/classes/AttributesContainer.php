@@ -23,7 +23,7 @@ class AttributesContainer implements \ArrayAccess {
    */
   public function __construct(array $attributes = array()) {
     foreach ($attributes as $name => $value) {
-      $this->offsetGet($name)->attributes($value);
+      $this->offsetGet($name)->setAttributes($value);
     }
   }
 
@@ -42,7 +42,7 @@ class AttributesContainer implements \ArrayAccess {
    * {@inheritdoc}
    */
   public function offsetSet($name, $value) {
-    $this->storage[$name] = $this->offsetGet($name)->attributes($value);
+    $this->storage[$name] = $this->offsetGet($name)->setAttributes($value);
   }
 
   /**
@@ -62,7 +62,7 @@ class AttributesContainer implements \ArrayAccess {
   /**
    * Returns the whole array.
    */
-  public function storage() {
+  public function getStorage() {
     return $this->storage;
   }
 
