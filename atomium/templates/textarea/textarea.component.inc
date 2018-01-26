@@ -23,17 +23,11 @@ function atomium_atomium_theme_textarea() {
 function atomium_preprocess_textarea(&$variables, $hook) {
   element_set_attributes(
     $variables['element'],
-    array('id', 'name', 'cols', 'rows', 'title', 'placeholder')
+    array('id', 'name', 'cols', 'rows', 'title', '#title' => 'placeholder')
   );
   _form_set_class($variables['element'], array('form-textarea'));
 
   $attributes = _atomium_get_attributes($variables['element']);
-
-  if (isset($attributes['placeholder'])) {
-    if (isset($attributes['title']) && !empty($attributes['title'])) {
-      $attributes['placeholder'] = $attributes['title'];
-    }
-  }
 
   $wrapper_attributes_array = array(
     'class' => array('form-textarea-wrapper'),

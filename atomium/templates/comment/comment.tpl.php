@@ -19,7 +19,7 @@
           <mark><?php print $new; ?></mark>
       <?php endif; ?>
         <figure>
-          <?php print $picture; ?>
+          <?php print render($picture); ?>
             <figcaption><?php print $author; ?></figcaption>
         </figure>
 
