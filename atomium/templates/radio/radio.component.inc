@@ -27,17 +27,11 @@ function atomium_preprocess_radio(&$variables, $hook) {
     array(
       0 => 'id',
       1 => 'name',
+      2 => 'type',
       '#return_value' => 'value',
     )
   );
   $attributes = _atomium_get_attributes($variables['element']);
-  $attributes['type'] = 'radio';
-
-  if (isset($variables['element']['#return_value']) &&
-    $variables['element']['#value'] !== FALSE &&
-    $variables['element']['#value'] == $variables['element']['#return_value']) {
-    $attributes['checked'] = 'checked';
-  }
 
   if (isset($variables['element']['#atomium']['attributes']['element'])) {
     $variables['atomium']['attributes']['element']
@@ -45,4 +39,10 @@ function atomium_preprocess_radio(&$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['element']->merge($attributes);
+
+  if (isset($variables['element']['#return_value']) &&
+    $variables['element']['#value'] !== FALSE &&
+    $variables['element']['#value'] == $variables['element']['#return_value']) {
+    $variables['atomium']['attributes']['element']->setAttribute('checked');
+  }
 }

@@ -174,13 +174,13 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
     isset($element['#pre_render']) ||
     isset($element['#markup']) ||
     isset($element['#theme_wrappers']) ||
-    isset($element["#$property"])
+    isset($element['#' . $property])
   ) {
     $element += array(
       '#' . $property => array(),
     );
 
-    return $element["#$property"];
+    return $element['#' . $property];
   }
   // Treat $element as if it were a [pre]process function $variables parameter
   // and look for a renderable "element".
@@ -189,7 +189,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
       '#' . $property => array(),
     );
 
-    return $element['element']["#$property"];
+    return $element['element']['#' . $property];
   }
 
   // If all else fails, create (if needed) a default "attributes" array. This
