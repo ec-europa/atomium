@@ -39,6 +39,6 @@
   <?php endif; ?>
 
   <?php if (!empty($description)): ?>
-      <div class="description"><?php print print render($description); ?></div>
+      <div class="description"><?php print render($description); ?></div>
   <?php endif; ?>
 </div>
