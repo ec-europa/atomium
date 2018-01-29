@@ -533,14 +533,16 @@ function _atomium_update_block_render_array(array &$block_array, $region = NULL,
   $block_array['#block']->atomium['block_index_in_region'] = $block_index_in_region;
   $block_array['#block']->atomium['total_blocks_in_regions'] = $total_blocks_in_region;
 
-  $block_array['#theme_wrappers'] = _atomium_extend_with_suggestions(
-    $block_array['#theme_wrappers'],
-    array(
-      is_string($region) ? $region : NULL,
-      $block_array['#block']->module,
-      $block_array['#block']->delta,
-    )
-  );
+  if (isset($block_array['#theme_wrappers'])) {
+    $block_array['#theme_wrappers'] = _atomium_extend_with_suggestions(
+      $block_array['#theme_wrappers'],
+      array(
+        is_string($region) ? $region : NULL,
+        $block_array['#block']->module,
+        $block_array['#block']->delta,
+      )
+    );
+  }
 }
 
 /**
