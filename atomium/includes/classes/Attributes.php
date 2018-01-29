@@ -54,7 +54,9 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function &offsetGet($name) {
     $this->storage += array($name => array());
 
-    return array_values($this->storage[$name]);
+    $value = array_values($this->storage[$name]);
+
+    return $value;
   }
 
   /**
