@@ -24,6 +24,8 @@ function atomium_atomium_theme_indentation() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_indentation(&$variables, $hook) {
+  $size = $variables['size'];
+
   if (!is_numeric($variables['size']) || $variables['size'] <= 0) {
     $size = 0;
   }

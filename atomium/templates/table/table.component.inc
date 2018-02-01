@@ -134,8 +134,15 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
 
         // Build row.
         $i = 0;
+
         foreach ($cells as $cellid => $cell) {
-          $cell = ($is_header) ? tablesort_header($cell, $header, $ts) : tablesort_cell($cell, $header, $ts, $i++);
+          if (TRUE == $is_header) {
+            $cell = tablesort_header($cell, $header, $ts);
+          }
+          else {
+            $cellid = $i;
+            $cell = tablesort_cell($cell, $header, $ts, $i++);
+          }
 
           // @todo: Check this part of code.
           $attributes_array = array();
@@ -145,7 +152,6 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
             $cell = $cell['data'];
           }
 
-          $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $i] = $attributes_array;
           $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $cellid] = $attributes_array;
           $rows_array['row-' . $rowid]['cells']['cell-' . $cellid] = $cell;
         }
