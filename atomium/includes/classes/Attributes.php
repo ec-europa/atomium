@@ -13,7 +13,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @var array
    */
-  protected $storage = array();
+  private $storage = array();
 
   /**
    * {@inheritdoc}
@@ -52,22 +52,18 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function &offsetGet($name) {
-    $storage = $this->getStorage();
+    $return = $this->setStorage(
+      $this->getStorage() + array($name => array())
+    )->toArray();
 
-    $storage += array($name => array());
-
-    $this->setStorage($storage);
-
-    return $this->toArray()[$name];
+    return $return[$name];
   }
 
   /**
    * {@inheritdoc}
    */
   public function offsetSet($name, $value = FALSE) {
-    $storage = $this->getStorage();
-
-    $storage += array($name => array());
+    $storage = $this->getStorage() + array($name => array());
 
     if (is_bool($value)) {
       $data = $value;
@@ -86,6 +82,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     $storage[$name] = $data;
+
     $this->setStorage($storage);
   }
 
@@ -104,7 +101,9 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * {@inheritdoc}
    */
   public function offsetExists($name) {
-    return isset($this->toArray()[$name]);
+    $storage = $this->toArray();
+
+    return isset($storage[$name]);
   }
 
   /**
@@ -170,7 +169,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @return $this
    */
   public function remove($key, $value = FALSE) {
-    $attributes = $this->storage;
+    $attributes = $this->getStorage();
 
     if (!isset($attributes[$key])) {
       return $this;
@@ -187,9 +186,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $attributes[$key] = array_values(array_diff($attributes[$key], $value));
     }
 
-    $this->storage = $attributes;
-
-    return $this;
+    return $this->setStorage($attributes);
   }
 
   /**
@@ -447,7 +444,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @return $this
    */
-  private function setStorage(array $storage = array()) {
+  public function setStorage(array $storage = array()) {
     $this->storage = $storage;
 
     return $this;
