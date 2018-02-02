@@ -41,6 +41,37 @@ class AttributesTest extends AbstractUnitTest {
   }
 
   /**
+   * Test class methods.
+   *
+   * @covers Attributes::exists
+   * @covers Attributes::contains
+   */
+  public function testVariousMethod() {
+    $attributes = array(
+      'class' => array(
+        'foo',
+        'bar',
+      ),
+      'id' => 'atomium',
+      'data-closable' => FALSE,
+    );
+
+    $attributes = new Attributes($attributes);
+
+    expect($attributes->exists('class', 'foo'))->to->equal(TRUE);
+    expect($attributes->exists('class', 'fooled'))->to->equal(FALSE);
+    expect($attributes->exists('foo', 'bar'))->to->equal(FALSE);
+    expect($attributes->exists('class', NULL))->to->equal(FALSE);
+    expect($attributes->exists('id', 'atomium'))->to->equal(TRUE);
+    expect($attributes->exists('data-closable', FALSE))->to->equal(TRUE);
+    expect($attributes->exists('data-closable'))->to->equal(TRUE);
+
+    expect($attributes->contains('class', 'fo'))->to->equal(TRUE);
+    expect($attributes->contains('role'))->to->equal(FALSE);
+    expect($attributes->contains('id', 'tomi'))->to->equal(TRUE);
+  }
+
+  /**
    * Methods provider.
    *
    * @return array

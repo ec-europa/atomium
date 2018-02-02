@@ -13,6 +13,18 @@
 
 -
   given:
+    class: ['one', 'two']
+  run:
+    - append: ['class', ['one', 'two']]
+  expect:
+    - toArray:
+        return:
+         class: ['one', 'two']
+    - __toString:
+        return: ' class="one two"'
+
+-
+  given:
     class: ['one', 'two', 'three']
   run: []
   expect:
@@ -143,3 +155,15 @@
   expect:
     - __toString:
         return: ' class="one three two" data-closable id=""'
+
+-
+  given:
+    class: ['one', 'two']
+  run:
+    - merge: [{
+        class: [foo, bar, one, two]
+        id: [foobar]
+        }]
+  expect:
+    - __toString:
+        return: ' class="bar foo one two" id="foobar"'
