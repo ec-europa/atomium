@@ -53,5 +53,5 @@ function atomium_preprocess_update_status_label(&$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['wrapper']->append('class', $class);
-  $variables[$hook] = $text;
+  $variables[$variables['base_hook']] = $text;
 }

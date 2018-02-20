@@ -47,8 +47,8 @@ function atomium_preprocess_menu_link(&$variables, $hook) {
     $variables['theme_hook_suggestions'][] = 'menu_link__' . $variables['element']['#original_link']['mlid'];
   }
 
-  $variables[$hook] = array(
-    $hook => array(
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       $variables['output'],
       $variables['sub_menu'],
     ),

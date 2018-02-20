@@ -54,7 +54,7 @@ function atomium_preprocess_form_element_label(&$variables, $hook) {
     );
   }
 
-  $variables[$hook] = array(
+  $variables[$variables['base_hook']] = array(
     'title' => array(
       $variables['title'],
     ),

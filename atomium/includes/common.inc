@@ -449,72 +449,6 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
 }
 
 /**
- * Invokes a specific suggestion's preprocess functions.
- *
- * @param array $variables
- *   The theme implementation variables array.
- */
-function _atomium_preprocess_theme_suggestion(array &$variables, $hook) {
-  _atomium_preprocess_process_theme_suggestion('preprocess', $variables, $hook);
-}
-
-/**
- * Invokes a specific suggestion's process functions.
- *
- * @param array $variables
- *   The theme implementation variables array.
- */
-function _atomium_process_theme_suggestion(array &$variables, $hook) {
-  _atomium_preprocess_process_theme_suggestion('process', $variables, $hook);
-}
-
-/**
- * Custom callback.
- *
- * This is to avoid duplicate code while invoking specific theme
- * suggestions pre and process functions.
- *
- * @param string $phase
- *   This can be either 'preprocess' or 'process'.
- * @param array $variables
- *   The theme implementation variables array.
- * @param string $hook
- *   The hook in use.
- */
-function _atomium_preprocess_process_theme_suggestion($phase, array &$variables, $hook) {
-  $registry = theme_get_registry();
-  $phases = array(
-    'preprocess' => 'preprocess functions',
-    'process' => 'process functions',
-  );
-
-  if (!empty($variables['theme_hook_suggestion']) && !empty($registry[$variables['theme_hook_suggestion']][$phases[$phase]])) {
-    // Save the suggestion as the hook to pass to the function.
-    $hook_suggestion = $variables['theme_hook_suggestion'];
-
-    // Iterate over the current phase functions.
-    $preprocess = array();
-    foreach ($registry[$hook_suggestion][$phases[$phase]] as $function) {
-      $preprocess[$function] = $function;
-      while (($function = drupal_substr($function, 0, strrpos($function, '__')))) {
-        $preprocess[$function] = $function;
-      }
-    }
-
-    $preprocess = array_slice($preprocess, 0, -1);
-
-    // Iterate over the current phase functions.
-    foreach (array_reverse($preprocess) as $function) {
-      // Ensure that the function is not this one (recursive) and exists.
-      if ($function !== __FUNCTION__ && function_exists($function)) {
-        // Invoke theme hook suggestion current phase function.
-        call_user_func_array($function, array(&$variables, $hook_suggestion));
-      }
-    }
-  }
-}
-
-/**
  * Custom helper function.
  *
  * This helper updates the render array of a block so block preprocess are
@@ -754,4 +688,25 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
   }
 
   return array_values(array_filter($setting_value));
+}
+
+/**
+ * Get the base hook of a hook name.
+ *
+ * Example:
+ *   If input hook is form_element__checkbox__form_random_id,
+ *   then the output base hook will be: form_element.
+ *
+ * @param string $hook
+ *   The hook.
+ *
+ * @return string
+ *   The base hook.
+ */
+function atomium_get_base_hook($hook) {
+  while ($pos = strrpos($hook, '__')) {
+    $hook = drupal_substr($hook, 0, $pos);
+  }
+
+  return $hook;
 }

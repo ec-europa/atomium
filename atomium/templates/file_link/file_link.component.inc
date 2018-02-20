@@ -66,14 +66,14 @@ function atomium_preprocess_file_link(&$variables, $hook) {
     $options['attributes']['title'] = check_plain($file->filename);
   }
 
-  $variables[$hook] = array(
+  $variables[$variables['base_hook']] = array(
     'file_icon' => array(
       '#theme' => _atomium_extend_theme_hook('file_icon', $variables['theme_hook_original']),
       '#file' => $file,
       '#icon_directory' => $icon_directory,
       '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
     ),
-    'file_link' => array(
+    $variables['base_hook'] => array(
       '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => $link_text,
       '#path' => $url,

@@ -22,6 +22,5 @@ function atomium_atomium_theme_comment_wrapper() {
  */
 function atomium_preprocess_comment_wrapper(&$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
-
   $variables['atomium']['attributes']['wrapper']->append('id', 'comments-wrapper-' . $variables['node']->nid);
 }

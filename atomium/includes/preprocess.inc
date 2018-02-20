@@ -26,4 +26,6 @@ function atomium_preprocess(&$variables, $hook) {
   if (!($variables['atomium']['attributes'] instanceof AttributesContainer)) {
     $variables['atomium']['attributes'] = new AttributesContainer($variables['atomium']['attributes']);
   }
+
+  $variables['base_hook'] = atomium_get_base_hook($hook);
 }

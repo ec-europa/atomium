@@ -61,10 +61,10 @@ function atomium_preprocess_breadcrumb(&$variables, $hook) {
     );
   }
 
-  $variables[$hook] = '';
+  $variables['breadcrumb'] = '';
   if ($links) {
-    $variables[$hook] = array(
-      $hook => array(
+    $variables[$variables['base_hook']] = array(
+      $variables['base_hook'] => array(
         '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => $links,
         '#type' => 'ul',

@@ -1,6 +1,8 @@
 drupal:
   core: "7"
   base_url: "http://127.0.0.1:8888"
+  site:
+    profile: minimal
   database:
     host: "127.0.0.1"
     port: "3306"
@@ -9,17 +11,21 @@ drupal:
     password: ""
   settings:
     conf:
-      theme_default: atomium
       file_scan_ignore_directories:
+        - vendor
+        - ${drupal.root}
         - node_modules
         - bower_components
         - build
-        - vendor
         - sites/all/themes/atomium/build
         - build/sites/all/themes/atomium/build
+      theme_default: atomium
   post_install:
       - ./vendor/bin/drush --root=$(pwd)/build en -y atomium devel realistic_dummy_content composer_autoloader
-      - ./vendor/bin/drush --root=$(pwd)/build dis -y overlay update help comment rdf search
+  drush:
+    options:
+      ignored-directories: "${drupal.root}"
+      uri: "${drupal.base_url}"
 
 commands:
   drupal:site-setup:

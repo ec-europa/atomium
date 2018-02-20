@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <html<?php print $atomium['attributes']['html']; ?>>
 <head>
-  <?php print $head; ?>
-    <title><?php print $head_title; ?></title>
-  <?php print $styles; ?>
-  <?php print $scripts; ?>
+  <?php print render($head); ?>
+    <title><?php print render($head_title); ?></title>
+  <?php print render($styles); ?>
+  <?php print render($scripts); ?>
 </head>
 <body<?php print $atomium['attributes']['body']; ?>>
-<?php print $page_top; ?>
-<?php print $page; ?>
-<?php print $page_bottom; ?>
+<?php print render($page_top); ?>
+<?php print render($page); ?>
+<?php print render($page_bottom); ?>
 </body>
 </html>

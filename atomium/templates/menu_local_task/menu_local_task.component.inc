@@ -50,10 +50,10 @@ function atomium_preprocess_menu_local_task(&$variables, $hook) {
     $link['localized_options']['html'] = TRUE;
   }
 
-  $variables[$hook] = $link_text;
+  $variables[$variables['base_hook']] = $link_text;
   if (isset($link['href'])) {
-    $variables[$hook] = array(
-      $hook => array(
+    $variables[$variables['base_hook']] = array(
+      $variables['base_hook'] => array(
         '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
         '#text' => array(
           array('#markup' => $link['title']),

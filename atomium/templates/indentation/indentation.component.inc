@@ -30,8 +30,8 @@ function atomium_preprocess_indentation(&$variables, $hook) {
     $size = 0;
   }
 
-  $variables[$hook] = array(
-    $hook => array(
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       '#theme' => _atomium_extend_theme_hook('item_list', array('size' . $size, $variables['theme_hook_original'])),
       '#wrapper' => FALSE,
       '#type' => FALSE,

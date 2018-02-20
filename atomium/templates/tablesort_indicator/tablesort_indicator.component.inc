@@ -49,7 +49,7 @@ function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
 
   $image['#theme'] = _atomium_extend_theme_hook('image', array($direction, $variables['theme_hook_original']));
 
-  $variables[$hook] = array(
-    $hook => $image,
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $image,
   );
 }

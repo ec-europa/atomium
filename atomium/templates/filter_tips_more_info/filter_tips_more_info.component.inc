@@ -23,8 +23,8 @@ function atomium_atomium_theme_filter_tips_more_info() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_tips_more_info(&$variables, $hook) {
-  $variables[$hook] = array(
-    $hook => array(
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => t('More information about text formats'),
       '#path' => 'filter/tips',

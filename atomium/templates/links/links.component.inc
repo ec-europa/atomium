@@ -123,8 +123,8 @@ function atomium_preprocess_links(&$variables, $hook) {
       $new_links[] = $newlink;
     }
 
-    $variables[$hook] = array(
-      $hook => array(
+    $variables[$variables['base_hook']] = array(
+      $variables['base_hook'] => array(
         '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => array_filter($new_links),
         '#type' => 'ul',

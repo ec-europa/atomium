@@ -193,8 +193,8 @@ function atomium_preprocess_pager(&$variables, $hook) {
 
     $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
 
-    $variables[$hook] = array(
-      $hook => array(
+    $variables[$variables['base_hook']] = array(
+      $variables['base_hook'] => array(
         '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
         '#items' => $items,
         '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),

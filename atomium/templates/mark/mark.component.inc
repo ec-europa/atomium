@@ -38,8 +38,8 @@ function atomium_preprocess_mark(&$variables, $hook) {
 
   $variables['atomium']['attributes']['wrapper']->append('class', 'marker');
 
-  $variables[$hook] = '';
+  $variables[$variables['base_hook']] = '';
   if (!empty($variables['title'])) {
-    $variables[$hook] = $variables['title'];
+    $variables[$variables['base_hook']] = $variables['title'];
   }
 }

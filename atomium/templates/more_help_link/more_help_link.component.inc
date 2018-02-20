@@ -23,8 +23,8 @@ function atomium_atomium_theme_more_help_link() {
 function atomium_preprocess_more_help_link(&$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('class', 'more-help-link');
 
-  $variables[$hook] = array(
-    $hook => array(
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => t('More help'),
       '#path' => $variables['url'],

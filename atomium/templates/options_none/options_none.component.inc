@@ -35,8 +35,8 @@ function atomium_preprocess_options_none(&$variables, $hook) {
       break;
   }
 
-  $variables[$hook] = array(
-    $hook => array(
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       '#markup' => $output,
     ),
   );

@@ -23,7 +23,7 @@ function atomium_atomium_theme_text_format_wrapper() {
 function atomium_preprocess_text_format_wrapper(&$variables, $hook) {
   $element = $variables['element'];
 
-  $variables[$hook] = array(
+  $variables[$variables['base_hook']] = array(
     'children' => array(
       '#markup' => $element['#children'],
       '#weight' => 5,
@@ -38,7 +38,7 @@ function atomium_preprocess_text_format_wrapper(&$variables, $hook) {
   );
 
   if (!empty($element['#description'])) {
-    $variables[$hook] += array(
+    $variables[$variables['base_hook']] += array(
       'description' => array(
         '#markup' => $element['#description'],
         '#weight' => 10,

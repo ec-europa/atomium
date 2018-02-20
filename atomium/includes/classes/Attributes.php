@@ -77,7 +77,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $data = array_merge($data, explode(' ', $item));
       }
 
-      $data = array_values(array_filter($data));
+      $data = array_values(array_filter($data, 'strlen'));
       $data = array_combine($data, $data);
     }
 
@@ -140,7 +140,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $this->storage = $attributes;
     }
 
-    if (empty($value) || empty($key) || is_bool($value)) {
+    if (empty($key) || is_bool($value)) {
       return $this;
     }
 
@@ -153,7 +153,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $data = array_merge($data, explode(' ', $item));
     }
 
-    $attributes[$key] = array_unique(array_merge((array) $attributes[$key], array_values(array_filter($data))));
+    $attributes[$key] = array_unique(array_merge((array) $attributes[$key], array_values(array_filter($data, 'strlen'))));
 
     return $this->setStorage($attributes);
   }
