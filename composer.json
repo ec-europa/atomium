@@ -29,7 +29,7 @@
     "drupal-composer/preserve-paths": "^0.1",
     "drupal/drupal": "~7.0",
     "drupal/composer_autoloader": "^1.0",
-    "drush/drush": "8.x-dev",
+    "drush/drush": "^8",
     "webflo/drupal-finder": "^1.0.0",
     "webmozart/path-util": "^2.3",
     "mikey179/vfsstream": "~1.2",
@@ -37,7 +37,7 @@
     "drupal/drupal-extension": "~3.4",
     "drupal/realistic_dummy_content": "*",
     "drupal/devel": "*",
-    "ec-europa/oe-task-runner": "^0.3"
+    "openeuropa/task-runner": "^0.4"
   },
   "autoload": {
     "psr-4": {
