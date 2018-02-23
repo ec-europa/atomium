@@ -106,7 +106,6 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
     // This is in order: the theme engine, the base theme(s), the current theme.
     foreach ($themes as $theme_hook) {
       _atomium_theme_find_processors($grouped_functions, $cache, $info, $theme_hook, $hook);
-      _atomium_theme_add_processors($hook, $info, $prefixes_data);
 
       // Ensure "theme path" is set.
       $info += array(
@@ -119,6 +118,8 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
       // are not triggered at all or in the right order.
       unset($info['base hook']);
     }
+
+    _atomium_theme_add_processors($hook, $info, $prefixes_data);
   }
 
   // Registry optimization and includes fiddling.
@@ -132,8 +133,8 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
     $cache[$original_hook] += array('includes' => array());
     $info['includes'] = array_unique(
       array_merge(
-        $info['includes'],
-        $cache[$original_hook]['includes']
+        (array) $info['includes'],
+        (array) $cache[$original_hook]['includes']
       )
     );
 
@@ -187,22 +188,6 @@ function _atomium_theme_find_processors(array $grouped_functions, array &$cache,
 }
 
 /**
- * Get processors name and machine name.
- *
- * Processor functions work in two distinct phases with the process
- * functions always being executed after the preprocess functions.
- *
- * @return array
- *   The processors names and machine names.
- */
-function _atomium_theme_processors_phases() {
-  return array(
-    'preprocess functions' => 'preprocess',
-    'process functions'    => 'process',
-  );
-}
-
-/**
  * Add the processors to the hook.
  *
  * @param string $hook
@@ -216,17 +201,26 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
   $hooks_stack = drupal_get_hook_parents($hook);
 
   foreach (_atomium_theme_processors_phases() as $phase_key => $phase) {
-    $info[$phase_key] = array();
+    $callbacks = array();
+
     foreach ($prefixes_data as $prefixes) {
       foreach ($prefixes as $prefix) {
-        $info[$phase_key][] = $prefix . '_' . $phase;
+        $callbacks[] = $prefix . '_' . $phase;
         // This is the code that ensure preprocess/process inheritance.
         // TODO here detect how to set 'theme path'.
-        array_map(function ($hook) use (&$info, $phase, $phase_key, $prefix) {
-          $info[$phase_key][] = $prefix . '_' . $phase . '_' . $hook;
+        array_map(function ($hook) use (&$callbacks, $phase, $prefix) {
+          $callbacks[] = $prefix . '_' . $phase . '_' . $hook;
         }, array_reverse($hooks_stack));
       }
     }
+
+    // This is for dealing with modules implementing hook_theme_registry_alter.
+    // By doing this, I make sure that no process callbacks that has been added
+    // through this hook are lost.
+    $info[$phase_key] = array_merge(
+      $callbacks,
+      array_diff($info[$phase_key], $callbacks)
+    );
 
     // Ensure uniqueness of functions.
     $info[$phase_key] = array_unique($info[$phase_key]);
@@ -249,6 +243,22 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
 }
 
 /**
+ * Get processors name and machine name.
+ *
+ * Processor functions work in two distinct phases with the process
+ * functions always being executed after the preprocess functions.
+ *
+ * @return array
+ *   The processors names and machine names.
+ */
+function _atomium_theme_processors_phases() {
+  return array(
+    'preprocess functions' => 'preprocess',
+    'process functions'    => 'process',
+  );
+}
+
+/**
  * Compile a list of prefixes.
  *
  * The order of this is very important.
@@ -264,13 +274,13 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
  *   The prefixes.
  */
 function _atomium_theme_make_prefixes(array $base_themes, $theme) {
-  $theme_engine = $theme->engine;
-
   return array(
-    'template' => array('template' => 'template'),
+    'template' => array(
+      'template' => 'template',
+    ),
     'module' => module_list(),
     'theme_engine' => array(
-      $theme_engine => $theme_engine,
+      $theme->engine => $theme->engine,
     ),
     'base_theme' => array_combine(
       array_keys($base_themes),
