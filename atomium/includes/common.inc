@@ -543,6 +543,8 @@ function _atomium_extend_with_suggestions(array $items = array(''), array $sugge
     if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
       return $hook[0];
     }
+
+    return NULL;
   }, $items);
 }
 

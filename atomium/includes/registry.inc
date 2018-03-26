@@ -226,9 +226,7 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
     $info[$phase_key] = array_unique($info[$phase_key]);
 
     // Filter out functions that does not exist.
-    $info[$phase_key] = array_filter($info[$phase_key], function ($function) {
-      return function_exists($function);
-    });
+    $info[$phase_key] = array_filter($info[$phase_key], '\function_exists');
 
     // Sadly we remove preprocess and process for hooks that provides
     // a theme function. (like the date module with date_display_single).
@@ -236,7 +234,7 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
     // attributes handling would fail.
     if (isset($info['function'])) {
       $info[$phase_key] = array_filter($info[$phase_key], function ($function) use ($phase, $hook) {
-        return (FALSE !== strpos($function, $phase . '_' . $hook));
+        return FALSE !== strpos($function, $phase . '_' . $hook);
       });
     }
   }

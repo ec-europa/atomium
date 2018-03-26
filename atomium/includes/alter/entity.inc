@@ -19,4 +19,6 @@ function atomium_entity_view_alter(&$build, $type) {
       $build['#contextual_links'][$type] = array($type, array($entity->{$info['entity keys']['id']}));
     }
   }
+
+  $build['#theme'] = _atomium_extend_theme_hook($build['#theme'], array($build['#bundle'], $build['#view_mode']));
 }
