@@ -167,3 +167,25 @@
   expect:
     - __toString:
         return: ' class="bar foo one two" id="foobar"'
+
+-
+  given: { }
+  run:
+    - setAttribute: ['placeholder', '<b>hello<em>A B</em>world</b>', true]
+  expect:
+    - __toString:
+        return: ' placeholder="helloA Bworld"'
+    - getStorage:
+        return:
+          placeholder: ['<b>hello<em>A', 'B</em>world</b>']
+
+-
+  given: { }
+  run:
+    - setAttribute: ['placeholder', '<b>hello<em>A B</em>world</b>', false]
+  expect:
+    - __toString:
+        return: ' placeholder="helloA Bworld"'
+    - getStorage:
+        return:
+          placeholder: ['<b>hello<em>A B</em>world</b>']

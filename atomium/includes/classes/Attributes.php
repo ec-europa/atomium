@@ -27,10 +27,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param array|Attributes $attributes
    *   The attributes.
+   * @param bool $explode
+   *   Should we explode attributes value ?
    *
    * @return $this
    */
-  public function setAttributes($attributes = array()) {
+  public function setAttributes($attributes = array(), $explode = TRUE) {
     if ($attributes instanceof Attributes) {
       $this->storage = $attributes->toArray();
       $attributes = array();
@@ -38,10 +40,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     foreach ($attributes as $name => $value) {
       if (is_numeric($name)) {
-        $this->offsetSet($value);
+        $this->setAttribute($value, TRUE, $explode);
       }
       else {
-        $this->offsetSet($name, $value);
+        $this->setAttribute($name, $value, $explode);
       }
     }
 
@@ -65,23 +67,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function offsetSet($name, $value = FALSE) {
     $storage = $this->getStorage() + array($name => array());
 
-    if (is_bool($value)) {
-      $data = $value;
-    }
-    else {
-      $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
-
-      $data = array();
-
-      foreach ($value_iterator as $item) {
-        $data = array_merge($data, explode(' ', $item));
-      }
-
-      $data = array_values(array_filter($data, 'strlen'));
-      $data = array_combine($data, $data);
-    }
-
-    $storage[$name] = $data;
+    $storage[$name] = $value;
 
     $this->setStorage($storage);
   }
@@ -113,11 +99,28 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *   Name of the attribute.
    * @param string|array|bool $value
    *   Value(s) to set for the given attribute key.
+   * @param bool $explode
+   *   Should we explode attributes value ?
    *
    * @return $this
    */
-  public function setAttribute($attribute, $value = FALSE) {
-    $this->offsetSet($attribute, $value);
+  public function setAttribute($attribute, $value = FALSE, $explode = TRUE) {
+    $data = $value;
+
+    if (TRUE === $explode && !is_bool($value)) {
+      $value = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
+
+      $data = array();
+
+      foreach ($value as $item) {
+        $data = array_merge($data, explode(' ', $item));
+      }
+
+      $data = array_values(array_filter($data, 'strlen'));
+      $data = array_combine($data, $data);
+    }
+
+    $this->offsetSet($attribute, $data);
 
     return $this;
   }

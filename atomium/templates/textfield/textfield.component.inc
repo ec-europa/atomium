@@ -33,7 +33,10 @@ function atomium_preprocess_textfield(&$variables, $hook) {
       '#title' => 'placeholder',
     )
   );
-  $attributes = _atomium_get_attributes($variables['element']);
+
+  $variables['atomium']['attributes']['element']
+    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
+
   $attributes['type'] = 'text';
 
   if ($variables['element']['#autocomplete_path'] &&

@@ -25,9 +25,11 @@ function atomium_preprocess_textarea(&$variables, $hook) {
     $variables['element'],
     array('id', 'name', 'cols', 'rows', 'title', '#title' => 'placeholder')
   );
+
   _form_set_class($variables['element'], array('form-textarea'));
 
-  $attributes = _atomium_get_attributes($variables['element']);
+  $variables['atomium']['attributes']['element']
+    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
 
   $wrapper_attributes_array = array(
     'class' => array('form-textarea-wrapper'),
@@ -62,8 +64,6 @@ function atomium_preprocess_textarea(&$variables, $hook) {
     $variables['atomium']['attributes']['element']
       ->merge($variables['element']['#atomium']['attributes']['element']);
   }
-
-  $variables['atomium']['attributes']['element']->merge($attributes);
 
   if (isset($variables['element']['#atomium']['attributes']['wrapper'])) {
     $variables['atomium']['attributes']['wrapper']
