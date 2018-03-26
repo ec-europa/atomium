@@ -2,7 +2,7 @@ drupal:
   core: "7"
   base_url: "http://127.0.0.1:8888"
   site:
-    profile: minimal
+    profile: standard
   database:
     host: "127.0.0.1"
     port: "3306"
@@ -19,9 +19,13 @@ drupal:
         - build
         - sites/all/themes/atomium/build
         - build/sites/all/themes/atomium/build
-      theme_default: atomium
+      drupal_http_request_fails: false
   post_install:
       - ./vendor/bin/drush --root=$(pwd)/build en -y atomium devel realistic_dummy_content composer_autoloader
+      - ./vendor/bin/drush --root=$(pwd)/build dis help overlay update search color dashboard dblog shortcut path -y
+      - ./vendor/bin/drush --root=$(pwd)/build pmu help overlay update search color dashboard dblog shortcut path -y
+      - ./vendor/bin/drush --root=$(pwd)/build vset theme_default atomium
+      - ./vendor/bin/drush --root=$(pwd)/build cc all
   drush:
     options:
       ignored-directories: "${drupal.root}"
