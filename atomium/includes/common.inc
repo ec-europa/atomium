@@ -575,8 +575,12 @@ function _atomium_extend_theme_hook($base = NULL, $suggestions = array()) {
       drupal_strtolower(
         implode(
           '__',
-          array_filter(
-            $suggestions
+          array_map(function ($suggestion) {
+            return trim($suggestion, '_');
+          },
+            array_filter(
+              $suggestions
+            )
           )
         )
       )
