@@ -72,15 +72,6 @@ function atomium_theme_registry_alter(&$registry) {
 
   // Apply Atomium sauce.
   _theme_post_process_registry($registry, $base_themes, $theme);
-
-  // Re-apply custom theme registry alterations done by
-  // third party modules/themes.
-  foreach (module_implements('theme_registry_alter', TRUE) as $hook) {
-    call_user_func_array(
-      sprintf('%s_theme_registry_alter', $hook),
-      array(&$registry)
-    );
-  }
 }
 
 /**
@@ -223,7 +214,13 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
       }
     }
 
-    $info[$phase_key] = $callbacks;
+    // This is for dealing with modules implementing hook_theme_registry_alter.
+    // By doing this, I make sure that no process callbacks that has been added
+    // through this hook are lost.
+    $info[$phase_key] = array_merge(
+      $callbacks,
+      array_diff($info[$phase_key], $callbacks)
+    );
 
     // Ensure uniqueness of functions.
     $info[$phase_key] = array_unique($info[$phase_key]);
