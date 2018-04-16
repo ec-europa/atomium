@@ -46,7 +46,7 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
 /**
  * Implements hook_theme_registry_alter().
  */
-function atomium_theme_registry_alter(&$registry) {
+function atomium_theme_registry_alter(array &$registry) {
   // Retrieve the active theme names.
   $themes = _atomium_get_base_themes(NULL, TRUE);
 
@@ -72,6 +72,20 @@ function atomium_theme_registry_alter(&$registry) {
 
   // Apply Atomium sauce.
   _theme_post_process_registry($registry, $base_themes, $theme);
+
+  array_walk($registry, function (array &$info) {
+    // Make sure there is a preprocess for each hook.
+    $info += array('preprocess functions' => array());
+
+    // Remove 'atomium preprocess' callback.
+    unset($info['preprocess functions']['atomium_preprocess']);
+
+    // The simple preprocess was not used here because theme hooks defined with
+    // a function doesn't trigger all the preprocess callbacks.
+    // It's added at the first place so we make sure it's creating the variables
+    // for hooks defined by templates and functions properly.
+    array_unshift($info['preprocess functions'], 'atomium_preprocess');
+  });
 }
 
 /**
