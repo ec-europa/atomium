@@ -21,4 +21,20 @@ class ThemeTest extends AbstractThemeTest {
     }
   }
 
+  /**
+   * Test the Drupal 7 theme registry.
+   *
+   * Test if every theme hooks of the theme registry contains
+   * the atomium_preprocess callback at first position.
+   */
+  public function testRegistry() {
+    foreach (theme_get_registry(TRUE) as $info) {
+      expect($info)->to->include->keys(['preprocess functions']);
+      expect($info['preprocess functions'])
+        ->to->be->an('array')
+        ->to->contain('atomium_preprocess');
+      expect($info['preprocess functions'][0])->equal('atomium_preprocess');
+    }
+  }
+
 }
