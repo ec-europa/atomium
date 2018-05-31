@@ -22,7 +22,7 @@ function atomium_atomium_theme_admin_page() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_admin_page(&$variables, $hook) {
+function atomium_preprocess_admin_page(array &$variables, $hook) {
   $variables['toggle_link'] = array(
     '#theme' => _atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
   );

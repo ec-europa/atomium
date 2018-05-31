@@ -8,7 +8,7 @@
 /**
  * Implements hook_block_view_alter().
  */
-function atomium_block_view_alter(&$data, $block) {
+function atomium_block_view_alter(array &$build, $block) {
   // Add a specific atomium key.
   // This will be used in the block preprocess later.
   if (!isset($block->atomium) || !is_array($block->atomium)) {

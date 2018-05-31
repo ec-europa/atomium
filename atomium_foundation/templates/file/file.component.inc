@@ -8,6 +8,6 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_file(&$variables, $hook) {
+function atomium_foundation_preprocess_file(array &$variables, $hook) {
   $variables['atomium']['attributes']['element']->append('class', array('button', 'secondary'));
 }

@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_user_list(&$variables, $hook) {
+function atomium_preprocess_user_list(array &$variables, $hook) {
   $users = $variables['users'];
   $variables[$variables['base_hook']] = '';
 

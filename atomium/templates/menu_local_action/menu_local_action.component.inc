@@ -20,7 +20,7 @@ function atomium_atomium_theme_menu_local_action() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_menu_local_action(&$variables, $hook) {
+function atomium_preprocess_menu_local_action(array &$variables, $hook) {
   $link = $variables['element']['#link'];
 
   $link += array('localized_options' => array());

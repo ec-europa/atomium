@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_links(&$variables, $hook) {
+function atomium_bootstrap_preprocess_links(array &$variables, $hook) {
   if (!in_array($variables['theme_hook_original'], array('links__node', 'links__comment'))) {
     return;
 

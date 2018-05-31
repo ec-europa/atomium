@@ -8,7 +8,7 @@
 /**
  * Implements hook_js_alter().
  */
-function atomium_js_alter(&$js) {
+function atomium_js_alter(array &$js) {
   foreach (atomium_find_templates() as $theme_data) {
     foreach ($theme_data as $component => $component_data) {
       $js_file = sprintf('%s/%s.js', $component_data['directory'], $component);

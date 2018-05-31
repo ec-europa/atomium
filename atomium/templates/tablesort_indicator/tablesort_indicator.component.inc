@@ -20,7 +20,7 @@ function atomium_atomium_theme_tablesort_indicator() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_tablesort_indicator(&$variables, $hook) {
+function atomium_preprocess_tablesort_indicator(array &$variables, $hook) {
   $variables['theme_hook_suggestions'][] = $hook . '__' . $variables['style'];
 
   $image = array(

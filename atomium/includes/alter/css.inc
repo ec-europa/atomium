@@ -8,7 +8,7 @@
 /**
  * Implements hook_css_alter().
  */
-function atomium_css_alter(&$css) {
+function atomium_css_alter(array &$css) {
   // Automatically includes css file from a component if it exists.
   foreach (atomium_find_templates() as $theme_data) {
     foreach ($theme_data as $component => $component_data) {

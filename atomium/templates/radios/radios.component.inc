@@ -20,7 +20,7 @@ function atomium_atomium_theme_radios() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_radios(&$variables, $hook) {
+function atomium_preprocess_radios(array &$variables, $hook) {
   _form_set_class($variables['element'], array('form-radios'));
   element_set_attributes(
     $variables['element'],

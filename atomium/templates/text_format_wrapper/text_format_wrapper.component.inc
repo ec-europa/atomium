@@ -20,7 +20,7 @@ function atomium_atomium_theme_text_format_wrapper() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_text_format_wrapper(&$variables, $hook) {
+function atomium_preprocess_text_format_wrapper(array &$variables, $hook) {
   $element = $variables['element'];
 
   $variables[$variables['base_hook']] = array(

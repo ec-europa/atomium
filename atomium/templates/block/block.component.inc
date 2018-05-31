@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_block(&$variables, $hook) {
+function atomium_preprocess_block(array &$variables, $hook) {
   $variables['classes_array'] = preg_grep('/^block-/', $variables['classes_array'], PREG_GREP_INVERT);
   $variables['classes_array'][] = $variables['block_html_id'];
   $variables['classes_array'][] = $variables['block_zebra'];

@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_menu_local_tasks(&$variables, $hook) {
+function atomium_bootstrap_preprocess_menu_local_tasks(array &$variables, $hook) {
   if (!empty($variables['primary'])) {
     $variables['primary']['#attributes']['class'][] = array(
       'nav',

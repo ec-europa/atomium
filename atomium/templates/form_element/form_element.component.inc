@@ -20,7 +20,7 @@ function atomium_atomium_theme_form_element() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_form_element(&$variables, $hook) {
+function atomium_preprocess_form_element(array &$variables, $hook) {
   $element = &$variables['element'];
 
   // This function is invoked as theme wrapper, but the rendered form element

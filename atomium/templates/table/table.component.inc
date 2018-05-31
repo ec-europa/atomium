@@ -29,7 +29,7 @@ function atomium_atomium_theme_table() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_table(&$variables, $hook) {
+function atomium_preprocess_table(array &$variables, $hook) {
   $header = $variables['header'];
   $rows = $variables['rows'];
   $sticky = $variables['sticky'];

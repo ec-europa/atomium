@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_breadcrumb(&$variables, $hook) {
+function atomium_foundation_preprocess_breadcrumb(array &$variables, $hook) {
   if (empty($variables[$hook][$hook])) {
     return;
   }

@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_menu_tree(&$variables, $hook) {
+function atomium_foundation_preprocess_menu_tree(array &$variables, $hook) {
   if (1 != $variables['depth']) {
     $variables['attributes_array']['class'][] = 'nested';
   }

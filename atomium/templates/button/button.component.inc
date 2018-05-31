@@ -36,7 +36,7 @@ function atomium_atomium_definition_button() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_button(&$variables, $hook) {
+function atomium_preprocess_button(array &$variables, $hook) {
   element_set_attributes($variables['element'], array('id', 'name', 'value'));
 
   $attributes = _atomium_get_attributes($variables['element']);

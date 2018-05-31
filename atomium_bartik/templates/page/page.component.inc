@@ -8,7 +8,7 @@
 /**
  * Implements hook_process_hook().
  */
-function atomium_bartik_preprocess_page(&$variables, $hook) {
+function atomium_bartik_preprocess_page(array &$variables, $hook) {
   if (isset($variables['page']['content']['#theme_wrappers'])) {
     $variables['page']['content']['#theme_wrappers'] = array_diff($variables['page']['content']['#theme_wrappers'], array('region'));
   }
@@ -18,7 +18,7 @@ function atomium_bartik_preprocess_page(&$variables, $hook) {
 /**
  * Implements hook_process_hook().
  */
-function atomium_bartik_process_page(&$variables, $hook) {
+function atomium_bartik_process_page(array &$variables, $hook) {
   // Hook into color.module.
   if (module_exists('color')) {
     _color_page_alter($variables);

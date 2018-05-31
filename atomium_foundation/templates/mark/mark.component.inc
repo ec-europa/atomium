@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_mark(&$variables, $hook) {
+function atomium_foundation_preprocess_mark(array &$variables, $hook) {
   $variables['attributes_array']['class'][] = 'label';
   $variables['attributes_array']['class'][] = 'info';
 }

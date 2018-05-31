@@ -22,7 +22,7 @@ function atomium_atomium_theme_admin_block_content() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_admin_block_content(&$variables, $hook) {
+function atomium_preprocess_admin_block_content(array &$variables, $hook) {
   $variables['compact'] = FALSE;
 
   if (!empty($variables['content'])) {

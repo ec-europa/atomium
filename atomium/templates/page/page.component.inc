@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_page(&$variables, $hook) {
+function atomium_preprocess_page(array &$variables, $hook) {
   $variables['page_manager_control'] = NULL;
   if (isset($variables['node'])) {
     // Tell the template whether the node is panelizer-controlled.

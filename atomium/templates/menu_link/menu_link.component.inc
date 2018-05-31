@@ -20,7 +20,7 @@ function atomium_atomium_theme_menu_link() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_menu_link(&$variables, $hook) {
+function atomium_preprocess_menu_link(array &$variables, $hook) {
   $element = $variables['element'];
   $sub_menu = '';
 

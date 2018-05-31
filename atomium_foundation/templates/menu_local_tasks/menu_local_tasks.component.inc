@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_menu_local_tasks(&$variables, $hook) {
+function atomium_foundation_preprocess_menu_local_tasks(array &$variables, $hook) {
   if (!empty($variables['primary'])) {
     if (isset($variables['primary']['#type'])) {
       $variables['primary']['#type'] = '';

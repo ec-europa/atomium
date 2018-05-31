@@ -23,7 +23,7 @@ function atomium_atomium_theme_file_link() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_file_link(&$variables, $hook) {
+function atomium_preprocess_file_link(array &$variables, $hook) {
   $file = $variables['file'];
   $icon_directory = $variables['icon_directory'];
 

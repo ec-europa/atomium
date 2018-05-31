@@ -20,7 +20,7 @@ function atomium_atomium_theme_textarea() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_textarea(&$variables, $hook) {
+function atomium_preprocess_textarea(array &$variables, $hook) {
   element_set_attributes(
     $variables['element'],
     array('id', 'name', 'cols', 'rows', 'title', '#title' => 'placeholder')

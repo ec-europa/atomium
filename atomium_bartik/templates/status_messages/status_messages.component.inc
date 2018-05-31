@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bartik_preprocess_status_messages(&$variables, $hook) {
+function atomium_bartik_preprocess_status_messages(array &$variables, $hook) {
   foreach ($variables['status_messages']['status_messages'] as &$data) {
     $data['#theme_wrappers'] = array();
     $data['messages']['#title'] = array(

@@ -24,7 +24,7 @@ function atomium_atomium_theme_menu_local_task() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_menu_local_task(&$variables, $hook) {
+function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   $link = $variables['link'];
   $link_text = $link['title'];
   $active = NULL;

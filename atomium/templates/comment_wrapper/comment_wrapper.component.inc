@@ -20,7 +20,7 @@ function atomium_atomium_theme_comment_wrapper() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_comment_wrapper(&$variables, $hook) {
+function atomium_preprocess_comment_wrapper(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
   $variables['atomium']['attributes']['wrapper']->append('id', 'comments-wrapper-' . $variables['node']->nid);
 }

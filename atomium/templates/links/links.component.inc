@@ -28,7 +28,7 @@ function atomium_atomium_theme_links() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_links(&$variables, $hook) {
+function atomium_preprocess_links(array &$variables, $hook) {
   global $language_url;
 
   $heading = $variables['heading'];

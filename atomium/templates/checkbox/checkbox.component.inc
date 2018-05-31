@@ -20,7 +20,7 @@ function atomium_atomium_theme_checkbox() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_checkbox(&$variables, $hook) {
+function atomium_preprocess_checkbox(array &$variables, $hook) {
   _form_set_class($variables['element'], array('form-checkbox'));
   element_set_attributes(
     $variables['element'],

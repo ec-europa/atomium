@@ -20,7 +20,7 @@ function atomium_atomium_theme_update_status_label() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_update_status_label(&$variables, $hook) {
+function atomium_preprocess_update_status_label(array &$variables, $hook) {
   $text = '';
   $class = '';
 

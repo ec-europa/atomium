@@ -20,7 +20,7 @@ function atomium_atomium_theme_fieldset() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_fieldset(&$variables, $hook) {
+function atomium_preprocess_fieldset(array &$variables, $hook) {
   $variables += array(
     'description' => '',
   );

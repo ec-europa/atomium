@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_node(&$variables, $hook) {
+function atomium_preprocess_node(array &$variables, $hook) {
   // One unified node teaser template.
   $variables['theme_hook_suggestions'][] = 'node__' . $variables['view_mode'];
 
@@ -79,4 +79,13 @@ function atomium_preprocess_node(&$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->remove('class', atomium_get_settings('preprocess.node.classes_to_remove', TRUE));
   $variables['atomium']['attributes']['wrapper']->append('role', 'article');
   $variables['atomium']['attributes']['wrapper']->append('id', 'node-' . $variables['nid']);
+}
+
+
+function atomium_preprocess_node__page(array &$variables, $hook) {
+    $variables['atomium']['attributes']['wrapper']->append('class', 'ec_ftw');
+
+    $variables['atomium']['attributes']['wrapper']->append('room', ['meeting', 'meeting2']);
+
+    //$variables['atomium']['attributes']['description'];
 }

@@ -20,7 +20,7 @@ function atomium_atomium_theme_select() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_select(&$variables, $hook) {
+function atomium_preprocess_select(array &$variables, $hook) {
   element_set_attributes($variables['element'], array('id', 'name', 'size'));
   _form_set_class($variables['element'], array('form-select'));
   $attributes = _atomium_get_attributes($variables['element']);

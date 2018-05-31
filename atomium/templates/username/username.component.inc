@@ -20,7 +20,7 @@ function atomium_atomium_theme_username() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_username(&$variables, $hook) {
+function atomium_preprocess_username(array &$variables, $hook) {
   if (isset($variables['uid'])) {
     $variables['theme_hook_suggestions'][] = 'username__uid_' . $variables['uid'];
   }

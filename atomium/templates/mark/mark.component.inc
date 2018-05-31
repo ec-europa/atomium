@@ -23,7 +23,7 @@ function atomium_atomium_theme_mark() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_mark(&$variables, $hook) {
+function atomium_preprocess_mark(array &$variables, $hook) {
   global $user;
   $type = $variables['type'];
 

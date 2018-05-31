@@ -23,7 +23,7 @@ function atomium_atomium_theme_filter_tips() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_filter_tips(&$variables, $hook) {
+function atomium_preprocess_filter_tips(array &$variables, $hook) {
   $items = array();
 
   foreach ($variables['tips'] as $name => $tip_list) {

@@ -20,7 +20,7 @@ function atomium_atomium_theme_image_button() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_image_button(&$variables, $hook) {
+function atomium_preprocess_image_button(array &$variables, $hook) {
   element_set_attributes(
     $variables['element'],
     array(

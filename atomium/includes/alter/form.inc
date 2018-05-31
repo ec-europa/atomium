@@ -8,7 +8,7 @@
 /**
  * Implements hook_form_alter().
  */
-function atomium_form_alter(&$form, &$form_state, $form_id) {
+function atomium_form_alter(array &$form, array &$form_state, $form_id) {
   // Custom recursive function to alter all the #theme keys of form elements.
   _atomium_form_element_theme_alter($form, $form_state, $form_id);
 
@@ -43,7 +43,7 @@ function atomium_form_alter(&$form, &$form_state, $form_id) {
  *
  * @see form_builder()
  */
-function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
+function _atomium_form_element_theme_alter(array &$form, array &$form_state, $form_id) {
   foreach (element_children($form) as $key) {
     if (isset($form[$key]['#type']) && empty($form[$key]['#defaults_loaded']) && ($info = element_info($form[$key]['#type']))) {
       if (isset($info['#theme'])) {
@@ -71,7 +71,7 @@ function _atomium_form_element_theme_alter(&$form, &$form_state, $form_id) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function atomium_form_search_block_form_alter(&$form, &$form_state, $form_id) {
+function atomium_form_search_block_form_alter(array &$form, array &$form_state, $form_id) {
   $form['search_block_form']['#attributes']['placeholder'][] = t('Search');
   $form['search_block_form']['#attributes']['type'] = 'search';
 }
@@ -79,7 +79,7 @@ function atomium_form_search_block_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function atomium_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+function atomium_form_user_login_block_alter(array &$form, array &$form_state, $form_id) {
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'];
   $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'];
 }
@@ -87,7 +87,7 @@ function atomium_form_user_login_block_alter(&$form, &$form_state, $form_id) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function atomium_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+function atomium_form_user_register_form_alter(array &$form, array &$form_state, $form_id) {
   $form['account']['name']['#attributes']['placeholder'][] = $form['account']['name']['#title'];
   $form['account']['mail']['#attributes']['placeholder'][] = $form['account']['mail']['#title'];
 }
@@ -95,7 +95,7 @@ function atomium_form_user_register_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function atomium_form_user_login_alter(&$form, &$form_state, $form_id) {
+function atomium_form_user_login_alter(array &$form, array &$form_state, $form_id) {
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'];
   $form['pass']['#attributes']['placeholder'][] = $form['pass']['#title'];
 }
@@ -103,6 +103,6 @@ function atomium_form_user_login_alter(&$form, &$form_state, $form_id) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function atomium_form_user_pass_alter(&$form, &$form_state, $form_id) {
+function atomium_form_user_pass_alter(array &$form, array &$form_state, $form_id) {
   $form['name']['#attributes']['placeholder'][] = $form['name']['#title'];
 }

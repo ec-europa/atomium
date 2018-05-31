@@ -24,7 +24,7 @@ function atomium_atomium_theme_link() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_link(&$variables, $hook) {
+function atomium_preprocess_link(array &$variables, $hook) {
   global $language_url;
 
   $variables += array('options' => array('html' => FALSE));

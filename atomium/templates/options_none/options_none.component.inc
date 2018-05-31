@@ -20,7 +20,7 @@ function atomium_atomium_theme_options_none() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_options_none(&$variables, $hook) {
+function atomium_preprocess_options_none(array &$variables, $hook) {
   $instance = $variables['instance'];
   $option = $variables['option'];
 

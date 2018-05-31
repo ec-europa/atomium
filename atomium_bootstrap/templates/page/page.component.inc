@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_page(&$variables, $hook) {
+function atomium_bootstrap_preprocess_page(array &$variables, $hook) {
   // This is important to set this variable to an empty string.
   $variables['action_links']['#type'] = 'div';
   $variables['action_links']['#wrapper'] = FALSE;

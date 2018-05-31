@@ -8,7 +8,7 @@
 /**
  * Implements hook_field_attach_view_alter().
  */
-function atomium_field_attach_view_alter(&$output, $context) {
+function atomium_field_attach_view_alter(array &$output, array $context) {
   $suggestion_data = atomium_get_settings('alter.field_attach_view_alter.keys', TRUE);
 
   foreach (element_children($output) as $key) {

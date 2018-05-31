@@ -20,7 +20,7 @@ function atomium_atomium_theme_field() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_field(&$variables, $hook) {
+function atomium_preprocess_field(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']
     ->append('class', $variables['classes_array']);
 

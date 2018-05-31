@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_html(&$variables, $hook) {
+function atomium_preprocess_html(array &$variables, $hook) {
   // Add variables and paths needed for HTML5 and responsive support.
   $variables['base_path'] = base_path();
 
@@ -97,7 +97,7 @@ function atomium_preprocess_html(&$variables, $hook) {
 /**
  * Implements hook_process_hook().
  */
-function atomium_process_html(&$variables, $hook) {
+function atomium_process_html(array &$variables, $hook) {
   if (theme_get_setting('atomium_convert_inline_js_into_files')) {
     preg_match_all('/<script(?![^>]+src).*?>([\s\S]*?)<\/script>/s', $variables['scripts'], $matches, PREG_SET_ORDER);
     foreach ($matches as $match) {

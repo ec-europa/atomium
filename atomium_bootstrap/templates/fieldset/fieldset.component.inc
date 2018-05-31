@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_fieldset(&$variables, $hook) {
+function atomium_bootstrap_preprocess_fieldset(array &$variables, $hook) {
   $element = &$variables['element'];
 
   // Set the element's attributes.

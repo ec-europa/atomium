@@ -10,7 +10,7 @@ use Drupal\Atomium\AttributesContainer;
 /**
  * Implements hook_preprocess().
  */
-function atomium_preprocess(&$variables, $hook) {
+function atomium_preprocess(array &$variables, $hook) {
   // Make sure the 'atomium' key is created.
   $variables += array(
     'atomium' => array(

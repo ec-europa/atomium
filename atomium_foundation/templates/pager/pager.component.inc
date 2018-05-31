@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_foundation_preprocess_pager(&$variables, $hook) {
+function atomium_foundation_preprocess_pager(array &$variables, $hook) {
   $variables[$hook][$hook]['#attributes']['class'][] = 'pagination';
 
   if (isset($variables[$hook][$hook]['#items'])) {

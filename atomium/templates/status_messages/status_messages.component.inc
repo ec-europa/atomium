@@ -46,7 +46,7 @@ function atomium_atomium_definition_status_messages() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_status_messages(&$variables, $hook) {
+function atomium_preprocess_status_messages(array &$variables, $hook) {
   $status_heading = array(
     'status' => t('Status message'),
     'error' => t('Error message'),

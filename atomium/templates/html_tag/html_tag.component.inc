@@ -20,7 +20,7 @@ function atomium_atomium_theme_html_tag() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_html_tag(&$variables, $hook) {
+function atomium_preprocess_html_tag(array &$variables, $hook) {
   $element = &$variables['element'];
 
   // Loop over element children, render them, and add them to the #value string.

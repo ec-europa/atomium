@@ -24,7 +24,7 @@ function atomium_atomium_theme_file_icon() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_file_icon(&$variables, $hook) {
+function atomium_preprocess_file_icon(array &$variables, $hook) {
   $file = $variables['file'];
 
   if (isset($file->filemime)) {

@@ -8,7 +8,7 @@
 /**
  * Implements hook_element_info_alter().
  */
-function atomium_element_info_alter(&$types) {
+function atomium_element_info_alter(array &$types) {
   foreach ($types as &$type) {
     if (isset($type['#theme_wrappers'])) {
       foreach ((array) $type['#theme_wrappers'] as $key => $theme_wrapper) {

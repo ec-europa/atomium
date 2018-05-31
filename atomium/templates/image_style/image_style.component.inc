@@ -28,7 +28,7 @@ function atomium_atomium_theme_image_style() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_image_style(&$variables, $hook) {
+function atomium_preprocess_image_style(array &$variables, $hook) {
   // Determine the dimensions of the styled image.
   $dimensions = array(
     'width' => $variables['width'],

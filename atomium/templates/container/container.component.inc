@@ -20,7 +20,7 @@ function atomium_atomium_theme_container() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_container(&$variables, $hook) {
+function atomium_preprocess_container(array &$variables, $hook) {
   $element = $variables['element'];
 
   // @Todo: Remove this, it shouldn't be used anymore but it's too early now.

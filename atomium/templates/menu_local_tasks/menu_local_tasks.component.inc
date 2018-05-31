@@ -26,7 +26,7 @@ function atomium_atomium_theme_menu_local_tasks() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_menu_local_tasks(&$variables, $hook) {
+function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
   $variables['atomium']['attributes']['primary']->append('class', 'hook__' . $hook . '__primary');
   $variables['atomium']['attributes']['secondary']->append('class', 'hook__' . $hook . '__secondary');
 

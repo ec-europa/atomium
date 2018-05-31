@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_bootstrap_preprocess_status_messages(&$variables, $hook) {
+function atomium_bootstrap_preprocess_status_messages(array &$variables, $hook) {
   $status_mapping = array(
     'error' => 'alert-danger',
     'status' => 'alert-success',

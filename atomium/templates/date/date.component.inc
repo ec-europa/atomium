@@ -20,7 +20,7 @@ function atomium_atomium_theme_date() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_date(&$variables, $hook) {
+function atomium_preprocess_date(array &$variables, $hook) {
   $element = $variables['element'];
 
   $attributes = array();

@@ -23,7 +23,7 @@ function atomium_atomium_theme_user_picture() {
 /**
  * Implements hook_preprocess_hook().
  */
-function atomium_preprocess_user_picture(&$variables, $hook) {
+function atomium_preprocess_user_picture(array &$variables, $hook) {
   if (variable_get('user_pictures', 0)) {
     $account = $variables['account'];
 
