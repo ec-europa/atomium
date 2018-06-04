@@ -65,27 +65,12 @@ function atomium_theme_registry_alter(array &$registry) {
   /* @see _theme_build_registry() */
   list($theme, $base_themes) = $trace[2]['args'];
 
-  $base_themes = array_combine(
-    array_map(
-      function ($theme) {
-        return $theme->name;
-      },
-      $base_themes
-    ),
-    $base_themes
-  );
-
   // Process registered hooks in the theme registry.
   _atomium_process_theme_registry(
     $registry,
-    array_map(
-      function ($theme) {
-        return $theme->name;
-      },
-      array_merge(
-        $base_themes,
-        array($theme->name => $theme)
-      )
+    array_merge(
+      $base_themes,
+      array($theme->name => $theme)
     )
   );
 
@@ -105,7 +90,10 @@ function atomium_theme_registry_alter(array &$registry) {
  */
 function _theme_post_process_registry(array &$cache, array $base_themes, $theme) {
   $prefixes_data = _atomium_theme_make_prefixes($base_themes, $theme);
-  $themes = array_merge($prefixes_data['theme_engine'], $prefixes_data['base_theme'], $prefixes_data['theme']);
+  $theme_hooks = array_merge(
+    $prefixes_data['theme_engine'],
+    $prefixes_data['base_theme'],
+    $prefixes_data['theme']);
   $grouped_functions = drupal_group_functions_by_prefix();
 
   // Reverse sort the registry.
@@ -123,7 +111,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
 
     // Iterate over each themes objects.
     // This is in order: the theme engine, the base theme(s), the current theme.
-    foreach ($themes as $theme_hook) {
+    foreach ($theme_hooks as $theme_hook) {
       _atomium_theme_find_processors($grouped_functions, $cache, $info, $theme_hook, $hook);
 
       // Ensure "theme path" is set.
@@ -317,9 +305,11 @@ function _atomium_theme_make_prefixes(array $base_themes, $theme) {
     'theme_engine' => array(
       $theme->engine => $theme->engine,
     ),
-    'base_theme' => array_combine(
-      array_keys($base_themes),
-      array_keys($base_themes)
+    'base_theme' => array_map(
+      function ($theme) {
+        return $theme->name;
+      },
+      $base_themes
     ),
     'theme' => array(
       $theme->name => $theme->name,
@@ -392,19 +382,14 @@ function drupal_get_hook_parents($hook) {
  *
  * @param array $registry
  *   The theme registry array, passed by reference.
- * @param string|array $themes
- *   The name of the theme or list of theme names to process.
+ * @param object[] $themes
+ *   The list of Drupal theme to process.
  *
  * @see atomium_theme_registry_alter()
  * @see _theme_process_registry()
  * @see _theme_build_registry()
  */
-function _atomium_process_theme_registry(array &$registry, $themes) {
-  // Convert to an array if needed.
-  if (is_string($themes)) {
-    $themes = array();
-  }
-
+function _atomium_process_theme_registry(array &$registry, array $themes) {
   // Processor functions work in two distinct phases with the process
   // functions always being executed after the preprocess functions.
   $variable_process_phases = array(
@@ -417,7 +402,7 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
   foreach ($variable_process_phases as $phase_key => $phase) {
     foreach ($themes as $theme) {
       // Get the theme's base path.
-      $path = drupal_get_path('theme', $theme);
+      $path = drupal_dirname($theme->filename);
       $regexp = '/\.component\.inc$/';
       // Find theme function overrides.
       foreach (drupal_system_listing($regexp, $path . '/templates', 'name', 0) as $name => $file) {
@@ -447,7 +432,7 @@ function _atomium_process_theme_registry(array &$registry, $themes) {
       }
 
       // Process core's normal functionality.
-      _theme_process_registry($registry, $theme, $GLOBALS['theme_key'] === $theme ? 'theme' : 'base_theme', $theme, $path);
+      _theme_process_registry($registry, $theme->name, $GLOBALS['theme_key'] === $theme->name ? 'theme' : 'base_theme', $theme->name, $path);
 
       // Find necessary templates in the theme.
       $registry = drupal_array_merge_deep($registry, drupal_find_theme_templates($registry, '.tpl.php', $path));
@@ -511,18 +496,20 @@ function _atomium_registry_sort_phase_functions(array &$functions, $hook, $phase
     return;
   }
 
-  // Create an associative array of theme functions to ensure sort order.
-  $theme_functions = array_fill_keys($themes, array());
+  $theme_functions = array();
 
   // Iterate over all the themes.
   foreach ($themes as $theme) {
+    // Create an associative array of theme functions to ensure sort order.
+    $theme_functions[$theme->name] = array();
+
     // Only add the function to the array of theme functions if it currently
     // exists in the $functions array.
-    $function = $theme . '_' . $phase . '_' . $hook;
+    $function = $theme->name . '_' . $phase . '_' . $hook;
     $key = array_search($function, $functions);
     if ($key !== FALSE) {
       // Save the theme function to be added later, but sorted.
-      $theme_functions[$theme][] = $function;
+      $theme_functions[$theme->name][] = $function;
 
       // Remove it from the current $functions array.
       unset($functions[$key]);
