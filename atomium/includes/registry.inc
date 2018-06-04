@@ -47,45 +47,40 @@ function _atomium_theme(&$existing, $type, $theme, $path) {
  * Implements hook_theme_registry_alter().
  */
 function atomium_theme_registry_alter(array &$registry) {
-  // Retrieve the active theme names.
-  $themes = _atomium_get_base_themes(NULL, TRUE);
+  // Figure out which theme this applies to.
+  $trace = debug_backtrace(0, 3);
 
-  // Return the theme registry unaltered if it is not Atomium based.
-  if (!in_array('atomium', $themes)) {
+  if (!isset($trace[2]['function'], $trace[2]['args'][0])
+    || '_theme_build_registry' !== $trace[2]['function']) {
+    watchdog(
+      'atomium',
+      'hook_theme_registry_alter() was called from an unexpected place. We cannot determine which theme this registry belongs to. Atomium functionality might not work.',
+      [],
+      WATCHDOG_WARNING
+    );
+
     return;
   }
 
+  /* @see _theme_build_registry() */
+  list($theme, $base_themes) = $trace[2]['args'];
+
   // Process registered hooks in the theme registry.
-  _atomium_process_theme_registry($registry, $themes);
-
-  // Get all themes.
-  $all_themes = list_themes();
-
-  // Compile an array of base themes object.
-  $base_themes = _atomium_get_base_themes($all_themes[$GLOBALS['theme']]->name, TRUE);
-  $base_themes = array_map(function ($theme) use ($all_themes) {
-    return $all_themes[$theme];
-  }, array_combine($base_themes, $base_themes));
-
-  // Extract the current theme.
-  $theme = array_pop($base_themes);
+  _atomium_process_theme_registry(
+    $registry,
+    array_map(
+      function ($theme) {
+        return $theme->name;
+      },
+      array_merge(
+        $base_themes,
+        array($theme)
+      )
+    )
+  );
 
   // Apply Atomium sauce.
   _theme_post_process_registry($registry, $base_themes, $theme);
-
-  array_walk($registry, function (array &$info) {
-    // Make sure there is a preprocess for each hook.
-    $info += array('preprocess functions' => array());
-
-    // Remove 'atomium preprocess' callback.
-    unset($info['preprocess functions']['atomium_preprocess']);
-
-    // The simple preprocess was not used here because theme hooks defined with
-    // a function doesn't trigger all the preprocess callbacks.
-    // It's added at the first place so we make sure it's creating the variables
-    // for hooks defined by templates and functions properly.
-    array_unshift($info['preprocess functions'], 'atomium_preprocess');
-  });
 }
 
 /**
@@ -158,6 +153,20 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
 
   // Sort the registry.
   ksort($cache);
+
+  array_walk($cache, function (array &$info) {
+    // Make sure there is a preprocess for each hook.
+    $info += array('preprocess functions' => array());
+
+    // Remove 'atomium preprocess' callback.
+    unset($info['preprocess functions']['atomium_preprocess']);
+
+    // The simple preprocess was not used here because theme hooks defined with
+    // a function doesn't trigger all the preprocess callbacks.
+    // It's added at the first place so we make sure it's creating the variables
+    // for hooks defined by templates and functions properly.
+    array_unshift($info['preprocess functions'], 'atomium_preprocess');
+  });
 }
 
 /**
