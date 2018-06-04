@@ -158,8 +158,12 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
     // Make sure there is a preprocess for each hook.
     $info += array('preprocess functions' => array());
 
-    // Remove 'atomium preprocess' callback.
-    unset($info['preprocess functions']['atomium_preprocess']);
+    $info['preprocess functions'] = array_filter(
+      $info['preprocess functions'],
+      function($preprocess) {
+        return 'atomium_preprocess' !== $preprocess;
+      }
+    );
 
     // The simple preprocess was not used here because theme hooks defined with
     // a function doesn't trigger all the preprocess callbacks.
