@@ -1,9 +1,12 @@
 <?php
 
 /**
+ * @file
+ * views.inc
+ */
+
+/**
  * Implements hook_views_pre_render().
- *
- * @param \view $view
  */
 function atomium_views_pre_render(view $view) {
   $display = $view->display[$view->current_display];
