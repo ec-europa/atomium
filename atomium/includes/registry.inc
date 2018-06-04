@@ -55,7 +55,7 @@ function atomium_theme_registry_alter(array &$registry) {
     watchdog(
       'atomium',
       'hook_theme_registry_alter() was called from an unexpected place. We cannot determine which theme this registry belongs to. Atomium functionality might not work.',
-      [],
+      array(),
       WATCHDOG_WARNING
     );
 
@@ -64,6 +64,16 @@ function atomium_theme_registry_alter(array &$registry) {
 
   /* @see _theme_build_registry() */
   list($theme, $base_themes) = $trace[2]['args'];
+
+  $base_themes = array_combine(
+    array_map(
+      function ($theme) {
+        return $theme->name;
+      },
+      $base_themes
+    ),
+    $base_themes
+  );
 
   // Process registered hooks in the theme registry.
   _atomium_process_theme_registry(
@@ -74,7 +84,7 @@ function atomium_theme_registry_alter(array &$registry) {
       },
       array_merge(
         $base_themes,
-        array($theme)
+        array($theme->name => $theme)
       )
     )
   );
@@ -160,7 +170,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
 
     $info['preprocess functions'] = array_filter(
       $info['preprocess functions'],
-      function($preprocess) {
+      function ($preprocess) {
         return 'atomium_preprocess' !== $preprocess;
       }
     );
