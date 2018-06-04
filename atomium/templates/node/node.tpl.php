@@ -6,13 +6,6 @@
  */
 ?>
 <article<?php print $atomium['attributes']['wrapper']; ?>>
-
-  <div>
-    <?php print views_embed_view('test'); ?>
-  </div>
-
-
-
   <?php if ($title_prefix || $title_suffix || $unpublished || $preview || !$page && $title): ?>
     <header>
       <?php print render($title_prefix); ?>
@@ -56,5 +49,4 @@
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
-
 </article>
