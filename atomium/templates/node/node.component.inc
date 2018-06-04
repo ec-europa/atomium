@@ -80,12 +80,3 @@ function atomium_preprocess_node(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('role', 'article');
   $variables['atomium']['attributes']['wrapper']->append('id', 'node-' . $variables['nid']);
 }
-
-
-function atomium_preprocess_node__page(array &$variables, $hook) {
-    $variables['atomium']['attributes']['wrapper']->append('class', 'ec_ftw');
-
-    $variables['atomium']['attributes']['wrapper']->append('room', ['meeting', 'meeting2']);
-
-    //$variables['atomium']['attributes']['description'];
-}
