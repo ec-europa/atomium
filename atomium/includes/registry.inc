@@ -250,6 +250,13 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
     // Ensure uniqueness of functions.
     $info[$phase_key] = array_unique($info[$phase_key]);
 
+    // Make sure that the files to include are included prior filtering
+    // the preprocess callbacks.
+    $info += array('includes' => array());
+    foreach ((array) $info['includes'] as $theme_file) {
+      include_once $theme_file;
+    }
+
     // Filter out functions that does not exist.
     $info[$phase_key] = array_filter($info[$phase_key], '\function_exists');
 

@@ -69,7 +69,7 @@ settings[toggle_secondary_menu] = 1
 
 settings[alter][css_alter][exclude][] = 'modules/aggregator/aggregator.css'
 settings[alter][css_alter][exclude][] = 'modules/book/book.css'
-settings[alter][css_alter][exclude][] = 'modules/block/block.css'
+;settings[alter][css_alter][exclude][] = 'modules/block/block.css'
 settings[alter][css_alter][exclude][] = 'modules/comment/comment.css'
 settings[alter][css_alter][exclude][] = 'modules/dblog/dblog.css'
 settings[alter][css_alter][exclude][] = 'modules/field/theme/field.css'
