@@ -21,7 +21,12 @@ Table of contents:
 
 [Go to top](#table-of-content)
 
-# Installation
+# Installation & requirements
+
+Since the branch 7-x-3.x, Atomium requires the module [Registry on steroids](https://www.drupal.org/project/registryonsteroids) and its submodule to be installed and enabled.
+
+As it is technically not possible for a theme to depends on a module, please make sure that these modules are enabled.
+
 [Download the theme manually](https://www.drupal.org/docs/7/extending-drupal/installing-themes) or using [Drush](https://drupal.org/project/drush).
 
 [Go to top](#table-of-content)
@@ -30,7 +35,7 @@ Table of contents:
 To enable the theme, go to **admin/appearance** and select an Atomium
 based theme.
 
-Atomium comes with 2 default sub-themes provided as examples.
+Atomium comes with 3 sub-themes provided as examples.
 
  - Atomium Bootstrap,
  - Atomium Foundation,
@@ -38,7 +43,7 @@ Atomium comes with 2 default sub-themes provided as examples.
  
 Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com/).
 Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
-Atomium Bartik is a fork on the Bartik core theme using the Atomium mechanisms.
+Atomium Bartik is a fork on the Bartik core theme based on Atomium.
 
 These sub-themes provide examples of *preprocess* functions and templates
 so you can craft your own theme quickly.
@@ -53,19 +58,17 @@ easily extend.
 
 However, Atomium provides the following settings:
 
- - Enable theme debug mode.
  - Allow CSS double underscore.
+ - Move inline javascript to a file.
  
-As of Drupal 7.33, Drupal core has a theme debug mode that can be enabled and
-disabled via the **theme_debug** variable.
-Theme debug mode can be used to see possible template suggestions and the
-locations of template files right in your HTML markup (as HTML comments).
-
 As of Drupal 7.51, a new **allow_css_double_underscores** variable has been
 added to allow for double underscores in CSS identifiers. In order to allow
 CSS identifiers to contain double underscores (*.example__selector*) for
 Drupal's [BEM-style naming standards](http://getbem.com/), this variable
 can be set to TRUE.
+
+Atomium allows you to move inline Javascript (like the Drupal settings) into
+a file that is automatically loaded as a regular Javascript file.
 
 [Go to top](#table-of-content)
 
