@@ -59,12 +59,16 @@ easily extend.
 However, Atomium provides the following settings:
 
  - Allow CSS double underscore.
+ - Move inline javascript to a file.
  
 As of Drupal 7.51, a new **allow_css_double_underscores** variable has been
 added to allow for double underscores in CSS identifiers. In order to allow
 CSS identifiers to contain double underscores (*.example__selector*) for
 Drupal's [BEM-style naming standards](http://getbem.com/), this variable
 can be set to TRUE.
+
+Atomium allows you to move inline Javascript (like the Drupal settings) into
+a file that is automatically loaded as a regular Javascript file.
 
 [Go to top](#table-of-content)
 
