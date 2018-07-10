@@ -34,12 +34,6 @@ settings[atomium_convert_inline_js_into_files] = 1
 
 ; Alter configuration
 ; -------------------
-settings[alter][css_alter][exclude][] = 'modules/block/block.css'
-settings[alter][css_alter][exclude][] = 'modules/node/node.css'
-settings[alter][css_alter][exclude][] = 'modules/system/admin.css'
-settings[alter][css_alter][exclude][] = 'modules/system/system.css'
-settings[alter][css_alter][exclude][] = 'modules/system/system.admin.css'
-settings[alter][css_alter][exclude][] = 'modules/system/system.base.css'
 settings[alter][css_alter][exclude][] = 'misc/vertical-tabs.css'
 settings[alter][css_alter][exclude][] = 'modules/aggregator/aggregator.css'
 settings[alter][css_alter][exclude][] = 'modules/book/book.css'
@@ -63,6 +57,7 @@ settings[alter][css_alter][exclude][] = 'modules/system/admin.css'
 settings[alter][css_alter][exclude][] = 'modules/system/maintenance.css'
 settings[alter][css_alter][exclude][] = 'modules/system/system.css'
 settings[alter][css_alter][exclude][] = 'modules/system/system.admin.css'
+settings[alter][css_alter][exclude][] = 'modules/system/system.base.css'
 settings[alter][css_alter][exclude][] = 'modules/system/system.maintenance.css'
 settings[alter][css_alter][exclude][] = 'modules/system/system.menus.css'
 settings[alter][css_alter][exclude][] = 'modules/system/system.messages.css'
