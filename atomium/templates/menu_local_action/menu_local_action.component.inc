@@ -27,17 +27,25 @@ function atomium_preprocess_menu_local_action(array &$variables, $hook) {
   $link['localized_options'] += array('attributes' => array());
 
   if (isset($link['href'])) {
-    $variables[$variables['base_hook']] = array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+    $menu_local_action = array(
+      '#theme' => 'link',
       '#text' => $link['title'],
       '#path' => $link['href'],
       '#options' => array(),
     );
   }
   elseif (!empty($link['localized_options']['html'])) {
-    $variables[$variables['base_hook']] = $link['title'];
+    $menu_local_action = $link['title'];
   }
   else {
-    $variables[$variables['base_hook']] = check_plain($link['title']);
+    $menu_local_action = check_plain($link['title']);
   }
+
+  _atomium_extend_theme_property(
+    $menu_local_action,
+    array($variables['theme_hook_original']));
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] = $menu_local_action,
+  );
 }

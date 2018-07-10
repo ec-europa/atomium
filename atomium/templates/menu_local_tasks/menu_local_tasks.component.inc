@@ -27,26 +27,35 @@ function atomium_atomium_theme_menu_local_tasks() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
-  $variables['atomium']['attributes']['primary']->append('class', 'hook__' . $hook . '__primary');
-  $variables['atomium']['attributes']['secondary']->append('class', 'hook__' . $hook . '__secondary');
-
+  $primary = '';
   if ($variables['primary']) {
-    $variables['primary'] = array(
-      '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original'] . '__primary'),
+    $primary = array(
+      '#theme' => 'item_list',
       '#items' => $variables['primary'],
       '#type' => $variables['type'],
       '#attributes' => $variables['atomium']['attributes']['primary']->toArray(),
       '#wrapper_attributes' => array(),
     );
+
+    _atomium_extend_theme_property(
+      $primary,
+      array('primary', $primary['#type'], $variables['theme_hook_original']));
   }
 
+  $secondary = '';
   if ($variables['secondary']) {
-    $variables['secondary'] = array(
-      '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original'] . '__secondary'),
+    $secondary = array(
+      '#theme' => 'item_list',
       '#items' => $variables['secondary'],
       '#type' => $variables['type'],
       '#attributes' => $variables['atomium']['attributes']['secondary']->toArray(),
       '#wrapper_attributes' => array(),
     );
+    _atomium_extend_theme_property(
+      $secondary,
+      array('secondary', $secondary['#type'], $variables['theme_hook_original']));
   }
+
+  $variables['primary'] = $primary;
+  $variables['secondary'] = $secondary;
 }

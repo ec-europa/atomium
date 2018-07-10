@@ -46,15 +46,21 @@ function atomium_preprocess_image_style(array &$variables, $hook) {
 
   // Determine the URL for the styled image.
   $variables['path'] = image_style_url($variables['style_name'], $variables['path']);
+  $image_style = array(
+    '#theme' => 'image',
+    '#path' => $variables['path'],
+    '#width' => $variables['width'],
+    '#height' => $variables['width'],
+    '#alt' => isset($variables['alt']) ? $variables['alt'] : NULL,
+    '#title' => isset($variables['title']) ? $variables['title'] : NULL,
+    '#attributes' => isset($variables['attributes']) ? $variables['attributes'] : NULL,
+  );
+
+  _atomium_extend_theme_property(
+    $image_style,
+    array($variables['theme_hook_original']));
+
   $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
-      '#path' => $variables['path'],
-      '#width' => $variables['width'],
-      '#height' => $variables['width'],
-      '#alt' => isset($variables['alt']) ? $variables['alt'] : NULL,
-      '#title' => isset($variables['title']) ? $variables['title'] : NULL,
-      '#attributes' => isset($variables['attributes']) ? $variables['attributes'] : NULL,
-    ),
+    $variables['base_hook'] => $image_style,
   );
 }

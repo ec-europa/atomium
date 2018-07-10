@@ -32,8 +32,17 @@ function atomium_preprocess_page(array &$variables, $hook) {
       unset($variables['page']['content']['system_main']['default_message']);
     }
     if (!empty($variables['page']['content']['system_main']['#theme_wrappers'])) {
-      // Remove the block template wrapper from the main content block.
-      $variables['page']['content']['system_main']['#theme_wrappers'] = array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
+      // Remove the block hook wrapper from the main content block.
+      $variables['page']['content']['system_main']['#theme_wrappers'] = array_filter(
+        $variables['page']['content']['system_main']['#theme_wrappers'],
+        function ($theme_hook) {
+          if ('block' === atomium_get_base_hook($theme_hook)) {
+            return FALSE;
+          }
+
+          return TRUE;
+        }
+      );
     }
   }
 
@@ -60,20 +69,29 @@ function atomium_preprocess_page(array &$variables, $hook) {
       break;
   }
 
-  $variables['messages'] = NULL;
+  $messages = '';
   if ($variables['show_messages']) {
-    $variables['messages'] = array(
-      '#theme' => _atomium_extend_theme_hook('status_messages', $variables['theme_hook_original']),
+    $messages = array(
+      '#theme' => 'status_messages',
     );
+
+    _atomium_extend_theme_property(
+      $messages,
+      array($variables['theme_hook_original']));
   }
+  $variables['messages'] = $messages;
 
   $variables['breadcrumb'] = array(
-    '#theme' => _atomium_extend_theme_hook('breadcrumb', $variables['theme_hook_original']),
+    '#theme' => 'breadcrumb',
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
 
+  _atomium_extend_theme_property(
+    $variables['breadcrumb'],
+    array($variables['theme_hook_original']));
+
   $variables['action_links'] = array(
-    '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
+    '#theme' => 'item_list',
     '#items' => menu_local_actions(),
     '#attributes' => array(
       'class' => array(
@@ -81,6 +99,10 @@ function atomium_preprocess_page(array &$variables, $hook) {
       ),
     ),
   );
+
+  _atomium_extend_theme_property(
+    $variables['action_links'],
+    array($variables['theme_hook_original']));
 
   unset($variables['page']['content']['#theme_wrappers']);
 }

@@ -44,7 +44,7 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
     $legend = array(
       'content' => array(
         '#markup' => $variables['title'],
-        '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
+        '#theme_wrappers' => array('html_tag'),
         '#tag' => 'span',
         '#attributes' => array(
           'class' => array(
@@ -52,9 +52,22 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
           ),
         ),
       ),
-      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', array('legend', $variables['theme_hook_original'])),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'legend',
       '#attributes' => array(),
+    );
+
+    _atomium_extend_theme_wrappers_property(
+      $legend,
+      array($legend['#tag'], $variables['theme_hook_original']));
+
+    _atomium_extend_theme_wrappers_property(
+      $legend['content'],
+      array(
+        $legend['content']['#tag'],
+        $legend['#tag'],
+        $variables['theme_hook_original'],
+      )
     );
   }
   $variables['legend'] = $legend;
@@ -64,13 +77,22 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
   if ($variables['description']) {
     $description = array(
       '#markup' => $variables['description'],
-      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original'] . '__description'),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'div',
       '#attributes' => array(
         'class' => array(
           'fieldset-description',
         ),
       ),
+    );
+
+    _atomium_extend_theme_wrappers_property(
+      $description,
+      array(
+        $description['#tag'],
+        $variables['theme_hook_original'],
+        'description',
+      )
     );
   }
   $variables['description'] = $description;

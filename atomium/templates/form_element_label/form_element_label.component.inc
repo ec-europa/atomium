@@ -26,11 +26,11 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
   $t = get_t();
 
   // Style the label as class option to display inline with the element.
-  if ($element['#title_display'] == 'after') {
+  if ('after' === $element['#title_display']) {
     $variables['atomium']['attributes']['wrapper']->append('class', 'option');
   }
   // Show label only to screen readers to avoid disruption in visual flows.
-  elseif ($element['#title_display'] == 'invisible') {
+  elseif ('invisible' === $element['#title_display']) {
     $variables['atomium']['attributes']['wrapper']->append('class', 'element-invisible');
   }
 
@@ -48,11 +48,16 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
     );
   }
 
-  if (isset($element['#required']) && $element['#required']) {
-    $variables['required'] = array(
-      '#theme' => _atomium_extend_theme_hook('form_required_marker', $variables['theme_hook_original']),
+  $required = '';
+  if (!empty($element['#required'])) {
+    $required = array(
+      '#theme' => 'form_required_marker',
     );
+    _atomium_extend_theme_property(
+      $required,
+      array($variables['theme_hook_original']));
   }
+  $variables['required'] = $required;
 
   $variables[$variables['base_hook']] = array(
     'title' => array(

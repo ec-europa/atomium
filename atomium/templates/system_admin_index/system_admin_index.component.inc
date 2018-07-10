@@ -21,9 +21,13 @@ function atomium_atomium_theme_system_admin_index() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_system_admin_index(array &$variables, $hook) {
-  $variables['toggle_link'] = array(
-    '#theme' => _atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
+  $toggle_link = array(
+    '#theme' => 'system_compact_link',
   );
+  _atomium_extend_theme_property(
+    $toggle_link,
+    array($variables['theme_hook_original']));
+  $variables['toggle_link'] = $toggle_link;
 
   $container = array('left' => array(), 'right' => array());
   $flip = array('left' => 'right', 'right' => 'left');
@@ -37,10 +41,16 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
     if (count($items)) {
       $block = array();
       $block['title'] = $module;
-      $block['content'] = array(
-        '#theme' => _atomium_extend_theme_hook('admin_block_content', $variables['theme_hook_original']),
+
+      $block_content = array(
+        '#theme' => 'admin_block_content',
         '#content' => $items,
       );
+      _atomium_extend_theme_property(
+        $block_content,
+        array($variables['theme_hook_original']));
+      $block['content'] = $block_content;
+
       $block['description'] = t('@description', array('@description' => $description));
       $block['show'] = TRUE;
 
@@ -49,10 +59,15 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
         $block['position'] = $position;
         $position = $flip[$position];
       }
-      $container[$block['position']][] = array(
-        '#theme' => _atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
+
+      $block = array(
+        '#theme' => 'admin_block',
         '#block' => $block,
       );
+      _atomium_extend_theme_property(
+        $block,
+        array($variables['theme_hook_original']));
+      $container[$block['position']][] = $block;
     }
   }
 

@@ -35,22 +35,21 @@ function atomium_preprocess_menu_link(array &$variables, $hook) {
 
   $variables['atomium']['attributes']['wrapper']->merge($element['#attributes']);
 
-  $variables['sub_menu'] = $sub_menu;
-  $variables['output'] = array(
-    '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+  $menu_link = array(
+    '#theme' => 'link',
     '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
     '#path' => $element['#href'],
-    '#options' => $element['#localized_options'],
+    '#options' => $element['#localized_options'] + array('attributes' => array('class' => array())),
   );
 
-  if (isset($variables['element']['#original_link']['mlid'])) {
-    $variables['theme_hook_suggestions'][] = 'menu_link__' . $variables['element']['#original_link']['mlid'];
-  }
+  _atomium_extend_theme_property(
+    $menu_link,
+    array($variables['theme_hook_original']));
 
   $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => array(
-      $variables['output'],
-      $variables['sub_menu'],
-    ),
+    $variables['base_hook'] => $menu_link,
+  );
+  $variables['submenu'] = array(
+    'submenu' => $sub_menu,
   );
 }

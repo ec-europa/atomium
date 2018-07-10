@@ -26,14 +26,13 @@ function atomium_atomium_theme_menu_local_task() {
  */
 function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   $link = $variables['link'];
-  $link_text = $link['title'];
   $active = NULL;
 
   if (!empty($variables['active']) && TRUE == $variables['active']) {
     // Add text to indicate active tab for non-visual users.
     $active = array(
       '#markup' => t('(active tab)'),
-      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
+      '#theme_wrappers' => array('html_tag'),
       '#tag' => 'span',
       '#attributes' => array(
         'class' => array(
@@ -41,6 +40,10 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
         ),
       ),
     );
+
+    _atomium_extend_theme_wrappers_property(
+      $active,
+      array($active['#tag'], $variables['theme_hook_original']));
 
     // If the link does not contain HTML already, check_plain() it now.
     // After we set 'html'=TRUE the link will not be sanitized by l().
@@ -50,23 +53,29 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
     $link['localized_options']['html'] = TRUE;
   }
 
-  $variables[$variables['base_hook']] = $link_text;
+  $menu_local_task = $link['title'];
   if (isset($link['href'])) {
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => array(
-        '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-        '#text' => array(
-          array('#markup' => $link['title']),
-          $active,
-        ),
-        '#path' => $link['href'],
-        '#options' => array(
-          'attributes' => array('title' => $link['title']),
-          'html' => TRUE,
-        ),
+    $menu_local_task = array(
+      '#theme' => 'link',
+      '#text' => array(
+        array('#markup' => $link['title']),
+        $active,
+      ),
+      '#path' => $link['href'],
+      '#options' => array(
+        'attributes' => array('title' => $link['title']),
+        'html' => TRUE,
       ),
     );
+
+    _atomium_extend_theme_property(
+      $menu_local_task,
+      array($variables['theme_hook_original']));
   }
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $menu_local_task,
+  );
 
   $variables['atomium']['attributes']['wrapper']->append('class', !empty($variables['active']) ? 'active' : '');
 }

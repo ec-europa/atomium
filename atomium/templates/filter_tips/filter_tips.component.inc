@@ -29,7 +29,7 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
   foreach ($variables['tips'] as $name => $tip_list) {
     foreach ($tip_list as $key => $tip) {
       $items[$key] = array(
-        '#theme' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
+        '#theme' => 'html_tag',
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
@@ -44,11 +44,27 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
     }
   }
 
+  array_walk($items, function (&$item) use ($variables) {
+    _atomium_extend_theme_property(
+      $item,
+      array($item['#tag'], $variables['theme_hook_original']));
+  });
+
+  $filter_tips = array(
+    '#theme' => 'item_list',
+    '#theme_wrappers' => array('container'),
+    '#items' => $items,
+  );
+
+  _atomium_extend_theme_property(
+    $filter_tips,
+    array($variables['theme_hook_original']));
+
+  _atomium_extend_theme_wrappers_property(
+    $filter_tips,
+    array($variables['theme_hook_original']));
+
   $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
-      '#items' => $items,
-      '#theme_wrappers' => _atomium_extend_theme_hook('container', $variables['theme_hook_original']),
-    ),
+    $variables['base_hook'] => $filter_tips,
   );
 }

@@ -21,8 +21,8 @@ function atomium_atomium_theme_system_compact_link() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_system_compact_link(array &$variables, $hook) {
-  $variables['link'] = array(
-    '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+  $link = array(
+    '#theme' => 'link',
     '#text' => NULL,
     '#path' => NULL,
     '#options' => array(
@@ -30,6 +30,10 @@ function atomium_preprocess_system_compact_link(array &$variables, $hook) {
       'query' => drupal_get_destination(),
     ),
   );
+  _atomium_extend_theme_property(
+    $link,
+    array($variables['theme_hook_original']));
+  $variables['link'] = $link;
 
   if (system_admin_compact_mode()) {
     $variables['link']['#text'] = t('Show descriptions');

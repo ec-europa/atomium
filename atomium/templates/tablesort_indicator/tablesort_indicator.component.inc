@@ -21,9 +21,7 @@ function atomium_atomium_theme_tablesort_indicator() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_tablesort_indicator(array &$variables, $hook) {
-  $variables['theme_hook_suggestions'][] = $hook . '__' . $variables['style'];
-
-  $image = array(
+  $tablesort_indicator = array(
     '#path' => 'misc/arrow-asc.png',
     '#width' => 13,
     '#height' => 13,
@@ -37,19 +35,21 @@ function atomium_preprocess_tablesort_indicator(array &$variables, $hook) {
   );
 
   if ('asc' === $variables['style']) {
-    $image['#path'] = 'misc/arrow-asc.png';
-    $image['#alt'] = $image['#title'] = t('sort ascending');
+    $tablesort_indicator['#path'] = 'misc/arrow-asc.png';
+    $tablesort_indicator['#alt'] = $tablesort_indicator['#title'] = t('sort ascending');
     $direction = 'asc';
   }
   else {
-    $image['#path'] = 'misc/arrow-desc.png';
-    $image['#alt'] = $image['#title'] = t('sort descending');
+    $tablesort_indicator['#path'] = 'misc/arrow-desc.png';
+    $tablesort_indicator['#alt'] = $tablesort_indicator['#title'] = t('sort descending');
     $direction = 'desc';
   }
 
-  $image['#theme'] = _atomium_extend_theme_hook('image', array($direction, $variables['theme_hook_original']));
+  _atomium_extend_theme_property(
+    $tablesort_indicator,
+    array($direction, $variables['theme_hook_original']));
 
   $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => $image,
+    $variables['base_hook'] => $tablesort_indicator,
   );
 }

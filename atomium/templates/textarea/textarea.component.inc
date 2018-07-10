@@ -41,25 +41,6 @@ function atomium_preprocess_textarea(array &$variables, $hook) {
     $wrapper_attributes_array['class'][] = 'resizable';
   }
 
-  if (isset($variables['element']['#field_name'])) {
-    $variables['theme_hook_suggestions'][] = 'textarea__' .
-      $variables['element']['#field_name'];
-  }
-  if (isset($variables['element']['#entity_type'])) {
-    $variables['theme_hook_suggestions'][] = 'textarea__' .
-      $variables['element']['#entity_type'];
-    if (isset($variables['element']['#field_name'])) {
-      $variables['theme_hook_suggestions'][] = 'textarea__' .
-        $variables['element']['#entity_type'] . '__' .
-        $variables['element']['#field_name'];
-    }
-    if (isset($variables['element']['#bundle'])) {
-      $variables['theme_hook_suggestions'][] = 'textarea__' .
-        $variables['element']['#entity_type'] . '__' .
-        $variables['element']['#bundle'];
-    }
-  }
-
   if (isset($variables['element']['#atomium']['attributes']['element'])) {
     $variables['atomium']['attributes']['element']
       ->merge($variables['element']['#atomium']['attributes']['element']);
