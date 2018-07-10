@@ -22,10 +22,10 @@
  */
 include_once drupal_dirname(__FILE__) . '/includes/common.inc';
 
+atomium_include('atomium', 'includes/classes');
 atomium_include('atomium', 'includes/config.inc');
 atomium_include('atomium', 'includes/preprocess.inc');
 atomium_include('atomium', 'includes/process.inc');
-atomium_include('atomium', 'includes/classes');
 
 /**
  * Implements hook_theme().
