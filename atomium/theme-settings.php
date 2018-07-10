@@ -8,7 +8,7 @@
 /**
  * Implements hook_form_system_theme_settings_alter().
  */
-function atomium_form_system_theme_settings_alter(&$form, $form_state) {
+function atomium_form_system_theme_settings_alter(array &$form, array $form_state) {
   $form['atomium'] = array(
     '#type' => 'fieldset',
     '#title' => t('Atomium settings'),

@@ -15,7 +15,7 @@
  * @see atomium_theme()
  * @see hook_theme()
  */
-function _atomium_theme(&$existing, $type, $theme, $path) {
+function _atomium_theme(array &$existing, $type, $theme, $path) {
   $hooks = array();
 
   foreach (atomium_find_templates() as $theme => $theme_data) {
