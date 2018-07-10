@@ -17,14 +17,6 @@
  * designed to only load the necessary files when a given theme hook is invoked.
  */
 
-// Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('atomium_rebuild_registry') && !defined('MAINTENANCE_MODE')) {
-  // Rebuild .info data.
-  system_rebuild_theme_data();
-  // Rebuild theme registry.
-  drupal_theme_rebuild();
-}
-
 /**
  * Include common functions used through out theme.
  */

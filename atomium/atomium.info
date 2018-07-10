@@ -26,8 +26,6 @@ regions[footer] = "Footer"
 ;-------------- JS -------------
 
 ;-------------- Default Settings for theme-settings.php -------------
-settings[theme_debug] = 0
-settings[atomium_rebuild_registry] = 0
 settings[allow_css_double_underscores] = 0
 settings[atomium_convert_inline_js_into_files] = 1
 
