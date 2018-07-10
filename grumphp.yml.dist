@@ -18,7 +18,7 @@ parameters:
       case_insensitive: true
       multiline: true
       matchers:
-        - '/^(Issue #\d+|#\d+): [A-Z].+\./'
+        - '/^([A-Z]+\-\d+|Issue #\d+): [A-Z].+\./'
     phpunit:
       always_execute: false
     securitychecker:
