@@ -289,10 +289,14 @@ function atomium_get_component_definitions() {
             $elements[] = array_merge($element, $preview);
           }
           if (!empty($elements)) {
-            $definition['preview'] = array(
-              '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
+            $preview = array(
+              '#theme' => 'item_list',
               '#items' => $elements,
             );
+            _atomium_extend_theme_property(
+              $preview,
+              array('atomium_preview', $component));
+            $definition['preview'] = $preview;
           }
         }
         else {
@@ -313,10 +317,14 @@ function atomium_get_component_definitions() {
         $definitions[$component] = array_filter($definition);
         if (!empty($errors)) {
           unset($definitions[$component]['form']);
-          $definitions[$component]['preview'] = array(
-            '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
+          $preview = array(
+            '#theme' => 'item_list',
             '#items' => $errors[$component],
           );
+          _atomium_extend_theme_property(
+            $preview,
+            array('atomium_preview', $component));
+          $definitions[$component]['preview'] = $preview;
         }
       }
     }
@@ -393,12 +401,16 @@ function atomium_menu_get_active_breadcrumb() {
     }
 
     foreach ($active_trail as $parent) {
-      $breadcrumb[] = array(
-        '#theme' => _atomium_extend_theme_hook('link', 'breadcrumb'),
+      $breadcrumb_part = array(
+        '#theme' => 'link',
         '#text' => $parent['title'],
         '#path' => $parent['href'],
         '#options' => $parent['localized_options'],
       );
+      _atomium_extend_theme_property(
+        $breadcrumb_part,
+        array('breadcrumb'));
+      $breadcrumb[] = $breadcrumb_part;
     }
   }
 
@@ -434,7 +446,7 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
         '#atomium_recursive' => $variables['#atomium_recursive'],
       );
 
-      if ($value['#atomium_recursive'] == TRUE) {
+      if (TRUE === $value['#atomium_recursive']) {
         atomium_recursive_foreach($value, $callback);
       }
 
@@ -449,37 +461,6 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
 }
 
 /**
- * Custom helper function.
- *
- * This helper updates the render array of a block so block preprocess are
- * correctly processed.
- *
- * @param array $block_array
- *   The original block render array.
- * @param string|null $region
- *   The region where the block is placed.
- * @param int $block_index_in_region
- *   The position of the block in the region, if any.
- * @param int $total_blocks_in_region
- *   The total number of blocks in the region.
- */
-function _atomium_update_block_render_array(array &$block_array, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
-  $block_array['#block']->atomium['block_index_in_region'] = $block_index_in_region;
-  $block_array['#block']->atomium['total_blocks_in_regions'] = $total_blocks_in_region;
-
-  if (isset($block_array['#theme_wrappers'])) {
-    $block_array['#theme_wrappers'] = _atomium_extend_with_suggestions(
-      $block_array['#theme_wrappers'],
-      array(
-        is_string($region) ? $region : NULL,
-        $block_array['#block']->module,
-        $block_array['#block']->delta,
-      )
-    );
-  }
-}
-
-/**
  * Get the render array of a block.
  *
  * @param string $module
@@ -488,15 +469,11 @@ function _atomium_update_block_render_array(array &$block_array, $region = NULL,
  *   The module delta.
  * @param string|null $region
  *   The region where the block is placed.
- * @param int $block_index_in_region
- *   The position of the block in the region, if any.
- * @param int $total_blocks_in_region
- *   The total number of blocks in the region.
  *
  * @return array
  *   The block render array.
  */
-function _atomium_block_get_render_array($module, $delta, $region = NULL, $block_index_in_region = 0, $total_blocks_in_region = 0) {
+function _atomium_block_get_render_array($module, $delta, $region = NULL) {
   $block = block_load($module, $delta);
 
   // If not block has been loaded, return empty array.
@@ -509,83 +486,17 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
   $block_array = array();
   if (isset($block_render_array[$module . '_' . $delta])) {
     $block_array = $block_render_array[$module . '_' . $delta];
-    _atomium_update_block_render_array($block_array);
+    _atomium_extend_theme_wrappers_property(
+      $block_array,
+      array(
+        is_string($region) ? $region : NULL,
+        $block_array['#block']->module,
+        $block_array['#block']->delta,
+      )
+    );
   }
 
   return $block_array;
-}
-
-/**
- * Extends strings with an array of suggestions.
- *
- * @param array $items
- *   The strings to extend.
- * @param array $suggestions
- *   The suggestions to add.
- *
- * @example
- *   $items = array('container', 'block');
- *   $suggestions = array('foo', 'bar');
- *
- *   The result will be: array('container__foo__bar', 'block__foo__bar')
- *
- *   Quick note about the drupal_strtolower() call:
- *   We must ensure lowercase values because get_defined_functions()
- *   in drupal_group_functions_by_prefix() returns functions in lower case.
- *
- * @see http://php.net/manual/en/function.get-defined-functions.php
- *
- * @return array
- *   The extended strings.
- */
-function _atomium_extend_with_suggestions(array $items = array(''), array $suggestions = array()) {
-  return array_map(function ($base_hook) use ($suggestions) {
-    if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
-      return $hook[0];
-    }
-
-    return NULL;
-  }, $items);
-}
-
-/**
- * Extend a theme hook with suggestions.
- *
- * @param string|null $base
- *   The base hook.
- * @param string|array $suggestions
- *   The suggestions.
- *
- * @return array|false
- *   An array containing the theme hook extended,
- *   FALSE if the base hook is null.
- */
-function _atomium_extend_theme_hook($base = NULL, $suggestions = array()) {
-  if (empty($base) || !is_string($base)) {
-    return FALSE;
-  }
-
-  $suggestions = (array) $suggestions;
-  array_unshift($suggestions, $base);
-
-  return array(
-    str_replace(
-      '-',
-      '_',
-      drupal_strtolower(
-        implode(
-          '__',
-          array_map(function ($suggestion) {
-            return trim($suggestion, '_');
-          },
-            array_filter(
-              $suggestions
-            )
-          )
-        )
-      )
-    ),
-  );
 }
 
 /**
@@ -715,4 +626,91 @@ function atomium_get_base_hook($hook) {
   }
 
   return $hook;
+}
+
+/**
+ * Retrieves output to be displayed in the HEAD tag of the HTML page.
+ *
+ * @param array $context
+ *   The context.
+ *
+ * @return array
+ *   The element.
+ */
+function atomium_drupal_get_html_head(array $context = array()) {
+  $elements = drupal_add_html_head();
+
+  if (!function_exists('registryonsteroids_alter_recursive_element_children')) {
+    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+
+    return $elements;
+  }
+
+  registryonsteroids_alter_recursive_element_children(
+    $elements,
+    function (&$element, $element_key, &$context) {
+      if (!isset($element['#tag'])) {
+        return NULL;
+      }
+      _atomium_extend_theme_property(
+        $element,
+        array($element['#tag'], $context['theme_hook_original'])
+      );
+    },
+    NULL,
+    $context
+  );
+
+  return $elements;
+}
+
+/**
+ * Wrapper for Registry on steroids Alter functions.
+ *
+ * @param array $element
+ *   A Drupal element.
+ * @param string[] $suggestions_parts
+ *   The suggestions strings.
+ */
+function _atomium_extend_theme_property(array &$element, array $suggestions_parts) {
+  if (!function_exists('_registryonsteroids_alter_extend_theme_property_with_suggestions')) {
+    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  }
+  else {
+    _registryonsteroids_alter_extend_theme_property_with_suggestions($element, $suggestions_parts);
+  }
+}
+
+/**
+ * Wrapper for Registry on steroids Alter functions.
+ *
+ * @param array $element
+ *   A Drupal element.
+ * @param array $suggestions_parts
+ *   The suggestions strings.
+ */
+function _atomium_extend_theme_wrappers_property(array &$element, array $suggestions_parts) {
+  if (!function_exists('_registryonsteroids_alter_extend_theme_wrappers_property_with_suggestions')) {
+    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  }
+  else {
+    _registryonsteroids_alter_extend_theme_wrappers_property_with_suggestions($element, $suggestions_parts);
+  }
+}
+
+/**
+ * Wrapper for Registry on steroids Alter functions.
+ *
+ * @param array|string $hook
+ *   The Drupal theme hook.
+ * @param array $suggestions_parts
+ *   The suggestions strings.
+ */
+function _atomium_extend_value_with_suggestions(&$hook, array $suggestions_parts) {
+  if (!function_exists('_registryonsteroids_alter_extend_value_with_suggestions')) {
+    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  }
+  else {
+    _registryonsteroids_alter_extend_value_with_suggestions($hook, $suggestions_parts);
+  };
 }

@@ -59,29 +59,39 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       // don't load image styles.
       if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
         $variables[$variables['base_hook']] += array(
-          '#theme' => _atomium_extend_theme_hook('image_style', $variables['theme_hook_original']),
+          '#theme' => 'image_style',
           '#style_name' => $style,
           '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
         );
       }
       else {
         $variables[$variables['base_hook']] += array(
-          '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
+          '#theme' => 'image',
           '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
         );
       }
 
+      _atomium_extend_theme_property(
+        $variables[$variables['base_hook']],
+        array($variables['theme_hook_original']));
+
       if (!empty($account->uid) && user_access('access user profiles')) {
-        $variables[$variables['base_hook']] = array(
-          $variables['base_hook'] => array(
-            '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-            '#text' => $variables['user_picture'],
-            '#path' => 'user/' . $account->uid,
-            '#options' => array(
-              'html' => TRUE,
-              'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->toArray(),
-            ),
+        $user_picture = array(
+          '#theme' => 'link',
+          '#text' => $variables['user_picture'],
+          '#path' => 'user/' . $account->uid,
+          '#options' => array(
+            'html' => TRUE,
+            'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->toArray(),
           ),
+        );
+
+        _atomium_extend_theme_property(
+          $user_picture,
+          array($variables['theme_hook_original']));
+
+        $variables[$variables['base_hook']] = array(
+          $variables['base_hook'] => $user_picture,
         );
       }
     }

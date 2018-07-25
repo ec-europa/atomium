@@ -66,18 +66,30 @@ function atomium_preprocess_file_link(array &$variables, $hook) {
     $options['attributes']['title'] = check_plain($file->filename);
   }
 
+  $file_icon = array(
+    '#theme' => 'file_icon',
+    '#file' => $file,
+    '#icon_directory' => $icon_directory,
+    '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
+  );
+
+  _atomium_extend_theme_property(
+    $file_icon,
+    array($variables['theme_hook_original']));
+
+  $file_link = array(
+    '#theme' => 'link',
+    '#text' => $link_text,
+    '#path' => $url,
+    '#options' => $options,
+  );
+
+  _atomium_extend_theme_property(
+    $file_link,
+    array($variables['theme_hook_original']));
+
   $variables[$variables['base_hook']] = array(
-    'file_icon' => array(
-      '#theme' => _atomium_extend_theme_hook('file_icon', $variables['theme_hook_original']),
-      '#file' => $file,
-      '#icon_directory' => $icon_directory,
-      '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
-    ),
-    $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => $link_text,
-      '#path' => $url,
-      '#options' => $options,
-    ),
+    'file_icon' => $file_icon,
+    $variables['base_hook'] => $file_link,
   );
 }

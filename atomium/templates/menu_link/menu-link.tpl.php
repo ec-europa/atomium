@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<li<?php print $atomium['attributes']['wrapper']; ?>><?php print render($output); ?><?php print render($sub_menu); ?></li>
+<li<?php print $atomium['attributes']['wrapper']; ?>><?php print render($menu_link); ?><?php print render($submenu); ?></li>

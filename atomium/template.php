@@ -17,28 +17,20 @@
  * designed to only load the necessary files when a given theme hook is invoked.
  */
 
-// Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('atomium_rebuild_registry') && !defined('MAINTENANCE_MODE')) {
-  // Rebuild .info data.
-  system_rebuild_theme_data();
-  // Rebuild theme registry.
-  drupal_theme_rebuild();
-}
-
 /**
  * Include common functions used through out theme.
  */
 include_once drupal_dirname(__FILE__) . '/includes/common.inc';
 
+atomium_include('atomium', 'includes/classes');
 atomium_include('atomium', 'includes/config.inc');
 atomium_include('atomium', 'includes/preprocess.inc');
 atomium_include('atomium', 'includes/process.inc');
-atomium_include('atomium', 'includes/classes');
 
 /**
  * Implements hook_theme().
  */
-function atomium_theme(&$existing, $type, $theme, $path) {
+function atomium_theme(array &$existing, $type, $theme, $path) {
   atomium_include('atomium', 'includes/registry.inc');
   return _atomium_theme($existing, $type, $theme, $path);
 }
@@ -46,7 +38,7 @@ function atomium_theme(&$existing, $type, $theme, $path) {
 /**
  * Implements hook_menu_alter().
  */
-function atomium_menu_alter(&$items) {
+function atomium_menu_alter(array &$items) {
   $items['atomium-overview'] = array(
     'title' => 'Atomium overview',
     'page callback' => 'theme',

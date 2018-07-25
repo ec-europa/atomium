@@ -37,11 +37,11 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   $attributes['class'] = array();
   // Date selects need the form-item for the show/hide end date.
   if (isset($element['#type'])) {
-    // AND.
-    if ($element['#type'] == 'date_select' or $element['#type'] == 'date_text' or $element['#type'] == 'date_popup') {
+    if ('date_select' === $element['#type'] || 'date_text' === $element['#type'] || 'date_popup' === $element['#type']) {
       $attributes['class'] = array('form-item');
     }
   }
+
   // Add element's #type and #name as class to aid with JS/CSS selectors.
   $attributes['class'] = array('form-item');
   if (!empty($element['#type'])) {
@@ -73,10 +73,16 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     '#field_prefix' => '',
   );
 
-  $variables['label'] = array(
-    '#theme' => _atomium_extend_theme_hook('form_element_label', $variables['theme_hook_original']),
+  $label = array(
+    '#theme' => 'form_element_label',
     'element' => $variables['element'],
   );
+
+  _atomium_extend_theme_property(
+    $label,
+    array($variables['theme_hook_original']));
+
+  $variables['label'] = $label;
 
   $variables['atomium']['attributes']['wrapper']->merge($attributes);
 }

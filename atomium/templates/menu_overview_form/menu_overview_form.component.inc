@@ -78,11 +78,8 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
     $rows[] = array(array('data' => $form['#empty_text'], 'colspan' => '7'));
   }
 
-  $variables['form']['table'] = array(
-    '#theme' => _atomium_extend_with_suggestions(
-      array('table'),
-      array($variables['theme_hook_original'], $variables['form']['#menu']['menu_name'])
-    ),
+  $menu_overview_form = array(
+    '#theme' => 'table',
     '#header' => $header,
     '#rows' => $rows,
     '#atomium' => array(
@@ -93,4 +90,10 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
       ),
     ),
   );
+
+  _atomium_extend_theme_property(
+    $menu_overview_form,
+    array($variables['form']['#menu']['menu_name'], $variables['theme_hook_original']));
+
+  $variables['form']['table'] = $menu_overview_form;
 }

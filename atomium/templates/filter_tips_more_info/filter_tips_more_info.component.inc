@@ -23,13 +23,24 @@ function atomium_atomium_theme_filter_tips_more_info() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_tips_more_info(array &$variables, $hook) {
-  $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => t('More information about text formats'),
-      '#path' => 'filter/tips',
-      // @codingStandardsIgnoreLine: False positive.
-      '#options' => array('attributes' => array('target' => '_blank')),
+  $filter_tips_more_info = array(
+    '#theme' => 'link',
+    '#text' => t('More information about text formats'),
+    '#path' => 'filter/tips',
+    // @codingStandardsIgnoreStart
+    '#options' => array(
+      'attributes' => array(
+        'target' => '_blank',
+      ),
     ),
+    // @codingStandardsIgnoreEnd
+  );
+
+  _atomium_extend_theme_property(
+    $filter_tips_more_info,
+    array($variables['theme_hook_original']));
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $filter_tips_more_info,
   );
 }

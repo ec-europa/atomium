@@ -60,12 +60,12 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   $i = $pager_first;
   if ($pager_last > $pager_max) {
     // Adjust "center" if at end of query.
-    $i = $i + ($pager_max - $pager_last);
+    $i += ($pager_max - $pager_last);
     $pager_last = $pager_max;
   }
   if ($i <= 0) {
     // Adjust "center" if at start of query.
-    $pager_last = $pager_last + (1 - $i);
+    $pager_last += (1 - $i);
     $i = 1;
   }
   /* End of generation loop preparation. */
@@ -103,14 +103,18 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     if ($i != $pager_max) {
       if ($i > 1) {
         $items['pager_ellipsis__' . $i] = array(
-          '#theme' => _atomium_extend_theme_hook('pager_ellipsis', $variables['theme_hook_original']),
+          '#theme' => 'pager_ellipsis',
           '#attributes' => array(
             'class' => array(
               'pager-ellipsis',
             ),
           ),
         );
+        _atomium_extend_theme_property(
+          $items['pager_ellipsis__' . $i],
+          array($variables['theme_hook_original']));
       }
+
       // Now generate the actual pager piece.
       for (; $i <= $pager_last && $i <= $pager_max; $i++) {
         if ($i < $pager_current || $i > $pager_current) {
@@ -140,13 +144,16 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
       if ($i < $pager_max) {
         $items['pager_ellipsis__' . $i] = array(
-          '#theme' => _atomium_extend_theme_hook('pager_ellipsis', $variables['theme_hook_original']),
+          '#theme' => 'pager_ellipsis',
           '#attributes' => array(
             'class' => array(
               'pager-ellipsis',
             ),
           ),
         );
+        _atomium_extend_theme_property(
+          $items['pager_ellipsis__' . $i],
+          array($variables['theme_hook_original']));
       }
     }
     // End generation.
@@ -180,25 +187,31 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     foreach ($items as $key => &$item) {
-      $item['#theme_wrappers'] = _atomium_extend_with_suggestions(
-        array('html_tag'),
-        array('item_list', $variables['theme_hook_original'], $key)
-      );
       $item['#tag'] = 'li';
       if (isset($item['link'])) {
         $item['#attributes'] = $item['link']['#options']['attributes'];
         unset($item['#attributes']['title']);
       }
+
+      _atomium_extend_theme_wrappers_property(
+        $item,
+        array($item['#tag'], $key, $variables['theme_hook_original']));
     }
 
     $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
 
+    $pager = array(
+      '#theme' => 'item_list',
+      '#items' => $items,
+      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
+    );
+
+    _atomium_extend_theme_wrappers_property(
+      $pager,
+      array($variables['theme_hook_original']));
+
     $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => array(
-        '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
-        '#items' => $items,
-        '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
-      ),
+      $variables['base_hook'] => $pager,
     );
   }
 }
@@ -221,12 +234,18 @@ function _atomium_pager_item_to_link_helper($text = NULL, $pager = NULL, $elemen
     }
   }
 
-  return array(
+  $link = array(
     'link' => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+      '#theme' => 'link',
       '#text' => check_plain($text),
       '#path' => $_GET['q'],
       '#options' => $options,
     ),
   );
+
+  _atomium_extend_theme_property(
+    $link['link'],
+    array($variables['theme_hook_original']));
+
+  return $link;
 }

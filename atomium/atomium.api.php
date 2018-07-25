@@ -55,7 +55,7 @@ function hook_atomium_definition_hook() {
  * @return array
  *   The Drupal form.
  */
-function hook_atomium_definition_form_hook($form, &$form_state) {
+function hook_atomium_definition_form_hook(array $form, array &$form_state) {
   $form['component'] = array(
     '#theme' => array('username'),
     '#account' => user_load(1),

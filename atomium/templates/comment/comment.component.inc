@@ -26,7 +26,7 @@ function atomium_preprocess_comment(array &$variables, $hook) {
 
   }
 
-  if ($variables['status'] == "comment-unpublished") {
+  if ('comment-unpublished' === $variables['status']) {
     $variables['classes_array'][] = 'unpublished';
   }
 
@@ -39,11 +39,16 @@ function atomium_preprocess_comment(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
   $variables['atomium']['attributes']['content']->append('class', 'content');
 
-  $variables['picture'] = NULL;
+  $picture = '';
   if (theme_get_setting('toggle_comment_user_picture')) {
-    $variables['picture'] = array(
-      '#theme' => _atomium_extend_theme_hook('user_picture', $variables['theme_hook_original']),
+    $picture = array(
+      '#theme' => 'user_picture',
       '#account' => $variables['elements']['#comment'],
     );
+
+    _atomium_extend_theme_property(
+      $picture,
+      array($variables['theme_hook_original']));
   }
+  $variables['picture'] = $picture;
 }

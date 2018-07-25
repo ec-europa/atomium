@@ -1,5 +1,5 @@
 {
-  "name": "ec-europa/atomium",
+  "name": "drupal/atomium",
   "description": "A clean and atomic base theme.",
   "type": "drupal-theme",
   "license": "GPL-2.0",
@@ -37,7 +37,9 @@
     "drupal/drupal-extension": "~3.4",
     "drupal/realistic_dummy_content": "*",
     "drupal/devel": "*",
-    "openeuropa/task-runner": "^0.4"
+    "drupal/xautoload": "*",
+    "drupal/registryonsteroids": "*",
+    "openeuropa/task-runner": "^0.7"
   },
   "autoload": {
     "psr-4": {
