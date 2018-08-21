@@ -22,9 +22,10 @@
  */
 include_once __DIR__ . '/includes/common.inc';
 
-atomium_include('atomium', 'includes/classes');
-atomium_include('atomium', 'includes/config.inc');
-atomium_include('atomium', 'includes/preprocess.inc');
+include_once __DIR__ . '/includes/classes/AttributesContainer.php';
+include_once __DIR__ . '/includes/classes/Attributes.php';
+include_once __DIR__ . '/includes/config.inc';
+include_once __DIR__ . '/includes/preprocess.inc';
 
 /**
  * Implements hook_theme().
