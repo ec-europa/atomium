@@ -20,17 +20,19 @@
 /**
  * Include common functions used through out theme.
  */
-include_once drupal_dirname(__FILE__) . '/includes/common.inc';
+include_once __DIR__ . '/includes/common.inc';
 
-atomium_include('atomium', 'includes/classes');
-atomium_include('atomium', 'includes/config.inc');
-atomium_include('atomium', 'includes/preprocess.inc');
+include_once __DIR__ . '/includes/classes/AttributesContainer.php';
+include_once __DIR__ . '/includes/classes/Attributes.php';
+include_once __DIR__ . '/includes/config.inc';
+include_once __DIR__ . '/includes/preprocess.inc';
 
 /**
  * Implements hook_theme().
  */
 function atomium_theme(array &$existing, $type, $theme, $path) {
-  atomium_include('atomium', 'includes/registry.inc');
+  include_once __DIR__ . '/includes/registry.inc';
+
   return _atomium_theme($existing, $type, $theme, $path);
 }
 
