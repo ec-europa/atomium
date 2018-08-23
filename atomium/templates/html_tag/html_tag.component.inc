@@ -22,34 +22,44 @@ function atomium_atomium_theme_html_tag() {
  */
 function atomium_preprocess_html_tag(array &$variables, $hook) {
   $element = &$variables['element'];
+  $element += array(
+    '#value' => '',
+    '#children' => '',
+    '#attributes' => array(),
+  );
 
-  // Loop over element children, render them, and add them to the #value string.
-  foreach (element_children($variables['element']) as $key) {
-    if (isset($variables['element']['#value']) && $variables['element']['#value'] === NULL) {
-      // Set this to string to avoid E_NOTICE error when concatenating to NULL.
-      $variables['element']['#value'] = array();
-    }
-    // Concatenate the rendered child onto the element #value.
-    $variables['element']['#value'][] = $variables['element'][$key];
+  if (is_string($element['#value'])) {
+    $element['#value'] = array(
+      array(
+        '#markup' => $element['#value'],
+      ),
+    );
   }
 
-  if (!empty($variables['element']['#atomium']['attributes'])) {
-    foreach ($variables['element']['#atomium']['attributes'] as $attribute => $data) {
+  // Loop over element children, render them, and add them to the #value array.
+  foreach (element_children($element) as $key) {
+    $element['#value'][] = $element[$key];
+  }
+
+  if (!empty($element['#atomium']['attributes'])) {
+    foreach ($element['#atomium']['attributes'] as $attribute => $data) {
       $variables['atomium']['attributes'][$attribute]->setAttributes($data);
     }
   }
 
-  if (isset($variables['element']['#attributes'])) {
-    $variables['atomium']['attributes']['element']->merge($variables['element']['#attributes']);
-  }
-
-  $element += array('#value' => '', '#children' => '');
+  $variables['atomium']['attributes']['element']
+    ->merge($element['#attributes']);
 
   // Remove type="..." and CDATA prefix/suffix.
-  unset($element['#attributes']['type'], $element['#value_prefix'], $element['#value_suffix']);
+  unset(
+    $element['#attributes']['type'],
+    $element['#value_prefix'],
+    $element['#value_suffix']
+  );
 
   // Remove media="all" but leave others unaffected.
-  if (isset($element['#attributes']['media']) && $element['#attributes']['media'] === 'all') {
+  if (isset($element['#attributes']['media']) &&
+    $element['#attributes']['media'] === 'all') {
     unset($element['#attributes']['media']);
   }
 }
