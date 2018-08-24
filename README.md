@@ -32,21 +32,15 @@ As it is technically not possible for a theme to depends on a module, please mak
 [Go to top](#table-of-content)
 
 # Activation
-To enable the theme, go to **admin/appearance** and select an Atomium
-based theme.
+To enable the theme, go to **admin/appearance** and select
+an Atomium based theme.
 
-Atomium comes with 3 sub-themes provided as examples.
+Atomium comes with 1 sub-theme "Atomium Bartik" provided as an example, it can
+be used as a starter-kit as well.
+It is a fork on the Bartik core theme but based on Atomium.
 
- - Atomium Bootstrap,
- - Atomium Foundation,
- - Atomium Bartik.
- 
-Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com/).
-Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
-Atomium Bartik is a fork on the Bartik core theme based on Atomium.
-
-These sub-themes provide examples of *preprocess* functions and templates
-so you can craft your own theme quickly.
+The sub-theme provide examples of *preprocess* functions and templates so you
+can craft your own theme quickly.
 
 [Go to top](#table-of-content)
 
