@@ -7,7 +7,7 @@
   expect:
     - toArray:
         return:
-         class: ['one', 'three']
+          class: ['one', 'three']
     - __toString:
         return: ' class="one three"'
 
