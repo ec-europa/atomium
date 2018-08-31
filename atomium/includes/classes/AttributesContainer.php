@@ -30,7 +30,7 @@ class AttributesContainer implements \ArrayAccess {
   /**
    * {@inheritdoc}
    */
-  public function &offsetGet($name) {
+  public function offsetGet($name) {
     $this->storage += array(
       $name => new Attributes(),
     );

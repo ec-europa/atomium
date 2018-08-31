@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\atomium\Unit;
 
+use Drupal\atomium\Attributes;
 use Drupal\atomium\AttributesContainer;
 
 /**
@@ -17,9 +18,10 @@ class AttributesContainerKnownIssuesTest extends UnitTestBase {
     // Set an illegal value.
     $attribute_object_reference =& $container['element'];
     $attribute_object_reference = new \stdClass();
-    // Internal variable is replaced with illegal value.
+    // Internal variable is no longer replaced with illegal value.
+    // See https://github.com/ec-europa/atomium/issues/142
     self::assertInstanceOf(
-      \stdClass::class,
+      Attributes::class,
       $container['element']);
   }
 
@@ -30,9 +32,10 @@ class AttributesContainerKnownIssuesTest extends UnitTestBase {
     $container = new AttributesContainer();
     // Set an illegal value.
     $this->varAssignValue($container['element'], new \stdClass());
-    // Internal variable is replaced with illegal value.
+    // Internal variable is no longer replaced with illegal value.
+    // See https://github.com/ec-europa/atomium/issues/142
     self::assertInstanceOf(
-      \stdClass::class,
+      Attributes::class,
       $container['element']);
   }
 
