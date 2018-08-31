@@ -53,7 +53,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   /**
    * {@inheritdoc}
    */
-  public function &offsetGet($name) {
+  public function offsetGet($name) {
     $return = $this->setStorage(
       $this->getStorage() + array($name => array())
     )->toArray();
