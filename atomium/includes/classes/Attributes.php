@@ -38,10 +38,54 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $this->setAttribute($value, TRUE, $explode);
       }
       else {
-        $data = \array_map(function ($item) use ($attribute) {
-          if ($attribute === 'placeholder') {
-            $item = \strip_tags($item);
-          }
+        $this->setAttribute($name, $value, $explode);
+      }
+    }
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetGet($name) {
+    $return = $this->setStorage(
+      $this->getStorage() + array($name => array())
+    )->toArray();
+
+    return $return[$name];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetSet($name, $value = FALSE) {
+    $storage = $this->getStorage() + array($name => array());
+
+    $storage[$name] = $value;
+
+    $this->setStorage($storage);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetUnset($name) {
+    $storage = $this->getStorage();
+
+    unset($storage[$name]);
+
+    $this->setStorage($storage);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetExists($name) {
+    $storage = $this->toArray();
+
+    return isset($storage[$name]);
+  }
 
           /*
            * @todo: Disabled for now, it's causing issue in
