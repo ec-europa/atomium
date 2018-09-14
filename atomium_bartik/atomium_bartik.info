@@ -92,3 +92,5 @@ settings[alter][css_alter][exclude][] = 'modules/taxonomy/taxonomy.css'
 settings[alter][css_alter][exclude][] = 'modules/tracker/tracker.css'
 settings[alter][css_alter][exclude][] = 'modules/update/update.css'
 settings[alter][css_alter][exclude][] = 'modules/user/user.css'
+
+settings[hooks_to_ignore][] = atomiumprofiler_example_minimal
