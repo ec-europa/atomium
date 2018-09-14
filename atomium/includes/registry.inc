@@ -83,14 +83,20 @@ function atomium_theme_registry_alter(array &$registry) {
     else {
       $base_hook = $hook;
     }
-    $components += array($base_hook => array());
 
-    $info['includes'] = \array_unique(
-      \array_merge(
-        $info['includes'],
-        $components[$base_hook]
-      )
-    );
+    if (isset($components[$base_hook])) {
+      $info['includes'] = array_unique(
+        array_merge(
+          $info['includes'],
+          $components[$base_hook]
+        )
+      );
+    }
+    else {
+      // To achieve complete BC with previous versions of Atomium,
+      // array_unique() must be called here.
+      $info['includes'] = array_unique($info['includes']);
+    }
 
     // Remove 'atomium preprocess' callback.
     $info['preprocess functions'] = \array_filter(
