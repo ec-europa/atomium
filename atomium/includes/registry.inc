@@ -70,11 +70,7 @@ function atomium_theme_registry_alter(array &$registry) {
     }
   }
 
-  \array_walk($registry, function (array &$info, $hook) use ($components) {
-    // Make sure there is a preprocess for each hook.
-    $info += array(
-      'preprocess functions' => array(),
-    );
+  array_walk($registry, function (array &$info, $hook) use ($components) {
 
     if ($pos = strpos($hook, '__')) {
       $base_hook = drupal_substr($hook, 0, $pos);
@@ -102,14 +98,19 @@ function atomium_theme_registry_alter(array &$registry) {
       }
     }
 
-    // Remove 'atomium preprocess' callback.
-    foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
-      unset($info['preprocess functions'][$index]);
+    if (!empty($info['preprocess functions'])) {
+      foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
+        unset($info['preprocess functions'][$index]);
+      }
+      // The simple preprocess was not used here because theme hooks defined with
+      // a function doesn't trigger all the preprocess callbacks.
+      // It's added at the first place so we make sure it's creating the variables
+      // for hooks defined by templates and functions properly.
+      array_unshift($info['preprocess functions'], 'atomium_preprocess');
     }
-    // The simple preprocess was not used here because theme hooks defined with
-    // a function doesn't trigger all the preprocess callbacks.
-    // It's added at the first place so we make sure it's creating the variables
-    // for hooks defined by templates and functions properly.
-    \array_unshift($info['preprocess functions'], 'atomium_preprocess');
+    else{
+      // $info has no preprocess functions.
+      $info['preprocess functions'] = ['atomium_preprocess'];
+    }
   });
 }
