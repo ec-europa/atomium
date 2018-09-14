@@ -77,7 +77,12 @@ function atomium_theme_registry_alter(array &$registry) {
       'includes' => array(),
     );
 
-    $base_hook = atomium_get_base_hook($hook);
+    if ($pos = strpos($hook, '__')) {
+      $base_hook = drupal_substr($hook, 0, $pos);
+    }
+    else {
+      $base_hook = $hook;
+    }
     $components += array($base_hook => array());
 
     $info['includes'] = \array_unique(
