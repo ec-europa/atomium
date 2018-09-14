@@ -595,8 +595,8 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
  *   The base hook.
  */
 function atomium_get_base_hook($hook) {
-  while ($pos = \strrpos($hook, '__')) {
-    $hook = drupal_substr($hook, 0, $pos);
+  if ($pos = strpos($hook, '__')) {
+    return drupal_substr($hook, 0, $pos);
   }
 
   return $hook;
