@@ -70,7 +70,7 @@ function atomium_theme_registry_alter(array &$registry) {
     }
   }
 
-  array_walk($registry, function (array &$info, $hook) use ($components) {
+  foreach ($registry as $hook => &$info) {
 
     if ($pos = strpos($hook, '__')) {
       $base_hook = drupal_substr($hook, 0, $pos);
@@ -112,5 +112,5 @@ function atomium_theme_registry_alter(array &$registry) {
       // $info has no preprocess functions.
       $info['preprocess functions'] = ['atomium_preprocess'];
     }
-  });
+  }
 }
