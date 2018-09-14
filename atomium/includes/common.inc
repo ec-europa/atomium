@@ -219,9 +219,11 @@ function atomium_find_templates() {
 
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
     $path = drupal_get_path('theme', $theme) . '/templates';
-    if (\is_dir($path)) {
-      $directories = \array_diff(\scandir($path), array('..', '.'));
-      foreach ($directories as $directory) {
+    if (is_dir($path)) {
+      foreach (scandir($path, SCANDIR_SORT_ASCENDING) as $directory) {
+        if ('.' === $directory[0]) {
+          continue;
+        }
         $templates[$theme][$directory] = array(
           'theme' => $theme,
           'directory' => $path . '/' . $directory,
