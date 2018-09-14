@@ -99,12 +99,9 @@ function atomium_theme_registry_alter(array &$registry) {
     }
 
     // Remove 'atomium preprocess' callback.
-    $info['preprocess functions'] = \array_filter(
-      $info['preprocess functions'],
-      function ($preprocess) {
-        return 'atomium_preprocess' !== $preprocess;
-      }
-    );
+    foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
+      unset($info['preprocess functions'][$index]);
+    }
 
     // The simple preprocess was not used here because theme hooks defined with
     // a function doesn't trigger all the preprocess callbacks.
