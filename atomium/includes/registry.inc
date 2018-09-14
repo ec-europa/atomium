@@ -61,6 +61,21 @@ function _atomium_theme(array &$existing, $type, $theme, $path) {
 function atomium_theme_registry_alter(array &$registry) {
   $components = array();
 
+  $ignorelist = atomium_get_settings('hooks_to_ignore');
+  $ignoremap = array_fill_keys($ignorelist, TRUE);
+
+  foreach ($ignoremap as $hook => $_true) {
+    if (0
+      || !isset($registry[$hook]['function'])
+      || isset($registry[$hook]['template'])
+      || 'atomium_' . $hook === $registry[$hook]['function']
+    ) {
+      unset($ignoremap[$hook]);
+      continue;
+    }
+  }
+
+
   // Prepare an array of files to include.
   foreach (atomium_find_templates() as $data) {
     foreach ($data as $component_name => $component_info) {
@@ -72,11 +87,24 @@ function atomium_theme_registry_alter(array &$registry) {
 
   foreach ($registry as $hook => &$info) {
 
+    $ignore = isset($ignoremap[$hook]);
+
     if ($pos = strpos($hook, '__')) {
       $base_hook = drupal_substr($hook, 0, $pos);
     }
     else {
       $base_hook = $hook;
+    }
+
+    if (isset($ignoremap[$base_hook])) {
+      if ($base_hook !== $hook) {
+        // Unset all children of ignored base hooks.
+        unset($registry[$hook]);
+      }
+      else {
+
+      }
+      continue;
     }
 
     if (isset($components[$base_hook])) {
@@ -98,19 +126,31 @@ function atomium_theme_registry_alter(array &$registry) {
       }
     }
 
-    if (!empty($info['preprocess functions'])) {
-      foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
-        unset($info['preprocess functions'][$index]);
+    if (!$ignore) {
+      if (!empty($info['preprocess functions'])) {
+        foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
+          unset($info['preprocess functions'][$index]);
+        }
+        // The simple preprocess was not used here because theme hooks defined with
+        // a function doesn't trigger all the preprocess callbacks.
+        // It's added at the first place so we make sure it's creating the variables
+        // for hooks defined by templates and functions properly.
+        array_unshift($info['preprocess functions'], 'atomium_preprocess');
       }
-      // The simple preprocess was not used here because theme hooks defined with
-      // a function doesn't trigger all the preprocess callbacks.
-      // It's added at the first place so we make sure it's creating the variables
-      // for hooks defined by templates and functions properly.
-      array_unshift($info['preprocess functions'], 'atomium_preprocess');
+      else{
+        // $info has no preprocess functions.
+        $info['preprocess functions'] = ['atomium_preprocess'];
+      }
     }
-    else{
-      // $info has no preprocess functions.
-      $info['preprocess functions'] = ['atomium_preprocess'];
+    else {
+      foreach (['preprocess functions', 'process functions'] as $phase => $phase_key) {
+        foreach (preg_grep('@^atomium_' . $phase . '(?:$|_)@', $info[$phase_key]) as $i => $function) {
+          unset($info[$phase_key][$i]);
+        }
+        if ([] === $info[$phase_key]) {
+          unset($info[$phase_key]);
+        }
+      }
     }
   }
 }
