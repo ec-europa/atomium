@@ -74,7 +74,6 @@ function atomium_theme_registry_alter(array &$registry) {
     // Make sure there is a preprocess for each hook.
     $info += array(
       'preprocess functions' => array(),
-      'includes' => array(),
     );
 
     if ($pos = strpos($hook, '__')) {
@@ -85,24 +84,28 @@ function atomium_theme_registry_alter(array &$registry) {
     }
 
     if (isset($components[$base_hook])) {
-      $info['includes'] = array_unique(
-        array_merge(
-          $info['includes'],
-          $components[$base_hook]
-        )
-      );
+      if (!empty($info['includes'])) {
+        $info['includes'] = array_unique(
+          array_merge(
+            $info['includes'],
+            $components[$base_hook]));
+      }
+      else {
+        $info['includes'] = $components[$base_hook];
+      }
     }
     else {
-      // To achieve complete BC with previous versions of Atomium,
-      // array_unique() must be called here.
-      $info['includes'] = array_unique($info['includes']);
+      if (!empty($info['includes'])) {
+        // To achieve complete BC with previous versions of Atomium,
+        // array_unique() must be called here.
+        $info['includes'] = array_unique($info['includes']);
+      }
     }
 
     // Remove 'atomium preprocess' callback.
     foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
       unset($info['preprocess functions'][$index]);
     }
-
     // The simple preprocess was not used here because theme hooks defined with
     // a function doesn't trigger all the preprocess callbacks.
     // It's added at the first place so we make sure it's creating the variables
