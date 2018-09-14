@@ -207,9 +207,12 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 }
 
 /**
- * Discover templates based on directory name.
+ * Discovers template directories in the active theme and its base themes.
  *
  * It is important that directories have the name of the hook for the moment.
+ *
+ * @return array[][]
+ *   Format: $[$theme][$subdir_name] = ['theme' => $theme, 'directory' => $directory]
  */
 function atomium_find_templates() {
   $templates = array();
