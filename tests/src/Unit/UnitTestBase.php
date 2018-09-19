@@ -2,13 +2,13 @@
 
 namespace Drupal\Tests\atomium\Unit;
 
-use Drupal\Tests\atomium\AbstractTest;
+use Drupal\Tests\atomium\TestBase;
 
 /**
  * Class AbstractUnitTest.
  *
  * @package Drupal\Tests\atomium\Kernel
  */
-abstract class AbstractUnitTest extends AbstractTest {
+abstract class UnitTestBase extends TestBase {
 
 }

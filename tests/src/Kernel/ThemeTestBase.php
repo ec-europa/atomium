@@ -7,7 +7,7 @@ namespace Drupal\Tests\atomium\Kernel;
  *
  * @package Drupal\Tests\atomium\Kernel
  */
-abstract class AbstractThemeTest extends AbstractKernelTest {
+abstract class ThemeTestBase extends KernelTestBase {
 
   /**
    * {@inheritdoc}

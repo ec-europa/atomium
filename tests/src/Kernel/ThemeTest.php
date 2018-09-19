@@ -7,7 +7,7 @@ namespace Drupal\Tests\atomium\Kernel;
  *
  * @package Drupal\Tests\atomium\Kernel\ThemeTest
  */
-class ThemeTest extends AbstractThemeTest {
+class ThemeTest extends ThemeTestBase {
 
   /**
    * Test arguments received by theme functions just before being rendered.

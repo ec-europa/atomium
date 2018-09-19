@@ -13,7 +13,7 @@ use Underscore\Types\Arrays;
  *
  * @package Drupal\Tests\atomium
  */
-abstract class AbstractTest extends TestCase {
+abstract class TestBase extends TestCase {
 
   /**
    * {@inheritdoc}

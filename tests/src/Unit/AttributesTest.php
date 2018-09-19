@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @package Drupal\Tests\atomium
  */
-class AttributesTest extends AbstractUnitTest {
+class AttributesTest extends UnitTestBase {
 
   /**
    * Test class methods.
