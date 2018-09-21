@@ -7,6 +7,8 @@
 
 require_once './vendor/autoload.php';
 
+require_once __DIR__ . '/bootstrap.local.php';
+
 // Directory change necessary since Drupal often uses relative paths.
 \chdir(DRUPAL_ROOT);
 
