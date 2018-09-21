@@ -1,0 +1,179 @@
+'exists(''_true_'')': true
+'exists(''_true_'', NULL)': true
+'exists(''_true_'', true)': true
+'exists(''_true_'', false)': true
+'exists(''_true_'', '''')': true
+'exists(''_true_'', 0)': true
+'exists(''_true_'', 1)': true
+'exists(''_true_'', ''0'')': true
+'exists(''_true_'', ''1'')': true
+'exists(''_true_'', ''x'')': true
+'exists(''_true_'', chr(0))': true
+'exists(''_true_'', chr(1))': true
+'exists(''_false_'')': true
+'exists(''_false_'', NULL)': true
+'exists(''_false_'', true)': true
+'exists(''_false_'', false)': true
+'exists(''_false_'', '''')': true
+'exists(''_false_'', 0)': true
+'exists(''_false_'', 1)': true
+'exists(''_false_'', ''0'')': true
+'exists(''_false_'', ''1'')': true
+'exists(''_false_'', ''x'')': true
+'exists(''_false_'', chr(0))': true
+'exists(''_false_'', chr(1))': true
+'exists(''_null_'')': false
+'exists(''_null_'', NULL)': false
+'exists(''_null_'', true)': false
+'exists(''_null_'', false)': false
+'exists(''_null_'', '''')': false
+'exists(''_null_'', 0)': false
+'exists(''_null_'', 1)': false
+'exists(''_null_'', ''0'')': false
+'exists(''_null_'', ''1'')': false
+'exists(''_null_'', ''x'')': false
+'exists(''_null_'', chr(0))': false
+'exists(''_null_'', chr(1))': false
+'exists(''_parts_'')': false
+'exists(''_parts_'', NULL)': false
+'exists(''_parts_'', true)': false
+'exists(''_parts_'', false)': false
+'exists(''_parts_'', '''')': false
+'exists(''_parts_'', 0)': false
+'exists(''_parts_'', 1)': false
+'exists(''_parts_'', ''0'')': false
+'exists(''_parts_'', ''1'')': false
+'exists(''_parts_'', ''x'')': false
+'exists(''_parts_'', ''ove'')': false
+'exists(''_parts_'', ''ve ca'')': false
+'exists(''_parts_'', ''ve CA'')': false
+'exists(''_parts_'', ''ve Ca'')': false
+"exists('_parts_', array (\n  0 => 'aa',\n  1 => 'bb',\n  2 => 'We love CaPs!',\n))": false
+'exists(''_parts_'', ''aa'')': true
+'exists(''_parts_'', ''bb'')': true
+'exists(''_parts_'', ''We love CaPs!'')': true
+'exists(''_parts_'', chr(0))': false
+'exists(''_parts_'', chr(1))': false
+'exists(''_part_'')': false
+'exists(''_part_'', NULL)': false
+'exists(''_part_'', true)': false
+'exists(''_part_'', false)': false
+'exists(''_part_'', '''')': false
+'exists(''_part_'', 0)': false
+'exists(''_part_'', 1)': false
+'exists(''_part_'', ''0'')': false
+'exists(''_part_'', ''1'')': false
+'exists(''_part_'', ''x'')': false
+'exists(''_part_'', ''aa'')': true
+'exists(''_part_'', chr(0))': false
+'exists(''_part_'', chr(1))': false
+'exists(''_empty_string_'')': false
+'exists(''_empty_string_'', NULL)': false
+'exists(''_empty_string_'', true)': false
+'exists(''_empty_string_'', false)': false
+'exists(''_empty_string_'', '''')': true
+'exists(''_empty_string_'', 0)': false
+'exists(''_empty_string_'', 1)': false
+'exists(''_empty_string_'', ''0'')': false
+'exists(''_empty_string_'', ''1'')': false
+'exists(''_empty_string_'', ''x'')': false
+'exists(''_empty_string_'', chr(0))': false
+'exists(''_empty_string_'', chr(1))': false
+'exists(''_empty_array_'')': false
+'exists(''_empty_array_'', NULL)': false
+'exists(''_empty_array_'', true)': false
+'exists(''_empty_array_'', false)': false
+'exists(''_empty_array_'', '''')': false
+'exists(''_empty_array_'', 0)': false
+'exists(''_empty_array_'', 1)': false
+'exists(''_empty_array_'', ''0'')': false
+'exists(''_empty_array_'', ''1'')': false
+'exists(''_empty_array_'', ''x'')': false
+"exists('_empty_array_', array (\n))": false
+'exists(''_empty_array_'', chr(0))': false
+'exists(''_empty_array_'', chr(1))': false
+'exists(''_zero_'')': false
+'exists(''_zero_'', NULL)': false
+'exists(''_zero_'', true)': false
+'exists(''_zero_'', false)': false
+'exists(''_zero_'', '''')': false
+'exists(''_zero_'', 0)': true
+'exists(''_zero_'', 1)': false
+'exists(''_zero_'', ''0'')': false
+'exists(''_zero_'', ''1'')': false
+'exists(''_zero_'', ''x'')': false
+'exists(''_zero_'', chr(0))': false
+'exists(''_zero_'', chr(1))': false
+'exists(''_one_'')': false
+'exists(''_one_'', NULL)': false
+'exists(''_one_'', true)': false
+'exists(''_one_'', false)': false
+'exists(''_one_'', '''')': false
+'exists(''_one_'', 0)': false
+'exists(''_one_'', 1)': true
+'exists(''_one_'', ''0'')': false
+'exists(''_one_'', ''1'')': false
+'exists(''_one_'', ''x'')': false
+'exists(''_one_'', chr(0))': false
+'exists(''_one_'', chr(1))': false
+'exists(''_zero_str_'')': false
+'exists(''_zero_str_'', NULL)': false
+'exists(''_zero_str_'', true)': false
+'exists(''_zero_str_'', false)': false
+'exists(''_zero_str_'', '''')': false
+'exists(''_zero_str_'', 0)': false
+'exists(''_zero_str_'', 1)': false
+'exists(''_zero_str_'', ''0'')': true
+'exists(''_zero_str_'', ''1'')': false
+'exists(''_zero_str_'', ''x'')': false
+'exists(''_zero_str_'', chr(0))': false
+'exists(''_zero_str_'', chr(1))': false
+'exists(''_one_str_'')': false
+'exists(''_one_str_'', NULL)': false
+'exists(''_one_str_'', true)': false
+'exists(''_one_str_'', false)': false
+'exists(''_one_str_'', '''')': false
+'exists(''_one_str_'', 0)': false
+'exists(''_one_str_'', 1)': false
+'exists(''_one_str_'', ''0'')': false
+'exists(''_one_str_'', ''1'')': true
+'exists(''_one_str_'', ''x'')': false
+'exists(''_one_str_'', chr(0))': false
+'exists(''_one_str_'', chr(1))': false
+'exists(''_chr_0_'')': false
+'exists(''_chr_0_'', NULL)': false
+'exists(''_chr_0_'', true)': false
+'exists(''_chr_0_'', false)': false
+'exists(''_chr_0_'', '''')': false
+'exists(''_chr_0_'', 0)': false
+'exists(''_chr_0_'', 1)': false
+'exists(''_chr_0_'', ''0'')': false
+'exists(''_chr_0_'', ''1'')': false
+'exists(''_chr_0_'', ''x'')': false
+'exists(''_chr_0_'', chr(0))': true
+'exists(''_chr_0_'', chr(1))': false
+'exists(''_chr_1_'')': false
+'exists(''_chr_1_'', NULL)': false
+'exists(''_chr_1_'', true)': false
+'exists(''_chr_1_'', false)': false
+'exists(''_chr_1_'', '''')': false
+'exists(''_chr_1_'', 0)': false
+'exists(''_chr_1_'', 1)': false
+'exists(''_chr_1_'', ''0'')': false
+'exists(''_chr_1_'', ''1'')': false
+'exists(''_chr_1_'', ''x'')': false
+'exists(''_chr_1_'', chr(0))': false
+'exists(''_chr_1_'', chr(1))': true
+'exists(''_non_existing_'')': false
+'exists(''_non_existing_'', NULL)': false
+'exists(''_non_existing_'', true)': false
+'exists(''_non_existing_'', false)': false
+'exists(''_non_existing_'', '''')': false
+'exists(''_non_existing_'', 0)': false
+'exists(''_non_existing_'', 1)': false
+'exists(''_non_existing_'', ''0'')': false
+'exists(''_non_existing_'', ''1'')': false
+'exists(''_non_existing_'', ''x'')': false
+'exists(''_non_existing_'', ''_non_existing_'')': false
+'exists(''_non_existing_'', chr(0))': false
+'exists(''_non_existing_'', chr(1))': false

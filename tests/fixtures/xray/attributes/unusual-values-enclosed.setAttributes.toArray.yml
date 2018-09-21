@@ -1,0 +1,151 @@
+'["a","value","z"]':
+    name:
+        - a
+        - value
+        - z
+'["a","value ","z"]':
+    name:
+        - a
+        - value
+        - z
+'["a"," value","z"]':
+    name:
+        - a
+        - value
+        - z
+'["a","  value  ","z"]':
+    name:
+        - a
+        - value
+        - z
+'["a","va l  ue","z"]':
+    name:
+        - a
+        - va
+        - l
+        - ue
+        - z
+'["a","mm mm","z"]':
+    name:
+        - a
+        - mm
+        - z
+'["a","val$u\"e","z"]':
+    name:
+        - a
+        - 'val$u"e'
+        - z
+'["a","","z"]':
+    name:
+        - a
+        - z
+'["a"," ","z"]':
+    name:
+        - a
+        - z
+'["a","  ","z"]':
+    name:
+        - a
+        - z
+'["a",true,"z"]':
+    name:
+        - a
+        - '1'
+        - z
+'["a",false,"z"]':
+    name:
+        - a
+        - z
+'["a",null,"z"]':
+    name:
+        - a
+        - z
+'["a",[true],"z"]':
+    name:
+        - a
+        - '1'
+        - z
+'["a",[true,true],"z"]':
+    name:
+        - a
+        - '1'
+        - z
+'["a",[false,false],"z"]':
+    name:
+        - a
+        - z
+'["a",[null],"z"]':
+    name:
+        - a
+        - z
+'["a",["",""],"z"]':
+    name:
+        - a
+        - z
+'["a",["x",5,5.1,true,false,""],"z"]':
+    name:
+        - a
+        - x
+        - '5'
+        - '5.1'
+        - '1'
+        - z
+'["a",0,"z"]':
+    name:
+        0: a
+        2: z
+'["a",3,"z"]':
+    name:
+        - a
+        - '3'
+        - z
+'["a",[1,2,3],"z"]':
+    name:
+        - a
+        - '1'
+        - '2'
+        - '3'
+        - z
+'["a",[1,[2,[3]]],"z"]':
+    name:
+        - a
+        - '1'
+        - '2'
+        - '3'
+        - z
+'["a",1.7,"z"]':
+    name:
+        - a
+        - '1.7'
+        - z
+'["a",[1.7],"z"]':
+    name:
+        - a
+        - '1.7'
+        - z
+'["a",[1.7,[1.9]],"z"]':
+    name:
+        - a
+        - '1.7'
+        - '1.9'
+        - z
+'["a",["a","b","c"],"z"]':
+    name:
+        - a
+        - b
+        - c
+        - z
+'["a",["a "," b "," c "," d "," e"],"z"]':
+    name:
+        - a
+        - b
+        - c
+        - d
+        - e
+        - z
+'["a",["a",["b",["c"]]],"z"]':
+    name:
+        - a
+        - b
+        - c
+        - z

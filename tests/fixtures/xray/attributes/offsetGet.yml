@@ -1,0 +1,23 @@
+'offsetGet(''_true_'')':
+    - true
+'offsetGet(''_false_'')': {  }
+'offsetGet(''_null_'')': {  }
+'offsetGet(''_parts_'')':
+    - aa
+    - bb
+    - 'We love CaPs!'
+'offsetGet(''_part_'')':
+    - aa
+'offsetGet(''_empty_string_'')': {  }
+'offsetGet(''_empty_array_'')': {  }
+'offsetGet(''_zero_'')': {  }
+'offsetGet(''_one_'')':
+    - 1
+'offsetGet(''_zero_str_'')': {  }
+'offsetGet(''_one_str_'')':
+    - '1'
+'offsetGet(''_chr_0_'')':
+    - "\0"
+'offsetGet(''_chr_1_'')':
+    - !!binary AQ==
+'offsetGet(''_non_existing_'')': {  }

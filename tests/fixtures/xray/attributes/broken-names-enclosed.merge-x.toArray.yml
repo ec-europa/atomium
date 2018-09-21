@@ -1,0 +1,10 @@
+'{"a":true,"name ":"value","z":true}': {  }
+'{"a":true,"name  ":"value","z":true}': {  }
+'{"a":true," name":"value","z":true}': {  }
+'{"a":true,"  name":"value","z":true}': {  }
+'{"a":true,"na m  e":"value","z":true}': {  }
+'{"a":true,"nam$e":"value","z":true}': {  }
+'{"a":true,"nam\"e":"value","z":true}': {  }
+'{"a":true,"":"value","z":true}': {  }
+'{"a":true," ":"value","z":true}': {  }
+'{"a":true,"  ":"value","z":true}': {  }

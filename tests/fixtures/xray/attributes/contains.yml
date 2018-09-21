@@ -1,0 +1,179 @@
+'contains(''_true_'')': false
+'contains(''_true_'', NULL)': false
+'contains(''_true_'', true)': false
+'contains(''_true_'', false)': false
+'contains(''_true_'', '''')': false
+'contains(''_true_'', 0)': false
+'contains(''_true_'', 1)': false
+'contains(''_true_'', ''0'')': false
+'contains(''_true_'', ''1'')': true
+'contains(''_true_'', ''x'')': false
+'contains(''_true_'', chr(0))': false
+'contains(''_true_'', chr(1))': false
+'contains(''_false_'')': false
+'contains(''_false_'', NULL)': false
+'contains(''_false_'', true)': false
+'contains(''_false_'', false)': false
+'contains(''_false_'', '''')': false
+'contains(''_false_'', 0)': false
+'contains(''_false_'', 1)': false
+'contains(''_false_'', ''0'')': false
+'contains(''_false_'', ''1'')': false
+'contains(''_false_'', ''x'')': false
+'contains(''_false_'', chr(0))': false
+'contains(''_false_'', chr(1))': false
+'contains(''_null_'')': false
+'contains(''_null_'', NULL)': false
+'contains(''_null_'', true)': false
+'contains(''_null_'', false)': false
+'contains(''_null_'', '''')': false
+'contains(''_null_'', 0)': false
+'contains(''_null_'', 1)': false
+'contains(''_null_'', ''0'')': false
+'contains(''_null_'', ''1'')': false
+'contains(''_null_'', ''x'')': false
+'contains(''_null_'', chr(0))': false
+'contains(''_null_'', chr(1))': false
+'contains(''_parts_'')': false
+'contains(''_parts_'', NULL)': false
+'contains(''_parts_'', true)': false
+'contains(''_parts_'', false)': false
+'contains(''_parts_'', '''')': false
+'contains(''_parts_'', 0)': false
+'contains(''_parts_'', 1)': false
+'contains(''_parts_'', ''0'')': false
+'contains(''_parts_'', ''1'')': false
+'contains(''_parts_'', ''x'')': false
+'contains(''_parts_'', ''ove'')': true
+'contains(''_parts_'', ''ve ca'')': true
+'contains(''_parts_'', ''ve CA'')': true
+'contains(''_parts_'', ''ve Ca'')': true
+"contains('_parts_', array (\n  0 => 'aa',\n  1 => 'bb',\n  2 => 'We love CaPs!',\n))": false
+'contains(''_parts_'', ''aa'')': true
+'contains(''_parts_'', ''bb'')': true
+'contains(''_parts_'', ''We love CaPs!'')': true
+'contains(''_parts_'', chr(0))': false
+'contains(''_parts_'', chr(1))': false
+'contains(''_part_'')': false
+'contains(''_part_'', NULL)': false
+'contains(''_part_'', true)': false
+'contains(''_part_'', false)': false
+'contains(''_part_'', '''')': false
+'contains(''_part_'', 0)': false
+'contains(''_part_'', 1)': false
+'contains(''_part_'', ''0'')': false
+'contains(''_part_'', ''1'')': false
+'contains(''_part_'', ''x'')': false
+'contains(''_part_'', ''aa'')': true
+'contains(''_part_'', chr(0))': false
+'contains(''_part_'', chr(1))': false
+'contains(''_empty_string_'')': false
+'contains(''_empty_string_'', NULL)': false
+'contains(''_empty_string_'', true)': false
+'contains(''_empty_string_'', false)': false
+'contains(''_empty_string_'', '''')': false
+'contains(''_empty_string_'', 0)': false
+'contains(''_empty_string_'', 1)': false
+'contains(''_empty_string_'', ''0'')': false
+'contains(''_empty_string_'', ''1'')': false
+'contains(''_empty_string_'', ''x'')': false
+'contains(''_empty_string_'', chr(0))': false
+'contains(''_empty_string_'', chr(1))': false
+'contains(''_empty_array_'')': false
+'contains(''_empty_array_'', NULL)': false
+'contains(''_empty_array_'', true)': false
+'contains(''_empty_array_'', false)': false
+'contains(''_empty_array_'', '''')': false
+'contains(''_empty_array_'', 0)': false
+'contains(''_empty_array_'', 1)': false
+'contains(''_empty_array_'', ''0'')': false
+'contains(''_empty_array_'', ''1'')': false
+'contains(''_empty_array_'', ''x'')': false
+"contains('_empty_array_', array (\n))": false
+'contains(''_empty_array_'', chr(0))': false
+'contains(''_empty_array_'', chr(1))': false
+'contains(''_zero_'')': false
+'contains(''_zero_'', NULL)': false
+'contains(''_zero_'', true)': false
+'contains(''_zero_'', false)': false
+'contains(''_zero_'', '''')': false
+'contains(''_zero_'', 0)': false
+'contains(''_zero_'', 1)': false
+'contains(''_zero_'', ''0'')': true
+'contains(''_zero_'', ''1'')': false
+'contains(''_zero_'', ''x'')': false
+'contains(''_zero_'', chr(0))': false
+'contains(''_zero_'', chr(1))': false
+'contains(''_one_'')': false
+'contains(''_one_'', NULL)': false
+'contains(''_one_'', true)': false
+'contains(''_one_'', false)': false
+'contains(''_one_'', '''')': false
+'contains(''_one_'', 0)': false
+'contains(''_one_'', 1)': false
+'contains(''_one_'', ''0'')': false
+'contains(''_one_'', ''1'')': true
+'contains(''_one_'', ''x'')': false
+'contains(''_one_'', chr(0))': false
+'contains(''_one_'', chr(1))': false
+'contains(''_zero_str_'')': false
+'contains(''_zero_str_'', NULL)': false
+'contains(''_zero_str_'', true)': false
+'contains(''_zero_str_'', false)': false
+'contains(''_zero_str_'', '''')': false
+'contains(''_zero_str_'', 0)': false
+'contains(''_zero_str_'', 1)': false
+'contains(''_zero_str_'', ''0'')': true
+'contains(''_zero_str_'', ''1'')': false
+'contains(''_zero_str_'', ''x'')': false
+'contains(''_zero_str_'', chr(0))': false
+'contains(''_zero_str_'', chr(1))': false
+'contains(''_one_str_'')': false
+'contains(''_one_str_'', NULL)': false
+'contains(''_one_str_'', true)': false
+'contains(''_one_str_'', false)': false
+'contains(''_one_str_'', '''')': false
+'contains(''_one_str_'', 0)': false
+'contains(''_one_str_'', 1)': false
+'contains(''_one_str_'', ''0'')': false
+'contains(''_one_str_'', ''1'')': true
+'contains(''_one_str_'', ''x'')': false
+'contains(''_one_str_'', chr(0))': false
+'contains(''_one_str_'', chr(1))': false
+'contains(''_chr_0_'')': true
+'contains(''_chr_0_'', NULL)': true
+'contains(''_chr_0_'', true)': false
+'contains(''_chr_0_'', false)': true
+'contains(''_chr_0_'', '''')': false
+'contains(''_chr_0_'', 0)': true
+'contains(''_chr_0_'', 1)': false
+'contains(''_chr_0_'', ''0'')': false
+'contains(''_chr_0_'', ''1'')': false
+'contains(''_chr_0_'', ''x'')': false
+'contains(''_chr_0_'', chr(0))': true
+'contains(''_chr_0_'', chr(1))': false
+'contains(''_chr_1_'')': false
+'contains(''_chr_1_'', NULL)': false
+'contains(''_chr_1_'', true)': true
+'contains(''_chr_1_'', false)': false
+'contains(''_chr_1_'', '''')': false
+'contains(''_chr_1_'', 0)': false
+'contains(''_chr_1_'', 1)': true
+'contains(''_chr_1_'', ''0'')': false
+'contains(''_chr_1_'', ''1'')': false
+'contains(''_chr_1_'', ''x'')': false
+'contains(''_chr_1_'', chr(0))': false
+'contains(''_chr_1_'', chr(1))': true
+'contains(''_non_existing_'')': false
+'contains(''_non_existing_'', NULL)': false
+'contains(''_non_existing_'', true)': false
+'contains(''_non_existing_'', false)': false
+'contains(''_non_existing_'', '''')': false
+'contains(''_non_existing_'', 0)': false
+'contains(''_non_existing_'', 1)': false
+'contains(''_non_existing_'', ''0'')': false
+'contains(''_non_existing_'', ''1'')': false
+'contains(''_non_existing_'', ''x'')': false
+'contains(''_non_existing_'', ''_non_existing_'')': false
+'contains(''_non_existing_'', chr(0))': false
+'contains(''_non_existing_'', chr(1))': false

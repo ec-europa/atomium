@@ -1,0 +1,14 @@
+'offsetExists(''_true_'')': true
+'offsetExists(''_false_'')': true
+'offsetExists(''_null_'')': true
+'offsetExists(''_parts_'')': true
+'offsetExists(''_part_'')': true
+'offsetExists(''_empty_string_'')': true
+'offsetExists(''_empty_array_'')': true
+'offsetExists(''_zero_'')': true
+'offsetExists(''_one_'')': true
+'offsetExists(''_zero_str_'')': true
+'offsetExists(''_one_str_'')': true
+'offsetExists(''_chr_0_'')': true
+'offsetExists(''_chr_1_'')': true
+'offsetExists(''_non_existing_'')': false

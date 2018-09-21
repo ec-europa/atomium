@@ -1,0 +1,8 @@
+'':
+    zzz:
+        - true
+    x:
+        - 'y'
+    aaa: {  }
+    class:
+        - sidebar
