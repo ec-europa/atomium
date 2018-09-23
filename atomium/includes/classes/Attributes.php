@@ -449,9 +449,26 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *   An associative array of attributes.
    */
   public function toArray() {
-    return array_map(function ($value) {
-      return array_filter((array) $value);
-    }, $this->getStorage());
+    $array = [];
+    foreach ($this->getStorage() as $name => $value) {
+      if (is_array($value)) {
+        $array[$name] = [];
+        foreach ($value as $k => $v) {
+          if (!empty($v)) {
+            $array[$name][$k] = $v;
+          }
+        }
+      }
+      else {
+        if (!empty($value)) {
+          $array[$name] = [$value];
+        }
+        else {
+          $array[$name] = [];
+        }
+      }
+    }
+    return $array;
   }
 
   /**
