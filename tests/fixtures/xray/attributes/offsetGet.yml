@@ -1,6 +1,5 @@
-'offsetGet(''_true_'')':
-    - true
-'offsetGet(''_false_'')': {  }
+'offsetGet(''_true_'')': true
+'offsetGet(''_false_'')': true
 'offsetGet(''_null_'')': {  }
 'offsetGet(''_parts_'')':
     - aa

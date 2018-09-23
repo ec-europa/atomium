@@ -63,8 +63,8 @@ class AttributesExplicitTest extends UnitTestBase {
       $attributes);
 
     foreach ([
-      [TRUE, [TRUE]],
-      [FALSE, []],
+      [TRUE, TRUE],
+      [FALSE, TRUE],
       [['a', 'b', 'c'], ['a', 'b', 'c']],
       ['cat', ['cat']],
       ['', [], TRUE],
@@ -120,7 +120,7 @@ class AttributesExplicitTest extends UnitTestBase {
     self::assertAppend(
       ' boolean',
       [
-        'boolean' => [TRUE],
+        'boolean' => TRUE,
       ],
       $attributes,
       [
@@ -134,7 +134,7 @@ class AttributesExplicitTest extends UnitTestBase {
     self::assertAppend(
       ' parts',
       [
-        'parts' => [TRUE],
+        'parts' => TRUE,
       ],
       $attributes,
       [

@@ -1,8 +1,7 @@
 '':
-    zzz:
-        - true
+    zzz: true
     x:
         - 'y'
-    aaa: {  }
+    aaa: true
     class:
         - sidebar

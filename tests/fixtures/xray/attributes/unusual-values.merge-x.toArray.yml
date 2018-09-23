@@ -12,13 +12,11 @@
 'false': {  }
 'null': {  }
 '[true]':
-    name:
-        - true
+    name: true
 '[true,true]':
-    name:
-        - true
+    name: true
 '[false,false]':
-    name: {  }
+    name: true
 '[null]':
     name: {  }
 '["",""]':

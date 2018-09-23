@@ -504,7 +504,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function toArray() {
     $array = [];
     foreach ($this->getStorage() as $name => $value) {
-      if (is_array($value)) {
+      if (is_bool($value)) {
+        $array[$name] = TRUE;
+      }
+      elseif (is_array($value)) {
         $array[$name] = [];
         foreach ($value as $v) {
           if (!empty($v)) {

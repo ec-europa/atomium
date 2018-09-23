@@ -114,7 +114,7 @@
   expect:
     - toArray:
         return:
-          'data-closable ': []
+          'data-closable ': true
     - __toString:
         return: ' data-closable'
 
