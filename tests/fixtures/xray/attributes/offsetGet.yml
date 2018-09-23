@@ -11,7 +11,7 @@
 'offsetGet(''_empty_array_'')': {  }
 'offsetGet(''_zero_'')': {  }
 'offsetGet(''_one_'')':
-    - 1
+    - '1'
 'offsetGet(''_zero_str_'')': {  }
 'offsetGet(''_one_str_'')':
     - '1'

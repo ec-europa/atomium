@@ -49,7 +49,7 @@
         - z
 '["a",true,"z"]':
     name:
-        - true
+        - '1'
         - z
 '["a",false,"z"]':
     name:

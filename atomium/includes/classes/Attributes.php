@@ -511,13 +511,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $array[$name] = [];
         foreach ($value as $v) {
           if (!empty($v)) {
-            $array[$name][] = $v;
+            $array[$name][] = (string) $v;
           }
         }
       }
       else {
         if (!empty($value)) {
-          $array[$name] = [$value];
+          $array[$name] = [(string) $value];
         }
         else {
           $array[$name] = [];
