@@ -35,8 +35,8 @@
         - z
 '["a","","z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a"," ","z"]':
     name:
         - a
@@ -54,12 +54,12 @@
         - z
 '["a",false,"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",null,"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",[true],"z"]':
     name:
         - a
@@ -72,28 +72,28 @@
         - z
 '["a",[false,false],"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",[null],"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",["",""],"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",["x",5,5.1,true,false,""],"z"]':
     name:
-        0: a
-        1: x
-        2: 5
-        3: 5.1
-        4: true
-        6: z
+        - a
+        - x
+        - 5
+        - 5.1
+        - true
+        - z
 '["a",0,"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",3,"z"]':
     name:
         - a

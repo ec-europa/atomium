@@ -53,7 +53,7 @@
         - z
 '["a",false,"z"]':
     name:
-        1: z
+        - z
 '["a",null,"z"]':
     name:
         - a
@@ -90,8 +90,8 @@
         - z
 '["a",0,"z"]':
     name:
-        0: a
-        2: z
+        - a
+        - z
 '["a",3,"z"]':
     name:
         - a
