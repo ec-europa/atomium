@@ -35,7 +35,7 @@ class AttributesTest extends UnitTestBase {
           $item['arguments']
         );
 
-        expect($actual)->to->equal($item['return']);
+        self::assertSame($item['return'], $actual);
       }
     }
   }
