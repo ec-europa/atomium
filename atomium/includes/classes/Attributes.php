@@ -27,7 +27,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *   .
    */
   public function __construct(array $attributes = array()) {
-    $this->setAttributes($attributes);
+    $this->setAttributes($attributes, FALSE);
   }
 
   /**
@@ -207,11 +207,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     $data = array();
     foreach ($value_iterator as $item) {
-      foreach (explode(' ', $item) as $part) {
-        $data[$part] = $part;
+      if (FALSE === $item || NULL === $item) {
+        continue;
       }
+      $part_str = (string) $item;
+      $data[$part_str] = $part_str;
     }
-    unset($data['']);
 
     $attributes[$name] = array_unique(
       array_merge(
@@ -243,7 +244,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
     else {
       if (!is_array($value)) {
-        $value = explode(' ', $value);
+        $value = [(string) $value];
       }
 
       $attributes[$name] = array_values(array_diff($attributes[$name], $value));
@@ -494,7 +495,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
            * }
            */
 
-          return trim(check_plain($item));
+          return check_plain($item);
         }, (array) $data);
 
         // By default, sort the value of the class attribute.

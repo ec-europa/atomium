@@ -3,30 +3,30 @@
         - value
 '"value "':
     name:
-        - value
+        - 'value '
 '" value"':
     name:
-        - value
+        - ' value'
 '"  value  "':
     name:
-        - value
+        - '  value  '
 '"va l  ue"':
     name:
-        - va
-        - l
-        - ue
+        - 'va l  ue'
 '"mm mm"':
     name:
-        - mm
+        - 'mm mm'
 '"val$u\"e"':
     name:
         - 'val$u"e'
 '""':
     name: {  }
 '" "':
-    name: {  }
+    name:
+        - ' '
 '"  "':
-    name: {  }
+    name:
+        - '  '
 'true':
     name: true
 'false':
@@ -83,11 +83,11 @@
         - c
 '["a "," b "," c "," d "," e"]':
     name:
-        - a
-        - b
-        - c
-        - d
-        - e
+        - 'a '
+        - ' b '
+        - ' c '
+        - ' d '
+        - ' e'
 '["a",["b",["c"]]]':
     name:
         - a

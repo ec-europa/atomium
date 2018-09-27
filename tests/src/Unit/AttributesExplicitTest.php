@@ -31,7 +31,7 @@ class AttributesExplicitTest extends UnitTestBase {
    */
   public function testValueOrder() {
     self::assertToString(
-      ' class="a b z" name="z b a"',
+      ' class="b a z" name="z b a"',
       new Attributes(
         [
           'class' => ['z', 'b a'],
@@ -169,7 +169,7 @@ class AttributesExplicitTest extends UnitTestBase {
     self::assertAppend(
       ' parts="aa bb uu vv yy zz"',
       [
-        'parts' => ['aa', 'bb', 'uu', 'vv', 'yy', 'zz'],
+        'parts' => ['aa', 'bb', 'uu vv', 'yy zz'],
       ],
       $attributes,
       [
@@ -181,7 +181,7 @@ class AttributesExplicitTest extends UnitTestBase {
     self::assertAppend(
       ' parts="aa bb zz dd cc"',
       [
-        'parts' => ['aa', 'bb', 'zz', 'dd', 'cc'],
+        'parts' => ['aa', 'bb', 'zz', 'dd cc'],
       ],
       $attributes,
       [
@@ -202,12 +202,12 @@ class AttributesExplicitTest extends UnitTestBase {
       [['a', TRUE, 'z'], 'a 1 z'],
       [['a', [TRUE], 'z'], 'a 1 z'],
       ['', ''],
-      [' ', ''],
+      [' ', ' '],
       [[''], ''],
-      [[' '], ''],
-      [['a', ' ', 'z'], 'a  z'],
+      [[' '], ' '],
+      [['a', ' ', 'z'], 'a   z'],
       [[1, ['two', [3]]], '1 two 3'],
-      [' a  b', 'a  b'],
+      [' a  b', ' a  b'],
     ] as $value_and_expected) {
       list($value, $expected_output) = $value_and_expected;
 
@@ -430,10 +430,10 @@ class AttributesExplicitTest extends UnitTestBase {
  integer-array="0 1 2 3 4 5"
  integer-nested-array="0 1 2 3 4 5"
  integer="0"
- string-array-spaces="a b c d e"
+ string-array-spaces="a   b   c   d   e"
  string-array="a b c d e f"
  string-nested-array="a b c d e f"
- string="a b c d e f"');
+ string=" a b c d e f "');
 
     $attributes = new Attributes(
       [

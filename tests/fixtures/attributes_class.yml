@@ -81,9 +81,9 @@
   expect:
     - toArray:
         return:
-          class: ['foo', 'bar', 'drupal']
+          class: ['foo bar', 'drupal']
     - __toString:
-        return: ' class="bar drupal foo"'
+        return: ' class="drupal foo bar"'
 
 -
   given: []
@@ -103,9 +103,9 @@
   expect:
     - toArray:
         return:
-          class: ['foo']
+          class: ['foo ']
     - __toString:
-        return: ' class="foo"'
+        return: ' class="foo "'
 
 -
   given: []
