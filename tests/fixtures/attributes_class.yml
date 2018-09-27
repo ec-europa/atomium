@@ -113,10 +113,9 @@
     - append: ['data-closable ']
   expect:
     - toArray:
-        return:
-          'data-closable ': true
+        return: []
     - __toString:
-        return: ' data-closable'
+        return: ''
 
 -
   given:

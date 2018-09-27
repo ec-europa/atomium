@@ -1,30 +1,12 @@
-'{"name ":"value"}':
-    'name ':
-        - value
-'{"name  ":"value"}':
-    'name  ':
-        - value
-'{" name":"value"}':
-    ' name':
-        - value
-'{"  name":"value"}':
-    '  name':
-        - value
-'{"na m  e":"value"}':
-    'na m  e':
-        - value
+'{"name ":"value"}': {  }
+'{"name  ":"value"}': {  }
+'{" name":"value"}': {  }
+'{"  name":"value"}': {  }
+'{"na m  e":"value"}': {  }
 '{"nam$e":"value"}':
     nam$e:
         - value
-'{"nam\"e":"value"}':
-    'nam"e':
-        - value
-'{"":"value"}':
-    '':
-        - value
-'{" ":"value"}':
-    ' ':
-        - value
-'{"  ":"value"}':
-    '  ':
-        - value
+'{"nam\"e":"value"}': {  }
+'{"":"value"}': {  }
+'{" ":"value"}': {  }
+'{"  ":"value"}': {  }

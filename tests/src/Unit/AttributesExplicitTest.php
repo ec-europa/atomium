@@ -310,16 +310,16 @@ class AttributesExplicitTest extends UnitTestBase {
   public function testBrokenAttributeNames() {
 
     foreach ([
-      'name ' => ' name ="value"',
-      'name  ' => ' name  ="value"',
-      ' name' => '  name="value"',
-      '  name' => '   name="value"',
-      'na m  e' => ' na m  e="value"',
+      'name ' => '',
+      'name  ' => '',
+      ' name' => '',
+      '  name' => '',
+      'na m  e' => '',
       'nam$e' => ' nam$e="value"',
-      'nam"e' => ' nam"e="value"',
-      '' => ' ="value"',
-      ' ' => '  ="value"',
-      '  ' => '   ="value"',
+      'nam"e' => '',
+      '' => '',
+      ' ' => '',
+      '  ' => '',
     ] as $name => $expected) {
 
       self::assertToString(
@@ -337,15 +337,15 @@ class AttributesExplicitTest extends UnitTestBase {
   public function testBrokenAttributeNamesEnclosed() {
 
     foreach ([
-      'name ' => ' a name ="value" z',
-      'name  ' => ' a name  ="value" z',
-      ' name' => '  name="value" a z',
-      '  name' => '   name="value" a z',
-      'na m  e' => ' a na m  e="value" z',
+      'name ' => ' a z',
+      'name  ' => ' a z',
+      ' name' => ' a z',
+      '  name' => ' a z',
+      'na m  e' => ' a z',
       'nam$e' => ' a nam$e="value" z',
-      '' => ' ="value" a z',
-      ' ' => '  ="value" a z',
-      '  ' => '   ="value" a z',
+      '' => ' a z',
+      ' ' => ' a z',
+      '  ' => ' a z',
     ] as $name => $expected) {
 
       self::assertToString(
@@ -368,15 +368,15 @@ class AttributesExplicitTest extends UnitTestBase {
   public function testBrokenAttributeNamesBoolean() {
 
     foreach ([
-      'name ' => ' name',
-      'name  ' => ' name',
-      ' name' => ' name',
-      '  name' => ' name',
-      'na m  e' => ' na m  e',
+      'name ' => '',
+      'name  ' => '',
+      ' name' => '',
+      '  name' => '',
+      'na m  e' => '',
       'nam$e' => ' nam$e',
-      '' => ' ',
-      ' ' => ' ',
-      '  ' => ' ',
+      '' => '',
+      ' ' => '',
+      '  ' => '',
     ] as $name => $expected) {
 
       self::assertToString(
@@ -394,15 +394,15 @@ class AttributesExplicitTest extends UnitTestBase {
   public function testBrokenAttributeNamesBooleanEnclosed() {
 
     foreach ([
-      'name ' => ' a name z',
-      'name  ' => ' a name z',
-      ' name' => ' a name z',
-      '  name' => ' a name z',
-      'na m  e' => ' a na m  e z',
+      'name ' => ' a z',
+      'name  ' => ' a z',
+      ' name' => ' a z',
+      '  name' => ' a z',
+      'na m  e' => ' a z',
       'nam$e' => ' a nam$e z',
-      '' => '  a z',
-      ' ' => '  a z',
-      '  ' => '  a z',
+      '' => ' a z',
+      ' ' => ' a z',
+      '  ' => ' a z',
     ] as $name => $expected) {
 
       self::assertToString(
