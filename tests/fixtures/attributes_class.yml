@@ -200,3 +200,36 @@
     - getStorage:
         return:
           placeholder: ['<b>hello<em>A B</em>world</b>']
+
+-
+  given: { }
+  run:
+    - setAttribute: ['name', [1, ['two', [3, {x: 4}]]], true]
+  expect:
+    - __toString:
+        return: ' name="1 two 3 4"'
+    - getStorage:
+        return:
+          name: ['1', 'two', '3', '4']
+
+-
+  given: { }
+  run:
+    - setAttribute: ['name', [1, ['two', [3, {x: 4}]]], false]
+  expect:
+    - __toString:
+        return: ' name="3 4"'
+    - getStorage:
+        return:
+          name: [3, 4]
+
+-
+  given: { }
+  run:
+    - offsetSet: ['name', [1, ['two', [3, {x: 4}]]]]
+  expect:
+    - __toString:
+        return: ' name="3 4"'
+    - getStorage:
+        return:
+          name: [3, 4]
