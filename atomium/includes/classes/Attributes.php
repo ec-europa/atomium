@@ -496,7 +496,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $value_iterator = new \RecursiveIteratorIterator(
           new \RecursiveArrayIterator($member)
         );
-        $this->storage[$name] = array_values(array_unique(iterator_to_array($value_iterator)));
+        $this->storage[$name] = array_values(array_unique(iterator_to_array($value_iterator, FALSE)));
       }
       elseif (NULL === $member) {
         $this->storage[$name] = [];

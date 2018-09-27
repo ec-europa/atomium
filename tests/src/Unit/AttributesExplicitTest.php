@@ -200,13 +200,13 @@ class AttributesExplicitTest extends UnitTestBase {
       [TRUE, TRUE],
       [[TRUE], '1'],
       [['a', TRUE, 'z'], 'a 1 z'],
-      [['a', [TRUE], 'z'], '1 z'],
+      [['a', [TRUE], 'z'], 'a 1 z'],
       ['', ''],
       [' ', ''],
       [[''], ''],
       [[' '], ''],
       [['a', ' ', 'z'], 'a  z'],
-      [[1, ['two', [3]]], '3'],
+      [[1, ['two', [3]]], '1 two 3'],
       [' a  b', 'a  b'],
     ] as $value_and_expected) {
       list($value, $expected_output) = $value_and_expected;

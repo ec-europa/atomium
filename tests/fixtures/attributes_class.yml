@@ -218,10 +218,10 @@
     - setAttribute: ['name', [1, ['two', [3, {x: 4}]]], false]
   expect:
     - __toString:
-        return: ' name="3 4"'
+        return: ' name="1 two 3 4"'
     - getStorage:
         return:
-          name: [3, 4]
+          name: [1, 'two', 3, 4]
 
 -
   given: { }
@@ -229,7 +229,7 @@
     - offsetSet: ['name', [1, ['two', [3, {x: 4}]]]]
   expect:
     - __toString:
-        return: ' name="3 4"'
+        return: ' name="1 two 3 4"'
     - getStorage:
         return:
-          name: [3, 4]
+          name: [1, 'two', 3, 4]
