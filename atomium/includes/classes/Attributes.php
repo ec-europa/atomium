@@ -549,9 +549,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       elseif (is_array($value)) {
         $array[$name] = [];
         foreach ($value as $v) {
-          if (!empty($v)) {
-            $array[$name][] = (string) $v;
-          }
+          $array[$name][] = (string) $v;
         }
       }
       else {

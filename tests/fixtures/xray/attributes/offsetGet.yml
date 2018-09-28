@@ -7,12 +7,15 @@
     - 'We love CaPs!'
 'offsetGet(''_part_'')':
     - aa
-'offsetGet(''_empty_string_'')': {  }
+'offsetGet(''_empty_string_'')':
+    - ''
 'offsetGet(''_empty_array_'')': {  }
-'offsetGet(''_zero_'')': {  }
+'offsetGet(''_zero_'')':
+    - '0'
 'offsetGet(''_one_'')':
     - '1'
-'offsetGet(''_zero_str_'')': {  }
+'offsetGet(''_zero_str_'')':
+    - '0'
 'offsetGet(''_one_str_'')':
     - '1'
 'offsetGet(''_chr_0_'')':

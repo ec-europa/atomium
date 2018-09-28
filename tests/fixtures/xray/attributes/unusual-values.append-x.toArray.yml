@@ -20,7 +20,8 @@
     name:
         - 'val$u"e'
 '""':
-    name: {  }
+    name:
+        - ''
 '" "':
     name:
         - ' '
@@ -44,15 +45,18 @@
 '[null]':
     name: {  }
 '["",""]':
-    name: {  }
+    name:
+        - ''
 '["x",5,5.1,true,false,""]':
     name:
         - x
         - '5'
         - '5.1'
         - '1'
+        - ''
 0:
-    name: {  }
+    name:
+        - '0'
 3:
     name:
         - '3'

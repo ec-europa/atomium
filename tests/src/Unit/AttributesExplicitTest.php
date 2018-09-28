@@ -67,8 +67,8 @@ class AttributesExplicitTest extends UnitTestBase {
       [FALSE, TRUE],
       [['a', 'b', 'c'], ['a', 'b', 'c']],
       ['cat', ['cat']],
-      ['', [], TRUE],
-      [0, []],
+      ['', ['']],
+      [0, ['0']],
     ] as $data) {
       list($value, $expectedOffsetGet, $expectedOffsetExists) = $data
       + [NULL, NULL, TRUE];
