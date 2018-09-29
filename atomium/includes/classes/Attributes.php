@@ -8,6 +8,7 @@ namespace Drupal\atomium;
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Attributes implements \ArrayAccess, \IteratorAggregate {
+
   /**
    * Stores the attribute data.
    *
