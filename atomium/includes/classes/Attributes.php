@@ -59,7 +59,15 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * {@inheritdoc}
+   * Gets the value of an attribute.
+   *
+   * @param mixed $name
+   *   The attribute name.
+   *
+   * @return mixed|null
+   *   The attribute value, or an empty array if the attribute does not exist.
+   *
+   * @see \ArrayAccess::offsetGet()
    */
   public function &offsetGet($name) {
     $return = $this->setStorage(
@@ -70,7 +78,14 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * {@inheritdoc}
+   * Sets the value of an attribute.
+   *
+   * @param string|int $name
+   *   The attribute name.
+   * @param bool|string|string[] $value
+   *   The value to set.
+   *
+   * @see \ArrayAccess::offsetSet()
    */
   public function offsetSet($name, $value = FALSE) {
     $storage = $this->getStorage() + array($name => array());
@@ -81,7 +96,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * {@inheritdoc}
+   * Removes an attribute completely.
+   *
+   * @param string $name
+   *   The attribute name.
+   *
+   * @see \ArrayAccess::offsetUnset()
    */
   public function offsetUnset($name) {
     $storage = $this->getStorage();
@@ -92,7 +112,15 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * {@inheritdoc}
+   * Checks whether an attribute with the given name exists.
+   *
+   * @param string $name
+   *   The attribute name.
+   *
+   * @return bool
+   *   TRUE, if the attribute exists.
+   *
+   * @see \ArrayAccess::offsetExists()
    */
   public function offsetExists($name) {
     $storage = $this->toArray();
