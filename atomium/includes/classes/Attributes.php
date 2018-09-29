@@ -17,7 +17,14 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   private $storage = array();
 
   /**
-   * {@inheritdoc}
+   * Constructor.
+   *
+   * @param mixed[] $attributes
+   *   Format:
+   *   $[$attribute_name_unsafe] = true|false|string|array(..)
+   *   $[$attribute_name_unsafe] = $value :string
+   *   $[$attribute_name_unsafe][] = $value_part :string
+   *   .
    */
   public function __construct(array $attributes = array()) {
     $this->setAttributes($attributes);
