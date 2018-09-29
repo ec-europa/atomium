@@ -86,6 +86,17 @@
         return: ' class="bar drupal foo"'
 
 -
+  given: []
+  run:
+    - offsetGet: ['class']
+  expect:
+    - toArray:
+        return:
+          class: []
+    - __toString:
+        return: ' class=""'
+
+-
   given:
     class: 'foo '
   run: []
