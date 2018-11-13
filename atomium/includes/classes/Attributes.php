@@ -479,16 +479,21 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    */
   public function getStorage() {
     // Flatten the array.
-    array_walk($this->storage, function (&$member) {
+    foreach ($this->storage as $name => $member) {
       // Take care of loners attributes.
-      if (!is_bool($member)) {
+      if (is_array($member)) {
         $value_iterator = new \RecursiveIteratorIterator(
-          new \RecursiveArrayIterator((array) $member)
+          new \RecursiveArrayIterator($member)
         );
-        $member = array_values(array_unique(iterator_to_array($value_iterator)));
+        $this->storage[$name] = array_values(array_unique(iterator_to_array($value_iterator)));
       }
-    });
-
+      elseif (NULL === $member) {
+        $this->storage[$name] = [];
+      }
+      elseif (!is_bool($member)) {
+        $this->storage[$name] = [$member];
+      }
+    }
     return $this->storage;
   }
 
