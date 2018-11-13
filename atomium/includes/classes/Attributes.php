@@ -72,11 +72,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @see \ArrayAccess::offsetGet()
    */
   public function offsetGet($name) {
-    $return = $this->setStorage(
-      $this->getStorage() + array($name => array())
-    )->toArray();
-
-    return $return[$name];
+    $array = $this->toArray();
+    return array_key_exists($name, $array) ? $array[$name] : array();
   }
 
   /**

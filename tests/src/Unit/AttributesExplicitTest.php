@@ -51,15 +51,15 @@ class AttributesExplicitTest extends UnitTestBase {
     self::assertToString(
       '',
       $attributes);
-    // Currently, offsetGet() has a side effect.
+    // offsetGet() used to have a side effect, but now that is fixed.
     self::assertSame(
       [],
       $attributes['class']);
     self::assertToArray(
-      ['class' => []],
+      [],
       $attributes);
     self::assertToString(
-      ' class=""',
+      '',
       $attributes);
 
     foreach ([

@@ -91,10 +91,9 @@
     - offsetGet: ['class']
   expect:
     - toArray:
-        return:
-          class: []
+        return: []
     - __toString:
-        return: ' class=""'
+        return: ''
 
 -
   given:
