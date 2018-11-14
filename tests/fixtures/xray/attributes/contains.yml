@@ -6,7 +6,7 @@
 'contains(''_true_'', 0)': false
 'contains(''_true_'', 1)': false
 'contains(''_true_'', ''0'')': false
-'contains(''_true_'', ''1'')': true
+'contains(''_true_'', ''1'')': false
 'contains(''_true_'', ''x'')': false
 'contains(''_true_'', chr(0))': false
 'contains(''_true_'', chr(1))': false

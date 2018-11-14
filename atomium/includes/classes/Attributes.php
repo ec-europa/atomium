@@ -414,7 +414,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     if (!is_array($actual_value)) {
-      return FALSE !== stripos($actual_value, $needle);
+      // Prevent that boolean TRUE is interpreted as '1' with stripos().
+      return FALSE;
     }
 
     foreach ($actual_value as $item) {
