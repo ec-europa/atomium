@@ -150,22 +150,51 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return $this;
     }
 
-    $data = $value;
+    if (is_array($value)) {
+      $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($value));
 
-    if (TRUE === $explode && !is_bool($value)) {
-      $value = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
-
-      $data = array();
-
-      foreach ($value as $item) {
-        $data = array_merge($data, explode(' ', $item));
+      $value = array();
+      foreach ($iterator as $item) {
+        if (!is_string($item)) {
+          $part = (string) $item;
+          $value[$part] = $part;
+        }
+        elseif ($explode) {
+          foreach (explode(' ', $item) as $part) {
+            $value[$part] = $part;
+          }
+        }
+        else {
+          $value[$item] = $item;
+        }
       }
 
-      $data = array_values(array_filter($data, 'strlen'));
-      $data = array_combine($data, $data);
+      if ($explode) {
+        unset($value['']);
+      }
+    }
+    elseif (NULL === $value) {
+      $value = [];
+    }
+    elseif (is_string($value)) {
+      if ($explode) {
+        $parts_map = [];
+        foreach (explode(' ', $value) as $part) {
+          $parts_map[$part] = $part;
+        }
+        unset($parts_map['']);
+        $value = $parts_map;
+      }
+      else {
+        $value = [$value => $value];
+      }
+    }
+    elseif (!is_bool($value)) {
+      $part = (string) $value;
+      $value = [$part => $part];
     }
 
-    $this->offsetSet($name, $data);
+    $this->offsetSet($name, $value);
 
     return $this;
   }
