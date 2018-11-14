@@ -360,7 +360,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   Attribute name.
-   * @param string|bool $value
+   * @param string|bool|int $value
    *   Attribute value.
    *
    * @return bool
