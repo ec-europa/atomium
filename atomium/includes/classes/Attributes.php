@@ -348,11 +348,15 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
-    return $storage[$name] !== array_filter(
-      $storage[$name],
-      function ($item) use ($value) {
-        return $item !== $value;
-      });
+    if (!is_array($storage[$name])) {
+      // Legacy support:
+      // array_filter() returns NULL if called with a non-array.
+      // $storage[$name] !== NULL returns TRUE, because we already excluded the
+      // NULL case above.
+      return TRUE;
+    }
+
+    return in_array($value, $storage[$name], TRUE);
   }
 
   /**
