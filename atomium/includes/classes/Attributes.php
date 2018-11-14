@@ -342,7 +342,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $name
    *   Attribute name.
-   * @param string|bool $value
+   * @param string|bool|int $value
    *   Attribute value.
    *
    * @return bool
@@ -361,6 +361,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       // $storage[$name] !== NULL returns TRUE, because we already excluded the
       // NULL case above.
       return TRUE;
+    }
+
+    if (is_int($value)) {
+      // Nothing.
+    }
+    elseif (!is_string($value)) {
+      return FALSE;
     }
 
     return in_array($value, $storage[$name], TRUE);
