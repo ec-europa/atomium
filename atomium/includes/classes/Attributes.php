@@ -377,17 +377,17 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
-    if (empty($storage[$name])) {
+    $actual_value = $storage[$name];
+
+    if (empty($actual_value)) {
       return FALSE;
     }
 
-    $candidates = $storage[$name];
-
-    if (!is_array($candidates)) {
-      return FALSE !== stripos($candidates, $value);
+    if (!is_array($actual_value)) {
+      return FALSE !== stripos($actual_value, $value);
     }
 
-    foreach ($candidates as $item) {
+    foreach ($actual_value as $item) {
       if (FALSE !== stripos($item, $value)) {
         return TRUE;
       }
