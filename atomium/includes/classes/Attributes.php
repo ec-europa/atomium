@@ -210,35 +210,33 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return $this;
     }
 
-    $attributes = $this->getStorage();
-
     if (is_bool($value)) {
-      $attributes[$name] = $value;
-      $this->storage = $attributes;
+      $this->storage[$name] = $value;
       return $this;
     }
 
-    if (empty($name)) {
-      return $this;
-    }
-
+    $attributes = $this->getStorage();
     $attributes += array($name => array());
+
+    if (!isset($attributes[$name]) || is_bool($attributes[$name])) {
+      $parts = [];
+    }
+    else {
+      $parts = $attributes[$name];
+      $parts = array_combine($parts, $parts);
+    }
 
     $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
-    $data = array();
     foreach ($value_iterator as $item) {
       if (FALSE === $item || NULL === $item) {
         continue;
       }
       $part_str = (string) $item;
-      $data[$part_str] = $part_str;
+      $parts[$part_str] = $part_str;
     }
 
-    $attributes[$name] = array_unique(
-      array_merge(
-        (array) $attributes[$name],
-        array_values($data)));
+    $attributes[$name] = array_values($parts);
 
     return $this->setStorage($attributes);
   }

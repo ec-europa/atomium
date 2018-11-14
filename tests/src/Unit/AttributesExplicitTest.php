@@ -107,9 +107,9 @@ class AttributesExplicitTest extends UnitTestBase {
       $attributes);
 
     self::assertAppend(
-      ' boolean="1 xx"',
+      ' boolean="xx"',
       [
-        'boolean' => ['1', 'xx'],
+        'boolean' => ['xx'],
       ],
       $attributes,
       [
@@ -154,9 +154,9 @@ class AttributesExplicitTest extends UnitTestBase {
       $message);
 
     self::assertAppend(
-      ' parts="1 zz"',
+      ' parts="zz"',
       [
-        'parts' => ['1', 'zz'],
+        'parts' => ['zz'],
       ],
       $attributes,
       [

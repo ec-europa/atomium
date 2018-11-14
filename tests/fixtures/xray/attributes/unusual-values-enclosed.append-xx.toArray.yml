@@ -49,7 +49,6 @@
         - z
 '["a",true,"z"]':
     name:
-        - '1'
         - z
 '["a",false,"z"]':
     name:
