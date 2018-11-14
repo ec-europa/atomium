@@ -140,10 +140,10 @@
 'contains(''_one_str_'', ''x'')': false
 'contains(''_one_str_'', chr(0))': false
 'contains(''_one_str_'', chr(1))': false
-'contains(''_chr_0_'')': true
+'contains(''_chr_0_'')': false
 'contains(''_chr_0_'', NULL)': true
 'contains(''_chr_0_'', true)': false
-'contains(''_chr_0_'', false)': true
+'contains(''_chr_0_'', false)': false
 'contains(''_chr_0_'', '''')': false
 'contains(''_chr_0_'', 0)': true
 'contains(''_chr_0_'', 1)': false
@@ -154,7 +154,7 @@
 'contains(''_chr_0_'', chr(1))': false
 'contains(''_chr_1_'')': false
 'contains(''_chr_1_'', NULL)': false
-'contains(''_chr_1_'', true)': true
+'contains(''_chr_1_'', true)': false
 'contains(''_chr_1_'', false)': false
 'contains(''_chr_1_'', '''')': false
 'contains(''_chr_1_'', 0)': false

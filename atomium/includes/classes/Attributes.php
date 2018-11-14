@@ -397,6 +397,22 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
+    if (is_bool($needle)) {
+      // Legacy support:
+      // In the past, TRUE and FALSE were passed directly to stripos(), where
+      // they were converted to "\1" and "\0", respectively, which are some
+      // exotic characters, the same you get from chr(1) and chr(0).
+      // So,
+      // (new Attributes(['name' => "\0"]))->contains('name', FALSE)
+      // did return TRUE, whereas
+      // (new Attributes(['name' => FALSE]))->contains('name', FALSE)
+      // did return FALSE.
+      //
+      // As a compromise between legacy support and "sane" behavior, we now
+      // always return FALSE if $value is boolean.
+      return FALSE;
+    }
+
     if (!is_array($actual_value)) {
       return FALSE !== stripos($actual_value, $needle);
     }
