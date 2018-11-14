@@ -364,13 +364,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $name
    *   Attribute name.
-   * @param string|bool|int $value
-   *   Attribute value.
+   * @param string|bool|int $needle
+   *   Needle to find in the string parts of the attribute value.
    *
    * @return bool
    *   Whereas an attribute contains a value.
    */
-  public function contains($name, $value = FALSE) {
+  public function contains($name, $needle = FALSE) {
     $storage = $this->getStorage();
 
     if (!isset($storage[$name])) {
@@ -384,11 +384,11 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     if (!is_array($actual_value)) {
-      return FALSE !== stripos($actual_value, $value);
+      return FALSE !== stripos($actual_value, $needle);
     }
 
     foreach ($actual_value as $item) {
-      if (FALSE !== stripos($item, $value)) {
+      if (FALSE !== stripos($item, $needle)) {
         return TRUE;
       }
     }
