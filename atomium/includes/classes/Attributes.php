@@ -384,7 +384,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     $candidates = $storage[$name];
 
     if (!is_array($candidates)) {
-      $candidates = array($candidates);
+      return FALSE !== stripos($candidates, $value);
     }
 
     foreach ($candidates as $item) {
