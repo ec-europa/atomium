@@ -381,7 +381,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     if (is_int($value)) {
-      // Nothing.
+      $value = (string) $value;
     }
     elseif (!is_string($value)) {
       return FALSE;
@@ -558,13 +558,18 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $value_iterator = new \RecursiveIteratorIterator(
           new \RecursiveArrayIterator($member)
         );
-        $this->storage[$name] = array_values(array_unique(iterator_to_array($value_iterator, FALSE)));
+        $parts = [];
+        foreach ($value_iterator as $part) {
+          $part = (string) $part;
+          $parts[$part] = $part;
+        }
+        $this->storage[$name] = array_values($parts);
       }
       elseif (NULL === $member) {
         $this->storage[$name] = [];
       }
       elseif (!is_bool($member)) {
-        $this->storage[$name] = [$member];
+        $this->storage[$name] = [(string) $member];
       }
     }
     return $this->storage;

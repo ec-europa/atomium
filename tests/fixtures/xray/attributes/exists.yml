@@ -99,7 +99,7 @@
 'exists(''_zero_'', '''')': false
 'exists(''_zero_'', 0)': true
 'exists(''_zero_'', 1)': false
-'exists(''_zero_'', ''0'')': false
+'exists(''_zero_'', ''0'')': true
 'exists(''_zero_'', ''1'')': false
 'exists(''_zero_'', ''x'')': false
 'exists(''_zero_'', chr(0))': false
@@ -112,7 +112,7 @@
 'exists(''_one_'', 0)': false
 'exists(''_one_'', 1)': true
 'exists(''_one_'', ''0'')': false
-'exists(''_one_'', ''1'')': false
+'exists(''_one_'', ''1'')': true
 'exists(''_one_'', ''x'')': false
 'exists(''_one_'', chr(0))': false
 'exists(''_one_'', chr(1))': false
@@ -121,7 +121,7 @@
 'exists(''_zero_str_'', true)': false
 'exists(''_zero_str_'', false)': false
 'exists(''_zero_str_'', '''')': false
-'exists(''_zero_str_'', 0)': false
+'exists(''_zero_str_'', 0)': true
 'exists(''_zero_str_'', 1)': false
 'exists(''_zero_str_'', ''0'')': true
 'exists(''_zero_str_'', ''1'')': false
@@ -134,7 +134,7 @@
 'exists(''_one_str_'', false)': false
 'exists(''_one_str_'', '''')': false
 'exists(''_one_str_'', 0)': false
-'exists(''_one_str_'', 1)': false
+'exists(''_one_str_'', 1)': true
 'exists(''_one_str_'', ''0'')': false
 'exists(''_one_str_'', ''1'')': true
 'exists(''_one_str_'', ''x'')': false

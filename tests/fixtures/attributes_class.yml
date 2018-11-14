@@ -219,7 +219,7 @@
         return: ' name="1 two 3 4"'
     - getStorage:
         return:
-          name: [1, 'two', 3, 4]
+          name: ['1', 'two', '3', '4']
 
 -
   given: { }
@@ -230,4 +230,4 @@
         return: ' name="1 two 3 4"'
     - getStorage:
         return:
-          name: [1, 'two', 3, 4]
+          name: ['1', 'two', '3', '4']
