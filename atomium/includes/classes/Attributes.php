@@ -413,6 +413,24 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
+    if (is_int($needle)) {
+      // In the past, integers were passed directly to stripos(), where
+      // they were converted to e.g. "\0" or "\1" or "\2" etc, which are some
+      // exotic characters, the same you get from chr(0), chr(1), chr(2) etc.
+      // So,
+      // (new Attributes(['name' => "\0"]))->contains('name', 0)
+      // did return TRUE, whereas
+      // (new Attributes(['name' => 0]))->contains('name', 0)
+      // did return FALSE.
+      //
+      // To match the assumed user expectations, we now always convert such
+      // values to string.
+      $needle = (string) $needle;
+    }
+    elseif (!is_string($needle)) {
+      return FALSE;
+    }
+
     if (!is_array($actual_value)) {
       // Prevent that boolean TRUE is interpreted as '1' with stripos().
       return FALSE;

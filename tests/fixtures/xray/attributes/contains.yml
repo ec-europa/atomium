@@ -97,7 +97,7 @@
 'contains(''_zero_'', true)': false
 'contains(''_zero_'', false)': false
 'contains(''_zero_'', '''')': false
-'contains(''_zero_'', 0)': false
+'contains(''_zero_'', 0)': true
 'contains(''_zero_'', 1)': false
 'contains(''_zero_'', ''0'')': true
 'contains(''_zero_'', ''1'')': false
@@ -110,7 +110,7 @@
 'contains(''_one_'', false)': false
 'contains(''_one_'', '''')': false
 'contains(''_one_'', 0)': false
-'contains(''_one_'', 1)': false
+'contains(''_one_'', 1)': true
 'contains(''_one_'', ''0'')': false
 'contains(''_one_'', ''1'')': true
 'contains(''_one_'', ''x'')': false
@@ -121,7 +121,7 @@
 'contains(''_zero_str_'', true)': false
 'contains(''_zero_str_'', false)': false
 'contains(''_zero_str_'', '''')': false
-'contains(''_zero_str_'', 0)': false
+'contains(''_zero_str_'', 0)': true
 'contains(''_zero_str_'', 1)': false
 'contains(''_zero_str_'', ''0'')': true
 'contains(''_zero_str_'', ''1'')': false
@@ -134,18 +134,18 @@
 'contains(''_one_str_'', false)': false
 'contains(''_one_str_'', '''')': false
 'contains(''_one_str_'', 0)': false
-'contains(''_one_str_'', 1)': false
+'contains(''_one_str_'', 1)': true
 'contains(''_one_str_'', ''0'')': false
 'contains(''_one_str_'', ''1'')': true
 'contains(''_one_str_'', ''x'')': false
 'contains(''_one_str_'', chr(0))': false
 'contains(''_one_str_'', chr(1))': false
 'contains(''_chr_0_'')': false
-'contains(''_chr_0_'', NULL)': true
+'contains(''_chr_0_'', NULL)': false
 'contains(''_chr_0_'', true)': false
 'contains(''_chr_0_'', false)': false
 'contains(''_chr_0_'', '''')': false
-'contains(''_chr_0_'', 0)': true
+'contains(''_chr_0_'', 0)': false
 'contains(''_chr_0_'', 1)': false
 'contains(''_chr_0_'', ''0'')': false
 'contains(''_chr_0_'', ''1'')': false
@@ -158,7 +158,7 @@
 'contains(''_chr_1_'', false)': false
 'contains(''_chr_1_'', '''')': false
 'contains(''_chr_1_'', 0)': false
-'contains(''_chr_1_'', 1)': true
+'contains(''_chr_1_'', 1)': false
 'contains(''_chr_1_'', ''0'')': false
 'contains(''_chr_1_'', ''1'')': false
 'contains(''_chr_1_'', ''x'')': false
