@@ -190,10 +190,16 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     $data = array();
     foreach ($value_iterator as $item) {
-      $data = array_merge($data, explode(' ', $item));
+      foreach (explode(' ', $item) as $part) {
+        $data[$part] = $part;
+      }
     }
+    unset($data['']);
 
-    $attributes[$name] = array_unique(array_merge((array) $attributes[$name], array_values(array_filter($data, 'strlen'))));
+    $attributes[$name] = array_unique(
+      array_merge(
+        (array) $attributes[$name],
+        array_values($data)));
 
     return $this->setStorage($attributes);
   }
