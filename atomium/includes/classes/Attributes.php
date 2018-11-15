@@ -88,16 +88,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @see \ArrayAccess::offsetSet()
    */
   public function offsetSet($name, $value = FALSE) {
-
-    if (!AttributesUtil::attributeNameIsValidOrNotice($name)) {
-      return;
-    }
-
-    $storage = $this->getStorage() + array($name => array());
-
-    $storage[$name] = $value;
-
-    $this->setStorage($storage);
+    $this->setAttribute($name, $value, FALSE);
   }
 
   /**
@@ -198,7 +189,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $value = [$part => $part];
     }
 
-    $this->offsetSet($name, $value);
+    $this->storage[$name] = $value;
 
     return $this;
   }
