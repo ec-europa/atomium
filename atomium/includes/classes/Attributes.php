@@ -36,7 +36,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    * @param array|Attributes $attributes
    *   The attributes.
    * @param bool $explode
-   *   Should we explode attributes value ?
+   *   TRUE, to explode all input strings and discard empty strings.
+   *   FALSE, to take all input strings as they are.
    *
    * @return $this
    */
@@ -155,6 +156,9 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
       $value = array();
       foreach ($iterator as $item) {
+        if (NULL === $item || FALSE === $item) {
+          continue;
+        }
         if (!is_string($item)) {
           $part = (string) $item;
           $value[$part] = $part;
