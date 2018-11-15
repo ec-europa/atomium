@@ -177,9 +177,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     if (is_bool($value)) {
       $attributes[$name] = $value;
       $this->storage = $attributes;
+      return $this;
     }
 
-    if (empty($name) || is_bool($value)) {
+    if (empty($name)) {
       return $this;
     }
 
