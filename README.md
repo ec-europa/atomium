@@ -1,5 +1,5 @@
 # Atomium
-[![Build Status](https://travis-ci.org/ec-europa/atomium.svg?branch=7.x-1.x)](https://travis-ci.org/ec-europa/atomium)
+[![Build Status](https://drone.fpfis.eu/api/badges/ec-europa/atomium/status.svg?branch=7.x-3.x)](https://drone.fpfis.eu/ec-europa/atomium)
 
 The Atomium theme is a Drupal 7 base theme.
 
@@ -101,6 +101,68 @@ The best way to submit code is by providing a pull request on Github.
 
 This also helps us to have the automated tests triggered automatically and save
 times on checking code styles.
+
+## Using Docker Compose
+
+Alternatively, you can build a development site using [Docker](https://www.docker.com/get-docker) and 
+[Docker Compose](https://docs.docker.com/compose/) with the provided configuration.
+
+Docker provides the necessary services and tools such as a web server and a database server to get the site running, 
+regardless of your local host configuration.
+
+### Requirements:
+
+- [Docker](https://www.docker.com/get-docker)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+### Configuration
+
+By default, Docker Compose reads two files, a `docker-compose.yml` and an optional `docker-compose.override.yml` file.
+By convention, the `docker-compose.yml` contains your base configuration and it's provided by default.
+The override file, as its name implies, can contain configuration overrides for existing services or entirely new 
+services.
+If a service is defined in both files, Docker Compose merges the configurations.
+
+Find more information on Docker Compose extension mechanism on [the official Docker Compose documentation](https://docs.docker.com/compose/extends/).
+
+### Usage
+
+To start, run:
+
+```bash
+docker-compose up
+```
+
+It's advised to not daemonize `docker-compose` so you can turn it off (`CTRL+C`) quickly when you're done working.
+However, if you'd like to daemonize it, you have to add the flag `-d`:
+
+```bash
+docker-compose up -d
+```
+
+Then:
+
+```bash
+docker-compose exec -u www-data web composer install
+docker-compose exec -u www-data web ./vendor/bin/run drupal:site-install
+```
+
+Using default configuration, the development site files should be available in the `build` directory and the development site
+should be available at: [http://127.0.0.1:8080/build](http://127.0.0.1:8080/build).
+
+### Running the tests
+
+To run the grumphp checks:
+
+```bash
+docker-compose exec -u www-data web ./vendor/bin/grumphp run
+```
+
+To run the phpunit tests:
+
+```bash
+docker-compose exec -u www-data web ./vendor/bin/phpunit
+```
 
 [Go to top](#table-of-content)
 
