@@ -1,10 +1,10 @@
 drupal:
-  core: "7"
-  base_url: "http://127.0.0.1:8888"
+  core: 7
+  base_url: "http://127.0.0.1:8080/build"
   site:
-    profile: standard
+    profile: minimal
   database:
-    host: "127.0.0.1"
+    host: "mysql"
     port: "3306"
     name: "atomium"
     user: "root"
@@ -21,9 +21,9 @@ drupal:
         - build/sites/all/themes/atomium/build
       drupal_http_request_fails: false
   post_install:
-      - ./vendor/bin/drush --root=$(pwd)/build en -y atomium devel realistic_dummy_content composer_autoloader
-      - ./vendor/bin/drush --root=$(pwd)/build dis help overlay update search color dashboard dblog shortcut path -y
-      - ./vendor/bin/drush --root=$(pwd)/build pmu help overlay update search color dashboard dblog shortcut path -y
+      - ./vendor/bin/drush --root=$(pwd)/build dis help overlay update search color dashboard dblog shortcut path toolbar -y
+      - ./vendor/bin/drush --root=$(pwd)/build pmu help overlay update search color dashboard dblog shortcut path toolbar -y
+      - ./vendor/bin/drush --root=$(pwd)/build en -y atomium admin_menu admin_menu_toolbar admin_devel devel realistic_dummy_content composer_autoloader
       - ./vendor/bin/drush --root=$(pwd)/build vset theme_default atomium
       - ./vendor/bin/drush --root=$(pwd)/build cc all
   drush:
@@ -33,7 +33,7 @@ drupal:
 
 commands:
   drupal:site-setup:
-    - { task: "chmod", file: "${drupal.root}/sites", permissions: 0774, recursive: true }
+    - { task: "chmod", file: "${drupal.root}/sites", permissions: 0777, recursive: true }
     - { task: "symlink", from: "../../../../..", to: "${drupal.root}/sites/all/themes/custom/atomium" }
     - { task: "run", command: "drupal:drush-setup" }
     - { task: "run", command: "drupal:settings-setup" }
