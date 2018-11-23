@@ -30,11 +30,10 @@
     "drupal/drupal-extension": "~3.4",
     "drupal/realistic_dummy_content": "*",
     "drush/drush": "^8",
-    "ec-europa/qa-automation": "^3",
     "mikey179/vfsstream": "~1.2",
+    "openeuropa/code-review": "^1.0.0-alpha5",
     "openeuropa/task-runner": "0.7.1",
     "peridot-php/leo": "~1.0",
-    "phpro/grumphp": "^0.12",
     "phpunit/phpunit": "^5",
     "webflo/drupal-finder": "^1.0.0",
     "webmozart/path-util": "^2.3"
