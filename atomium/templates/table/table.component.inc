@@ -144,7 +144,6 @@ function atomium_preprocess_table(array &$variables, $hook) {
  *   A proper render array of rows.
  *
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function _atomium_table_format_rows($type, array $rows, array $header, array $ts, $is_header = FALSE, array &$variables = array()) {
   $rows_array = array();

@@ -218,6 +218,9 @@ function atomium_find_templates() {
  *
  * @return array
  *   List of definitions.
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_get_component_definitions() {
   $definitions = array();
