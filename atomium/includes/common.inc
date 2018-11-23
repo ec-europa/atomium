@@ -83,6 +83,9 @@ function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE)
  * @return string|array|false
  *   A string or array depending on the type of value and if a base theme also
  *   contains the same $key, FALSE if no $key is found.
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = TRUE) {
   // If no $theme_key is given, use the current theme if we can determine it.
@@ -230,6 +233,9 @@ function atomium_find_templates() {
  *
  * @return array
  *   List of definitions.
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_get_component_definitions() {
   $definitions = array();

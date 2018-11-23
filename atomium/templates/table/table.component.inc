@@ -28,6 +28,9 @@ function atomium_atomium_theme_table() {
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_table(array &$variables, $hook) {
   $header = $variables['header'];
@@ -95,6 +98,8 @@ function atomium_preprocess_table(array &$variables, $hook) {
  *
  * @return array
  *   A proper render array of rows.
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header = FALSE, array &$variables = array()) {
   $rows_array = array();
