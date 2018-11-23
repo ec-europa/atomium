@@ -395,6 +395,9 @@ function drupal_get_hook_parents($hook) {
  * @see atomium_theme_registry_alter()
  * @see _theme_process_registry()
  * @see _theme_build_registry()
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function _atomium_process_theme_registry(array &$registry, array $themes) {
   // Processor functions work in two distinct phases with the process

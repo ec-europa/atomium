@@ -22,10 +22,13 @@ function atomium_atomium_theme_user_picture() {
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function atomium_preprocess_user_picture(array &$variables, $hook) {
   if (variable_get('user_pictures', 0)) {
     $account = $variables['account'];
+    $filepath = NULL;
 
     if (!empty($account->picture)) {
       // @TODO: Ideally this function would only be passed file objects, but
@@ -46,7 +49,7 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       $filepath = variable_get('user_picture_default', '');
     }
 
-    if (isset($filepath)) {
+    if (NULL === $filepath) {
       $alt = t("@user's picture", array('@user' => format_username($account)));
 
       $variables[$variables['base_hook']] = array(
