@@ -27,7 +27,7 @@
 
 <div class="container">
     <div class="row">
-      <?php if ($page['sidebar_first']): ?>
+      <?php if (!empty($page['sidebar_first'])): ?>
           <?php print render($page['sidebar_first']); ?>
       <?php endif; ?>
 
@@ -46,7 +46,7 @@
           <?php print render($page['content']); ?>
         </main>
 
-      <?php if ($page['sidebar_second']): ?>
+      <?php if (!empty($page['sidebar_second'])): ?>
           <?php print render($page['sidebar_second']); ?>
       <?php endif; ?>
     </div>
