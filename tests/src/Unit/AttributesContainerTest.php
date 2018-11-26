@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\atomium\Unit;
 
-use drupal\atomium\AttributesContainer;
+use Drupal\atomium\AttributesContainer;
 
 /**
  * Class AttributesContainerTest.

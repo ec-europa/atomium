@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\atomium\Unit;
 
-use drupal\atomium\Attributes;
+use Drupal\atomium\Attributes;
 use Symfony\Component\Yaml\Yaml;
 
 /**
