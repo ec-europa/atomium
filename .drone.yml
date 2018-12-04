@@ -1,17 +1,41 @@
+workspace:
+  base: /var/www
+  path: html
+
 services:
+  web:
+    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    environment:
+    - DOCUMENT_ROOT=/var/www/html
   mysql:
-    image: fpfis/mysql56
+    image: percona/percona-server:5.6
+    environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 
 pipeline:
-  install:
-    image: fpfis/php56-dev
+  composer-install:
+    group: prepare
+    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    volumes:
+    - /cache:/cache
     commands:
-      - composer self-update
-      - composer install
-  test:
-    image: fpfis/php56-dev
+    - chown www-data:www-data /var/www -R
+    - su -s /bin/bash -c "composer install --ansi --no-suggest --no-progress" www-data
+
+  site-install:
+    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     commands:
-      - './vendor/bin/run drupal:site-install --database-host=mysql'
-      - ./vendor/bin/drush --root=$PWD/build --debug runserver :8888 > ~/debug.txt 2>&1 &
-      - sleep 4s
-      - ./vendor/bin/grumphp run
+    - chown www-data:www-data /var/www -R
+    - su -s /bin/bash -c "./vendor/bin/run drupal:site-install" www-data
+
+  grumphp:
+    group: test
+    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    commands:
+    - chown www-data:www-data /var/www -R
+    - su -s /bin/bash -c "./vendor/bin/grumphp run" www-data
+
+matrix:
+  PHP_VERSION:
+  - 5.6
+  - 7.1

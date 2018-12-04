@@ -7,6 +7,8 @@
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD)
  */
 function atomium_foundation_preprocess_button(array &$variables, $hook) {
   $variables['atomium']['attributes']['element']->append('class', 'button');

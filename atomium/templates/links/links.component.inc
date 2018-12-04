@@ -27,6 +27,9 @@ function atomium_atomium_theme_links() {
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_links(array &$variables, $hook) {
   global $language_url;

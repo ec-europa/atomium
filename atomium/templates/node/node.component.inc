@@ -7,6 +7,9 @@
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_node(array &$variables, $hook) {
   // One unified node teaser template.

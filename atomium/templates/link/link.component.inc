@@ -23,6 +23,8 @@ function atomium_atomium_theme_link() {
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function atomium_preprocess_link(array &$variables, $hook) {
   global $language_url;

@@ -7,6 +7,9 @@
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_page(array &$variables, $hook) {
   $variables['page_manager_control'] = NULL;

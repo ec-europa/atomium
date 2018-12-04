@@ -27,6 +27,9 @@ function atomium_atomium_theme_pager() {
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_pager(array &$variables, $hook) {
   $tags = $variables['tags'];
