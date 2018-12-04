@@ -5,7 +5,7 @@ namespace Drupal\atomium;
 /**
  * Class Attributes.
  *
- * @package Drupal\atomium
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Attributes implements \ArrayAccess, \IteratorAggregate {
   /**

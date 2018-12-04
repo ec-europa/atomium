@@ -7,6 +7,9 @@
 
 /**
  * Implements hook_preprocess_hook().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_block(array &$variables, $hook) {
   $variables['classes_array'] = preg_grep('/^block-/', $variables['classes_array'], PREG_GREP_INVERT);

@@ -1,29 +1,14 @@
+imports:
+  - { resource: vendor/openeuropa/code-review/dist/drupal-conventions.yml }
 parameters:
-  git_dir: .
-  bin_dir: vendor/bin
-  tasks:
-    phpcs:
-      standard: vendor/ec-europa/qa-automation/phpcs/SubStandards/QA
-      ignore_patterns:
-        - vendor/
-        - RoboFile.php
-      triggered_by:
-        - php
-        - module
-        - inc
-        - js
-    git_commit_message:
-      enforce_no_subject_trailing_period: false
-      max_subject_width: 200
-      case_insensitive: true
-      multiline: true
-      matchers:
-        - '/^([A-Z]+\-\d+|Issue #\d+): [A-Z].+\./'
+  extensions:
+    - OpenEuropa\CodeReview\ExtraTasksExtension
+  extra_tasks:
     phpunit:
       always_execute: false
     securitychecker:
-        lockfile: ./composer.lock
-        format: ~
-        end_point: ~
-        timeout: ~
-        run_always: false
+      lockfile: ./composer.lock
+      format: ~
+      end_point: ~
+      timeout: ~
+      run_always: false
