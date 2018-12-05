@@ -6,3 +6,4 @@ node_modules
 /build/
 /phpunit.xml
 /runner.yml
+/.php_cs.cache

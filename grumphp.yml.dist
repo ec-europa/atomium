@@ -4,6 +4,7 @@ parameters:
   extensions:
     - OpenEuropa\CodeReview\ExtraTasksExtension
   extra_tasks:
+    phpcsfixer: ~
     phpunit:
       always_execute: false
     securitychecker:
