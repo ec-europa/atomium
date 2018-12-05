@@ -18,7 +18,7 @@
  */
 
 // Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('atomium_rebuild_registry') && !defined('MAINTENANCE_MODE')) {
+if (theme_get_setting('atomium_rebuild_registry') && !\defined('MAINTENANCE_MODE')) {
   // Rebuild .info data.
   system_rebuild_theme_data();
   // Rebuild theme registry.
@@ -40,6 +40,7 @@ atomium_include('atomium', 'includes/classes');
  */
 function atomium_theme(&$existing, $type, $theme, $path) {
   atomium_include('atomium', 'includes/registry.inc');
+
   return _atomium_theme($existing, $type, $theme, $path);
 }
 

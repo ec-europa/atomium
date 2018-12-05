@@ -6,7 +6,7 @@
  */
 ?>
 <aside<?php print $atomium['attributes']['wrapper']; ?>>
-  <?php if ($node->type != 'forum'): ?>
+  <?php if ('forum' != $node->type): ?>
       <h2><?php print t('Comments'); ?></h2>
   <?php endif; ?>
 

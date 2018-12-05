@@ -22,7 +22,7 @@ class AttributesTest extends AbstractUnitTest {
 
     foreach ($runs as $run) {
       foreach ($run as $method => $arguments) {
-        call_user_func_array([$attributes, $method], $arguments);
+        \call_user_func_array(array($attributes, $method), $arguments);
       }
     }
 
@@ -30,7 +30,7 @@ class AttributesTest extends AbstractUnitTest {
       foreach ($expect as $method => $item) {
         $item += array('arguments' => array());
 
-        $actual = call_user_func_array(
+        $actual = \call_user_func_array(
           array($attributes, $method),
           $item['arguments']
         );
@@ -78,7 +78,7 @@ class AttributesTest extends AbstractUnitTest {
    *   Test data.
    */
   public function methodsProvider() {
-    return Yaml::parse(file_get_contents(__DIR__ . '/../../fixtures/attributes_class.yml'));
+    return Yaml::parse(\file_get_contents(__DIR__ . '/../../fixtures/attributes_class.yml'));
   }
 
 }
