@@ -26,8 +26,7 @@ class AttributesContainerTest extends AbstractUnitTest {
   public function testOffsetGet() {
     $container = new AttributesContainer();
     $container['foo'] = array('bar');
-
-    self::assertInstanceOf('drupal\atomium\Attributes', $container->offsetGet('foo'));
+    expect($container->offsetGet('foo'))->to->be->instanceof('drupal\atomium\Attributes');
   }
 
   /**
@@ -36,8 +35,7 @@ class AttributesContainerTest extends AbstractUnitTest {
   public function testOffsetUnset() {
     $container = new AttributesContainer();
     $container['foo'] = array('class' => 'bar');
-
-    self::assertEquals(array('bar'), $container->offsetGet('foo')['class']);
+    expect($container->offsetGet('foo')['class'])->to->equal(array('bar'));
 
     unset($container['foo']);
 
@@ -66,8 +64,8 @@ class AttributesContainerTest extends AbstractUnitTest {
     self::assertInstanceOf('drupal\atomium\Attributes', $container['foo']);
     self::assertInstanceOf('drupal\atomium\Attributes', $container['bar']);
 
-    self::assertEquals(array('class' => array('bar')), $container['foo']->toArray());
-    self::assertEquals(array('class' => array('foo')), $container['bar']->toArray());
+    expect($container['foo']->toArray())->to->be->equal(array('class' => array('bar')));
+    expect($container['bar']->toArray())->to->be->equal(array('class' => array('foo')));
   }
 
 }

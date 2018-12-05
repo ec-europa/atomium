@@ -68,16 +68,27 @@ class AttributesTest extends AbstractUnitTest {
 
     $attributes = new Attributes($attributes);
 
-    self::assertEquals(TRUE, $attributes->exists('class', 'foo'));
-    self::assertEquals(FALSE, $attributes->exists('class', 'fooled'));
-    self::assertEquals(FALSE, $attributes->exists('foo', 'bar'));
-    self::assertEquals(FALSE, $attributes->exists('class', NULL));
-    self::assertEquals(TRUE, $attributes->exists('id', 'atomium'));
-    self::assertEquals(TRUE, $attributes->exists('data-closable', FALSE));
-    self::assertEquals(TRUE, $attributes->exists('data-closable'));
-    self::assertEquals(TRUE, $attributes->contains('class', 'fo'));
-    self::assertEquals(FALSE, $attributes->contains('role'));
-    self::assertEquals(TRUE, $attributes->contains('id', 'tomi'));
+    expect($attributes->exists('class', 'foo'))->to->equal(TRUE);
+    expect($attributes->exists('class', 'fooled'))->to->equal(FALSE);
+    expect($attributes->exists('foo', 'bar'))->to->equal(FALSE);
+    expect($attributes->exists('class', NULL))->to->equal(FALSE);
+    expect($attributes->exists('id', 'atomium'))->to->equal(TRUE);
+    expect($attributes->exists('data-closable', FALSE))->to->equal(TRUE);
+    expect($attributes->exists('data-closable'))->to->equal(TRUE);
+
+    expect($attributes->contains('class', 'fo'))->to->equal(TRUE);
+    expect($attributes->contains('role'))->to->equal(FALSE);
+    expect($attributes->contains('id', 'tomi'))->to->equal(TRUE);
+  }
+
+  /**
+   * Methods provider.
+   *
+   * @return array
+   *   Test data.
+   */
+  public function methodsProvider() {
+    return Yaml::parse(\file_get_contents(__DIR__ . '/../../fixtures/attributes_class.yml'));
   }
 
 }

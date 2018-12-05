@@ -29,11 +29,13 @@ class ThemeTest extends AbstractThemeTest {
    *
    * @dataProvider componentsProvider
    */
-  public function testThemeArguments($hook, $content) {
-    $actual = theme($hook);
-
-    foreach ($content as $expected) {
-      self::assertArraySubset($expected, $actual);
+  public function testRegistry() {
+    foreach (theme_get_registry(TRUE) as $info) {
+      expect($info)->to->include->keys(array('preprocess functions'));
+      expect($info['preprocess functions'])
+        ->to->be->an('array')
+        ->to->contain('atomium_preprocess');
+      expect($info['preprocess functions'][0])->equal('atomium_preprocess');
     }
   }
 
