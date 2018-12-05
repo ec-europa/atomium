@@ -39,7 +39,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     foreach ($attributes as $name => $value) {
-      if (is_numeric($name)) {
+      if (\is_numeric($name)) {
         $this->setAttribute($value, TRUE, $explode);
       }
       else {
@@ -107,17 +107,17 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function setAttribute($attribute, $value = FALSE, $explode = TRUE) {
     $data = $value;
 
-    if (TRUE === $explode && !is_bool($value)) {
+    if (TRUE === $explode && !\is_bool($value)) {
       $value = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
       $data = array();
 
       foreach ($value as $item) {
-        $data = array_merge($data, explode(' ', $item));
+        $data = \array_merge($data, \explode(' ', $item));
       }
 
-      $data = array_values(array_filter($data, 'strlen'));
-      $data = array_combine($data, $data);
+      $data = \array_values(\array_filter($data, 'strlen'));
+      $data = \array_combine($data, $data);
     }
 
     $this->offsetSet($attribute, $data);
@@ -138,12 +138,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function append($key, $value = FALSE) {
     $attributes = $this->getStorage();
 
-    if (is_bool($value)) {
+    if (\is_bool($value)) {
       $attributes[$key] = $value;
       $this->storage = $attributes;
     }
 
-    if (empty($key) || is_bool($value)) {
+    if (empty($key) || \is_bool($value)) {
       return $this;
     }
 
@@ -153,10 +153,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     $data = array();
     foreach ($value_iterator as $item) {
-      $data = array_merge($data, explode(' ', $item));
+      $data = \array_merge($data, \explode(' ', $item));
     }
 
-    $attributes[$key] = array_unique(array_merge((array) $attributes[$key], array_values(array_filter($data, 'strlen'))));
+    $attributes[$key] = \array_unique(\array_merge((array) $attributes[$key], \array_values(\array_filter($data, 'strlen'))));
 
     return $this->setStorage($attributes);
   }
@@ -178,15 +178,15 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return $this;
     }
 
-    if (is_bool($value)) {
+    if (\is_bool($value)) {
       unset($attributes[$key]);
     }
     else {
-      if (!is_array($value)) {
-        $value = explode(' ', $value);
+      if (!\is_array($value)) {
+        $value = \explode(' ', $value);
       }
 
-      $attributes[$key] = array_values(array_diff($attributes[$key], $value));
+      $attributes[$key] = \array_values(\array_diff($attributes[$key], $value));
     }
 
     return $this->setStorage($attributes);
@@ -258,9 +258,9 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     $attributes = $this->getStorage();
 
     if (isset($attributes[$key])) {
-      $attributes[$key] = array_replace($attributes[$key],
-        array_fill_keys(
-          array_keys($attributes[$key], $value),
+      $attributes[$key] = \array_replace($attributes[$key],
+        \array_fill_keys(
+          \array_keys($attributes[$key], $value, TRUE),
           $replacement
         )
       );
@@ -282,7 +282,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $data = $data->toArray();
     }
 
-    if (!is_array($data) || is_null($data)) {
+    if (!\is_array($data) || NULL === $data) {
       // @todo: error handling.
       return $this;
     }
@@ -312,7 +312,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
-    return $storage[$key] !== array_filter(
+    return $storage[$key] !== \array_filter(
       $storage[$key],
       function ($item) use ($value) {
         return $item !== $value;
@@ -343,12 +343,12 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     $candidates = $storage[$key];
 
-    if (!is_array($candidates)) {
+    if (!\is_array($candidates)) {
       $candidates = array($candidates);
     }
 
     foreach ($candidates as $item) {
-      if (FALSE !== stripos($item, $value)) {
+      if (FALSE !== \stripos($item, $value)) {
         return TRUE;
       }
     }
@@ -368,13 +368,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     foreach ($attributes as $attribute => &$data) {
-      if (is_numeric($attribute) || is_bool($data)) {
-        $data = sprintf('%s', trim(check_plain($attribute)));
+      if (\is_numeric($attribute) || \is_bool($data)) {
+        $data = \sprintf('%s', \trim(check_plain($attribute)));
       }
       else {
-        $data = array_map(function ($item) use ($attribute) {
+        $data = \array_map(function ($item) use ($attribute) {
           if ('placeholder' === $attribute) {
-            $item = strip_tags($item);
+            $item = \strip_tags($item);
           }
 
           /*
@@ -386,24 +386,24 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
            * }
            */
 
-          return trim(check_plain($item));
+          return \trim(check_plain($item));
         }, (array) $data);
 
         // By default, sort the value of the class attribute.
         if ('class' === $attribute) {
-          asort($data);
+          \asort($data);
         }
 
         // If the attribute is numeric, just display the value.
         // Ex: 0="data-closable" will be displayed: data-closable.
-        $data = sprintf('%s="%s"', $attribute, implode(' ', $data));
+        $data = \sprintf('%s="%s"', $attribute, \implode(' ', $data));
       }
     }
 
     // Sort the attributes.
-    asort($attributes);
+    \asort($attributes);
 
-    return $attributes ? ' ' . implode(' ', $attributes) : '';
+    return $attributes ? ' ' . \implode(' ', $attributes) : '';
   }
 
   /**
@@ -413,8 +413,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *   An associative array of attributes.
    */
   public function toArray() {
-    return array_map(function ($value) {
-      return array_filter((array) $value);
+    return \array_map(function ($value) {
+      return \array_filter((array) $value);
     }, $this->getStorage());
   }
 
@@ -426,13 +426,13 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    */
   public function getStorage() {
     // Flatten the array.
-    array_walk($this->storage, function (&$member) {
+    \array_walk($this->storage, function (&$member) {
       // Take care of loners attributes.
-      if (!is_bool($member)) {
+      if (!\is_bool($member)) {
         $value_iterator = new \RecursiveIteratorIterator(
           new \RecursiveArrayIterator((array) $member)
         );
-        $member = array_values(array_unique(iterator_to_array($value_iterator)));
+        $member = \array_values(\array_unique(\iterator_to_array($value_iterator)));
       }
     });
 
