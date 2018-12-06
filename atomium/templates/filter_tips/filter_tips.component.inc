@@ -44,7 +44,7 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
     }
   }
 
-  array_walk($items, function (&$item) use ($variables) {
+  \array_walk($items, function (&$item) use ($variables) {
     _atomium_extend_theme_property(
       $item,
       array($item['#tag'], $variables['theme_hook_original']));
