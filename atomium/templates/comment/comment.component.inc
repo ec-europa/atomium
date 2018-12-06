@@ -26,7 +26,7 @@ function atomium_preprocess_comment(array &$variables, $hook) {
 
   }
 
-  if ($variables['status'] == "comment-unpublished") {
+  if ('comment-unpublished' == $variables['status']) {
     $variables['classes_array'][] = 'unpublished';
   }
 
@@ -34,7 +34,7 @@ function atomium_preprocess_comment(array &$variables, $hook) {
   $variables['classes_array'][] = $variables['zebra'];
 
   // Remove inline class from the ul links.
-  $variables['content']['links']['#attributes']['class'] = array_values(array_diff($variables['content']['links']['#attributes']['class'], array('inline')));
+  $variables['content']['links']['#attributes']['class'] = \array_values(\array_diff($variables['content']['links']['#attributes']['class'], array('inline')));
 
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
   $variables['atomium']['attributes']['content']->append('class', 'content');

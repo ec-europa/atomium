@@ -39,12 +39,12 @@ function atomium_preprocess_links(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
   $variables['atomium']['attributes']['wrapper']->append('class', 'links');
 
-  $count = count($variables['links']);
+  $count = \count($variables['links']);
   if ($count > 0) {
     // Treat the heading first if it is present to prepend it to the
     // list of links.
     if (!empty($variables['heading'])) {
-      if (is_string($variables['heading'])) {
+      if (\is_string($variables['heading'])) {
         // Prepare the array that will be used when the passed heading
         // is a string.
         $variables['heading'] = array(
@@ -71,13 +71,13 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
       // Add first, last and active classes to the list of links to help out
       // themers.
-      if ($i == 1) {
+      if (1 == $i) {
         $link['attributes_array']['class'][] = 'first';
       }
       if ($i == $num_links) {
         $link['attributes_array']['class'][] = 'last';
       }
-      if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
+      if (isset($link['href']) && ($link['href'] == $_GET['q'] || ('<front>' == $link['href'] && drupal_is_front_page()))
         && (empty($link['language']) || $link['language']->language == $language_url->language)) {
         $link['attributes_array']['class'][] = 'active';
       }
@@ -129,7 +129,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
     $variables[$variables['base_hook']] = array(
       $variables['base_hook'] => array(
         '#theme' => _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
-        '#items' => array_filter($new_links),
+        '#items' => \array_filter($new_links),
         '#type' => 'ul',
         '#atomium' => array(
           'attributes' => array(

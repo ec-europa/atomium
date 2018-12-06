@@ -29,11 +29,11 @@ function atomium_preprocess_html(array &$variables, $hook) {
   // Serialize RDF Namespaces into an RDFa 1.1 prefix attribute.
   if ($variables['rdf_namespaces']) {
     $prefixes = array();
-    foreach (explode("\n  ", ltrim($variables['rdf_namespaces'])) as $namespace) {
+    foreach (\explode("\n  ", \ltrim($variables['rdf_namespaces'])) as $namespace) {
       // Remove xlmns: and ending quote and fix prefix formatting.
-      $prefixes[] = str_replace('="', ': ', drupal_substr($namespace, 6, -1));
+      $prefixes[] = \str_replace('="', ': ', drupal_substr($namespace, 6, -1));
     }
-    $variables['rdf_namespaces'] = implode(' ', $prefixes);
+    $variables['rdf_namespaces'] = \implode(' ', $prefixes);
   }
 
   $variables['atomium']['attributes']['html']->append('prefix', $variables['rdf_namespaces']);
@@ -44,13 +44,13 @@ function atomium_preprocess_html(array &$variables, $hook) {
     // Add unique class for each page.
     $path = drupal_get_path_alias($_GET['q']);
     // Add unique class for each website section.
-    list($section,) = explode('/', $path, 2);
-    $arg = explode('/', $_GET['q']);
+    list($section,) = \explode('/', $path, 2);
+    $arg = \explode('/', $_GET['q']);
     if ('node' === $arg[0] && isset($arg[1])) {
       if ('add' === $arg[1]) {
         $section = 'node-add';
       }
-      elseif (isset($arg[2]) && is_numeric($arg[1]) && ('edit' === $arg[2] || 'delete' === $arg[2])) {
+      elseif (isset($arg[2]) && \is_numeric($arg[1]) && ('edit' === $arg[2] || 'delete' === $arg[2])) {
         $section = 'node-' . $arg[2];
       }
     }
@@ -64,6 +64,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
       case 'views_page':
         // Is this a Views page?
         $variables['classes_array'][] = 'page-views';
+
         break;
 
       case 'page_manager_blog':
@@ -81,6 +82,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
       case 'page_manager_user_view_page':
         // Is this a Panels page?
         $variables['classes_array'][] = 'page-panels';
+
         break;
     }
   }

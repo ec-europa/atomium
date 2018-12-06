@@ -42,7 +42,7 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
       foreach (element_children($element['operations']) as $op) {
         $operations[] = array('data' => $element['operations'][$op], 'class' => array('menu-operations'));
       }
-      while (count($operations) < 2) {
+      while (\count($operations) < 2) {
         $operations[] = '';
       }
 
@@ -65,9 +65,9 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
         'class' => array('checkbox', 'menu-enabled'),
       );
       $row[] = drupal_render($element['weight']) . drupal_render($element['plid']) . drupal_render($element['mlid']);
-      $row = array_merge($row, $operations);
+      $row = \array_merge($row, $operations);
 
-      $row = array_merge(array('data' => $row), $element['#attributes']);
+      $row = \array_merge(array('data' => $row), $element['#attributes']);
       $row['class'][] = 'draggable';
       $rows[] = $row;
       unset($variables['form'][$mlid]);

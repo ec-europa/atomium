@@ -15,7 +15,7 @@ function atomium_element_info_alter(array &$types) {
         if ($type['#type'] !== $theme_wrapper) {
           // Using current to make sure to have the first item of the array
           // Instead of the complete array.
-          $type['#theme_wrappers'][$key] = current(
+          $type['#theme_wrappers'][$key] = \current(
             _atomium_extend_with_suggestions(
               array($theme_wrapper),
               array($type['#type'])

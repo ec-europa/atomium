@@ -17,7 +17,7 @@ function atomium_block_view_alter(&$build, $block) {
   //
   // Add a specific atomium key.
   // This will be used in the block preprocess later.
-  if (!isset($block->atomium) || !is_array($block->atomium)) {
+  if (!isset($block->atomium) || !\is_array($block->atomium)) {
     $block->atomium = array();
   }
 

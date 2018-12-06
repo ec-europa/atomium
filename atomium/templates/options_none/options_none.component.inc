@@ -28,10 +28,12 @@ function atomium_preprocess_options_none(array &$variables, $hook) {
   switch ($instance['widget']['type']) {
     case 'options_buttons':
       $output = t('N/A');
+
       break;
 
     case 'options_select':
-      $output = ($option == 'option_none' ? t('- None -') : t('- Select a value -'));
+      $output = ('option_none' == $option ? t('- None -') : t('- Select a value -'));
+
       break;
   }
 
