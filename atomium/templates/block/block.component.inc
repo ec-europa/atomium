@@ -40,11 +40,11 @@ function atomium_preprocess_block(array &$variables, $hook) {
   }
 
   if (
-    ($variables['elements']['#block']->module === 'system' && $variables['elements']['#block']->delta === 'navigation') ||
-    ($variables['elements']['#block']->module === 'system' && $variables['elements']['#block']->delta === 'main-menu') ||
-    ($variables['elements']['#block']->module === 'system' && $variables['elements']['#block']->delta === 'user-menu') ||
-    ($variables['elements']['#block']->module === 'admin' && $variables['elements']['#block']->delta === 'menu') ||
-    $variables['elements']['#block']->module === 'menu_block'
+    ('system' == $variables['elements']['#block']->module && 'navigation' == $variables['elements']['#block']->delta) ||
+    ('system' == $variables['elements']['#block']->module && 'main-menu' == $variables['elements']['#block']->delta) ||
+    ('system' == $variables['elements']['#block']->module && 'user-menu' == $variables['elements']['#block']->delta) ||
+    ('admin' == $variables['elements']['#block']->module && 'menu' == $variables['elements']['#block']->delta) ||
+    'menu_block' == $variables['elements']['#block']->module
   ) {
     $variables['theme_hook_suggestions'][] = 'block__menu';
   }

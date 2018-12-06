@@ -212,6 +212,19 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 function atomium_find_templates() {
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
     $path = drupal_get_path('theme', $theme) . '/templates';
+    if (\is_dir($path)) {
+      $directories = \array_diff(\scandir($path), array('..', '.'));
+      foreach ($directories as $directory) {
+        $templates[$theme][$directory] = array(
+          'theme' => $theme,
+          'directory' => $path . '/' . $directory,
+        );
+      }
+    }
+  }
+
+  return $templates;
+}
 
 /**
  * Get list of component definitions.
@@ -226,20 +239,20 @@ function atomium_get_component_definitions() {
   $definitions = array();
   foreach (atomium_find_templates() as $theme => $theme_data) {
     foreach ($theme_data as $component => $component_data) {
-      $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
-      if (file_exists($file)) {
+      $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component);
+      if (\file_exists($file)) {
         include_once $file;
       }
 
       $function_name = $theme . '_atomium_definition_' . $component;
-      if (function_exists($function_name)) {
-        $definition = (array) call_user_func($function_name) + array(
+      if (\function_exists($function_name)) {
+        $definition = (array) \call_user_func($function_name) + array(
           'disable' => FALSE,
           'preview' => array(),
           'dependencies' => array(),
         );
 
-        if (!is_array($definition['dependencies'])) {
+        if (!\is_array($definition['dependencies'])) {
           $definition['dependencies'] = array($definition['dependencies']);
         }
 
@@ -259,7 +272,7 @@ function atomium_get_component_definitions() {
 
         // Prepend hash to all preview properties.
         foreach ($definition['preview'] as $key => $value) {
-          if (!is_numeric($key)) {
+          if (!\is_numeric($key)) {
             $definition['preview']["#{$key}"] = $value;
             unset($definition['preview'][$key]);
           }
@@ -272,12 +285,12 @@ function atomium_get_component_definitions() {
           foreach ($definition['preview'] as $preview) {
             // Prepend hash to all preview properties.
             foreach ($preview as $key => $value) {
-              if (!is_numeric($key)) {
+              if (!\is_numeric($key)) {
                 $preview["#{$key}"] = $value;
                 unset($preview[$key]);
               }
             }
-            $elements[] = array_merge($element, $preview);
+            $elements[] = \array_merge($element, $preview);
           }
           if (!empty($elements)) {
             $preview = array(
@@ -294,10 +307,11 @@ function atomium_get_component_definitions() {
           $definition['preview']['#theme'] = array($component);
         }
 
-    $directories = \array_diff(
-      \scandir($path, SCANDIR_SORT_ASCENDING),
-      array('..', '.')
-    );
+        // Allow the use of a form.
+        $function_name = $theme . '_atomium_definition_form_' . $component;
+        if (\function_exists($function_name)) {
+          $definition['form'] = drupal_get_form($function_name);
+        }
 
     foreach ($directories as $directory) {
       yield array(
@@ -468,7 +482,7 @@ function atomium_menu_get_active_breadcrumb() {
 
     // Don't show a link to the current page in the breadcrumb trail.
     $end = \end($active_trail);
-    if ($item['href'] === $end['href']) {
+    if ($item['href'] == $end['href']) {
       \array_pop($active_trail);
     }
 
@@ -485,7 +499,7 @@ function atomium_menu_get_active_breadcrumb() {
     // (commonly MENU_DEFAULT_LOCAL_TASK). In order to also hide the parent link
     // itself, we always remove the last link in the trail, if the current
     // router item links to its parent.
-    if (($item['type'] & MENU_LINKS_TO_PARENT) === MENU_LINKS_TO_PARENT) {
+    if (($item['type'] & MENU_LINKS_TO_PARENT) == MENU_LINKS_TO_PARENT) {
       \array_pop($active_trail);
     }
 
@@ -685,8 +699,8 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
  *   The base hook.
  */
 function atomium_get_base_hook($hook) {
-  if (FALSE !== $pos = \strpos($hook, '__')) {
-    $hook = \substr($hook, 0, $pos);
+  while ($pos = \strrpos($hook, '__')) {
+    $hook = drupal_substr($hook, 0, $pos);
   }
 
   return $hook;

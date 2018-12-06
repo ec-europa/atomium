@@ -25,7 +25,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
 
   // Custom 404.
   $headers = drupal_get_http_header();
-  if (isset($headers['status']) && $headers['status'] === '404 Not Found') {
+  if (isset($headers['status']) && '404 Not Found' == $headers['status']) {
     $variables['theme_hook_suggestions'][] = 'page__404';
   }
 

@@ -46,7 +46,7 @@ function atomium_preprocess_link(array &$variables, $hook) {
     $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 
-  if ((\strpos($variables['path'], '#') === 0) || (\strpos($variables['path'], 'javascript:') === 0)) {
+  if ((0 === \strpos($variables['path'], '#')) || (0 === \strpos($variables['path'], 'javascript:'))) {
     $path = $variables['path'];
   }
 
