@@ -1,15 +1,17 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude('vendor')
     ->exclude('node_modules')
     ->exclude('build')
-    ->exclude('atomium/includes/classes/htmltag')
+    ->name('*.install')
+    ->name('*.inc')
+    ->name('*.module')
     ->in(__DIR__);
 
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
+        'single_quote' => TRUE,
         'linebreak_after_opening_tag' => TRUE,
         'logical_operators' => TRUE,
         'lowercase_cast' => TRUE,
