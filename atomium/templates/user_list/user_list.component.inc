@@ -16,7 +16,7 @@ function atomium_preprocess_user_list(array &$variables, $hook) {
   if (!empty($users)) {
     $user_list = array(
       '#theme' => 'item_list',
-      '#items' => array_map(function ($user) use ($variables) {
+      '#items' => \array_map(function ($user) use ($variables) {
         $user = array(
           'data' => array(
             '#theme' => 'username',

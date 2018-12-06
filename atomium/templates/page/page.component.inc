@@ -25,7 +25,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
 
   // Custom 404.
   $headers = drupal_get_http_header();
-  if (isset($headers['status']) && $headers['status'] == '404 Not Found') {
+  if (isset($headers['status']) && '404 Not Found' == $headers['status']) {
     $variables['theme_hook_suggestions'][] = 'page__404';
   }
 
@@ -36,7 +36,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
     }
     if (!empty($variables['page']['content']['system_main']['#theme_wrappers'])) {
       // Remove the block hook wrapper from the main content block.
-      $variables['page']['content']['system_main']['#theme_wrappers'] = array_filter(
+      $variables['page']['content']['system_main']['#theme_wrappers'] = \array_filter(
         $variables['page']['content']['system_main']['#theme_wrappers'],
         function ($theme_hook) {
           if ('block' === atomium_get_base_hook($theme_hook)) {
@@ -57,14 +57,17 @@ function atomium_preprocess_page(array &$variables, $hook) {
   switch (current_path()) {
     case 'user':
       drupal_set_title(t('Log in'));
+
       break;
 
     case 'user/register':
       drupal_set_title(t('Create new account'));
+
       break;
 
     case 'user/password':
       drupal_set_title(t('Request new password'));
+
       break;
 
     default:

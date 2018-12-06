@@ -39,16 +39,16 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   global $pager_page_array, $pager_total;
 
   // This is for the hook_atomium_definition_hook() to work.
-  if (isset($variables['pager_page_array']) && !is_null($variables['pager_page_array'])) {
+  if (isset($variables['pager_page_array']) && NULL !== $variables['pager_page_array']) {
     $pager_page_array = $variables['pager_page_array'];
   }
-  if (isset($variables['pager_total']) && !is_null($variables['pager_total'])) {
+  if (isset($variables['pager_total']) && NULL !== $variables['pager_total']) {
     $pager_total = $variables['pager_total'];
   }
 
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
-  $pager_middle = ceil($quantity / 2);
+  $pager_middle = \ceil($quantity / 2);
   // Current is the page we are currently paged to.
   $pager_current = $pager_page_array[$element] + 1;
   // First is the first page listed by this pager piece (re quantity).
@@ -88,7 +88,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
       // If we are anywhere but the first page.
       $pager = pager_load_array($pager_page_array[$element] - 1, $element, $pager_page_array);
       // If the previous page is the first page, mark the link as such.
-      if ($pager[$element] == 0) {
+      if (0 == $pager[$element]) {
         $pager = array(0 => 0);
       }
       $options = array(
@@ -227,12 +227,12 @@ function _atomium_pager_item_to_link_helper($text = NULL, $pager = NULL, $elemen
   $options['query'] = drupal_get_query_parameters($options['query'], array('q', 'page'));
 
   if ($query_pager = pager_get_query_parameters()) {
-    $options['query'] = array_merge($options['query'], $query_pager);
+    $options['query'] = \array_merge($options['query'], $query_pager);
   }
 
   $page = isset($_GET['page']) ? $_GET['page'] : '';
-  if (!is_null($element)) {
-    if ($new_page = implode(',', pager_load_array($pager[$element], $element, explode(',', $page)))) {
+  if (NULL !== $element) {
+    if ($new_page = \implode(',', pager_load_array($pager[$element], $element, \explode(',', $page)))) {
       $options['query']['page'] = $new_page;
     }
   }

@@ -26,7 +26,7 @@ function atomium_atomium_theme_indentation() {
 function atomium_preprocess_indentation(array &$variables, $hook) {
   $size = $variables['size'];
 
-  if (!is_numeric($variables['size']) || $variables['size'] <= 0) {
+  if (!\is_numeric($variables['size']) || $variables['size'] <= 0) {
     $size = 0;
   }
 
@@ -34,7 +34,7 @@ function atomium_preprocess_indentation(array &$variables, $hook) {
     '#theme' => 'item_list',
     '#wrapper' => FALSE,
     '#type' => FALSE,
-    '#items' => array_fill(
+    '#items' => \array_fill(
       0,
       $size,
       array(

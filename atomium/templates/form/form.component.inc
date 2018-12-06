@@ -32,7 +32,7 @@ function atomium_preprocess_form(array &$variables, $hook) {
   }
   element_set_attributes($element, array('method', 'id'));
   if (empty($element['#attributes']['accept-charset'])) {
-    $element['#attributes']['accept-charset'] = "UTF-8";
+    $element['#attributes']['accept-charset'] = 'UTF-8';
   }
 
   $variables['atomium']['attributes']['element']->merge($element['#attributes']);

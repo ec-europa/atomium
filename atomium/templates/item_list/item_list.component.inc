@@ -45,7 +45,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   // Only output the list container and title, if there are any list items.
   // Check to see whether the block title exists before adding a header.
   // Empty headers are not semantic and present accessibility challenges.
-  $num_items = count($variables['items']);
+  $num_items = \count($variables['items']);
   $i = 0;
   foreach ($variables['items'] as $key => $item) {
     $i++;
@@ -56,7 +56,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
       $variables['atomium']['attributes'][$key]->append('class', 'last');
     }
 
-    if (is_array($item) && isset($item['data'])) {
+    if (\is_array($item) && isset($item['data'])) {
       $item += array('class' => array());
       $variables['atomium']['attributes'][$key]->append('class', $item['class']);
       $item = array(
@@ -75,7 +75,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
       $variables['items'][$key] = $item;
     }
 
-    if (is_string($item)) {
+    if (\is_string($item)) {
       $item = array(
         '#theme' => 'html_tag',
         '#tag' => 'li',

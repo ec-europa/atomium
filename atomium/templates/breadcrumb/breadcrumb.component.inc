@@ -48,7 +48,7 @@ function atomium_atomium_definition_breadcrumb() {
 function atomium_preprocess_breadcrumb(array &$variables, $hook) {
   $links = array();
   foreach ($variables['breadcrumb'] as $item) {
-    if (is_string($item)) {
+    if (\is_string($item)) {
       $item = array(
         '#markup' => $item,
       );
@@ -61,7 +61,7 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
     );
   }
 
-  array_walk($links, function (&$link) use ($variables) {
+  \array_walk($links, function (&$link) use ($variables) {
     _atomium_extend_theme_wrappers_property(
       $link,
       array($link['#tag'], $variables['theme_hook_original']));

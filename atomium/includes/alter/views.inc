@@ -11,10 +11,10 @@
 function atomium_views_pre_render(view $view) {
   $display = $view->display[$view->current_display];
 
-  $suggestions_parts = [
+  $suggestions_parts = array(
     $view->name,
     $display->display_plugin,
-  ];
+  );
 
   if ($display->id !== $display->display_plugin) {
     $suggestions_parts[] = $display->id;
@@ -26,7 +26,7 @@ function atomium_views_pre_render(view $view) {
       $suggestions_parts
     );
 
-    array_unshift(
+    \array_unshift(
       $suggestions_parts,
       $view->style_plugin->definition['theme']
     );

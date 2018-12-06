@@ -44,14 +44,15 @@ function atomium_preprocess_table(array &$variables, $hook) {
 
   // Allows to have multiple lines in the header.
   foreach ($variables['header'] as $item) {
-    if (!is_array($item) || (is_array($item) && isset($item['data']))) {
+    if (!\is_array($item) || (\is_array($item) && isset($item['data']))) {
       $header = $variables['header'] = array($variables['header']);
+
       break;
     }
   }
 
   // Add sticky headers, if applicable.
-  if (count($header) && $sticky) {
+  if (\count($header) && $sticky) {
     drupal_add_js('misc/tableheader.js');
     // Add 'sticky-enabled' class to the table to identify it for JS.
     // This is needed to target tables constructed by this function.
@@ -59,10 +60,10 @@ function atomium_preprocess_table(array &$variables, $hook) {
   }
 
   // Add the 'empty' row message if available.
-  if (!count($rows) && $empty) {
+  if (!\count($rows) && $empty) {
     $header_count = 0;
     foreach ($header[0] as $header_cell) {
-      if (is_array($header_cell)) {
+      if (\is_array($header_cell)) {
         $header_count += isset($header_cell['colspan']) ? $header_cell['colspan'] : 1;
       }
       else {
@@ -78,7 +79,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
     );
   }
 
-  $ts = count($header) ? tablesort_init($header[0]) : array();
+  $ts = \count($header) ? tablesort_init($header[0]) : array();
 
   // Format the table colgroups row.
   $variables['colgroups'] = _atomium_table_format_rows('colgroup', array($variables['colgroups']), $header, $ts, FALSE, $variables);
@@ -108,7 +109,7 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
     $header = $header[0];
   }
 
-  if (count($rows)) {
+  if (\count($rows)) {
     $flip = array('even' => 'odd', 'odd' => 'even');
     $class = 'even';
     foreach ($rows as $rowid => $row) {
@@ -128,7 +129,7 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
         $no_striping = FALSE;
       }
 
-      if (count($cells)) {
+      if (\count($cells)) {
         // Add odd/even class.
         if (!$no_striping) {
           $class = $flip[$class];
@@ -151,9 +152,9 @@ function _atomium_table_format_rows($type, array $rows, $header, $ts, $is_header
 
           // @todo: Check this part of code.
           $attributes_array = array();
-          if (is_array($cell)) {
+          if (\is_array($cell)) {
             $cell += array('data' => '');
-            $attributes_array = array_diff_key($cell, array('data' => 'data', 'header' => 'header'));
+            $attributes_array = \array_diff_key($cell, array('data' => 'data', 'header' => 'header'));
             $cell = $cell['data'];
           }
 

@@ -28,10 +28,10 @@ function atomium_preprocess_mark(array &$variables, $hook) {
   $type = $variables['type'];
 
   if ($user->uid) {
-    if ($type == MARK_NEW) {
+    if (MARK_NEW == $type) {
       $variables['title'] = !empty($variables['title']) ? $variables['title'] : t('new');
     }
-    elseif ($type == MARK_UPDATED) {
+    elseif (MARK_UPDATED == $type) {
       $variables['title'] = !empty($variables['title']) ? $variables['title'] : t('updated');
     }
   }

@@ -34,7 +34,7 @@ function atomium_atomium_theme_links() {
 function atomium_preprocess_links(array &$variables, $hook) {
   global $language_url;
 
-  $count = count($variables['links']);
+  $count = \count($variables['links']);
   if ($count <= 0) {
     return;
   }
@@ -47,7 +47,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
   // Treat the heading first if it is present to prepend it to the
   // list of links.
   if (!empty($variables['heading'])) {
-    if (is_string($variables['heading'])) {
+    if (\is_string($variables['heading'])) {
       // Prepare the array that will be used when the passed heading
       // is a string.
       $variables['heading'] = array(
@@ -74,7 +74,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
     // Add first, last and active classes to the list of links to help out
     // themers.
-    if ($i == 1) {
+    if (1 == $i) {
       $link['attributes_array']['class'][] = 'first';
     }
     if ($i == $num_links) {
@@ -142,7 +142,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
   $links = array(
     '#theme' => 'item_list',
-    '#items' => array_filter($new_links),
+    '#items' => \array_filter($new_links),
     '#type' => 'ul',
     '#atomium' => array(
       'attributes' => array(

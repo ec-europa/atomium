@@ -38,7 +38,7 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       // and load it for them. Once we've got user_load_multiple() and
       // comment_load_multiple() functions the user module will be able to load
       // the picture files in mass during the object's load process.
-      if (is_numeric($account->picture)) {
+      if (\is_numeric($account->picture)) {
         $account->picture = file_load($account->picture);
       }
       if (!empty($account->picture->uri)) {

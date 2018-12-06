@@ -25,7 +25,7 @@ function atomium_preprocess_hidden(array &$variables, $hook) {
   // By default, VBO creates hidden components and set the class as string.
   // The class attributes needs to be an array.
   if (isset($variables['element']['#attributes']['class']) &&
-    !is_array($variables['element']['#attributes']['class'])) {
+    !\is_array($variables['element']['#attributes']['class'])) {
     $variables['element']['#attributes']['class'] = array(
       $variables['element']['#attributes']['class'],
     );
