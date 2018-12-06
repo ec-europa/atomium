@@ -26,11 +26,13 @@ abstract class AbstractTest extends TestCase {
       foreach (Arrays::flatten($this->getActual()) as $dotted => $item) {
         $expected = Arrays::get($value, $dotted);
         if ($item != $expected) {
-          $this->failing = [$dotted, $item];
+          $this->failing = array($dotted, $item);
           $this->expected = $expected;
+
           return FALSE;
         }
       }
+
       return TRUE;
     });
   }
@@ -42,16 +44,17 @@ abstract class AbstractTest extends TestCase {
    *   List of component fixtures.
    */
   public function componentsProvider() {
-    $data = [];
+    $data = array();
 
     $finder = new Finder();
-    $finder->files()->in(realpath(__DIR__ . '/../fixtures/components'));
+    $finder->files()->in(\realpath(__DIR__ . '/../fixtures/components'));
     foreach ($finder as $file) {
-      $data[] = [
+      $data[] = array(
         'hook' => drupal_basename($file->getRelativePathname(), '.yml'),
         'content' => Yaml::parse($file->getContents()),
-      ];
+      );
     }
+
     return $data;
   }
 
@@ -62,15 +65,16 @@ abstract class AbstractTest extends TestCase {
    *   List of attributes fixtures.
    */
   public function attributesProvider() {
-    $data = [];
+    $data = array();
 
     $finder = new Finder();
-    $finder->files()->in(realpath(__DIR__ . '/../fixtures/attributes'));
+    $finder->files()->in(\realpath(__DIR__ . '/../fixtures/attributes'));
     foreach ($finder as $file) {
-      $data[] = [
+      $data[] = array(
         'attribute_fixture' => Yaml::parse($file->getContents()),
-      ];
+      );
     }
+
     return $data;
   }
 
@@ -81,15 +85,16 @@ abstract class AbstractTest extends TestCase {
    *   List of variables fixtures.
    */
   public function variablesPreprocessProvider() {
-    $data = [];
+    $data = array();
 
     $finder = new Finder();
     $finder->files()->in(drupal_realpath(__DIR__ . '/../fixtures/preprocess'));
     foreach ($finder as $file) {
-      $data[] = [
+      $data[] = array(
         'variable_fixture' => Yaml::parse($file->getContents()),
-      ];
+      );
     }
+
     return $data;
   }
 
@@ -100,15 +105,16 @@ abstract class AbstractTest extends TestCase {
    *   List of variables fixtures.
    */
   public function variablesProcessProvider() {
-    $data = [];
+    $data = array();
 
     $finder = new Finder();
     $finder->files()->in(drupal_realpath(__DIR__ . '/../fixtures/process'));
     foreach ($finder as $file) {
-      $data[] = [
+      $data[] = array(
         'variable_fixture' => Yaml::parse($file->getContents()),
-      ];
+      );
     }
+
     return $data;
   }
 
