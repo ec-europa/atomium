@@ -26,11 +26,11 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
   $t = get_t();
 
   // Style the label as class option to display inline with the element.
-  if ($element['#title_display'] == 'after') {
+  if ('after' == $element['#title_display']) {
     $variables['atomium']['attributes']['wrapper']->append('class', 'option');
   }
   // Show label only to screen readers to avoid disruption in visual flows.
-  elseif ($element['#title_display'] == 'invisible') {
+  elseif ('invisible' == $element['#title_display']) {
     $variables['atomium']['attributes']['wrapper']->append('class', 'element-invisible');
   }
 

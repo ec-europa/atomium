@@ -14,17 +14,19 @@ function atomium_foundation_preprocess_button(array &$variables, $hook) {
   $variables['atomium']['attributes']['element']->append('class', 'button');
 
   if (isset($variables['element']['#id']) && $id = $variables['element']['#id']) {
-    list($id,) = explode('--', $id);
+    list($id,) = \explode('--', $id);
     switch ($id) {
       case 'edit-submit':
       case 'edit-update':
       case 'edit-save':
         $variables['atomium']['attributes']['wrapper']->append('class', array('primary', 'expanded'));
+
         break;
 
       case 'edit-delete':
       case 'edit-delete_translation':
         $variables['atomium']['attributes']['wrapper']->append('class', 'alert');
+
         break;
 
       default:

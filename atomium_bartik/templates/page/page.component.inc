@@ -10,9 +10,9 @@
  */
 function atomium_bartik_preprocess_page(array &$variables, $hook) {
   if (isset($variables['page']['content']['#theme_wrappers'])) {
-    $variables['page']['content']['#theme_wrappers'] = array_diff($variables['page']['content']['#theme_wrappers'], array('region'));
+    $variables['page']['content']['#theme_wrappers'] = \array_diff($variables['page']['content']['#theme_wrappers'], array('region'));
   }
-  $variables['page']['content']['system_main']['#theme_wrappers'] = array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
+  $variables['page']['content']['system_main']['#theme_wrappers'] = \array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
 }
 
 /**

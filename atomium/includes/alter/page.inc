@@ -20,7 +20,7 @@ function atomium_page_alter(array &$page) {
 
     $block_index_in_region = 0;
     $blocks = element_children($page[$region]);
-    $total_blocks_in_region = count($blocks);
+    $total_blocks_in_region = \count($blocks);
 
     // Alter each blocks to provides relevant variables in the block preprocess.
     foreach ($blocks as $block) {

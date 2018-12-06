@@ -18,14 +18,14 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
    *
    * Remove if #1245218 is backported to D7 core.
    */
-  foreach (array_keys($form) as $item) {
-    if (strpos($item, 'field_') === 0) {
+  foreach (\array_keys($form) as $item) {
+    if (0 === \strpos($item, 'field_')) {
       if (!empty($form[$item]['#attributes']['class'])) {
         foreach ($form[$item]['#attributes']['class'] as &$class) {
           // Core bug: the field-type-text-with-summary class
           // is used as a JS hook.
-          if ($class != 'field-type-text-with-summary' && strpos($class,
-              'field-type-') === 0 || strpos($class, 'field-name-') === 0) {
+          if ('field-type-text-with-summary' != $class && 0 === \strpos($class,
+              'field-type-') || 0 === \strpos($class, 'field-name-')) {
             // Make the class different from that used in theme_field().
             $class = 'form-' . $class;
           }
@@ -55,7 +55,7 @@ function _atomium_form_element_theme_alter(array &$form, array &$form_state, $fo
 
       if (isset($info['#theme_wrappers'])) {
         $form[$key] += array('#theme_wrappers' => array());
-        $form[$key]['#theme_wrappers'] = array_merge($form[$key]['#theme_wrappers'], $info['#theme_wrappers']);
+        $form[$key]['#theme_wrappers'] = \array_merge($form[$key]['#theme_wrappers'], $info['#theme_wrappers']);
 
         $form[$key]['#theme_wrappers'] = _atomium_extend_with_suggestions(
           $info['#theme_wrappers'],

@@ -34,7 +34,7 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
     list($description, $items) = $block;
 
     // Output links.
-    if (count($items)) {
+    if (\count($items)) {
       $block = array();
       $block['title'] = $module;
       $block['content'] = array(

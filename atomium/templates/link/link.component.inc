@@ -46,13 +46,13 @@ function atomium_preprocess_link(array &$variables, $hook) {
     $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 
-  if ((0 === strpos($variables['path'], '#')) || (0 === strpos($variables['path'], 'javascript:'))) {
+  if ((0 === \strpos($variables['path'], '#')) || (0 === \strpos($variables['path'], 'javascript:'))) {
     $path = $variables['path'];
   }
 
   $variables['atomium']['attributes']['element']->setAttribute('href', $path);
 
-  if (is_string($variables['text'])) {
+  if (\is_string($variables['text'])) {
     $variables['text'] = array(
       '#markup' => ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])),
     );

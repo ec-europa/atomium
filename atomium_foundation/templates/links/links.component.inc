@@ -9,7 +9,7 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_links(array &$variables, $hook) {
-  if (in_array($variables['theme_hook_original'], array('links__contextual'))) {
+  if (\in_array($variables['theme_hook_original'], array('links__contextual'), TRUE)) {
     return;
   }
 
@@ -20,7 +20,7 @@ function atomium_foundation_preprocess_links(array &$variables, $hook) {
   $variables[$hook][$hook]['#attributes']['class'][] = 'secondary';
   $variables[$hook][$hook]['#attributes']['class'][] = 'button-group';
 
-  if (isset($variables[$hook][$hook]['#items']) && is_array($variables[$hook][$hook]['#items'])) {
+  if (isset($variables[$hook][$hook]['#items']) && \is_array($variables[$hook][$hook]['#items'])) {
     foreach ($variables[$hook][$hook]['#items'] as &$item) {
       unset($item['#theme_wrappers']);
       unset($item['#tag']);

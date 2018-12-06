@@ -28,7 +28,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
     '#attributes' => array(),
   );
 
-  if (is_string($element['#value'])) {
+  if (\is_string($element['#value'])) {
     $element['#value'] = array(
       array(
         '#markup' => $element['#value'],
@@ -64,7 +64,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
 
   // Remove media="all" but leave others unaffected.
   if (isset($element['#attributes']['media']) &&
-    $element['#attributes']['media'] === 'all') {
+    'all' === $element['#attributes']['media']) {
     unset($element['#attributes']['media']);
   }
 }

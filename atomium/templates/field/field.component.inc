@@ -25,6 +25,6 @@ function atomium_preprocess_field(array &$variables, $hook) {
     ->append('class', $variables['classes_array']);
 
   $variables['atomium']['attributes'][0]->append('class', 'first');
-  $variables['atomium']['attributes'][count($variables['items']) - 1]
+  $variables['atomium']['attributes'][\count($variables['items']) - 1]
     ->append('class', 'last');
 }

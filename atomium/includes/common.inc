@@ -23,18 +23,19 @@ function atomium_include($theme, $path) {
     $theme => drupal_get_path('theme', $theme),
   );
 
-  if ($themes[$theme] && ($file = DRUPAL_ROOT . '/' . $themes[$theme] . '/' . $path) && file_exists($file)) {
-    if (is_dir($file)) {
-      foreach (glob($file . '/*.{inc}', GLOB_BRACE) as $file_to_include) {
+  if ($themes[$theme] && ($file = DRUPAL_ROOT . '/' . $themes[$theme] . '/' . $path) && \file_exists($file)) {
+    if (\is_dir($file)) {
+      foreach (\glob($file . '/*.{inc}', GLOB_BRACE) as $file_to_include) {
         include_once $file_to_include;
       }
-      foreach (glob($file . '/*.{php}', GLOB_BRACE) as $file_to_include) {
+      foreach (\glob($file . '/*.{php}', GLOB_BRACE) as $file_to_include) {
         include_once $file_to_include;
       }
     }
-    if (is_file($file)) {
+    if (\is_file($file)) {
       include_once $file;
     }
+
     return TRUE;
   }
 
@@ -59,14 +60,14 @@ function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE)
   $theme_key = ($theme_key) ?: $GLOBALS['theme_key'];
 
   if (!isset($themes[$theme_key])) {
-    $themes[$theme_key] = array_unique(array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
+    $themes[$theme_key] = \array_unique(\array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
   }
 
   if ($include_theme_key) {
     $themes[$theme_key][] = $theme_key;
   }
 
-  return array_unique($themes[$theme_key]);
+  return \array_unique($themes[$theme_key]);
 }
 
 /**
@@ -102,14 +103,14 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
         $value = FALSE;
         // Recursively add base theme values.
         if ($base_themes && isset($theme->base_themes)) {
-          foreach (array_keys($theme->base_themes) as $base_theme) {
+          foreach (\array_keys($theme->base_themes) as $base_theme) {
             $value = atomium_get_theme_info($base_theme, $key);
           }
         }
         if (!empty($themes[$theme_key])) {
           $info = $themes[$theme_key]->info;
           // Allow array traversal.
-          $keys = explode('][', $key);
+          $keys = \explode('][', $key);
           foreach ($keys as $parent) {
             if (isset($info[$parent])) {
               $info = $info[$parent];
@@ -118,9 +119,9 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
               $info = FALSE;
             }
           }
-          if (is_array($value)) {
+          if (\is_array($value)) {
             if (!empty($info)) {
-              if (!is_array($info)) {
+              if (!\is_array($info)) {
                 $info = array($info);
               }
               $value = drupal_array_merge_deep($value, $info);
@@ -132,10 +133,10 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
                 $value = $info;
               }
               else {
-                if (!is_array($value)) {
+                if (!\is_array($value)) {
                   $value = array($value);
                 }
-                if (!is_array($info)) {
+                if (!\is_array($info)) {
                   $info = array($info);
                 }
                 $value = drupal_array_merge_deep($value, $info);
@@ -143,6 +144,7 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
             }
           }
         }
+
         return $value;
       }
       // If no info $key was specified, just return the entire info array.
@@ -214,8 +216,8 @@ function atomium_find_templates() {
 
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
     $path = drupal_get_path('theme', $theme) . '/templates';
-    if (is_dir($path)) {
-      $directories = array_diff(scandir($path), array('..', '.'));
+    if (\is_dir($path)) {
+      $directories = \array_diff(\scandir($path), array('..', '.'));
       foreach ($directories as $directory) {
         $templates[$theme][$directory] = array(
           'theme' => $theme,
@@ -241,20 +243,20 @@ function atomium_get_component_definitions() {
   $definitions = array();
   foreach (atomium_find_templates() as $theme => $theme_data) {
     foreach ($theme_data as $component => $component_data) {
-      $file = sprintf('%s/%s.component.inc', $component_data['directory'], $component);
-      if (file_exists($file)) {
+      $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component);
+      if (\file_exists($file)) {
         include_once $file;
       }
 
       $function_name = $theme . '_atomium_definition_' . $component;
-      if (function_exists($function_name)) {
-        $definition = (array) call_user_func($function_name) + array(
+      if (\function_exists($function_name)) {
+        $definition = (array) \call_user_func($function_name) + array(
           'disable' => FALSE,
           'preview' => array(),
           'dependencies' => array(),
         );
 
-        if (!is_array($definition['dependencies'])) {
+        if (!\is_array($definition['dependencies'])) {
           $definition['dependencies'] = array($definition['dependencies']);
         }
 
@@ -274,7 +276,7 @@ function atomium_get_component_definitions() {
 
         // Prepend hash to all preview properties.
         foreach ($definition['preview'] as $key => $value) {
-          if (!is_numeric($key)) {
+          if (!\is_numeric($key)) {
             $definition['preview']["#{$key}"] = $value;
             unset($definition['preview'][$key]);
           }
@@ -287,12 +289,12 @@ function atomium_get_component_definitions() {
           foreach ($definition['preview'] as $preview) {
             // Prepend hash to all preview properties.
             foreach ($preview as $key => $value) {
-              if (!is_numeric($key)) {
+              if (!\is_numeric($key)) {
                 $preview["#{$key}"] = $value;
                 unset($preview[$key]);
               }
             }
-            $elements[] = array_merge($element, $preview);
+            $elements[] = \array_merge($element, $preview);
           }
           if (!empty($elements)) {
             $definition['preview'] = array(
@@ -307,7 +309,7 @@ function atomium_get_component_definitions() {
 
         // Allow the use of a form.
         $function_name = $theme . '_atomium_definition_form_' . $component;
-        if (function_exists($function_name)) {
+        if (\function_exists($function_name)) {
           $definition['form'] = drupal_get_form($function_name);
         }
 
@@ -316,7 +318,7 @@ function atomium_get_component_definitions() {
           unset($definition['preview']);
         }
 
-        $definitions[$component] = array_filter($definition);
+        $definitions[$component] = \array_filter($definition);
         if (!empty($errors)) {
           unset($definitions[$component]['form']);
           $definitions[$component]['preview'] = array(
@@ -376,9 +378,9 @@ function atomium_menu_get_active_breadcrumb() {
     drupal_alter('menu_breadcrumb', $active_trail, $item);
 
     // Don't show a link to the current page in the breadcrumb trail.
-    $end = end($active_trail);
+    $end = \end($active_trail);
     if ($item['href'] == $end['href']) {
-      array_pop($active_trail);
+      \array_pop($active_trail);
     }
 
     // Remove the tab root (parent) if the current path links to its parent.
@@ -395,7 +397,7 @@ function atomium_menu_get_active_breadcrumb() {
     // itself, we always remove the last link in the trail, if the current
     // router item links to its parent.
     if (($item['type'] & MENU_LINKS_TO_PARENT) == MENU_LINKS_TO_PARENT) {
-      array_pop($active_trail);
+      \array_pop($active_trail);
     }
 
     foreach ($active_trail as $parent) {
@@ -433,14 +435,14 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
   );
 
   foreach ($variables as $key => &$value) {
-    if (is_array($value) && !isset($value['#atomium_recursive_processed'])) {
+    if (\is_array($value) && !isset($value['#atomium_recursive_processed'])) {
 
       // If no recursive is set, take the value by default.
       $value += array(
         '#atomium_recursive' => $variables['#atomium_recursive'],
       );
 
-      if ($value['#atomium_recursive'] == TRUE) {
+      if (TRUE == $value['#atomium_recursive']) {
         atomium_recursive_foreach($value, $callback);
       }
 
@@ -448,7 +450,7 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
       unset($value['#atomium_recursive']);
     }
 
-    call_user_func_array($callback, array($key, &$value, &$variables));
+    \call_user_func_array($callback, array($key, &$value, &$variables));
   }
 
   unset($variables['#atomium_recursive_processed']);
@@ -477,7 +479,7 @@ function _atomium_update_block_render_array(array &$block_array, $region = NULL,
     $block_array['#theme_wrappers'] = _atomium_extend_with_suggestions(
       $block_array['#theme_wrappers'],
       array(
-        is_string($region) ? $region : NULL,
+        \is_string($region) ? $region : NULL,
         $block_array['#block']->module,
         $block_array['#block']->delta,
       )
@@ -545,7 +547,7 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
  *   The extended strings.
  */
 function _atomium_extend_with_suggestions(array $items = array(''), array $suggestions = array()) {
-  return array_map(function ($base_hook) use ($suggestions) {
+  return \array_map(function ($base_hook) use ($suggestions) {
     if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
       return $hook[0];
     }
@@ -567,24 +569,24 @@ function _atomium_extend_with_suggestions(array $items = array(''), array $sugge
  *   FALSE if the base hook is null.
  */
 function _atomium_extend_theme_hook($base = NULL, $suggestions = array()) {
-  if (empty($base) || !is_string($base)) {
+  if (empty($base) || !\is_string($base)) {
     return FALSE;
   }
 
   $suggestions = (array) $suggestions;
-  array_unshift($suggestions, $base);
+  \array_unshift($suggestions, $base);
 
   return array(
-    str_replace(
+    \str_replace(
       '-',
       '_',
       drupal_strtolower(
-        implode(
+        \implode(
           '__',
-          array_map(function ($suggestion) {
-            return trim($suggestion, '_');
+          \array_map(function ($suggestion) {
+            return \trim($suggestion, '_');
           },
-            array_filter(
+            \array_filter(
               $suggestions
             )
           )
@@ -637,15 +639,15 @@ function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') 
   foreach ($array as $key => $value) {
     $itemKey = $parentKey;
 
-    if (!is_numeric($key)) {
+    if (!\is_numeric($key)) {
       $itemKey .= (($parentKey) ? '.' : '') . $key;
     }
 
-    if (is_array($value)) {
+    if (\is_array($value)) {
       _atomium_array_flatten($value, $storage, $itemKey);
     }
     else {
-      if (is_numeric($key)) {
+      if (\is_numeric($key)) {
         $storage += array($itemKey => array());
         $storage[$itemKey][] = $value;
       }
@@ -686,20 +688,20 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
   $setting_value = array();
 
   if (isset($settings[$setting_keys])) {
-    if (is_string($settings[$setting_keys])) {
-      $setting_value = explode(',', $settings[$setting_keys]);
+    if (\is_string($settings[$setting_keys])) {
+      $setting_value = \explode(',', $settings[$setting_keys]);
     }
 
-    if (is_array($settings[$setting_keys])) {
+    if (\is_array($settings[$setting_keys])) {
       $setting_value = $settings[$setting_keys];
     }
 
     foreach ($value_callbacks as $value_callback) {
-      $setting_value = array_map($value_callback, $setting_value);
+      $setting_value = \array_map($value_callback, $setting_value);
     }
   }
 
-  return array_values(array_filter($setting_value));
+  return \array_values(\array_filter($setting_value));
 }
 
 /**
@@ -716,7 +718,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
  *   The base hook.
  */
 function atomium_get_base_hook($hook) {
-  while ($pos = strrpos($hook, '__')) {
+  while ($pos = \strrpos($hook, '__')) {
     $hook = drupal_substr($hook, 0, $pos);
   }
 
