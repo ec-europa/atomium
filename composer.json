@@ -30,6 +30,7 @@
         "drupal/drupal-extension": "~3.4",
         "drupal/realistic_dummy_content": "*",
         "drush/drush": "^8",
+        "friendsofphp/php-cs-fixer": "^2.10",
         "mikey179/vfsstream": "~1.2",
         "openeuropa/code-review": "^1.0.0-alpha5",
         "openeuropa/task-runner": "0.7.1",

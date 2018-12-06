@@ -29,7 +29,7 @@ class ThemeTest extends AbstractThemeTest {
    */
   public function testRegistry() {
     foreach (theme_get_registry(TRUE) as $info) {
-      expect($info)->to->include->keys(['preprocess functions']);
+      expect($info)->to->include->keys(array('preprocess functions'));
       expect($info['preprocess functions'])
         ->to->be->an('array')
         ->to->contain('atomium_preprocess');
