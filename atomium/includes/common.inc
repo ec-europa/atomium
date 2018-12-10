@@ -212,15 +212,16 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
  * It is important that directories have the name of the hook for the moment.
  *
  * @return array[][]
- *   Format: $[$theme][$subdir_name] = ['theme' => $theme, 'directory' => $directory]
+ *   Format:
+ *   $[$theme][$subdir_name] = ['theme' => $theme, 'directory' => $directory]
  */
 function atomium_find_templates() {
   $templates = array();
 
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
     $path = drupal_get_path('theme', $theme) . '/templates';
-    if (is_dir($path)) {
-      foreach (scandir($path, SCANDIR_SORT_ASCENDING) as $directory) {
+    if (\is_dir($path)) {
+      foreach (\scandir($path, SCANDIR_SORT_ASCENDING) as $directory) {
         if ('.' === $directory[0]) {
           continue;
         }
@@ -595,7 +596,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
  *   The base hook.
  */
 function atomium_get_base_hook($hook) {
-  if ($pos = strpos($hook, '__')) {
+  if ($pos = \strpos($hook, '__')) {
     return drupal_substr($hook, 0, $pos);
   }
 

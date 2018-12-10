@@ -57,12 +57,15 @@ function _atomium_theme(array &$existing, $type, $theme, $path) {
 
 /**
  * Implements hook_theme_registry_alter().
+ *
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_theme_registry_alter(array &$registry) {
   $components = array();
 
   $ignorelist = atomium_get_settings('hooks_to_ignore');
-  $ignoremap = array_fill_keys($ignorelist, TRUE);
+  $ignoremap = \array_fill_keys($ignorelist, TRUE);
 
   foreach ($ignoremap as $hook => $_true) {
     if (0
@@ -71,10 +74,10 @@ function atomium_theme_registry_alter(array &$registry) {
       || 'atomium_' . $hook === $registry[$hook]['function']
     ) {
       unset($ignoremap[$hook]);
+
       continue;
     }
   }
-
 
   // Prepare an array of files to include.
   foreach (atomium_find_templates() as $data) {
@@ -86,10 +89,9 @@ function atomium_theme_registry_alter(array &$registry) {
   }
 
   foreach ($registry as $hook => &$info) {
-
     $ignore = isset($ignoremap[$hook]);
 
-    if ($pos = strpos($hook, '__')) {
+    if ($pos = \strpos($hook, '__')) {
       $base_hook = drupal_substr($hook, 0, $pos);
     }
     else {
@@ -101,16 +103,14 @@ function atomium_theme_registry_alter(array &$registry) {
         // Unset all children of ignored base hooks.
         unset($registry[$hook]);
       }
-      else {
 
-      }
       continue;
     }
 
     if (isset($components[$base_hook])) {
       if (!empty($info['includes'])) {
-        $info['includes'] = array_unique(
-          array_merge(
+        $info['includes'] = \array_unique(
+          \array_merge(
             $info['includes'],
             $components[$base_hook]));
       }
@@ -122,32 +122,32 @@ function atomium_theme_registry_alter(array &$registry) {
       if (!empty($info['includes'])) {
         // To achieve complete BC with previous versions of Atomium,
         // array_unique() must be called here.
-        $info['includes'] = array_unique($info['includes']);
+        $info['includes'] = \array_unique($info['includes']);
       }
     }
 
     if (!$ignore) {
       if (!empty($info['preprocess functions'])) {
-        foreach (array_keys($info['preprocess functions'], 'atomium_preprocess') as $index) {
+        foreach (\array_keys($info['preprocess functions'], 'atomium_preprocess', TRUE) as $index) {
           unset($info['preprocess functions'][$index]);
         }
-        // The simple preprocess was not used here because theme hooks defined with
-        // a function doesn't trigger all the preprocess callbacks.
-        // It's added at the first place so we make sure it's creating the variables
-        // for hooks defined by templates and functions properly.
-        array_unshift($info['preprocess functions'], 'atomium_preprocess');
+        // The simple preprocess was not used here because theme hooks defined
+        // with a function doesn't trigger all the preprocess callbacks.
+        // It's added at the first place so we make sure it's creating the
+        // variables for hooks defined by templates and functions properly.
+        \array_unshift($info['preprocess functions'], 'atomium_preprocess');
       }
-      else{
+      else {
         // $info has no preprocess functions.
-        $info['preprocess functions'] = ['atomium_preprocess'];
+        $info['preprocess functions'] = array('atomium_preprocess');
       }
     }
     else {
-      foreach (['preprocess functions', 'process functions'] as $phase => $phase_key) {
-        foreach (preg_grep('@^atomium_' . $phase . '(?:$|_)@', $info[$phase_key]) as $i => $function) {
+      foreach (array('preprocess functions', 'process functions') as $phase => $phase_key) {
+        foreach (\preg_grep('@^atomium_' . $phase . '(?:$|_)@', $info[$phase_key]) as $i => $function) {
           unset($info[$phase_key][$i]);
         }
-        if ([] === $info[$phase_key]) {
+        if (array() === $info[$phase_key]) {
           unset($info[$phase_key]);
         }
       }
