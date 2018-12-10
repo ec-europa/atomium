@@ -3,11 +3,10 @@
 namespace Drupal\Tests\atomium\Unit;
 
 use Drupal\atomium\AttributesContainer;
+use drupol\htmltag\Attributes\AttributesInterface;
 
 /**
  * Class AttributesContainerTest.
- *
- * @package Drupal\Tests\atomium
  */
 class AttributesContainerTest extends AbstractUnitTest {
 
@@ -17,7 +16,7 @@ class AttributesContainerTest extends AbstractUnitTest {
   public function testAttributesContainer() {
     $attributesContainer = new AttributesContainer();
 
-    self::assertInstanceOf('drupal\atomium\AttributesContainer', $attributesContainer);
+    self::assertInstanceOf(AttributesContainer::class, $attributesContainer);
   }
 
   /**
@@ -27,7 +26,7 @@ class AttributesContainerTest extends AbstractUnitTest {
     $container = new AttributesContainer();
     $container['foo'] = array('bar');
 
-    self::assertInstanceOf('drupal\atomium\Attributes', $container->offsetGet('foo'));
+    self::assertInstanceOf(AttributesInterface::class, $container->offsetGet('foo'));
   }
 
   /**
@@ -36,13 +35,12 @@ class AttributesContainerTest extends AbstractUnitTest {
   public function testOffsetUnset() {
     $container = new AttributesContainer();
     $container['foo'] = array('class' => 'bar');
-
-    self::assertEquals(array('bar'), $container->offsetGet('foo')['class']);
+    self::assertEquals(array('bar'), $container->offsetGet('foo')['class']->getValuesAsArray());
 
     unset($container['foo']);
 
-    self::assertInstanceOf('drupal\atomium\Attributes', $container['foo']);
-    self::assertEmpty($container['foo']->getStorage());
+    self::assertInstanceOf(AttributesInterface::class, $container['foo']);
+    self::assertEmpty($container['foo']);
   }
 
   /**
@@ -52,7 +50,7 @@ class AttributesContainerTest extends AbstractUnitTest {
     $attributesContainer = new AttributesContainer();
     $attributesContainer['attributes'] = array('class', 'example');
 
-    self::assertInstanceOf('drupal\atomium\Attributes', $attributesContainer['attributes']);
+    self::assertInstanceOf(AttributesInterface::class, $attributesContainer['attributes']);
   }
 
   /**
@@ -63,11 +61,11 @@ class AttributesContainerTest extends AbstractUnitTest {
     $container['foo'] = array('class' => 'bar');
     $container['bar'] = array('class' => 'foo');
 
-    self::assertInstanceOf('drupal\atomium\Attributes', $container['foo']);
-    self::assertInstanceOf('drupal\atomium\Attributes', $container['bar']);
+    self::assertInstanceOf(AttributesInterface::class, $container['foo']);
+    self::assertInstanceOf(AttributesInterface::class, $container['bar']);
 
-    self::assertEquals(array('class' => array('bar')), $container['foo']->toArray());
-    self::assertEquals(array('class' => array('foo')), $container['bar']->toArray());
+    self::assertEquals(array('class' => array('bar')), $container['foo']->getValuesAsArray());
+    self::assertEquals(array('class' => array('foo')), $container['bar']->getValuesAsArray());
   }
 
 }
