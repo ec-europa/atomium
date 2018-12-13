@@ -546,16 +546,30 @@ function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') 
  *   The settings as an array.
  */
 function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_callbacks = array('trim')) {
-  $theme_key = $GLOBALS['theme_key'];
+  static $drupal_static_fast;
 
-  $settings = array();
-
-  if ($theme_settings = atomium_get_theme_info($theme_key, 'settings', $base_themes)) {
-    _atomium_array_flatten(
-      $theme_settings,
-      $settings
-    );
+  if (!isset($drupal_static_fast)) {
+    $drupal_static_fast['atomium_get_settings'] = &drupal_static(__FUNCTION__);
   }
+
+  $theme_key = $GLOBALS['theme_key'];
+  $cid = $theme_key;
+  if ($base_themes) {
+    $cid .= '+';
+  }
+
+  $settings_by_theme = &$drupal_static_fast['atomium_get_settings'];
+
+  if (!isset($settings_by_theme[$cid])) {
+    $settings_by_theme[$cid] = array();
+    if ($theme_settings = atomium_get_theme_info($theme_key, 'settings', $base_themes)) {
+      _atomium_array_flatten(
+        $theme_settings,
+        $settings_by_theme[$cid]);
+    }
+  }
+
+  $settings = $settings_by_theme[$cid];
 
   $setting_value = array();
 
