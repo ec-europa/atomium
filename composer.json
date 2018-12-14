@@ -19,7 +19,6 @@
         "source": "https://drupal.org/project/atomium"
     },
     "require-dev": {
-        "anahkiasen/underscore-php" : "dev-master",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/preserve-paths": "^0.1",
@@ -34,7 +33,6 @@
         "mikey179/vfsstream": "~1.2",
         "openeuropa/code-review": "^1.0.0-alpha5",
         "openeuropa/task-runner": "0.7.1",
-        "peridot-php/leo": "~1.0",
         "phpunit/phpunit": "^5",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"

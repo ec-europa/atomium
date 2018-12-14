@@ -16,8 +16,9 @@ class ThemeTest extends AbstractThemeTest {
    */
   public function testThemeArguments($hook, $content) {
     $actual = theme($hook);
+
     foreach ($content as $expected) {
-      expect($actual)->to->containsArray($expected);
+      self::assertArraySubset($expected, $actual);
     }
   }
 
@@ -29,11 +30,10 @@ class ThemeTest extends AbstractThemeTest {
    */
   public function testRegistry() {
     foreach (theme_get_registry(TRUE) as $info) {
-      expect($info)->to->include->keys(array('preprocess functions'));
-      expect($info['preprocess functions'])
-        ->to->be->an('array')
-        ->to->contain('atomium_preprocess');
-      expect($info['preprocess functions'][0])->equal('atomium_preprocess');
+      self::assertArrayHasKey('preprocess functions', $info);
+      self::assertInternalType('array', $info['preprocess functions']);
+      self::assertContains('atomium_preprocess', $info['preprocess functions']);
+      self::assertEquals('atomium_preprocess', $info['preprocess functions'][0]);
     }
   }
 
