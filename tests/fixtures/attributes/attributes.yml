@@ -1,67 +1,191 @@
 -
-  actual:
-    class:
-      'a simple string'
-  expected:
-    ' class="a simple string"'
+  given:
+    class: ['one', 'two']
+  run:
+    - append: ['class', 'three']
+    - remove: ['class', 'two']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'three']
+    - __toString:
+        return: ' class="one three"'
 
 -
-  actual:
-    class:
-      - testing
-      - array
-  expected:
-    ' class="array testing"'
+  given:
+    class: ['one', 'two']
+  run:
+    - append: ['class', ['one', 'two']]
+  expect:
+    - toArray:
+        return:
+         class: ['one', 'two']
+    - __toString:
+        return: ' class="one two"'
 
 -
-  actual:
-    class:
-      - testing
-      - sub
-      -
-        - array
-        -
-          - deep
-  expected:
-    ' class="array deep sub testing"'
+  given:
+    class: ['one', 'two', 'three']
+  run: []
+  expect:
+    - contains:
+        arguments: ['class', 'tw']
+        return: true
 
 -
-  actual:
-    class:
-      - hello
-      - I
-      - love
-      - you
-    id:
-      - plop
-  expected:
-    ' class="I hello love you" id="plop"'
+  given:
+    class: ['one', 'two', 'three']
+  run:
+    - replace: ['class', 'two', 'four']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'four', 'three']
+    - __toString:
+        return: ' class="four one three"'
 
 -
-  actual:
-    class:
-      - Bonjour Madame
-    id:
-      - Bonjour Monsieur
-  expected:
-    ' class="Bonjour Madame" id="Bonjour Monsieur"'
+  given:
+    class: ['one', 'two', 'three']
+  run:
+    - remove: ['class', 'one']
+    - remove: ['class', 'two']
+    - remove: ['class', 'three']
+  expect:
+    - toArray:
+        return:
+          class: []
+    - __toString:
+        return: ' class=""'
 
 -
-  actual:
-    placeholder:
-      - This is an <b>html tag</b>
-  expected:
-    ' placeholder="This is an html tag"'
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - setAttribute: ['id', 'id']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'two', 'three']
+          id: ['id']
+    - __toString:
+        return: ' class="one three two" id="id"'
 
 -
-  actual:
-    class:
-      - hello
-      - I
-      - love
-      - you
-      -
-        - another
-        - subarray
-  expected:
-    ' class="I another hello love subarray you"'
+  given:
+    class: 'foo bar'
+  run:
+    - append: ['class', 'durpal']
+    - replace: ['class', 'durpal', 'drupal']
+  expect:
+    - toArray:
+        return:
+          class: ['foo', 'bar', 'drupal']
+    - __toString:
+        return: ' class="bar drupal foo"'
+
+-
+  given:
+    class: 'foo '
+  run: []
+  expect:
+    - toArray:
+        return:
+          class: ['foo']
+    - __toString:
+        return: ' class="foo"'
+
+-
+  given: []
+  run:
+    - append: ['data-closable ']
+  expect:
+    - toArray:
+        return:
+          'data-closable ': []
+    - __toString:
+        return: ' data-closable'
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - delete: [['id', 'class']]
+  expect:
+    - toArray:
+        return: []
+    - __toString:
+        return: ''
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - delete: ['id']
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'two', 'three']
+    - __toString:
+        return: ' class="one three two"'
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['custom_id']
+  run:
+    - delete: []
+  expect:
+    - toArray:
+        return:
+          class: ['one', 'two', 'three']
+          id: ['custom_id']
+    - __toString:
+        return: ' class="one three two" id="custom_id"'
+
+-
+  given:
+    class: [['one', 'two'], 'three']
+    id: ['']
+  run:
+    - append: ['data-closable']
+  expect:
+    - __toString:
+        return: ' class="one three two" data-closable id=""'
+
+-
+  given:
+    class: ['one', 'two']
+  run:
+    - merge: [{
+        class: [foo, bar, one, two]
+        id: [foobar]
+        }]
+  expect:
+    - __toString:
+        return: ' class="bar foo one two" id="foobar"'
+
+-
+  given: { }
+  run:
+    - setAttribute: ['placeholder', '<b>hello<em>A B</em>world</b>', true]
+  expect:
+    - __toString:
+        return: ' placeholder="helloA Bworld"'
+    - getStorage:
+        return:
+          placeholder: ['<b>hello<em>A', 'B</em>world</b>']
+
+-
+  given: { }
+  run:
+    - setAttribute: ['placeholder', '<b>hello<em>A B</em>world</b>', false]
+  expect:
+    - __toString:
+        return: ' placeholder="helloA Bworld"'
+    - getStorage:
+        return:
+          placeholder: ['<b>hello<em>A B</em>world</b>']

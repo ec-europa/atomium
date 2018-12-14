@@ -1,20 +1,14 @@
 -
   variables:
-    attributes: ""
-    attributes_array:
-      class: []
     breadcrumb: ""
-    classes_array:
-      - breadcrumb
-    content_attributes: ""
-    content_attributes_array: []
-    context: []
     theme_hook_original: "breadcrumb"
     theme_hook_suggestions: []
-    title_attributes: ""
+    base_hook: "breadcrumb"
+    classes_array:
+      - breadcrumb
+    attributes_array: []
     title_attributes_array: []
+    content_attributes_array: []
     title_prefix: []
     title_suffix: []
-    wrapper_attributes: ""
-    wrapper_attributes_array:
-      class: []
+
