@@ -58,11 +58,6 @@
         "grumphp": "./vendor/bin/grumphp run"
     },
     "extra": {
-        "patches": {
-            "drupal/drupal": {
-                "https://www.drupal.org/node/2482549": "https://www.drupal.org/files/issues/ignore_node_module-2482549-27_0.patch"
-            }
-        },
         "installer-paths": {
             "build/": ["type:drupal-core"],
             "build/profiles/{$name}/": ["type:drupal-profile"],
