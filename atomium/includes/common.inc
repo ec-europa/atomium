@@ -207,9 +207,10 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 }
 
 /**
- * Discover templates based on directory name.
+ * Discover components accross a theme and all its subthemes.
  *
- * It is important that directories have the name of the hook for the moment.
+ * @return \Generator
+ *   An array of data containing information of a component.
  */
 function atomium_find_templates() {
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
