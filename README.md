@@ -11,6 +11,7 @@ sub-theme using preprocess functions or by providing a custom template.
 Table of contents:
 =================
 - [Installation](#installation)
+- [Requirements](#requirements)
 - [Activation](#activation)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -23,6 +24,10 @@ Table of contents:
 
 # Installation
 [Download the theme manually](https://www.drupal.org/docs/7/extending-drupal/installing-themes) or using [Drush](https://drupal.org/project/drush).
+
+# Requirements
+* Drupal 7: latest stable version,
+* PHP: greater or equal to version 5.6.
 
 [Go to top](#table-of-content)
 

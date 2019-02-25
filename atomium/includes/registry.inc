@@ -18,23 +18,20 @@
 function _atomium_theme(&$existing, $type, $theme, $path) {
   $hooks = array();
 
-  foreach (atomium_find_templates() as $theme => $theme_data) {
-    foreach ($theme_data as $component => $component_data) {
-
-      $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component);
-      if (\file_exists($file)) {
-        include_once $file;
-        $function_name = $theme . '_atomium_theme_' . $component;
-        if (\function_exists($function_name)) {
-          $hooks = drupal_array_merge_deep(
-            (array) \call_user_func_array(
-              $function_name,
-              array(&$existing, $type, $theme, $path)),
-            $hooks
-          );
-          foreach ($hooks as &$hook) {
-            $hook += array('path' => $component_data['directory']);
-          }
+  foreach (atomium_discover_templates() as $component_data) {
+    $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component_data['component']);
+    if (\file_exists($file)) {
+      include_once $file;
+      $function_name = $theme . '_atomium_theme_' . $component_data['component'];
+      if (\function_exists($function_name)) {
+        $hooks = drupal_array_merge_deep(
+        (array) \call_user_func_array(
+          $function_name,
+          array(&$existing, $type, $theme, $path)),
+        $hooks
+        );
+        foreach ($hooks as &$hook) {
+          $hook += array('path' => $component_data['directory']);
         }
       }
     }
