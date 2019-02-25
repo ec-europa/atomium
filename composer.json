@@ -20,7 +20,6 @@
     },
     "require-dev": {
         "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6",
         "drupal-composer/preserve-paths": "^0.1",
         "drupal/admin_menu": "*",
         "drupal/composer_autoloader": "^1.0",
@@ -33,8 +32,8 @@
         "drush/drush": "^8",
         "friendsofphp/php-cs-fixer": "^2.10",
         "mikey179/vfsstream": "~1.2",
-        "openeuropa/code-review": "^1.0.0-alpha5",
-        "openeuropa/task-runner": "0.7.1",
+        "openeuropa/code-review": "1.0.0-beta1",
+        "openeuropa/task-runner": "1.0.0-beta4",
         "phpunit/phpunit": "^5",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
@@ -61,11 +60,6 @@
         "grumphp": "./vendor/bin/grumphp run"
     },
     "extra": {
-        "patches": {
-            "drupal/drupal": {
-                "https://www.drupal.org/node/2482549": "https://www.drupal.org/files/issues/ignore_node_module-2482549-27_0.patch"
-            }
-        },
         "installer-paths": {
             "build/": ["type:drupal-core"],
             "build/profiles/{$name}/": ["type:drupal-profile"],

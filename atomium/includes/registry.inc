@@ -18,38 +18,34 @@
 function _atomium_theme(array &$existing, $type, $theme, $path) {
   $hooks = array();
 
-  foreach (atomium_find_templates() as $atomium_based_theme => $theme_data) {
-    foreach ($theme_data as $component => $component_data) {
-      $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component);
-
-      if (!\file_exists($file)) {
-        continue;
-      }
-
-      include_once $file;
-      $function_name = $atomium_based_theme . '_atomium_theme_' . $component;
-
-      if (!\function_exists($function_name)) {
-        continue;
-      }
-
-      $hooks = \array_map(
-        function ($hook) use ($component_data, $component) {
-          $hook += array(
-            'path' => $component_data['directory'],
-            'file' => \sprintf('%s.component.inc', $component),
-          );
-
-          return $hook;
-        },
-        drupal_array_merge_deep(
-          (array) \call_user_func_array(
-            $function_name,
-            array(&$existing, $type, $atomium_based_theme, $path)),
-          $hooks
-        )
-      );
+  foreach (atomium_find_templates() as $component_data) {
+    $file = \sprintf('%s/%s.component.inc', $component_data['directory'], $component_data['component']);
+    if (!\file_exists($file)) {
+      continue;
     }
+    include_once $file;
+    $function_name = $component_data['theme'] . '_atomium_theme_' . $component_data['component'];
+
+    if (!\function_exists($function_name)) {
+      continue;
+    }
+
+    $hooks = \array_map(
+      function ($hook) use ($component_data) {
+        $hook += array(
+          'path' => $component_data['directory'],
+          'file' => \sprintf('%s.component.inc', $component_data['component']),
+        );
+
+        return $hook;
+      },
+      drupal_array_merge_deep(
+        (array) \call_user_func_array(
+          $function_name,
+          array(&$existing, $type, $component_data['theme'], $path)),
+        $hooks
+      )
+    );
   }
 
   return $hooks;
@@ -62,11 +58,9 @@ function atomium_theme_registry_alter(array &$registry) {
   $components = array();
 
   // Prepare an array of files to include.
-  foreach (atomium_find_templates() as $data) {
-    foreach ($data as $component_name => $component_info) {
-      foreach (\glob($component_info['directory'] . '/*.component.inc') as $filename) {
-        $components[$component_name][] = $filename;
-      }
+  foreach (atomium_find_templates() as $component_info) {
+    foreach (\glob($component_info['directory'] . '/*.component.inc') as $filename) {
+      $components[$component_info['component']][] = $filename;
     }
   }
 

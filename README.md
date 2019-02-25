@@ -11,6 +11,7 @@ sub-theme using preprocess functions or by providing a custom template.
 Table of contents:
 =================
 - [Installation](#installation)
+- [Requirements](#requirements)
 - [Activation](#activation)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -28,6 +29,11 @@ Since the branch 7-x-3.x, Atomium requires the module [Registry on steroids](htt
 As it is technically not possible for a theme to depends on a module, please make sure that these modules are enabled.
 
 [Download the theme manually](https://www.drupal.org/docs/7/extending-drupal/installing-themes) or using [Drush](https://drupal.org/project/drush).
+
+# Requirements
+* PHP: greater or equal to version 5.6.
+* Drupal 7: latest stable version,
+* Drupal contrib module: [Registry on steroids](https://drupal.org/project/registryonsteroids)
 
 [Go to top](#table-of-content)
 

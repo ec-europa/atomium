@@ -10,16 +10,17 @@
  */
 function atomium_css_alter(array &$css) {
   // Automatically includes css file from a component if it exists.
-  foreach (atomium_find_templates() as $theme_data) {
-    foreach ($theme_data as $component => $component_data) {
-      $css_file = \sprintf('%s/%s.css', $component_data['directory'], $component);
-      if (\file_exists($css_file)) {
-        $css = drupal_add_css($css_file, array(
-          'group' => CSS_THEME,
-          'every_page' => TRUE,
-        ));
-      }
+  foreach (atomium_find_templates() as $component_data) {
+    $css_file = \sprintf('%s/%s.css', $component_data['directory'], $component_data['component']);
+
+    if (!\file_exists($css_file)) {
+      continue;
     }
+
+    $css = drupal_add_css($css_file, array(
+      'group' => CSS_THEME,
+      'every_page' => TRUE,
+    ));
   }
 
   // Exclude specified CSS files from theme.
