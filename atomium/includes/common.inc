@@ -207,10 +207,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 }
 
 /**
- * Discover components accross a theme and all its subthemes.
- *
- * @return \Generator
- *   An array of data containing information of a component.
+ * Discover components across a theme and all its subthemes.
  */
 function atomium_discover_templates() {
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
@@ -220,30 +217,24 @@ function atomium_discover_templates() {
       continue;
     }
 
-    return _atomium_discover_templates_by_path($path, $theme);
-  }
-}
-
-/**
- * Discover components from a given path.
- *
- * @param string $path
- *   The path to search.
- * @param string $theme
- *   The theme name.
- */
-function _atomium_discover_templates_by_path($path, $theme) {
-  $directories = \array_diff(
-    \scandir($path, SCANDIR_SORT_ASCENDING),
-    array('..', '.')
-  );
-
-  foreach ($directories as $directory) {
-    yield array(
-      'theme' => $theme,
-      'component' => $directory,
-      'directory' => $path . '/' . $directory,
+    $directories = \array_diff(
+      \scandir($path, SCANDIR_SORT_ASCENDING),
+      array('..', '.')
     );
+
+    foreach ($directories as $directory) {
+      $component_directory = $path . DIRECTORY_SEPARATOR . $directory;
+
+      if (!\is_dir($component_directory)) {
+        continue;
+      }
+
+      yield array(
+        'theme' => $theme,
+        'component' => $directory,
+        'directory' => $component_directory,
+      );
+    }
   }
 }
 
