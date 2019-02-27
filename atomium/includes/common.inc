@@ -207,10 +207,7 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
 }
 
 /**
- * Discover components accross a theme and all its subthemes.
- *
- * @return \Generator
- *   An array of data containing information of a component.
+ * Discover components across a theme and all its subthemes.
  */
 function atomium_find_templates() {
   foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
