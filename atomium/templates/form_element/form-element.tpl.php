@@ -6,7 +6,7 @@
  */
 ?>
 <div<?php print $atomium['attributes']['wrapper']; ?>>
-  <?php if ('before' == $element['#title_display'] || 'invisible' == $element['#title_display']): ?>
+  <?php if ($element['#title_display'] === 'before' || $element['#title_display'] === 'invisible'): ?>
     <?php print render($label); ?>
     <?php if ($element['#field_prefix']): ?>
           <span class="field-prefix"><?php print render($element['#field_prefix']); ?></span>
@@ -17,7 +17,7 @@
     <?php endif; ?>
   <?php endif; ?>
 
-  <?php if ('after' == $element['#title_display']): ?>
+  <?php if ($element['#title_display'] === 'after'): ?>
     <?php if ($element['#field_prefix']): ?>
           <span class="field-prefix"><?php print render($element['#field_prefix']); ?></span>
     <?php endif; ?>
@@ -28,7 +28,7 @@
     <?php print render($label); ?>
   <?php endif; ?>
 
-  <?php if ('none' == $element['#title_display'] || 'attribute' == $element['#title_display']): ?>
+  <?php if ($element['#title_display'] === 'none' || $element['#title_display'] === 'attribute'): ?>
     <?php if ($element['#field_prefix']): ?>
           <span class="field-prefix"><?php print render($element['#field_prefix']); ?></span>
     <?php endif; ?>

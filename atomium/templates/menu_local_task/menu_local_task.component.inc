@@ -28,7 +28,7 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   $link = $variables['link'];
   $active = NULL;
 
-  if (!empty($variables['active']) && TRUE == $variables['active']) {
+  if (!empty($variables['active']) && $variables['active'] === TRUE) {
     // Add text to indicate active tab for non-visual users.
     $active = array(
       '#markup' => t('(active tab)'),

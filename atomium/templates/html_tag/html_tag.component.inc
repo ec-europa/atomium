@@ -59,7 +59,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
 
   // Remove media="all" but leave others unaffected.
   if (isset($element['#attributes']['media']) &&
-    'all' === $element['#attributes']['media']) {
+    $element['#attributes']['media'] === 'all') {
     unset($element['#attributes']['media']);
   }
 }

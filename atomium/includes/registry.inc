@@ -85,7 +85,7 @@ function atomium_theme_registry_alter(array &$registry) {
     $info['preprocess functions'] = \array_filter(
       $info['preprocess functions'],
       function ($preprocess) {
-        return 'atomium_preprocess' !== $preprocess;
+        return $preprocess !== 'atomium_preprocess';
       }
     );
 

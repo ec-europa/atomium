@@ -31,7 +31,7 @@ function atomium_preprocess_node(array &$variables, $hook) {
   }
 
   $variables['unpublished'] = (!$variables['status']) ? TRUE : FALSE;
-  if ('0' == $variables['status']) {
+  if ($variables['status'] === '0') {
     $variables['classes_array'][] = 'node__unpublished';
     $variables['theme_hook_suggestions'][] = 'node__unpublished';
   }
@@ -73,7 +73,7 @@ function atomium_preprocess_node(array &$variables, $hook) {
   $variables['classes_array'][] = 'view-mode-' . $variables['view_mode'];
 
   // Add a class to show node is authored by current user.
-  if ($variables['uid'] && $variables['uid'] == $GLOBALS['user']->uid) {
+  if ($variables['uid'] && $variables['uid'] === $GLOBALS['user']->uid) {
     $variables['classes_array'][] = 'node-by-viewer';
   }
   $variables['classes_array'][] = 'node-' . $variables['nid'];
