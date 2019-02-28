@@ -58,6 +58,9 @@
         "grumphp": "./vendor/bin/grumphp run"
     },
     "extra": {
+        "grumphp": {
+            "config-default-path": "vendor/drupol/drupal-conventions/config/drupal7/grumphp.yml"
+        },
         "installer-paths": {
             "build/": ["type:drupal-core"],
             "build/profiles/{$name}/": ["type:drupal-profile"],
