@@ -47,7 +47,7 @@ function atomium_theme(&$existing, $type, $theme, $path) {
 /**
  * Implements hook_menu_alter().
  */
-function atomium_menu_alter(&$items) {
+function atomium_menu_alter(array &$items) {
   $items['atomium-overview'] = array(
     'title' => 'Atomium overview',
     'page callback' => 'theme',
@@ -55,8 +55,6 @@ function atomium_menu_alter(&$items) {
     'access arguments' => array('administer themes'),
     'type' => MENU_CALLBACK,
   );
-
-  return $items;
 }
 
 /**
