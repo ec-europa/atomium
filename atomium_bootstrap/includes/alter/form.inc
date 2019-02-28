@@ -25,7 +25,7 @@ function atomium_bootstrap_form_system_theme_settings_alter(array &$form, array 
   // moved in the global vertical tabs.
   $global_children = element_children($form);
   foreach ($global_children as $child) {
-    if (isset($form[$child]['#type']) && 'fieldset' === $form[$child]['#type'] && !isset($form[$child]['#group'])) {
+    if (isset($form[$child]['#type']) && $form[$child]['#type'] === 'fieldset' && !isset($form[$child]['#group'])) {
       $form[$child]['#group'] = 'global';
     }
   }

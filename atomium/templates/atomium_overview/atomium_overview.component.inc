@@ -109,7 +109,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     }
 
     // Disable the preview if we explicitely set the key disable to TRUE.
-    if (TRUE == $definition['disable']) {
+    if ($definition['disable'] === TRUE) {
       unset($definition['preview']);
     }
 

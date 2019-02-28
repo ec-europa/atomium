@@ -53,7 +53,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
   }
 
   // Add sticky headers, if applicable.
-  if (TRUE === $sticky && \is_array($header) && 0 !== \count($header)) {
+  if ($sticky === TRUE && \is_array($header) && \count($header) !== 0) {
     drupal_add_js('misc/tableheader.js');
     // Add 'sticky-enabled' class to the table to identify it for JS.
     // This is needed to target tables constructed by this function.
@@ -175,7 +175,7 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
       $no_striping = FALSE;
     }
 
-    if (0 === \count($cells)) {
+    if (\count($cells) === 0) {
       continue;
     }
 
@@ -192,7 +192,7 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
     $i = 0;
 
     foreach ($cells as $cellid => $cell) {
-      if (TRUE === $is_header) {
+      if ($is_header === TRUE) {
         $cell = tablesort_header($cell, $header, $ts);
       }
       else {

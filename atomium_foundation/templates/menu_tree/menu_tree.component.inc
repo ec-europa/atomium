@@ -9,13 +9,13 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_menu_tree(array &$variables, $hook) {
-  if (1 != $variables['depth']) {
+  if ($variables['depth'] !== 1) {
     $variables['attributes_array']['class'][] = 'nested';
   }
 
   $variables['attributes_array']['class'][] = 'menu';
 
-  if ('menu_tree__main_menu' == $variables['theme_hook_original']) {
+  if ($variables['theme_hook_original'] === 'menu_tree__main_menu') {
     $variables['attributes_array']['class'][] = 'dropdown';
     $variables['attributes_array'][] = 'data-dropdown-menu';
   }

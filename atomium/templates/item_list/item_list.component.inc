@@ -40,10 +40,10 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     $i = 0;
     foreach ($variables['items'] as $key => $item) {
       $i++;
-      if (1 == $i) {
+      if ($i === 1) {
         $variables['atomium']['attributes'][$key]->append('class', 'first');
       }
-      if ($i == $num_items) {
+      if ($i === $num_items) {
         $variables['atomium']['attributes'][$key]->append('class', 'last');
       }
 

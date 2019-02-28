@@ -14,7 +14,6 @@ function atomium_bartik_preprocess_menu_local_tasks(array &$variables, $hook) {
       'nav',
       'primary',
     );
-
   }
   if (!empty($variables['secondary'])) {
     $variables['secondary']['#attributes']['class'][] = array(

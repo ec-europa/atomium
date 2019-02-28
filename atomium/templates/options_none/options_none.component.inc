@@ -32,7 +32,7 @@ function atomium_preprocess_options_none(array &$variables, $hook) {
       break;
 
     case 'options_select':
-      $output = ('option_none' == $option ? t('- None -') : t('- Select a value -'));
+      $output = ($option === 'option_none' ? t('- None -') : t('- Select a value -'));
 
       break;
   }

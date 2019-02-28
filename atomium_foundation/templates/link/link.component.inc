@@ -9,7 +9,7 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_link(array &$variables, $hook) {
-  if (isset($variables['attributes_array']['id']) && 'edit-cancel' == $variables['attributes_array']['id']) {
+  if (isset($variables['attributes_array']['id']) && $variables['attributes_array']['id'] === 'edit-cancel') {
     $variables['atomium']['attributes']['element']->append('class', 'button');
   }
 }

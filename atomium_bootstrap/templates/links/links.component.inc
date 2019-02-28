@@ -11,7 +11,6 @@
 function atomium_bootstrap_preprocess_links(array &$variables, $hook) {
   if (!\in_array($variables['theme_hook_original'], array('links__node', 'links__comment'), TRUE)) {
     return;
-
   }
 
   // @todo: fix this.
