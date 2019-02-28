@@ -28,7 +28,7 @@
         "drush/drush": "^8.1.18",
         "friendsofphp/php-cs-fixer": "^2.14.1",
         "mikey179/vfsstream": "~1.6",
-        "openeuropa/code-review": "1.0.0-beta1",
+        "drupol/drupal-conventions": "^1.4.1",
         "openeuropa/task-runner": "1.0.0-beta4",
         "phpunit/phpunit": "^5.7",
         "webflo/drupal-finder": "^1.1",
@@ -56,6 +56,9 @@
         "grumphp": "./vendor/bin/grumphp run"
     },
     "extra": {
+        "grumphp": {
+            "config-default-path": "vendor/drupol/drupal-conventions/config/drupal7/grumphp.yml"
+        },
         "installer-paths": {
             "build/": ["type:drupal-core"],
             "build/profiles/{$name}/": ["type:drupal-profile"],
