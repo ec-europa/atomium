@@ -47,8 +47,6 @@ function atomium_menu_alter(array &$items) {
     'access arguments' => array('administer themes'),
     'type' => MENU_CALLBACK,
   );
-
-  return $items;
 }
 
 /**
