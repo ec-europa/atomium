@@ -223,10 +223,16 @@ function atomium_find_templates() {
     );
 
     foreach ($directories as $directory) {
+      $component_directory = $path . DIRECTORY_SEPARATOR . $directory;
+
+      if (!\is_dir($component_directory)) {
+        continue;
+      }
+
       yield array(
         'theme' => $theme,
         'component' => $directory,
-        'directory' => $path . '/' . $directory,
+        'directory' => $component_directory,
       );
     }
   }
