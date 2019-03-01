@@ -22,7 +22,10 @@ function atomium_atomium_theme_system_admin_index() {
  */
 function atomium_preprocess_system_admin_index(array &$variables, $hook) {
   $variables['toggle_link'] = array(
-    '#theme' => _atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
+    '#theme' => _atomium_extend_theme_hook(
+      'system_compact_link',
+      $variables['theme_hook_original']
+    ),
   );
 
   $container = array('left' => array(), 'right' => array());
@@ -33,27 +36,31 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
   foreach ($variables['menu_items'] as $module => $block) {
     list($description, $items) = $block;
 
-    // Output links.
-    if (\count($items)) {
-      $block = array();
-      $block['title'] = $module;
-      $block['content'] = array(
-        '#theme' => _atomium_extend_theme_hook('admin_block_content', $variables['theme_hook_original']),
-        '#content' => $items,
-      );
-      $block['description'] = t('@description', array('@description' => $description));
-      $block['show'] = TRUE;
-
-      if (!isset($block['position'])) {
-        // Perform automatic striping.
-        $block['position'] = $position;
-        $position = $flip[$position];
-      }
-      $container[$block['position']][] = array(
-        '#theme' => _atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
-        '#block' => $block,
-      );
+    if (0 === \count($items)) {
+      continue;
     }
+
+    $position = $flip[$position];
+
+    $container[$flip[$position]][] = array(
+      '#theme' => _atomium_extend_theme_hook(
+        'admin_block',
+        $variables['theme_hook_original']
+      ),
+      '#block' => array(
+        'title' => $module,
+        'content' => array(
+          '#theme' => _atomium_extend_theme_hook(
+            'admin_block_content',
+            $variables['theme_hook_original']
+          ),
+          '#content' => $items,
+        ),
+        'description' => t('@description', array('@description' => $description)),
+        'show' => TRUE,
+        'position' => $flip[$position],
+      ),
+    );
   }
 
   $variables['container'] = $container;
