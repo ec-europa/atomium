@@ -31,66 +31,47 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
 
   $container = array('left' => array(), 'right' => array());
   $flip = array('left' => 'right', 'right' => 'left');
-  $position = 'left';
+  $position = 'right';
 
   // Iterate over all modules.
   foreach ($variables['menu_items'] as $module => $block) {
     list($description, $items) = $block;
 
     // Output links.
-    if (\count($items)) {
-      $block = array();
-      $block['title'] = $module;
-
-      $block_content = array(
-        '#theme' => 'admin_block_content',
-        '#content' => $items,
-      );
-      _atomium_extend_theme_property(
-        $block_content,
-        array($variables['theme_hook_original']));
-      $block['content'] = $block_content;
-
-      $block['description'] = t('@description', array('@description' => $description));
-      $block['show'] = TRUE;
-
-      if (!isset($block['position'])) {
-        // Perform automatic striping.
-        $block['position'] = $position;
-        $position = $flip[$position];
-      }
-
-      $block = array(
-        '#theme' => 'admin_block',
-        '#block' => $block,
-      );
-      _atomium_extend_theme_property(
-        $block,
-        array($variables['theme_hook_original']));
-      $container[$block['position']][] = $block;
+    if (0 === \count($items)) {
+      continue;
     }
 
-    $position = $flip[$position];
-
-    $container[$flip[$position]][] = array(
-      '#theme' => _atomium_extend_theme_hook(
-        'admin_block',
-        $variables['theme_hook_original']
-      ),
-      '#block' => array(
-        'title' => $module,
-        'content' => array(
-          '#theme' => _atomium_extend_theme_hook(
-            'admin_block_content',
-            $variables['theme_hook_original']
-          ),
-          '#content' => $items,
-        ),
-        'description' => t('@description', array('@description' => $description)),
-        'show' => TRUE,
-        'position' => $flip[$position],
-      ),
+    $block_content = array(
+      '#theme' => 'admin_block_content',
+      '#content' => $items,
     );
+    _atomium_extend_theme_property(
+      $block_content,
+      array($variables['theme_hook_original']));
+
+    $position = $flip[$position];
+    $block = array(
+      'title' => $module,
+      'content' => $block_content,
+      'description' => t(
+        '@description',
+        array('@description' => $description)
+      ),
+      'show' => TRUE,
+      'position' => $flip[$position],
+    );
+
+    $block = array(
+      '#theme' => 'admin_block',
+      '#block' => $block,
+    );
+
+    _atomium_extend_theme_property(
+      $block,
+      array($variables['theme_hook_original']));
+
+    $container[$position][] = $block;
   }
 
   $variables['container'] = $container;
