@@ -1,41 +1,66 @@
 workspace:
-  base: /var/www
-  path: html
+  base: /test
+  path: atomium
 
 services:
   web:
     image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     environment:
-    - DOCUMENT_ROOT=/var/www/html
+    - DOCUMENT_ROOT=/test/atomium
   mysql:
     image: percona/percona-server:5.6
     environment:
     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
 
 pipeline:
-  composer-install:
+  composer-install-lowest:
     group: prepare
     image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     volumes:
     - /cache:/cache
     commands:
-    - chown www-data:www-data /var/www -R
-    - su -s /bin/bash -c "composer install --ansi --no-suggest --no-progress" www-data
+      # Perform a composer install to work around an issue where an update
+      # without a lock file present affects the resolving of dependencies.
+      # Todo: Remove the `composer install` when the composer bug is fixed.
+      # Ref. https://github.com/composer/composer/issues/7542
+      # Ref. https://webgate.ec.europa.eu/CITnet/jira/browse/OPENEUROPA-1234
+      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/20-xdebug.ini
+      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/90-blackfire.ini
+      - composer install --ansi --no-suggest --no-progress
+      - composer update --prefer-lowest --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
+
+  composer-install-highest:
+    group: prepare
+    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    volumes:
+      - /cache:/cache
+    commands:
+      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/20-xdebug.ini
+      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/90-blackfire.ini
+      - composer install --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: highest
 
   site-install:
     image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     commands:
-    - chown www-data:www-data /var/www -R
-    - su -s /bin/bash -c "./vendor/bin/run drupal:site-install" www-data
+    - ./vendor/bin/run drupal:site-install
 
   grumphp:
     group: test
     image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     commands:
-    - chown www-data:www-data /var/www -R
-    - su -s /bin/bash -c "./vendor/bin/grumphp run" www-data
+    - ./vendor/bin/grumphp run --ansi
 
 matrix:
   PHP_VERSION:
   - 5.6
   - 7.1
+  - 7.2
+  COMPOSER_BOUNDARY:
+  - lowest
+  - highest
