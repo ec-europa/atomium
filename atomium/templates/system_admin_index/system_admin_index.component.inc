@@ -38,7 +38,7 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
     list($description, $items) = $block;
 
     // Output links.
-    if (0 === \count($items)) {
+    if (\count($items) === 0) {
       continue;
     }
 

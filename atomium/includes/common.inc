@@ -435,7 +435,7 @@ function atomium_get_component_definitions() {
     }
 
     // Disable the preview if we explicitely set the key disable to TRUE.
-    if (TRUE == $definition['disable']) {
+    if ($definition['disable'] === TRUE) {
       unset($definition['preview']);
     }
 
@@ -502,7 +502,7 @@ function atomium_menu_get_active_breadcrumb() {
 
     // Don't show a link to the current page in the breadcrumb trail.
     $end = \end($active_trail);
-    if ($item['href'] == $end['href']) {
+    if ($item['href'] === $end['href']) {
       \array_pop($active_trail);
     }
 
@@ -519,7 +519,7 @@ function atomium_menu_get_active_breadcrumb() {
     // (commonly MENU_DEFAULT_LOCAL_TASK). In order to also hide the parent link
     // itself, we always remove the last link in the trail, if the current
     // router item links to its parent.
-    if (($item['type'] & MENU_LINKS_TO_PARENT) == MENU_LINKS_TO_PARENT) {
+    if (($item['type'] & MENU_LINKS_TO_PARENT) === MENU_LINKS_TO_PARENT) {
       \array_pop($active_trail);
     }
 
@@ -569,7 +569,7 @@ function atomium_recursive_foreach(array &$variables, callable $callback) {
         '#atomium_recursive' => $variables['#atomium_recursive'],
       );
 
-      if (TRUE === $value['#atomium_recursive']) {
+      if ($value['#atomium_recursive'] === TRUE) {
         atomium_recursive_foreach($value, $callback);
       }
 

@@ -25,7 +25,7 @@ function atomium_preprocess_comment(array &$variables, $hook) {
     $variables['classes_array'][] = 'new';
   }
 
-  if ('comment-unpublished' === $variables['status']) {
+  if ($variables['status'] === 'comment-unpublished') {
     $variables['classes_array'][] = 'unpublished';
   }
 

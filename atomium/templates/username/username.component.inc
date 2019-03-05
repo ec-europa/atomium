@@ -40,7 +40,6 @@ function atomium_preprocess_username(array &$variables, $hook) {
         $variables['theme_hook_original'],
       )
     );
-
   }
   else {
     $username = array(

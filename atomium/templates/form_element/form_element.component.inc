@@ -40,7 +40,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   $attributes['class'] = array();
   // Date selects need the form-item for the show/hide end date.
   if (isset($element['#type'])) {
-    if ('date_select' === $element['#type'] || 'date_text' === $element['#type'] || 'date_popup' === $element['#type']) {
+    if ($element['#type'] === 'date_select' || $element['#type'] === 'date_text' || $element['#type'] === 'date_popup') {
       $attributes['class'] = array('form-item');
     }
   }

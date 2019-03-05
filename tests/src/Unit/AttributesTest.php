@@ -80,14 +80,4 @@ class AttributesTest extends AbstractUnitTest {
     self::assertEquals(TRUE, $attributes->contains('id', 'tomi'));
   }
 
-  /**
-   * Methods provider.
-   *
-   * @return array
-   *   Test data.
-   */
-  public function methodsProvider() {
-    return Yaml::parse(\file_get_contents(__DIR__ . '/../../fixtures/attributes/attributes.yml'));
-  }
-
 }

@@ -74,14 +74,14 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
     // Add first, last and active classes to the list of links to help out
     // themers.
-    if (1 == $i) {
+    if ($i === 1) {
       $link['attributes_array']['class'][] = 'first';
     }
-    if ($i == $num_links) {
+    if ($i === $num_links) {
       $link['attributes_array']['class'][] = 'last';
     }
-    if (isset($link['href']) && ($link['href'] === $_GET['q'] || ('<front>' === $link['href'] && drupal_is_front_page()))
-      && (empty($link['language']) || $link['language']->language == $language_url->language)) {
+    if (isset($link['href']) && ($link['href'] === $_GET['q'] || ($link['href'] === '<front>' && drupal_is_front_page()))
+      && (empty($link['language']) || $link['language']->language === $language_url->language)) {
       $link['attributes_array']['class'][] = 'active';
     }
 

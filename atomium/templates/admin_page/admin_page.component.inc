@@ -34,7 +34,7 @@ function atomium_preprocess_admin_page(array &$variables, $hook) {
   $container = array();
 
   foreach ($variables['blocks'] as $block) {
-    if (0 == $block['has_children']) {
+    if ($block['has_children'] === 0) {
       continue;
     }
     if (empty($block['position'])) {

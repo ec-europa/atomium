@@ -25,7 +25,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
 
   // Custom 404.
   $headers = drupal_get_http_header();
-  if (isset($headers['status']) && '404 Not Found' == $headers['status']) {
+  if (isset($headers['status']) && $headers['status'] === '404 Not Found') {
     $variables['theme_hook_suggestions'][] = 'page__404';
   }
 
@@ -39,7 +39,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
       $variables['page']['content']['system_main']['#theme_wrappers'] = \array_filter(
         $variables['page']['content']['system_main']['#theme_wrappers'],
         function ($theme_hook) {
-          if ('block' === atomium_get_base_hook($theme_hook)) {
+          if (atomium_get_base_hook($theme_hook) === 'block') {
             return FALSE;
           }
 

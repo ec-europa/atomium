@@ -33,59 +33,15 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return '';
     }
 
-    foreach ($attributes as $name => $value) {
-      if (\is_numeric($name)) {
-        $this->setAttribute($value, TRUE, $explode);
+    foreach ($attributes as $attribute => &$data) {
+      if (\is_numeric($attribute) || \is_bool($data)) {
+        $data = \sprintf('%s', \trim(check_plain($attribute)));
       }
       else {
-        $this->setAttribute($name, $value, $explode);
-      }
-    }
-
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function offsetGet($name) {
-    $return = $this->setStorage(
-      $this->getStorage() + array($name => array())
-    )->toArray();
-
-    return $return[$name];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function offsetSet($name, $value = FALSE) {
-    $storage = $this->getStorage() + array($name => array());
-
-    $storage[$name] = $value;
-
-    $this->setStorage($storage);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function offsetUnset($name) {
-    $storage = $this->getStorage();
-
-    unset($storage[$name]);
-
-    $this->setStorage($storage);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function offsetExists($name) {
-    $storage = $this->toArray();
-
-    return isset($storage[$name]);
-  }
+        $data = \array_map(function ($item) use ($attribute) {
+          if ($attribute === 'placeholder') {
+            $item = \strip_tags($item);
+          }
 
           /*
            * @todo: Disabled for now, it's causing issue in
@@ -96,20 +52,18 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
            * }
            */
 
-    if (TRUE === $explode && !\is_bool($value)) {
-      $value = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
+          return \trim(check_plain($item));
+        }, (array) $data);
 
         // By default, sort the value of the class attribute.
         if ($attribute === 'class') {
           \asort($data);
         }
 
-      foreach ($value as $item) {
-        $data = \array_merge($data, \explode(' ', $item));
+        // If the attribute is numeric, just display the value.
+        // Ex: 0="data-closable" will be displayed: data-closable.
+        $data = \sprintf('%s="%s"', $attribute, \implode(' ', $data));
       }
-
-      $data = \array_values(\array_filter($data, 'strlen'));
-      $data = \array_combine($data, $data);
     }
 
     // Sort the attributes.
@@ -172,15 +126,14 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       return FALSE;
     }
 
-    if (\is_bool($value)) {
-      unset($attributes[$key]);
+    if (empty($storage[$key])) {
+      return FALSE;
     }
-    else {
-      if (!\is_array($value)) {
-        $value = \explode(' ', $value);
-      }
 
-      $attributes[$key] = \array_values(\array_diff($attributes[$key], $value));
+    $candidates = $storage[$key];
+
+    if (!\is_array($candidates)) {
+      $candidates = array($candidates);
     }
 
     foreach ($candidates as $item) {
@@ -244,14 +197,23 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     return new \ArrayIterator($this->toArray());
   }
 
-    if (isset($attributes[$key])) {
-      $attributes[$key] = \array_replace($attributes[$key],
-        \array_fill_keys(
-          \array_keys($attributes[$key], $value, TRUE),
-          $replacement
-        )
-      );
-    }
+  /**
+   * Returns the whole array.
+   *
+   * @return array
+   *   The storage.
+   */
+  public function getStorage() {
+    // Flatten the array.
+    \array_walk($this->storage, function (&$member) {
+      // Take care of loners attributes.
+      if (!\is_bool($member)) {
+        $value_iterator = new \RecursiveIteratorIterator(
+          new \RecursiveArrayIterator((array) $member)
+        );
+        $member = \array_values(\array_unique(\iterator_to_array($value_iterator)));
+      }
+    });
 
     return $this->storage;
   }
@@ -269,7 +231,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       $data = $data->toArray();
     }
 
-    if (!\is_array($data) || NULL === $data) {
+    if (!\is_array($data) || $data === NULL) {
       // @todo: error handling.
       return $this;
     }
@@ -320,11 +282,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     unset($storage[$name]);
 
-    return $storage[$key] !== \array_filter(
-      $storage[$key],
-      function ($item) use ($value) {
-        return $item !== $value;
-      });
+    $this->setStorage($storage);
   }
 
   /**
@@ -352,17 +310,11 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
         $value = \explode(' ', $value);
       }
 
-    $candidates = $storage[$key];
-
-    if (!\is_array($candidates)) {
-      $candidates = array($candidates);
+      $attributes[$key] = \array_values(\array_diff($attributes[$key], $value));
     }
 
-    foreach ($candidates as $item) {
-      if (FALSE !== \stripos($item, $value)) {
-        return TRUE;
-      }
-    }
+    return $this->setStorage($attributes);
+  }
 
   /**
    * Delete an attribute.
@@ -402,15 +354,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
       );
     }
 
-    foreach ($attributes as $attribute => &$data) {
-      if (\is_numeric($attribute) || \is_bool($data)) {
-        $data = \sprintf('%s', \trim(check_plain($attribute)));
-      }
-      else {
-        $data = \array_map(function ($item) use ($attribute) {
-          if ('placeholder' === $attribute) {
-            $item = \strip_tags($item);
-          }
+    return $this->setStorage($attributes);
+  }
 
   /**
    * Sets values for an attribute key.
@@ -427,55 +372,43 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   public function setAttribute($attribute, $value = FALSE, $explode = TRUE) {
     $data = $value;
 
-          return \trim(check_plain($item));
-        }, (array) $data);
+    if ($explode === TRUE && !\is_bool($value)) {
+      $value = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
-        // By default, sort the value of the class attribute.
-        if ('class' === $attribute) {
-          \asort($data);
-        }
+      $data = array();
 
-        // If the attribute is numeric, just display the value.
-        // Ex: 0="data-closable" will be displayed: data-closable.
-        $data = \sprintf('%s="%s"', $attribute, \implode(' ', $data));
+      foreach ($value as $item) {
+        $data = \array_merge($data, \explode(' ', $item));
       }
 
       $data = \array_values(\array_filter($data, 'strlen'));
       $data = \array_combine($data, $data);
     }
 
-    // Sort the attributes.
-    \asort($attributes);
+    $this->offsetSet($attribute, $data);
 
-    return $attributes ? ' ' . \implode(' ', $attributes) : '';
+    return $this;
   }
 
   /**
    * Set attributes.
    *
-   * @return array
-   *   An associative array of attributes.
-   */
-  public function toArray() {
-    return \array_map(function ($value) {
-      return \array_filter((array) $value);
-    }, $this->getStorage());
-  }
-
-  /**
-   * Returns the whole array.
+   * @param array|Attributes $attributes
+   *   The attributes.
+   * @param bool $explode
+   *   Should we explode attributes value ?
    *
    * @return $this
    */
-  public function getStorage() {
-    // Flatten the array.
-    \array_walk($this->storage, function (&$member) {
-      // Take care of loners attributes.
-      if (!\is_bool($member)) {
-        $value_iterator = new \RecursiveIteratorIterator(
-          new \RecursiveArrayIterator((array) $member)
-        );
-        $member = \array_values(\array_unique(\iterator_to_array($value_iterator)));
+  public function setAttributes($attributes = array(), $explode = TRUE) {
+    if ($attributes instanceof Attributes) {
+      $this->storage = $attributes->toArray();
+      $attributes = array();
+    }
+
+    foreach ($attributes as $name => $value) {
+      if (\is_numeric($name)) {
+        $this->setAttribute($value, TRUE, $explode);
       }
       else {
         $this->setAttribute($name, $value, $explode);
