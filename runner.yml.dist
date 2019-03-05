@@ -28,7 +28,14 @@ drupal:
       - ./vendor/bin/drush --root=$(pwd)/build cc all
   drush:
     options:
-      ignored-directories: "${drupal.root}"
+      ignored-directories:
+        - vendor
+        - ${drupal.root}
+        - node_modules
+        - bower_components
+        - build
+        - sites/all/themes/atomium/build
+        - build/sites/all/themes/atomium/build
       uri: "${drupal.base_url}"
 
 commands:
