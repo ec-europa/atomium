@@ -4,8 +4,6 @@
     "type": "drupal-theme",
     "license": "GPL-2.0",
     "homepage": "https://drupal.org/project/atomium",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "authors": [
         {
             "name": "Pol Dellaiera",
@@ -19,21 +17,21 @@
         "source": "https://drupal.org/project/atomium"
     },
     "require-dev": {
-        "composer/installers": "^1.2",
+        "composer/installers": "^1.6",
         "drupal-composer/preserve-paths": "^0.1",
-        "drupal/admin_menu": "*",
-        "drupal/composer_autoloader": "^1.0",
-        "drupal/devel": "*",
-        "drupal/drupal": "~7.0",
+        "drupal/admin_menu": "3.0.0-rc6",
+        "drupal/composer_autoloader": "^1",
+        "drupal/devel": "^1",
+        "drupal/drupal": "^7.64",
         "drupal/drupal-extension": "~3.4",
-        "drupal/realistic_dummy_content": "*",
-        "drush/drush": "^8",
-        "friendsofphp/php-cs-fixer": "^2.10",
-        "mikey179/vfsstream": "~1.2",
+        "drupal/realistic_dummy_content": "^2",
+        "drush/drush": "^8.1.18",
+        "friendsofphp/php-cs-fixer": "^2.14.1",
+        "mikey179/vfsstream": "~1.6",
         "openeuropa/code-review": "1.0.0-beta1",
         "openeuropa/task-runner": "1.0.0-beta4",
-        "phpunit/phpunit": "^5",
-        "webflo/drupal-finder": "^1.0.0",
+        "phpunit/phpunit": "^5.7",
+        "webflo/drupal-finder": "^1.1",
         "webmozart/path-util": "^2.3"
     },
     "autoload": {
