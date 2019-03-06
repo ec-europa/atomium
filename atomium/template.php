@@ -21,8 +21,6 @@
  * Include common functions used through out theme.
  */
 include_once __DIR__ . '/includes/common.inc';
-
-include_once __DIR__ . '/includes/classes/AttributesContainer.php';
 include_once __DIR__ . '/includes/config.inc';
 include_once __DIR__ . '/includes/preprocess.inc';
 
