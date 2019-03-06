@@ -6,6 +6,9 @@
  */
 
 use drupol\htmltag\Attributes\AttributesFactory;
+use drupol\htmltag\Attribute\AttributeFactory;
+use Drupal\atomium\AtomiumClassAttribute;
+use Drupal\atomium\AtomiumPlaceholderAttribute;
 
 /**
  * Includes a theme file.
@@ -825,5 +828,8 @@ function _atomium_extend_value_with_suggestions(&$hook, array $suggestions_parts
  *   An attributes object.
  */
 function atomium_get_attributes(array $values) {
+  AttributeFactory::$registry['class'] = AtomiumClassAttribute::class;
+  AttributeFactory::$registry['placeholder'] = AtomiumPlaceholderAttribute::class;
+
   return AttributesFactory::build($values);
 }
