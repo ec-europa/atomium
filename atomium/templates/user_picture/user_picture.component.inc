@@ -49,7 +49,7 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       $filepath = variable_get('user_picture_default', '');
     }
 
-    if (NULL === $filepath) {
+    if ($filepath === NULL) {
       $alt = t("@user's picture", array('@user' => format_username($account)));
 
       $variables[$variables['base_hook']] = array(

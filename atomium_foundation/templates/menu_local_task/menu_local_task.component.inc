@@ -14,7 +14,7 @@ function atomium_foundation_preprocess_menu_local_task(array &$variables, $hook)
       'small',
       'button',
     );
-    if (TRUE == $variables['active']) {
+    if ($variables['active'] === TRUE) {
       $variables[$hook][$hook]['#options']['attributes']['class'][] = 'primary';
     }
     else {

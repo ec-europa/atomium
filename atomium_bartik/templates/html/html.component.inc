@@ -70,6 +70,5 @@ function atomium_bartik_process_html(array &$variables, $hook) {
   // Hook into color.module.
   if (module_exists('color')) {
     _color_html_alter($variables);
-
   }
 }

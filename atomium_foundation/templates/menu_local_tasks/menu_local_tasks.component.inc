@@ -12,7 +12,6 @@ function atomium_foundation_preprocess_menu_local_tasks(array &$variables, $hook
   if (!empty($variables['primary'])) {
     if (isset($variables['primary']['#type'])) {
       $variables['primary']['#type'] = '';
-
     }
     $variables['primary']['#wrapper_attributes_array']['class'][] = array(
       'menu',

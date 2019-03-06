@@ -23,10 +23,9 @@ function atomium_atomium_theme_comment() {
 function atomium_preprocess_comment(array &$variables, $hook) {
   if (isset($variables['elements']['#comment']->new) && $variables['elements']['#comment']->new) {
     $variables['classes_array'][] = 'new';
-
   }
 
-  if ('comment-unpublished' == $variables['status']) {
+  if ($variables['status'] === 'comment-unpublished') {
     $variables['classes_array'][] = 'unpublished';
   }
 

@@ -21,16 +21,6 @@ class AttributesContainerTest extends AbstractUnitTest {
   }
 
   /**
-   * Test AttributesContainer class.
-   */
-  public function testSetAttributes() {
-    $attributesContainer = new AttributesContainer();
-    $attributesContainer['attributes'] = array('class', 'example');
-
-    self::assertInstanceOf('drupal\atomium\Attributes', $attributesContainer['attributes']);
-  }
-
-  /**
    * Test offsetGet().
    */
   public function testOffsetGet() {
@@ -53,6 +43,16 @@ class AttributesContainerTest extends AbstractUnitTest {
 
     self::assertInstanceOf('drupal\atomium\Attributes', $container['foo']);
     self::assertEmpty($container['foo']->getStorage());
+  }
+
+  /**
+   * Test AttributesContainer class.
+   */
+  public function testSetAttributes() {
+    $attributesContainer = new AttributesContainer();
+    $attributesContainer['attributes'] = array('class', 'example');
+
+    self::assertInstanceOf('drupal\atomium\Attributes', $attributesContainer['attributes']);
   }
 
   /**

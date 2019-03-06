@@ -13,7 +13,6 @@ function atomium_bootstrap_preprocess_menu_local_task(array &$variables, $hook) 
     $variables['menu_link']['#options']['attributes_array']['class'] = array(
       'btn',
     );
-
   }
 
   if ($variables['active']) {

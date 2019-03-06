@@ -41,12 +41,12 @@ function atomium_preprocess_link(array &$variables, $hook) {
   $path = url($variables['path'], $variables['options']);
 
   // Append active class.
-  if (($path == '/' . $_GET['q'] || ($path == url('<front>', $variables['options']) && drupal_is_front_page())) &&
-    (empty($variables['options']['language']) || $variables['options']['language']->language == $language_url->language)) {
+  if (($path === '/' . $_GET['q'] || ($path === url('<front>', $variables['options']) && drupal_is_front_page())) &&
+    (empty($variables['options']['language']) || $variables['options']['language']->language === $language_url->language)) {
     $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 
-  if ((0 === \strpos($variables['path'], '#')) || (0 === \strpos($variables['path'], 'javascript:'))) {
+  if ((\strpos($variables['path'], '#') === 0) || (\strpos($variables['path'], 'javascript:') === 0)) {
     $path = $variables['path'];
   }
 

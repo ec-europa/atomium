@@ -9,7 +9,7 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_foundation_preprocess_region(array &$variables, $hook) {
-  if (FALSE !== \strpos($variables['elements']['#region'], 'sidebar')) {
+  if (\strpos($variables['elements']['#region'], 'sidebar') !== FALSE) {
     $variables['atomium']['attributes']['wrapper']->append('class', array('large-3', 'columns'));
   }
 }

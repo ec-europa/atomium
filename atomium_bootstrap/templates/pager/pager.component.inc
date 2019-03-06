@@ -16,7 +16,6 @@ function atomium_bootstrap_preprocess_pager(array &$variables, $hook) {
   $variables[$hook][$hook]['#tag'] = 'nav';
 
   if (isset($variables[$hook][$hook]['#items'])) {
-
     if ($variables[$hook][$hook]['#items']['pager_current']['#markup']) {
       $markup = $variables[$hook][$hook]['#items']['pager_current']['#markup'];
       $variables[$hook][$hook]['#items']['pager_current'] = array(

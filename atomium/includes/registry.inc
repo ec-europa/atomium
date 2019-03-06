@@ -55,7 +55,7 @@ function atomium_theme_registry_alter(array &$registry) {
   $trace = \debug_backtrace(0, 3);
 
   if (!isset($trace[2]['function'], $trace[2]['args'][0])
-    || '_theme_build_registry' !== $trace[2]['function']) {
+    || $trace[2]['function'] !== '_theme_build_registry') {
     watchdog(
       'atomium',
       'hook_theme_registry_alter() was called from an unexpected place. We cannot determine which theme this registry belongs to. Atomium functionality might not work.',
@@ -139,7 +139,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
   foreach ($cache as $hook => &$info) {
     // Make sure the includes member of each hook is completed with its
     // parent hook.
-    list($original_hook,) = \explode('__', $hook);
+    list($original_hook, $rest) = \explode('__', $hook);
     $info += array('includes' => array());
     $cache[$original_hook] += array('includes' => array());
     $info['includes'] = \array_unique(
@@ -163,7 +163,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
     $info['preprocess functions'] = \array_filter(
       $info['preprocess functions'],
       function ($preprocess) {
-        return 'atomium_preprocess' !== $preprocess;
+        return $preprocess !== 'atomium_preprocess';
       }
     );
 
@@ -198,7 +198,7 @@ function _atomium_theme_find_processors(array $grouped_functions, array &$cache,
     $prefix = $theme . '_' . $phase;
 
     // Grep only the functions which are within the prefix group.
-    list($first_prefix,) = \explode('_', $prefix, 2);
+    list($first_prefix, $rest) = \explode('_', $prefix, 2);
     if (isset($grouped_functions[$first_prefix]) && ($matches = \preg_grep(
         '/^' . $prefix . '_' . $pattern . '/',
         $grouped_functions[$first_prefix]
@@ -270,7 +270,7 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
     // attributes handling would fail.
     if (isset($info['function'])) {
       $info[$phase_key] = \array_filter($info[$phase_key], function ($function) use ($phase, $hook) {
-        return FALSE !== \strpos($function, $phase . '_' . $hook);
+        return \strpos($function, $phase . '_' . $hook) !== FALSE;
       });
     }
   }
@@ -340,7 +340,7 @@ function drupal_group_functions_by_prefix() {
 
   // Splitting user defined functions into groups by the first prefix.
   foreach ($functions['user'] as $function) {
-    list($first_prefix,) = \explode('_', $function, 2);
+    list($first_prefix, $rest) = \explode('_', $function, 2);
     $grouped_functions[$first_prefix][] = $function;
   }
 
@@ -421,7 +421,7 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
       // Find theme function overrides.
       foreach (drupal_system_listing($regexp, $path . '/templates', 'name', 0) as $name => $file) {
         // Strip off the extension.
-        if (FALSE !== ($pos = \strpos($name, '.'))) {
+        if (($pos = \strpos($name, '.')) !== FALSE) {
           $name = drupal_substr($name, 0, $pos);
         }
 
@@ -521,7 +521,7 @@ function _atomium_registry_sort_phase_functions(array &$functions, $hook, $phase
     // exists in the $functions array.
     $function = $theme->name . '_' . $phase . '_' . $hook;
     $key = \array_search($function, $functions, TRUE);
-    if (FALSE !== $key) {
+    if ($key !== FALSE) {
       // Save the theme function to be added later, but sorted.
       $theme_functions[$theme->name][] = $function;
 

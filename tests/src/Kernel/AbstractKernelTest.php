@@ -10,4 +10,5 @@ use Drupal\Tests\atomium\AbstractTest;
  * @package Drupal\Tests\atomium\Kernel
  */
 abstract class AbstractKernelTest extends AbstractTest {
+
 }

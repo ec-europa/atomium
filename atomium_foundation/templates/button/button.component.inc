@@ -14,7 +14,7 @@ function atomium_foundation_preprocess_button(array &$variables, $hook) {
   $variables['atomium']['attributes']['element']->append('class', 'button');
 
   if (isset($variables['element']['#id']) && $id = $variables['element']['#id']) {
-    list($id,) = \explode('--', $id);
+    list($id, $rest) = \explode('--', $id);
     switch ($id) {
       case 'edit-submit':
       case 'edit-update':
@@ -34,12 +34,12 @@ function atomium_foundation_preprocess_button(array &$variables, $hook) {
     }
   }
 
-  if (isset($variables['element']['#value']) && t('Delete') == $variables['element']['#value']) {
+  if (isset($variables['element']['#value']) && t('Delete') === $variables['element']['#value']) {
     $variables['atomium']['attributes']['element']->remove('class', array('primary', 'secondary'))->append('class', 'alert');
   }
 
   // The close-button is only used in status_messages.
-  if (isset($variables['element']['#name']) && 'close-button' == $variables['element']['#name']) {
+  if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'close-button') {
     $variables['atomium']['attributes']['element']
       ->remove(
     'class', array('primary', 'alert', 'secondary', 'button')

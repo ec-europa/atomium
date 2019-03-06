@@ -36,7 +36,7 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
   foreach ($variables['menu_items'] as $module => $block) {
     list($description, $items) = $block;
 
-    if (0 === \count($items)) {
+    if (\count($items) === 0) {
       continue;
     }
 
