@@ -41,8 +41,8 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
   $heading = $variables['heading'];
 
-  $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
-  $variables['atomium']['attributes']['wrapper']->append('class', 'links');
+  $variables['atomium']['attributes']['list']->merge($variables['attributes']);
+  $variables['atomium']['attributes']['list']->append('class', 'links');
 
   // Treat the heading first if it is present to prepend it to the
   // list of links.
@@ -145,9 +145,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
     '#items' => \array_filter($new_links),
     '#type' => 'ul',
     '#atomium' => array(
-      'attributes' => array(
-        'list' => $variables['atomium']['attributes']['wrapper'],
-      ),
+      'attributes' => $variables['atomium']['attributes'],
     ),
   );
 

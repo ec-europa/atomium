@@ -32,7 +32,7 @@ function atomium_preprocess_container(array &$variables, $hook) {
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
     // Assign an html ID.
-    $variables['atomium']['attributes']['wrapper']->setAttribute('id', $element['#id']);
+    $variables['atomium']['attributes']['wrapper']->set('id', $element['#id']);
   }
   $variables['container'] = $element['#children'];
 

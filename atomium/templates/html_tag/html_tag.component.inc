@@ -43,7 +43,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
 
   if (!empty($element['#atomium']['attributes'])) {
     foreach ($element['#atomium']['attributes'] as $attribute => $data) {
-      $variables['atomium']['attributes'][$attribute]->setAttributes($data);
+      $variables['atomium']['attributes'][$attribute]->import($data);
     }
   }
 

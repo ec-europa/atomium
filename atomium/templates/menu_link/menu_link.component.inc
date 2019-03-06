@@ -39,7 +39,7 @@ function atomium_preprocess_menu_link(array &$variables, $hook) {
     '#theme' => 'link',
     '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
     '#path' => $element['#href'],
-    '#options' => $element['#localized_options'] + array('attributes' => array('class' => array())),
+    '#options' => $element['#localized_options'] + array('attributes' => array()),
   );
 
   _atomium_extend_theme_property(

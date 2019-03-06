@@ -24,18 +24,11 @@ function atomium_preprocess_textfield(array &$variables, $hook) {
   _form_set_class($variables['element'], array('form-text'));
   element_set_attributes(
     $variables['element'],
-    array(
-      0 => 'id',
-      1 => 'name',
-      2 => 'value',
-      3 => 'size',
-      4 => 'maxlength',
-      '#title' => 'placeholder',
-    )
+    array('id', 'name', 'value', 'size', 'maxlength', '#title' => 'placeholder')
   );
 
   $variables['atomium']['attributes']['element']
-    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
+    ->import(_atomium_get_attributes($variables['element']), FALSE);
 
   $attributes['type'] = 'text';
 

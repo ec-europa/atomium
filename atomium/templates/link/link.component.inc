@@ -50,7 +50,7 @@ function atomium_preprocess_link(array &$variables, $hook) {
     $path = $variables['path'];
   }
 
-  $variables['atomium']['attributes']['element']->setAttribute('href', $path);
+  $variables['atomium']['attributes']['element']->set('href', $path);
 
   if (\is_string($variables['text'])) {
     $variables['text'] = array(

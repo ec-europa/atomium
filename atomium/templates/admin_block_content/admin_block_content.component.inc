@@ -51,6 +51,7 @@ function atomium_preprocess_admin_block_content(array &$variables, $hook) {
         '#markup' => filter_xss_admin($item['description']),
       );
     }
+
     $item = array(
       'link' => $link,
       'description' => $description,

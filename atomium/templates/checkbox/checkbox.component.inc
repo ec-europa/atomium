@@ -42,7 +42,7 @@ function atomium_preprocess_checkbox(array &$variables, $hook) {
 
   if (isset($variables['element']['#checked'])) {
     if ($variables['element']['#checked'] === TRUE) {
-      $variables['atomium']['attributes']['element']->setAttribute('checked');
+      $variables['atomium']['attributes']['element']->set('checked');
     }
   }
 }

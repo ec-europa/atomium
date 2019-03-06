@@ -29,7 +29,7 @@ function atomium_preprocess_textarea(array &$variables, $hook) {
   _form_set_class($variables['element'], array('form-textarea'));
 
   $variables['atomium']['attributes']['element']
-    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
+    ->import(_atomium_get_attributes($variables['element']), FALSE);
 
   $wrapper_attributes_array = array(
     'class' => array('form-textarea-wrapper'),
