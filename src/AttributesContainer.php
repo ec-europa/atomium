@@ -23,7 +23,7 @@ class AttributesContainer implements \ArrayAccess {
    */
   public function __construct(array $attributes = array()) {
     foreach ($attributes as $name => $value) {
-      $this->offsetGet($name)->setAttributes($value);
+      $this->set($name, $value);
     }
   }
 
@@ -31,18 +31,25 @@ class AttributesContainer implements \ArrayAccess {
    * {@inheritdoc}
    */
   public function &offsetGet($name) {
-    $this->storage += array(
-      $name => new Attributes(),
-    );
+    if (FALSE === $this->offsetExists($name)) {
+      $this->set($name);
+    }
 
     return $this->storage[$name];
   }
 
   /**
-   * Returns the whole array.
+   * {@inheritdoc}
    */
-  public function getStorage() {
-    return $this->storage;
+  public function offsetSet($name, $value = array()) {
+    $this->set($name, $value);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetUnset($name) {
+    unset($this->storage[$name]);
   }
 
   /**
@@ -53,17 +60,29 @@ class AttributesContainer implements \ArrayAccess {
   }
 
   /**
-   * {@inheritdoc}
+   * Returns the storage array.
+   *
+   * @return array
+   *   The storage array.
    */
-  public function offsetSet($name, $value) {
-    $this->storage[$name] = $this->offsetGet($name)->setAttributes($value);
+  public function getStorage() {
+    return $this->storage;
   }
 
   /**
-   * {@inheritdoc}
+   * Set an attributes.
+   *
+   * @param string $name
+   *   The channel name.
+   * @param mixed $value
+   *   The data to import.
+   *
+   * @return $this
    */
-  public function offsetUnset($name) {
-    unset($this->storage[$name]);
+  public function set($name, $value = array()) {
+    $this->storage[$name] = atomium_get_attributes($value);
+
+    return $this;
   }
 
 }

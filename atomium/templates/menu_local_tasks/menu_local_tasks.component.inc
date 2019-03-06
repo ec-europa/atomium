@@ -33,7 +33,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
       '#theme' => 'item_list',
       '#items' => $variables['primary'],
       '#type' => $variables['type'],
-      '#attributes' => $variables['atomium']['attributes']['primary']->toArray(),
+      '#attributes' => $variables['atomium']['attributes']['primary']->getValuesAsArray(),
       '#wrapper_attributes' => array(),
     );
 
@@ -48,7 +48,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
       '#theme' => 'item_list',
       '#items' => $variables['secondary'],
       '#type' => $variables['type'],
-      '#attributes' => $variables['atomium']['attributes']['secondary']->toArray(),
+      '#attributes' => $variables['atomium']['attributes']['secondary']->getValuesAsArray(),
       '#wrapper_attributes' => array(),
     );
     _atomium_extend_theme_property(

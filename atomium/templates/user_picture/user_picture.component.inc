@@ -64,13 +64,13 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
         $variables[$variables['base_hook']] += array(
           '#theme' => 'image_style',
           '#style_name' => $style,
-          '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
+          '#attributes' => $variables['atomium']['attributes']['image']->getValuesAsArray(),
         );
       }
       else {
         $variables[$variables['base_hook']] += array(
           '#theme' => 'image',
-          '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
+          '#attributes' => $variables['atomium']['attributes']['image']->getValuesAsArray(),
         );
       }
 
@@ -85,7 +85,7 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
           '#path' => 'user/' . $account->uid,
           '#options' => array(
             'html' => TRUE,
-            'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->toArray(),
+            'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->getValuesAsArray(),
           ),
         );
 

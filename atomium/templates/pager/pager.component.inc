@@ -206,7 +206,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     $pager = array(
       '#theme' => 'item_list',
       '#items' => $items,
-      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
+      '#attributes' => $variables['atomium']['attributes']['wrapper']->getValuesAsArray(),
     );
 
     _atomium_extend_theme_wrappers_property(
