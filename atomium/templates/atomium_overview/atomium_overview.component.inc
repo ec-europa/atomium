@@ -32,7 +32,7 @@ function atomium_atomium_theme_atomium_overview() {
 function atomium_preprocess_atomium_overview(array &$variables, $hook) {
   $definitions = array();
 
-  foreach (atomium_discover_templates() as $component_data) {
+  foreach (atomium_find_templates() as $component_data) {
     $component = $component_data['component'];
     $theme = $component_data['theme'];
 
@@ -93,8 +93,13 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       }
       if (!empty($elements)) {
         $definition['preview'] = array(
-          '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
+          '#theme' => 'item_list',
           '#items' => $elements,
+        );
+
+        _atomium_extend_theme_property(
+          $definition,
+          array('preview', $component)
         );
       }
     }
@@ -108,7 +113,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       $definition['form'] = drupal_get_form($function_name);
     }
 
-    // Disable the preview if we explicitely set the key disable to TRUE.
+    // Disable the preview if we explicitly set the key disable to TRUE.
     if ($definition['disable'] === TRUE) {
       unset($definition['preview']);
     }
@@ -116,10 +121,17 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     $definitions[$component] = \array_filter($definition);
     if (!empty($errors)) {
       unset($definitions[$component]['form']);
-      $definitions[$component]['preview'] = array(
-        '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
+      $preview = array(
+        '#theme' => 'item_list',
         '#items' => $errors[$component],
       );
+
+      _atomium_extend_theme_property(
+        $preview,
+        array('preview', $component)
+      );
+
+      $definitions[$component]['preview'] = $preview;
     }
   }
 
