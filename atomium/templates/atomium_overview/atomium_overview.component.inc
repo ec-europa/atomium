@@ -117,7 +117,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       $definition['form'] = drupal_get_form($function_name);
     }
 
-    // Disable the preview if we explicitely set the key disable to TRUE.
+    // Disable the preview if we explicitly set the key disable to TRUE.
     if ($definition['disable'] === TRUE) {
       unset($definition['preview']);
     }
