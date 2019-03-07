@@ -19,17 +19,13 @@ function _atomium_theme(array &$existing, $type, $theme, $path) {
   $hooks = array();
 
   foreach (atomium_find_templates() as $component_info) {
-    $file = \sprintf(
-      '%s/%s.component.inc',
-      $component_info['directory'],
-      $component_info['component']
-    );
-
-    if (!\file_exists($file)) {
+    if (empty($component_info['includes'])) {
       continue;
     }
 
-    include_once $file;
+    foreach ($component_info['includes'] as $file) {
+      include_once $file;
+    }
 
     $function_name = sprintf(
       '%s_atomium_theme_%s',
