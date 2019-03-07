@@ -139,7 +139,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
   foreach ($cache as $hook => &$info) {
     // Make sure the includes member of each hook is completed with its
     // parent hook.
-    list($original_hook, $rest) = \explode('__', $hook);
+    list($original_hook) = \explode('__', $hook, 1);
     $info += array('includes' => array());
     $cache[$original_hook] += array('includes' => array());
     $info['includes'] = \array_unique(
@@ -198,7 +198,7 @@ function _atomium_theme_find_processors(array $grouped_functions, array &$cache,
     $prefix = $theme . '_' . $phase;
 
     // Grep only the functions which are within the prefix group.
-    list($first_prefix, $rest) = \explode('_', $prefix, 2);
+    list($first_prefix) = \explode('_', $prefix, 1);
     if (isset($grouped_functions[$first_prefix]) && ($matches = \preg_grep(
         '/^' . $prefix . '_' . $pattern . '/',
         $grouped_functions[$first_prefix]
@@ -340,7 +340,7 @@ function drupal_group_functions_by_prefix() {
 
   // Splitting user defined functions into groups by the first prefix.
   foreach ($functions['user'] as $function) {
-    list($first_prefix, $rest) = \explode('_', $function, 2);
+    list($first_prefix) = \explode('_', $function, 1);
     $grouped_functions[$first_prefix][] = $function;
   }
 
