@@ -59,9 +59,15 @@ function atomium_theme_registry_alter(array &$registry) {
 
   // Prepare an array of files to include.
   foreach (atomium_find_templates() as $component_info) {
-    foreach (\glob($component_info['directory'] . '/*.component.inc') as $filename) {
-      $components[$component_info['component']][] = $filename;
-    }
+    // Ensure the key exists and is an array.
+    $components += array($component_info['component'] => array());
+
+    // Merge existing component 'includes' files so we ensure that each files
+    // of each theme is use are included.
+    $components[$component_info['component']] = array_merge(
+      $components[$component_info['component']],
+      $component_info['includes']
+    );
   }
 
   \array_walk($registry, function (array &$info, $hook) use ($components) {
