@@ -5,4 +5,4 @@ parameters:
     - drupol\DrupalConventions\GrumphpTasksExtension
   extra_tasks:
     phpunit:
-      always_execute: false
+      always_execute: true
