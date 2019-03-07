@@ -22,14 +22,14 @@
         "drupal/admin_menu": "3.0.0-rc6",
         "drupal/composer_autoloader": "^1",
         "drupal/devel": "^1",
-        "drupal/drupal": "7.64",
+        "drupal/drupal": "^7.64",
         "drupal/drupal-extension": "~3.4",
         "drupal/realistic_dummy_content": "^2",
-        "drupol/drupal-conventions": "^1.3.15",
+        "drupol/drupal-conventions": "^1.4.2",
         "drush/drush": "^8.1.18",
         "mikey179/vfsstream": "^1.6",
         "openeuropa/task-runner": "1.0.0-beta4",
-        "phpunit/phpunit": "^5",
+        "phpunit/phpunit": "^5.7",
         "webflo/drupal-finder": "^1.1",
         "webmozart/path-util": "^2.3"
     },
@@ -55,9 +55,6 @@
         "grumphp": "./vendor/bin/grumphp run"
     },
     "extra": {
-        "grumphp": {
-            "config-default-path": "vendor/drupol/drupal-conventions/config/drupal7/php5.6/grumphp.yml"
-        },
         "installer-paths": {
             "build/": ["type:drupal-core"],
             "build/profiles/{$name}/": ["type:drupal-profile"],
