@@ -233,6 +233,7 @@ function atomium_discover_templates() {
         'theme' => $theme,
         'component' => $directory,
         'directory' => $component_directory,
+        'includes' => \glob($component_directory . '/*.component.inc'),
       );
     }
   }
