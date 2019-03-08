@@ -18,3 +18,20 @@ function atomium_atomium_theme_admin_block() {
     ),
   );
 }
+
+/**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_admin_block() {
+  return array(
+    'label' => 'Admin block',
+    'description' => 'Admin block description.',
+    'preview' => array(
+      'block' => array(
+        'title' => 'Block title',
+        'description' => 'Block description',
+        'content' => 'Block content',
+      )
+    ),
+  );
+}

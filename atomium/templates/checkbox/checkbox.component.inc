@@ -18,6 +18,22 @@ function atomium_atomium_theme_checkbox() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_checkbox() {
+  return array(
+    'label' => 'Checkbox',
+    'description' => 'Checkbox.',
+    'preview' => array(
+      'checkbox' => array(
+        'title' => 'Checkbox title',
+        'description' => 'Checkbox description.',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_checkbox(array &$variables, $hook) {

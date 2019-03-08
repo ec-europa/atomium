@@ -21,6 +21,19 @@ function atomium_atomium_theme_user_picture() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_user_picture() {
+  return array(
+    'label' => 'User picture',
+    'description' => 'User picture description.',
+    'preview' => array(
+      'account' => user_load(1),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  *
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)

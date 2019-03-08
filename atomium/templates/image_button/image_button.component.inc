@@ -18,6 +18,22 @@ function atomium_atomium_theme_image_button() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_image_button() {
+  return array(
+    'label' => 'Image button',
+    'description' => 'Image button description.',
+    'preview' => array(
+      array(
+        'title' => 'Image button',
+        'src' => drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_image_button(array &$variables, $hook) {

@@ -18,6 +18,22 @@ function atomium_atomium_theme_fieldset() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_fieldset() {
+  return array(
+    'label' => 'Fieldset',
+    'description' => 'Fieldset.',
+    'preview' => array(
+      'fieldset' => array(
+        'title' => 'Fieldset title',
+        'description' => 'Fieldset description.',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_fieldset(array &$variables, $hook) {

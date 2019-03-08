@@ -18,6 +18,19 @@ function atomium_atomium_theme_tablesort_indicator() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_tablesort_indicator() {
+  return array(
+    'label' => 'Tablesort indicator',
+    'description' => 'Tablesort indicator description.',
+    'preview' => array(
+      'style' => 'asc',
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_tablesort_indicator(array &$variables, $hook) {
