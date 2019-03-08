@@ -64,7 +64,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key],
+            'element' => $variables['atomium']['attributes'][$key]->getValuesAsArray(),
           ),
         ),
         '#value' => $item['data'],
@@ -81,7 +81,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key],
+            'element' => $variables['atomium']['attributes'][$key]->getValuesAsArray(),
           ),
         ),
         '#value' => $item,

@@ -15,7 +15,6 @@ function atomium_atomium_theme_feed_icon() {
       'variables' => array(
         'url' => NULL,
         'title' => NULL,
-        'link' => NULL,
       ),
     ),
   );

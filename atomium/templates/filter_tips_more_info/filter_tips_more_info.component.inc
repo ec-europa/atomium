@@ -12,9 +12,7 @@ function atomium_atomium_theme_filter_tips_more_info() {
   return array(
     'filter_tips_more_info' => array(
       'template' => 'filter-tips-more-info',
-      'variables' => array(
-        'link' => array(),
-      ),
+      'variables' => array(),
     ),
   );
 }
