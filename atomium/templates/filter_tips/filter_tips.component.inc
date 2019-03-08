@@ -21,6 +21,20 @@ function atomium_atomium_theme_filter_tips() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_filter_tips() {
+  return array(
+    'label' => 'Filter tips',
+    'description' => 'Filter tips description.',
+    'preview' => array(
+      'tips' => array(),
+      'long' => true
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_tips(array &$variables, $hook) {

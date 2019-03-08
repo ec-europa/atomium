@@ -18,3 +18,13 @@ function atomium_atomium_theme_pager_ellipsis() {
     ),
   );
 }
+
+/**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_pager_ellipsis() {
+  return array(
+    'label' => 'Pager ellipsis',
+    'description' => 'Pager ellipsis description.',
+  );
+}

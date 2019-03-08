@@ -18,6 +18,35 @@ function atomium_atomium_theme_radios() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_radios() {
+  return array(
+    'label' => 'Radio group',
+    'description' => 'Radio group.',
+  );
+}
+
+/**
+ * Implements hook_atomium_definition_form_hook().
+ */
+function atomium_atomium_definition_form_radios(array $form, array &$form_state) {
+  $form['element1'] = array(
+    '#title' => 'Radios',
+    '#description' => 'Radios description',
+    '#type' => 'radios',
+    '#options' => array(
+      'item1' => 'Item 1',
+      'item2' => 'Item 2',
+      'item3' => 'Item 3',
+    ),
+    '#default_value' => array('item2'),
+  );
+
+  return $form;
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_radios(array &$variables, $hook) {

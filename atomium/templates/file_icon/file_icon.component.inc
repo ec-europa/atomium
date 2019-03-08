@@ -22,6 +22,27 @@ function atomium_atomium_theme_file_icon() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_file_icon() {
+  $icon_directory = variable_get('file_icon_directory', drupal_get_path('module', 'file') . '/icons');
+
+  $file = new stdClass();
+  $file->filemime = 'application/pdf';
+
+  return array(
+    'label' => 'File icon',
+    'description' => 'File icon description.',
+    'dependencies' => array('file'),
+    'preview' => array(
+      'file' => $file,
+      'icon_directory' => $icon_directory,
+      'alt' => NULL,
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_file_icon(array &$variables, $hook) {

@@ -18,6 +18,22 @@ function atomium_atomium_theme_radio() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_radio() {
+  return array(
+    'label' => 'Radio',
+    'description' => 'Radio.',
+    'preview' => array(
+      'radio' => array(
+        'title' => 'Radio title',
+        'description' => 'Radio description.',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_radio(array &$variables, $hook) {
