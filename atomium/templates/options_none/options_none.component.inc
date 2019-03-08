@@ -28,9 +28,9 @@ function atomium_atomium_definition_options_none() {
       'instance' => array(
         'widget' => array(
           'type' => 'options_buttons',
-        )
-      )
-    )
+        ),
+      ),
+    ),
   );
 }
 

@@ -90,6 +90,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     $element = element_info($component);
     if (!empty($element)) {
       $elements = array();
+
       foreach ($definition['preview'] as $preview) {
         // Prepend hash to all preview properties.
         foreach ($preview as $key => $value) {
@@ -100,6 +101,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
         }
         $elements[] = \array_merge($element, $preview);
       }
+
       if (!empty($elements)) {
         $definition['preview'] = array(
           '#theme' => 'item_list',

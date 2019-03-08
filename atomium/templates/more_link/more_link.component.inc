@@ -26,7 +26,7 @@ function atomium_atomium_definition_more_link() {
     'description' => 'More link description.',
     'preview' => array(
       'url' => '#',
-      'title' => 'More link title'
+      'title' => 'More link title',
     ),
   );
 }

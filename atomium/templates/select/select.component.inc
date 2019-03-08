@@ -31,9 +31,9 @@ function atomium_atomium_definition_select() {
           'option 1' => 'option 1',
           'option 2' => 'option 2',
           'option 3' => 'option 3',
-        )
-      )
-    )
+        ),
+      ),
+    ),
   );
 }
 

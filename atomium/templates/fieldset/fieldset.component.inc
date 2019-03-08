@@ -52,7 +52,7 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
     $variables['atomium']['attributes']['wrapper']->append('id', $variables['element']['#id']);
   }
   $variables['atomium']['attributes']['wrapper']->append('class', 'form-wrapper');
-  $variables['atomium']['attributes']['wrapper']->merge($variables['element']['#attributes']);
+  $variables['atomium']['attributes']['wrapper']->merge((array) $variables['element']['#attributes']);
 
   /* <legend> tag handling */
   $legend = '';

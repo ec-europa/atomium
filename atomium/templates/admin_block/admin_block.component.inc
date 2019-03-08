@@ -31,7 +31,7 @@ function atomium_atomium_definition_admin_block() {
         'title' => 'Block title',
         'description' => 'Block description',
         'content' => 'Block content',
-      )
+      ),
     ),
   );
 }

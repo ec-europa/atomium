@@ -29,7 +29,7 @@ function atomium_atomium_definition_filter_tips() {
     'description' => 'Filter tips description.',
     'preview' => array(
       'tips' => array(),
-      'long' => true
+      'long' => TRUE,
     ),
   );
 }
