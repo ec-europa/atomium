@@ -39,8 +39,8 @@ function atomium_atomium_definition_admin_block_content() {
           'href' => '#',
           'description' => 'Item description 2',
           'localized_options' => array(),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
