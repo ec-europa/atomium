@@ -16,3 +16,16 @@ function atomium_atomium_theme_progress_bar() {
     ),
   );
 }
+
+/**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_progress_bar() {
+  return array(
+    'label' => 'Progress bar',
+    'description' => 'Progress bar description.',
+    'preview' => array(
+      'percent' => \mt_rand(0, 100),
+    ),
+  );
+}

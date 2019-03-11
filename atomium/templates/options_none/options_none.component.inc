@@ -18,6 +18,23 @@ function atomium_atomium_theme_options_none() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_options_none() {
+  return array(
+    'label' => 'Options none',
+    'description' => 'Options none description.',
+    'preview' => array(
+      'instance' => array(
+        'widget' => array(
+          'type' => 'options_buttons',
+        ),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_options_none(array &$variables, $hook) {

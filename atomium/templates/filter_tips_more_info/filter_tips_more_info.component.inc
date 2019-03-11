@@ -20,6 +20,16 @@ function atomium_atomium_theme_filter_tips_more_info() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_filter_tips_more_info() {
+  return array(
+    'label' => 'Filter tips more info',
+    'description' => 'Filter tips more info description.',
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_tips_more_info(array &$variables, $hook) {

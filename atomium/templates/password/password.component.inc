@@ -18,6 +18,22 @@ function atomium_atomium_theme_password() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_password() {
+  return array(
+    'label' => 'Password',
+    'description' => 'Password description.',
+    'preview' => array(
+      array(
+        'title' => 'Password field',
+        'description' => 'Password field description',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_password(array &$variables, $hook) {

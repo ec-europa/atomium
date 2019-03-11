@@ -18,6 +18,22 @@ function atomium_atomium_theme_textarea() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_textarea() {
+  return array(
+    'label' => 'Textarea',
+    'description' => 'Textarea description.',
+    'preview' => array(
+      array(
+        'title' => 'Textarea title',
+        'description' => 'Textarea description',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_textarea(array &$variables, $hook) {
