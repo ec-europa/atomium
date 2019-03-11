@@ -153,7 +153,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
   foreach ($cache as $hook => &$info) {
     // Make sure the includes member of each hook is completed with its
     // parent hook.
-    list($original_hook) = \explode('__', $hook, 1);
+    $original_hook = atomium_get_base_hook($hook);
     $info += array('includes' => array());
     $cache[$original_hook] += array('includes' => array());
     $info['includes'] = \array_unique(
@@ -440,7 +440,7 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
         }
 
         // Transform "-" in file names to "_" to match theme hook naming scheme.
-        $hook = \strtr($name, '-', '_');
+        $hook = str_replace('-', '_', $name);
 
         // File to be included by core's theme function when a theme hook is
         // invoked.
