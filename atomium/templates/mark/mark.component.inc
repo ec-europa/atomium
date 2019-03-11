@@ -21,6 +21,20 @@ function atomium_atomium_theme_mark() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_mark() {
+  return array(
+    'label' => 'Mark',
+    'description' => 'Mark description.',
+    'preview' => array(
+      'title' => 'New stuff!',
+      'type' => MARK_NEW,
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_mark(array &$variables, $hook) {

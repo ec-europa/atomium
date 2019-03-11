@@ -21,6 +21,16 @@ function atomium_atomium_theme_indentation() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_indentation() {
+  return array(
+    'label' => 'Indentation',
+    'description' => 'Indentation description.',
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_indentation(array &$variables, $hook) {

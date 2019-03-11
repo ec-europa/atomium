@@ -18,6 +18,23 @@ function atomium_atomium_theme_date() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_date() {
+  return array(
+    'label' => 'Date',
+    'description' => 'Date description.',
+    'preview' => array(
+      'element' => array(
+        array(
+          '#markup' => format_date(REQUEST_TIME),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_date(array &$variables, $hook) {

@@ -18,6 +18,19 @@ function atomium_atomium_theme_more_help_link() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_more_help_link() {
+  return array(
+    'label' => 'More help link',
+    'description' => 'More help link description.',
+    'preview' => array(
+      'url' => '#',
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_more_help_link(array &$variables, $hook) {

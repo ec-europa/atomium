@@ -18,6 +18,22 @@ function atomium_atomium_theme_textfield() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_textfield() {
+  return array(
+    'label' => 'Textfield',
+    'description' => 'Text field description.',
+    'preview' => array(
+      array(
+        'title' => 'Text field',
+        'description' => 'Text field description',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_textfield(array &$variables, $hook) {

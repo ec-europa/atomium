@@ -103,8 +103,8 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     // When there is more than one page, create the pager list.
-    if ($i !== $pager_max) {
-      if ($i > 1) {
+    if ((int) $i !== (int) $pager_max) {
+      if ((int) $i > 1) {
         $items['pager_ellipsis__' . $i] = array(
           '#theme' => 'pager_ellipsis',
           '#attributes' => array(
@@ -120,7 +120,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
       // Now generate the actual pager piece.
       for (; $i <= $pager_last && $i <= $pager_max; $i++) {
-        if ($i < $pager_current || $i > $pager_current) {
+        if ((int) $i < (int) $pager_current || (int) $i > (int) $pager_current) {
           $options = array(
             'attributes' => array(
               'title' => t('Go to page @number', array('@number' => $i)),
@@ -133,7 +133,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           $items['pager_link__' . $i] = _atomium_pager_item_to_link_helper($i, $pager, $element, $options, $variables);
         }
 
-        if ($i === $pager_current) {
+        if ((int) $i === (int) $pager_current) {
           $items['pager_current'] = array(
             '#markup' => $i,
             '#attributes' => array(
@@ -145,7 +145,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
         }
       }
 
-      if ($i < $pager_max) {
+      if ((int) $i < (int) $pager_max) {
         $items['pager_ellipsis__' . $i] = array(
           '#theme' => 'pager_ellipsis',
           '#attributes' => array(

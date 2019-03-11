@@ -23,6 +23,9 @@
 include_once __DIR__ . '/includes/common.inc';
 include_once __DIR__ . '/includes/config.inc';
 include_once __DIR__ . '/includes/preprocess.inc';
+include_once __DIR__ . '/../src/AttributesContainer.php';
+include_once __DIR__ . '/../src/AtomiumClassAttribute.php';
+include_once __DIR__ . '/../src/AtomiumPlaceholderAttribute.php';
 
 /**
  * Implements hook_theme().

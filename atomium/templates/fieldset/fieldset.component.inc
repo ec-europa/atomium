@@ -18,6 +18,22 @@ function atomium_atomium_theme_fieldset() {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_fieldset() {
+  return array(
+    'label' => 'Fieldset',
+    'description' => 'Fieldset.',
+    'preview' => array(
+      'fieldset' => array(
+        'title' => 'Fieldset title',
+        'description' => 'Fieldset description.',
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_fieldset(array &$variables, $hook) {
@@ -36,7 +52,7 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
     $variables['atomium']['attributes']['wrapper']->append('id', $variables['element']['#id']);
   }
   $variables['atomium']['attributes']['wrapper']->append('class', 'form-wrapper');
-  $variables['atomium']['attributes']['wrapper']->merge($variables['element']['#attributes']);
+  $variables['atomium']['attributes']['wrapper']->merge((array) $variables['element']['#attributes']);
 
   /* <legend> tag handling */
   $legend = '';

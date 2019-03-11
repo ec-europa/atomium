@@ -15,8 +15,21 @@ function atomium_atomium_theme_feed_icon() {
       'variables' => array(
         'url' => NULL,
         'title' => NULL,
-        'link' => NULL,
       ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_feed_icon() {
+  return array(
+    'label' => 'Feed icon',
+    'description' => 'Feed icon description.',
+    'preview' => array(
+      'url' => '#',
+      'title' => 'Feed icon title',
     ),
   );
 }
