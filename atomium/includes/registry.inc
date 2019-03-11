@@ -153,7 +153,7 @@ function _theme_post_process_registry(array &$cache, array $base_themes, $theme)
   foreach ($cache as $hook => &$info) {
     // Make sure the includes member of each hook is completed with its
     // parent hook.
-    list($original_hook) = \explode('__', $hook, 1);
+    $original_hook = atomium_get_base_hook($hook);
     $info += array('includes' => array());
     $cache[$original_hook] += array('includes' => array());
     $info['includes'] = \array_unique(
@@ -212,7 +212,7 @@ function _atomium_theme_find_processors(array $grouped_functions, array &$cache,
     $prefix = $theme . '_' . $phase;
 
     // Grep only the functions which are within the prefix group.
-    list($first_prefix) = \explode('_', $prefix, 1);
+    list($first_prefix) = \explode('_', $prefix, 2);
     if (isset($grouped_functions[$first_prefix]) && ($matches = \preg_grep(
         '/^' . $prefix . '_' . $pattern . '/',
         $grouped_functions[$first_prefix]
@@ -354,7 +354,7 @@ function drupal_group_functions_by_prefix() {
 
   // Splitting user defined functions into groups by the first prefix.
   foreach ($functions['user'] as $function) {
-    list($first_prefix) = \explode('_', $function, 1);
+    list($first_prefix) = \explode('_', $function, 2);
     $grouped_functions[$first_prefix][] = $function;
   }
 
@@ -440,7 +440,7 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
         }
 
         // Transform "-" in file names to "_" to match theme hook naming scheme.
-        $hook = \strtr($name, '-', '_');
+        $hook = str_replace('-', '_', $name);
 
         // File to be included by core's theme function when a theme hook is
         // invoked.
