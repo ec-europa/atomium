@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_html_tag() {
+function atomium_atomium_theme_html_tag(array $existing, $type, $theme, $path) {
   return array(
     'html_tag' => array(
       'render element' => 'element',

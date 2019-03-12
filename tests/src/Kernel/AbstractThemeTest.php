@@ -4,8 +4,6 @@ namespace Drupal\Tests\atomium\Kernel;
 
 /**
  * Class AbstractThemeTest.
- *
- * @package Drupal\Tests\atomium\Kernel
  */
 abstract class AbstractThemeTest extends AbstractKernelTest {
 

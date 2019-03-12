@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_item_list() {
+function atomium_atomium_theme_item_list(array $existing, $type, $theme, $path) {
   return array(
     'item_list' => array(
       'template' => 'item-list',

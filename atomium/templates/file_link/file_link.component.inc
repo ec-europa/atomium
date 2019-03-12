@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_file_link() {
+function atomium_atomium_theme_file_link(array $existing, $type, $theme, $path) {
   return array(
     'file_link' => array(
       'template' => 'file-link',

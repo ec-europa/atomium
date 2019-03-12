@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_table() {
+function atomium_atomium_theme_table(array $existing, $type, $theme, $path) {
   return array(
     'table' => array(
       'template' => 'table',

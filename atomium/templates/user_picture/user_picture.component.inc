@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_user_picture() {
+function atomium_atomium_theme_user_picture(array $existing, $type, $theme, $path) {
   return array(
     'user_picture' => array(
       'template' => 'user-picture',

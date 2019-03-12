@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_checkbox() {
+function atomium_atomium_theme_checkbox(array $existing, $type, $theme, $path) {
   return array(
     'checkbox' => array(
       'render element' => 'element',

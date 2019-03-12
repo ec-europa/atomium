@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_system_admin_index() {
+function atomium_atomium_theme_system_admin_index(array $existing, $type, $theme, $path) {
   return array(
     'admin_page' => array(
       'template' => 'admin-page',

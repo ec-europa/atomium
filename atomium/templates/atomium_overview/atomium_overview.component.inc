@@ -12,7 +12,7 @@
  * install, we have to generate the list of existing definitions in the
  * preprocess hook.
  */
-function atomium_atomium_theme_atomium_overview() {
+function atomium_atomium_theme_atomium_overview(array $existing, $type, $theme, $path) {
   return array(
     'atomium_overview' => array(
       'template' => 'atomium-overview',

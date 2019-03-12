@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_file_icon() {
+function atomium_atomium_theme_file_icon(array $existing, $type, $theme, $path) {
   return array(
     'file_icon' => array(
       'template' => 'file-icon',

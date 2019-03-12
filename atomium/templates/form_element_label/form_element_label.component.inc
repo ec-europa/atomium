@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_form_element_label() {
+function atomium_atomium_theme_form_element_label(array $existing, $type, $theme, $path) {
   return array(
     'form_element_label' => array(
       'render element' => 'element',
