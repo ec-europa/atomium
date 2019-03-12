@@ -7,8 +7,6 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AttributesTest.
- *
- * @package Drupal\Tests\atomium
  */
 class AttributesTest extends AbstractUnitTest {
 

@@ -6,8 +6,6 @@ use Drupal\atomium\AttributesContainer;
 
 /**
  * Class AttributesContainerTest.
- *
- * @package Drupal\Tests\atomium
  */
 class AttributesContainerTest extends AbstractUnitTest {
 

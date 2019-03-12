@@ -4,8 +4,6 @@ namespace Drupal\atomium;
 
 /**
  * Class AttributesContainer.
- *
- * @package Drupal\atomium
  */
 class AttributesContainer implements \ArrayAccess {
   /**

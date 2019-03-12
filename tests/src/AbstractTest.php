@@ -8,8 +8,6 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AbstractTest.
- *
- * @package Drupal\Tests\atomium
  */
 abstract class AbstractTest extends TestCase {
 
