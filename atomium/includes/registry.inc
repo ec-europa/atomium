@@ -15,7 +15,7 @@
  * @see atomium_theme()
  * @see hook_theme()
  */
-function _atomium_theme(array &$existing, $type, $theme, $path) {
+function _atomium_theme(array $existing, $type, $theme, $path) {
   $hooks = array();
 
   foreach (atomium_find_templates() as $component_info) {
@@ -47,9 +47,12 @@ function _atomium_theme(array &$existing, $type, $theme, $path) {
         return $hook;
       },
       drupal_array_merge_deep(
-        (array) \call_user_func_array(
-          $function_name,
-          array(&$existing, $type, $component_info['theme'], $path)),
+        (array) $function_name(
+          $existing,
+          $type,
+          $component_info['theme'],
+          $path
+        ),
         $hooks
       )
     );
