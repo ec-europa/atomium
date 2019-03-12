@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_system_modules_incompatible() {
+function atomium_atomium_theme_system_modules_incompatible(array $existing, $type, $theme, $path) {
   return array(
     'system_modules_incompatible' => array(
       'variables' => array('message' => NULL),

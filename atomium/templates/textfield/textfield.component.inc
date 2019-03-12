@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_textfield() {
+function atomium_atomium_theme_textfield(array $existing, $type, $theme, $path) {
   return array(
     'textfield' => array(
       'render element' => 'element',

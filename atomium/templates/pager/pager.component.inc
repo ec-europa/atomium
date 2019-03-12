@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_pager() {
+function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
   return array(
     'pager' => array(
       'template' => 'pager',

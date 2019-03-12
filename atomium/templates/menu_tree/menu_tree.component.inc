@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_menu_tree() {
+function atomium_atomium_theme_menu_tree(array $existing, $type, $theme, $path) {
   return array(
     'menu_tree' => array(
       'template' => 'menu-tree',

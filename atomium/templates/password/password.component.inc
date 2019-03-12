@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_password() {
+function atomium_atomium_theme_password(array $existing, $type, $theme, $path) {
   return array(
     'password' => array(
       'render element' => 'element',

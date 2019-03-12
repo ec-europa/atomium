@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_date() {
+function atomium_atomium_theme_date(array $existing, $type, $theme, $path) {
   return array(
     'date' => array(
       'render element' => 'element',

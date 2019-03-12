@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_image_button() {
+function atomium_atomium_theme_image_button(array $existing, $type, $theme, $path) {
   return array(
     'image_button' => array(
       'render element' => 'element',

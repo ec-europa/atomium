@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_image() {
+function atomium_atomium_theme_image(array $existing, $type, $theme, $path) {
   return array(
     'image' => array(
       'template' => 'image',
