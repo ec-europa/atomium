@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_status_messages() {
+function atomium_atomium_theme_status_messages(array $existing, $type, $theme, $path) {
   return array(
     'status_messages' => array(
       'variables' => array(

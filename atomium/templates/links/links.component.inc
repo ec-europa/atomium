@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_links() {
+function atomium_atomium_theme_links(array $existing, $type, $theme, $path) {
   return array(
     'links' => array(
       'template' => 'links',

@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_mark() {
+function atomium_atomium_theme_mark(array $existing, $type, $theme, $path) {
   return array(
     'mark' => array(
       'template' => 'mark',

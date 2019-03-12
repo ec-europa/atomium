@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_form_element() {
+function atomium_atomium_theme_form_element(array $existing, $type, $theme, $path) {
   return array(
     'form_element' => array(
       'template' => 'form-element',

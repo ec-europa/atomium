@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_image_style() {
+function atomium_atomium_theme_image_style(array $existing, $type, $theme, $path) {
   return array(
     'image_style' => array(
       'template' => 'image-style',

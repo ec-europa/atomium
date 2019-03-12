@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_progress_bar() {
+function atomium_atomium_theme_progress_bar(array $existing, $type, $theme, $path) {
   return array(
     'progress_bar' => array(
       'template' => 'progress-bar',

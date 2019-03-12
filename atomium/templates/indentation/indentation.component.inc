@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_indentation() {
+function atomium_atomium_theme_indentation(array $existing, $type, $theme, $path) {
   return array(
     'indentation' => array(
       'template' => 'indentation',

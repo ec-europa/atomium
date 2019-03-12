@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_menu_overview_form() {
+function atomium_atomium_theme_menu_overview_form(array $existing, $type, $theme, $path) {
   return array(
     'menu_overview_form' => array(
       'template' => 'menu-overview-form',

@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_filter_tips() {
+function atomium_atomium_theme_filter_tips(array $existing, $type, $theme, $path) {
   return array(
     'filter_tips' => array(
       'template' => 'filter-tips',

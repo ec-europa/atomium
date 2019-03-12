@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_admin_block() {
+function atomium_atomium_theme_admin_block(array $existing, $type, $theme, $path) {
   return array(
     'admin_block' => array(
       'template' => 'admin-block',

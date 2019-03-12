@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_options_none() {
+function atomium_atomium_theme_options_none(array $existing, $type, $theme, $path) {
   return array(
     'options_none' => array(
       'template' => 'options-none',
