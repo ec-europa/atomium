@@ -55,7 +55,7 @@ class SubThemeTest extends AbstractThemeTest {
     $this::assertSame(
       array(
         'atomium_test_preprocess_more_link',
-        'atomium_test_test_preprocess_more_link'
+        'atomium_test_test_preprocess_more_link',
       ),
       $actual['variables']['callbacks']);
   }
