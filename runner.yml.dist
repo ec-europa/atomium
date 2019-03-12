@@ -21,9 +21,9 @@ drupal:
         - build/sites/all/themes/atomium/build
       drupal_http_request_fails: false
   post_install:
+      - { task: "chmod", file: "${drupal.root}/sites/default/files", permissions: 0777, recursive: true }
       - ./vendor/bin/drush --root=$(pwd)/build dis -y color comment dashboard dblog help overlay path search shortcut toolbar update
       - ./vendor/bin/drush --root=$(pwd)/build pmu -y color comment dashboard dblog help overlay path search shortcut toolbar update
-      - ./vendor/bin/drush --root=$(pwd)/build en -y registryonsteroids registryonsteroids_alter xautoload
       - ./vendor/bin/drush --root=$(pwd)/build en -y admin_menu admin_menu_toolbar admin_devel atomium composer_autoloader devel realistic_dummy_content
       - ./vendor/bin/drush --root=$(pwd)/build vset theme_default atomium
       - ./vendor/bin/drush --root=$(pwd)/build cc all
