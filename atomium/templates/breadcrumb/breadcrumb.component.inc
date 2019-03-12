@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_breadcrumb() {
+function atomium_atomium_theme_breadcrumb(array $existing, $type, $theme, $path) {
   return array(
     'breadcrumb' => array(
       'variables' => array('breadcrumb' => NULL),

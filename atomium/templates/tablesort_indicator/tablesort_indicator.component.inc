@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_tablesort_indicator() {
+function atomium_atomium_theme_tablesort_indicator(array $existing, $type, $theme, $path) {
   return array(
     'tablesort_indicator' => array(
       'template' => 'tablesort-indicator',

@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_username() {
+function atomium_atomium_theme_username(array $existing, $type, $theme, $path) {
   return array(
     'username' => array(
       'template' => 'username',

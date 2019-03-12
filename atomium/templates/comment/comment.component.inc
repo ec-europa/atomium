@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_comment() {
+function atomium_atomium_theme_comment(array $existing, $type, $theme, $path) {
   return array(
     'comment' => array(
       'render element' => 'elements',

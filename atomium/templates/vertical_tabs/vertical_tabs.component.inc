@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_vertical_tabs() {
+function atomium_atomium_theme_vertical_tabs(array $existing, $type, $theme, $path) {
   return array(
     'vertical_tabs' => array(
       'render element' => 'element',

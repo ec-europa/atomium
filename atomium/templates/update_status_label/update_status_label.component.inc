@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_update_status_label() {
+function atomium_atomium_theme_update_status_label(array $existing, $type, $theme, $path) {
   return array(
     'update_status_label' => array(
       'template' => 'update-status-label',

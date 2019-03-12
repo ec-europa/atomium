@@ -8,7 +8,7 @@
 /**
  * Implements hook_atomium_theme_hook().
  */
-function atomium_atomium_theme_radio() {
+function atomium_atomium_theme_radio(array $existing, $type, $theme, $path) {
   return array(
     'radio' => array(
       'render element' => 'element',
