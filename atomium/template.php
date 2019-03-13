@@ -21,6 +21,7 @@
  * Include common functions used through out theme.
  */
 include_once __DIR__ . '/includes/common.inc';
+include_once __DIR__ . '/includes/registry.inc';
 include_once __DIR__ . '/includes/config.inc';
 include_once __DIR__ . '/includes/preprocess.inc';
 include_once __DIR__ . '/../src/AttributesContainer.php';
@@ -31,9 +32,49 @@ include_once __DIR__ . '/../src/AtomiumPlaceholderAttribute.php';
  * Implements hook_theme().
  */
 function atomium_theme(array &$existing, $type, $theme, $path) {
-  include_once __DIR__ . '/includes/registry.inc';
+  $hooks = array();
 
-  return _atomium_theme($existing, $type, $theme, $path);
+  foreach (atomium_find_templates() as $component_info) {
+    if (empty($component_info['includes'])) {
+      continue;
+    }
+
+    foreach ($component_info['includes'] as $file) {
+      include_once $file;
+    }
+
+    $function_name = sprintf(
+      '%s_atomium_theme_%s',
+      $component_info['theme'],
+      $component_info['component']
+    );
+
+    if (!\function_exists($function_name)) {
+      continue;
+    }
+
+    $hooks = \array_map(
+      function ($hook) use ($component_info) {
+        $hook += array(
+          'path' => $component_info['directory'],
+          'file' => \sprintf('%s.component.inc', $component_info['component']),
+        );
+
+        return $hook;
+      },
+      drupal_array_merge_deep(
+        (array) $function_name(
+          $existing,
+          $type,
+          $component_info['theme'],
+          $path
+        ),
+        $hooks
+      )
+    );
+  }
+
+  return $hooks;
 }
 
 /**
