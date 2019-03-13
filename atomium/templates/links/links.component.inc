@@ -32,7 +32,6 @@ function atomium_atomium_theme_links(array $existing, $type, $theme, $path) {
  * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_links(array &$variables, $hook) {
-  global $language_url;
 
   $heading = $variables['heading'];
 
@@ -78,7 +77,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
         $link['attributes_array']['class'][] = 'last';
       }
       if (isset($link['href']) && ($link['href'] === $_GET['q'] || ($link['href'] === '<front>' && drupal_is_front_page()))
-        && (empty($link['language']) || $link['language']->language === $language_url->language)) {
+        && (empty($link['language']) || $link['language']->language === $GLOBALS['language_url']->language)) {
         $link['attributes_array']['class'][] = 'active';
       }
 
