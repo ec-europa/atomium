@@ -1,0 +1,46 @@
+-
+  theme: atomium_test_test
+  key: settings
+  base_theme: true
+  test: test1
+  expected:
+    setting1: setting1
+    setting2: setting2
+    setting3: setting3
+    setting7: settingG
+    setting4: setting4
+    setting5: setting5
+    setting6: setting6
+
+-
+  theme: atomium_test_test
+  key: settings
+  base_themes: true
+  test: test2
+  expected:
+    - value1
+    - value2
+    - value3
+    - value4
+
+-
+  theme: atomium_test_test
+  key: settings
+  base_themes: false
+  test: test1
+  expected:
+    setting1: setting1
+    setting2: setting2
+    setting3: setting3
+    setting4: setting4
+    setting5: setting5
+    setting6: setting6
+
+-
+  theme: atomium_test_test
+  key: settings
+  base_themes: false
+  test: test2
+  expected:
+    - value3
+    - value4
