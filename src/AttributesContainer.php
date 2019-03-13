@@ -28,8 +28,8 @@ class AttributesContainer implements \ArrayAccess {
   /**
    * {@inheritdoc}
    */
-  public function &offsetGet($name) {
-    if ($this->offsetExists($name) === FALSE) {
+  public function offsetGet($name) {
+    if (!isset($this->storage[$name])) {
       $this->set($name);
     }
 
