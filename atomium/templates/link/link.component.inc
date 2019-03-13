@@ -27,7 +27,7 @@ function atomium_atomium_theme_link(array $existing, $type, $theme, $path) {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function atomium_preprocess_link(array &$variables, $hook) {
-  global $language_url;
+  $language_url = $GLOBALS['language_url'];
 
   $variables += array('options' => array('html' => FALSE));
   $variables['options'] += array(
