@@ -26,17 +26,6 @@ class AttributesContainer implements \ArrayAccess {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function offsetGet($name) {
-    if (!isset($this->storage[$name])) {
-      $this->set($name);
-    }
-
-    return $this->storage[$name];
-  }
-
-  /**
    * Returns the storage array.
    *
    * @return array
@@ -51,6 +40,17 @@ class AttributesContainer implements \ArrayAccess {
    */
   public function offsetExists($name) {
     return isset($this->storage[$name]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function offsetGet($name) {
+    if (!isset($this->storage[$name])) {
+      $this->set($name);
+    }
+
+    return $this->storage[$name];
   }
 
   /**
