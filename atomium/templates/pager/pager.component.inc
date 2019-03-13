@@ -36,7 +36,8 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   $element = $variables['element'];
   $quantity = $variables['quantity'];
   $items = array();
-  global $pager_page_array, $pager_total;
+  $pager_page_array = $GLOBALS['pager_page_array'];
+  $pager_total = $GLOBALS['pager_total'];
 
   // This is for the hook_atomium_definition_hook() to work.
   if (isset($variables['pager_page_array']) && $variables['pager_page_array'] !== NULL) {

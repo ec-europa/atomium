@@ -6,62 +6,6 @@
  */
 
 /**
- * Stub implementation for atomium_theme().
- *
- * This base-theme's custom theme hook implementations. Never define "path"
- * or "template" as these are detected and automatically added.
- *
- * @see atomium_theme_registry_alter()
- * @see atomium_theme()
- * @see hook_theme()
- */
-function _atomium_theme(array $existing, $type, $theme, $path) {
-  $hooks = array();
-
-  foreach (atomium_find_templates() as $component_info) {
-    if (empty($component_info['includes'])) {
-      continue;
-    }
-
-    foreach ($component_info['includes'] as $file) {
-      include_once $file;
-    }
-
-    $function_name = sprintf(
-      '%s_atomium_theme_%s',
-      $component_info['theme'],
-      $component_info['component']
-    );
-
-    if (!\function_exists($function_name)) {
-      continue;
-    }
-
-    $hooks = \array_map(
-      function ($hook) use ($component_info) {
-        $hook += array(
-          'path' => $component_info['directory'],
-          'file' => \sprintf('%s.component.inc', $component_info['component']),
-        );
-
-        return $hook;
-      },
-      drupal_array_merge_deep(
-        (array) $function_name(
-          $existing,
-          $type,
-          $component_info['theme'],
-          $path
-        ),
-        $hooks
-      )
-    );
-  }
-
-  return $hooks;
-}
-
-/**
  * Implements hook_theme_registry_alter().
  */
 function atomium_theme_registry_alter(array &$registry) {

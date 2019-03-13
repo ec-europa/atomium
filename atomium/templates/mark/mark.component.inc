@@ -38,7 +38,7 @@ function atomium_atomium_definition_mark() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_mark(array &$variables, $hook) {
-  global $user;
+  $user = $GLOBALS['user'];
   $type = $variables['type'];
 
   if ($user->uid) {

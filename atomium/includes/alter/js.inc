@@ -10,14 +10,18 @@
  */
 function atomium_js_alter(array &$js) {
   foreach (atomium_find_templates() as $component_data) {
-    $js_file = \sprintf('%s/%s.js', $component_data['directory'], $component_data['component']);
+    $js_file = \sprintf(
+      '%s/%s.js',
+      $component_data['directory'],
+      $component_data['component']
+    );
 
     if (!\file_exists($js_file)) {
       continue;
     }
 
     $js = drupal_add_js($js_file, array(
-      'group' => JS_DEFAULT,
+      'group' => JS_THEME,
       'every_page' => TRUE,
     ));
   }

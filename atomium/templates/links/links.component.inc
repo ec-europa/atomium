@@ -32,7 +32,7 @@ function atomium_atomium_theme_links(array $existing, $type, $theme, $path) {
  * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_links(array &$variables, $hook) {
-  global $language_url;
+  $language_url = $GLOBALS['language_url'];
 
   $count = \count($variables['links']);
   if ($count <= 0) {
