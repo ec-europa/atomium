@@ -21,3 +21,11 @@ regions[sidebar_first] = Sidebar first
 regions[sidebar_second] = Sidebar second
 regions[footer_middle] = Footer middle
 regions[footer_right] = Footer right
+
+settings[test1][setting1] = settingA
+settings[test1][setting2] = settingB
+settings[test1][setting3] = settingC
+settings[test1][setting7] = settingG
+
+settings[test2][] = value1
+settings[test2][] = value2
