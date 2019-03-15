@@ -28,7 +28,7 @@
         "drupol/drupal-conventions": "^1.4.5",
         "drush/drush": "^8.1.18",
         "mikey179/vfsstream": "^1.6",
-        "openeuropa/task-runner": "1.0.0-beta4",
+        "openeuropa/task-runner": "1.0.0-beta5",
         "phpunit/phpunit": "^5.7",
         "webflo/drupal-finder": "^1.1",
         "webmozart/path-util": "^2.3"
