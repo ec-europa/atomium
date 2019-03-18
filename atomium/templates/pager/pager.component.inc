@@ -36,27 +36,31 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   $element = $variables['element'];
   $quantity = $variables['quantity'];
   $items = array();
+  $pager_page_array = $GLOBALS['pager_page_array'];
+  $pager_total = $GLOBALS['pager_total'];
 
-  $pager_total_elem = $GLOBALS['pager_total'][$element];
   // This is for the hook_atomium_definition_hook() to work.
   if (isset($variables['pager_page_array']) && $variables['pager_page_array'] !== NULL) {
     $pager_page_array = $variables['pager_page_array'];
   }
+  $pager_page_array_element = (int) $pager_page_array[$element];
+
   if (isset($variables['pager_total']) && $variables['pager_total'] !== NULL) {
-    $GLOBALS['pager_total'] = $variables['pager_total'];
+    $pager_total = $variables['pager_total'];
   }
+  $pager_total_element = (int) $pager_total[$element];
 
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
-  $pager_middle = \ceil($quantity / 2);
+  $pager_middle = (int) \ceil($quantity / 2);
   // Current is the page we are currently paged to.
-  $pager_current = $pager_page_array[$element] + 1;
+  $pager_current = $pager_page_array_element + 1;
   // First is the first page listed by this pager piece (re quantity).
   $pager_first = $pager_current - $pager_middle + 1;
   // Last is the last page listed by this pager piece (re quantity).
   $pager_last = $pager_current + $quantity - $pager_middle;
   // Max is the maximum page number.
-  $pager_max = $pager_total_elem;
+  $pager_max = $pager_total_element;
   /* End of marker calculations. */
 
   // Prepare for generation loop.
@@ -73,8 +77,8 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   }
   /* End of generation loop preparation. */
 
-  if ($pager_total_elem > 1) {
-    if ($GLOBALS['pager_page_array'][$element] > 0) {
+  if ($pager_total_element > 1) {
+    if ($pager_page_array_element > 0) {
       $options = array(
         'title' => t('Go to first page'),
         'attributes' => array(
@@ -83,10 +87,20 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           ),
         ),
       );
-      $items['pager_first'] = _atomium_pager_item_to_link_helper((isset($tags[0]) ? $tags[0] : t('« first')), array(0 => 0), $element, $options, $variables);
+      $items['pager_first'] = _atomium_pager_item_to_link_helper(
+        (isset($tags[0]) ? $tags[0] : t('« first')),
+        array(0 => 0),
+        $element,
+        $options,
+        $variables
+      );
 
       // If we are anywhere but the first page.
-      $pager = pager_load_array($GLOBALS['pager_page_array'][$element] - 1, $element, $GLOBALS['pager_page_array']);
+      $pager = pager_load_array(
+        $pager_page_array_element - 1,
+        $element,
+        $pager_page_array
+      );
       // If the previous page is the first page, mark the link as such.
       if ($pager[$element] === 0) {
         $pager = array(0 => 0);
@@ -99,14 +113,23 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           ),
         ),
       );
-      $items['pager_previous'] = _atomium_pager_item_to_link_helper((isset($tags[1]) ? $tags[1] : t('‹ previous')), $pager, $element, $options, $variables);
+      $items['pager_previous'] = _atomium_pager_item_to_link_helper(
+        (isset($tags[1]) ? $tags[1] : t('‹ previous')),
+        $pager,
+        $element,
+        $options,
+        $variables
+      );
     }
 
     // When there is more than one page, create the pager list.
-    if ($i !== $pager_max) {
+    if ( $i !== $pager_max) {
       if ($i > 1) {
         $items['pager_ellipsis__' . $i] = array(
-          '#theme' => _atomium_extend_theme_hook('pager_ellipsis', $variables['theme_hook_original']),
+          '#theme' => _atomium_extend_theme_hook(
+            'pager_ellipsis',
+            $variables['theme_hook_original']
+          ),
           '#attributes' => array(
             'class' => array(
               'pager-ellipsis',
@@ -125,8 +148,18 @@ function atomium_preprocess_pager(array &$variables, $hook) {
               ),
             ),
           );
-          $pager = pager_load_array($GLOBALS['pager_page_array'][$element] + ($i - $pager_current), $element, $GLOBALS['pager_page_array']);
-          $items['pager_link__' . $i] = _atomium_pager_item_to_link_helper($i, $pager, $element, $options, $variables);
+          $pager = pager_load_array(
+            $pager_page_array_element + ($i - $pager_current),
+            $element,
+            $pager_page_array
+          );
+          $items['pager_link__' . $i] = _atomium_pager_item_to_link_helper(
+            $i,
+            $pager,
+            $element,
+            $options,
+            $variables
+          );
         }
 
         if ($i === $pager_current) {
@@ -154,7 +187,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
     // End generation.
     // If we are anywhere but the last page.
-    if ($GLOBALS['pager_page_array'][$element] < ($pager_total_elem - 1)) {
+    if ($pager_page_array_element < ($pager_total_element - 1)) {
       // If the next page is the last page, mark the link as such.
       $options = array(
         'title' => t('Go to next page'),
@@ -164,12 +197,23 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           ),
         ),
       );
-      $pager = pager_load_array($GLOBALS['pager_page_array'][$element] + 1, $element, $GLOBALS['pager_page_array']);
-      $items['pager_next'] = _atomium_pager_item_to_link_helper((isset($tags[3]) ? $tags[3] : t('next ›')), $pager, $element, $options, $variables);
+      $pager = pager_load_array(
+        $pager_page_array_element + 1,
+        $element,
+        $pager_page_array
+      );
+      $items['pager_next'] = _atomium_pager_item_to_link_helper(
+        (isset($tags[3]) ? $tags[3] : t('next ›')),
+        $pager,
+        $element,
+        $options,
+        $variables
+      );
     }
 
     // If we are anywhere but the last page.
-    if ($GLOBALS['pager_page_array'][$element] < ($pager_total_elem - 1)) {
+
+    if ($pager_page_array_element < ($pager_total_element - 1)) {
       $options = array(
         'title' => t('Go to last page'),
         'attributes' => array(
@@ -178,8 +222,18 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           ),
         ),
       );
-      $pager = pager_load_array($pager_total_elem - 1, $element, $GLOBALS['pager_page_array']);
-      $items['pager_last'] = _atomium_pager_item_to_link_helper((isset($tags[4]) ? $tags[4] : t('last »')), $pager, $element, $options, $variables);
+      $pager = pager_load_array(
+        $pager_total_element - 1,
+        $element,
+        $pager_page_array
+      );
+      $items['pager_last'] = _atomium_pager_item_to_link_helper(
+        (isset($tags[4]) ? $tags[4] : t('last »')),
+        $pager,
+        $element,
+        $options,
+        $variables
+      );
     }
 
     foreach ($items as $key => &$item) {
