@@ -11,11 +11,9 @@
 function atomium_block_view_alter(&$build, $block) {
   // Strict typing has been disabled for this function until
   // https://www.drupal.org/project/facetapi/issues/2976814
-  // and
-  // https://www.drupal.org/project/workbench/issues/2976812
-  // are not committed.
+  // is not committed.
   //
-  // Add a specific atomium key.
+  // Add a specific Atomium key.
   // This will be used in the block preprocess later.
   if (!isset($block->atomium) || !\is_array($block->atomium)) {
     $block->atomium = array();

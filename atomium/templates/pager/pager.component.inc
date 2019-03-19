@@ -141,7 +141,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     // When there is more than one page, create the pager list.
-    if ( $i !== $pager_max) {
+    if ($i !== $pager_max) {
       if ($i > 1) {
         $items['pager_ellipsis__' . $i] = array(
           '#theme' => _atomium_extend_theme_hook(
@@ -230,7 +230,6 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     // If we are anywhere but the last page.
-
     if ($pager_page_array_element < ($pager_total_element - 1)) {
       $options = array(
         'title' => t('Go to last page'),

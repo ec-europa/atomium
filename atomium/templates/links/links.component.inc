@@ -32,7 +32,6 @@ function atomium_atomium_theme_links(array $existing, $type, $theme, $path) {
  * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_links(array &$variables, $hook) {
-
   $heading = $variables['heading'];
 
   $variables['atomium']['attributes']['wrapper']->merge($variables['attributes']);
