@@ -35,17 +35,12 @@ Table of contents:
 To enable the theme, go to **admin/appearance** and select an Atomium
 based theme.
 
-Atomium comes with 2 default sub-themes provided as examples.
-
- - Atomium Bootstrap,
- - Atomium Foundation,
+Atomium comes with a default sub-themes provided as example.
  - Atomium Bartik.
  
-Atomium Bootstrap is based on the [Bootstrap framework](https://getbootstrap.com/).
-Atomium Foundation is based on the [Zurb Foundation framework](https://foundation.zurb.com/).
 Atomium Bartik is a fork on the Bartik core theme using the Atomium mechanisms.
 
-These sub-themes provide examples of *preprocess* functions and templates
+This sub-theme provides examples of *preprocess* functions and templates
 so you can craft your own theme quickly.
 
 [Go to top](#table-of-content)
