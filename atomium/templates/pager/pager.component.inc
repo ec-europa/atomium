@@ -6,6 +6,24 @@
  */
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_pager() {
+  return array(
+    'label' => 'Pager',
+    'description' => 'The pager',
+    'preview' => array(
+      'pager_page_array' => array(
+        0 => \rand(0, 30),
+      ),
+      'pager_total' => array(
+        0 => 30,
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_atomium_theme_hook().
  */
 function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
