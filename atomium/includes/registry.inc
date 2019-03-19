@@ -279,16 +279,20 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
     }
 
     // Filter out functions that does not exist.
-    $info[$phase_key] = \array_filter($info[$phase_key], '\function_exists');
+    $info[$phase_key] =
+      \array_filter($info[$phase_key], '\function_exists');
 
     // Sadly we remove preprocess and process for hooks that provides
     // a theme function. (like the date module with date_display_single).
     // We could have this in Atomium but some modules badly implementing
     // attributes handling would fail.
     if (isset($info['function'])) {
-      $info[$phase_key] = \array_filter($info[$phase_key], function ($function) use ($phase, $hook) {
-        return \strpos($function, $phase . '_' . $hook) !== FALSE;
-      });
+      $info[$phase_key] = \array_filter(
+        $info[$phase_key],
+        function ($function) use ($phase, $hook) {
+          return \strpos($function, $phase . '_' . $hook) !== FALSE;
+        }
+      );
     }
   }
 }
@@ -463,10 +467,19 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
       }
 
       // Process core's normal functionality.
-      _theme_process_registry($registry, $theme->name, $GLOBALS['theme_key'] === $theme->name ? 'theme' : 'base_theme', $theme->name, $path);
+      _theme_process_registry(
+        $registry,
+        $theme->name,
+        $GLOBALS['theme_key'] === $theme->name ? 'theme' : 'base_theme',
+        $theme->name,
+        $path
+      );
 
       // Find necessary templates in the theme.
-      $registry = drupal_array_merge_deep($registry, drupal_find_theme_templates($registry, '.tpl.php', $path));
+      $registry = drupal_array_merge_deep(
+        $registry,
+        drupal_find_theme_templates($registry, '.tpl.php', $path)
+      );
 
       // Iterate over each registered hook.
       foreach ($registry as $hook => $info) {
@@ -489,7 +502,12 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
 
         // Sort the phase functions.
         // @see https://www.drupal.org/node/2098551
-        _atomium_registry_sort_phase_functions($registry[$hook][$phase_key], $hook, $phase, $themes);
+        _atomium_registry_sort_phase_functions(
+          $registry[$hook][$phase_key],
+          $hook,
+          $phase,
+          $themes
+        );
 
         // Setup a default "context" variable. This allows #context to be passed
         // to every template and theme function.
