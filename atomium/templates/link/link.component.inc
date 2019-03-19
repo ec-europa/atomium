@@ -27,8 +27,6 @@ function atomium_atomium_theme_link(array $existing, $type, $theme, $path) {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function atomium_preprocess_link(array &$variables, $hook) {
-  global $language_url;
-
   $variables += array('options' => array('html' => FALSE));
   $variables['options'] += array(
     'html' => FALSE,
@@ -42,7 +40,7 @@ function atomium_preprocess_link(array &$variables, $hook) {
 
   // Append active class.
   if (($path === '/' . $_GET['q'] || ($path === url('<front>', $variables['options']) && drupal_is_front_page())) &&
-    (empty($variables['options']['language']) || $variables['options']['language']->language === $language_url->language)) {
+    (empty($variables['options']['language']) || $variables['options']['language']->language === $GLOBALS['language_url']->language)) {
     $variables['atomium']['attributes']['element']->append('class', 'active');
   }
 

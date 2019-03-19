@@ -574,7 +574,8 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
   static $drupal_static_fast;
 
   if (!isset($drupal_static_fast)) {
-    $drupal_static_fast['atomium_get_settings'] = &drupal_static(__FUNCTION__);
+    $drupal_static_fast['atomium_get_settings'] =
+      &drupal_static(__FUNCTION__);
   }
 
   $theme_key = $GLOBALS['theme_key'];
@@ -587,7 +588,9 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
 
   if (!isset($settings_by_theme[$cid])) {
     $settings_by_theme[$cid] = array();
-    if ($theme_settings = atomium_get_theme_info($theme_key, 'settings', $base_themes)) {
+    if ($theme_settings =
+      atomium_get_theme_info($theme_key, 'settings', $base_themes)
+    ) {
       _atomium_array_flatten(
         $theme_settings,
         $settings_by_theme[$cid]);
