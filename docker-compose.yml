@@ -7,10 +7,9 @@ services:
     - 8080:8080
     volumes:
     - .:/var/www/html # Non Mac users.
-    - ~/.composer:/var/www/.composer
     # - nfsmount:/var/www/html # Mac Users with the nfsmount volume.
     environment:
-      # XDEBUG_CONFIG: "remote_enable=1 remote_host=10.254.254.254 remote_port=9000 idekey=PHPSTORM remote_autostart=1"
+      XDEBUG_CONFIG: "remote_enable=1 remote_host=10.254.254.254 remote_port=9000 idekey=PHPSTORM remote_autostart=1"
       PHP_IDE_CONFIG: "serverName=Docker"
       # For Xdebug setup, run this command in the terminal:
       # For Mac users: sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
