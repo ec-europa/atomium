@@ -37,8 +37,8 @@ Table of contents:
 To enable the theme, go to **admin/appearance** and select
 an Atomium based theme.
 
-Atomium comes with "Atomium Bartik" sub-theme provided as an example, it can
-be used as a starter-kit as well.
+Atomium comes with "Atomium Bartik" sub-theme provided as an example, also, it can
+be used as a starter-kit.
 It is a fork of the Bartik core theme but based on Atomium.
 
 The sub-theme provide examples of *preprocess* functions and templates, allowing custom theme to be crafted quickly.

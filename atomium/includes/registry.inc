@@ -309,7 +309,7 @@ function _atomium_theme_add_processors($hook, array &$info = array(), array $pre
 function _atomium_theme_processors_phases() {
   return array(
     'preprocess functions' => 'preprocess',
-    'process functions'    => 'process',
+    'process functions' => 'process',
   );
 }
 
@@ -429,7 +429,7 @@ function _atomium_process_theme_registry(array &$registry, array $themes) {
   // functions always being executed after the preprocess functions.
   $variable_process_phases = array(
     'preprocess functions' => 'preprocess',
-    'process functions'    => 'process',
+    'process functions' => 'process',
   );
 
   // Iterate over each theme passed.
