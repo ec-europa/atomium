@@ -1,3 +1,14 @@
+# ==============================================================================
+# Pull request clone ===========================================================
+# ==============================================================================
+# Use plugin to checkout pull requests for caching issue:
+# https://github.com/drone/drone/issues/2390
+# ==============================================================================
+clone:
+  git:
+    image: plugins/git:next
+    pull: true
+
 workspace:
   base: /test
   path: atomium
@@ -7,6 +18,7 @@ services:
     image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
     environment:
     - DOCUMENT_ROOT=/test/atomium
+    pull: true
   mysql:
     image: percona/percona-server:5.6
     environment:
