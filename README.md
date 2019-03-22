@@ -186,7 +186,7 @@ Atomium provides a custom page available on the path: **atomium-overview**.
 This particular page is only available to users with _administer themes_ permission.
 
 This page acts as a showcase page of components.
-To add a component in there, A custom component needs to define two hooks:
+To add a component in there, a custom component needs to define two hooks:
  - `hook_atomium_definition_hook()`
    
    This hook allows to define only one component.
