@@ -43,12 +43,7 @@ function atomium_atomium_definition_table() {
 function atomium_atomium_definition_form_table(array $form, array &$form_state) {
   $form['element1'] = array(
     '#theme' => 'table',
-    '#caption' => 'Default table.',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
+    '#caption' => 'Default simple table.',
     '#header' => array(
       array('header cell 1.1', 'header cell 1.2', 'header cell 1.3'),
     ),
@@ -66,11 +61,6 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element2'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with empty heading',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
     '#header' => array(
       array('', 'header cell 1.2', 'header cell 1.3'),
     ),
@@ -88,11 +78,6 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element3'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with colspan #1.',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
     '#header' => array(
       array(
         array(
@@ -136,11 +121,6 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element4'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with colspan #2.',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
     '#header' => array(
       array(
         array(
@@ -188,11 +168,6 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element5'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with colspan #3.',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
     '#header' => array(
       array(
         array(
@@ -240,11 +215,6 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element6'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with colspan and empty heading.',
-    '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
-    ),
     '#header' => array(
       array(
         array(
@@ -288,10 +258,101 @@ function atomium_atomium_definition_form_table(array $form, array &$form_state) 
   $form['element7'] = array(
     '#theme' => 'table',
     '#caption' => 'Table with sticky enabled.',
+    '#header' => array(
+      array('header cell 1.1', 'header cell 1.2', 'header cell 1.3'),
+      array('header cell 2.1', 'header cell 2.2', 'header cell 2.3'),
+    ),
+    '#rows' => array(
+      array('body cell 1.1', 'body cell 1.2', 'body cell 1.3'),
+      array('body cell 2.1', 'body cell 2.2', 'body cell 2.3'),
+      array('body cell 3.1', 'body cell 3.2', 'body cell 3.3'),
+    ),
+    '#footer' => array(
+      array('footer cell 1.1', 'footer cell 1.2', 'footer cell 1.3'),
+      array('footer cell 2.1', 'footer cell 2.2', 'footer cell 2.3'),
+    ),
+  );
+
+  $form['element8'] = array(
+    '#theme' => 'table',
+    '#caption' => 'Table with a colgroup and a single col element.',
     '#colgroups' => array(
-      array('data' => '', 'style' => 'background-color: #fafafa;'),
-      '',
-      '',
+      array(
+        array(
+          'style' => 'background-color: red;',
+        ),
+      ),
+    ),
+    '#header' => array(
+      array('header cell 1.1', 'header cell 1.2', 'header cell 1.3'),
+      array('header cell 2.1', 'header cell 2.2', 'header cell 2.3'),
+    ),
+    '#rows' => array(
+      array('body cell 1.1', 'body cell 1.2', 'body cell 1.3'),
+      array('body cell 2.1', 'body cell 2.2', 'body cell 2.3'),
+      array('body cell 3.1', 'body cell 3.2', 'body cell 3.3'),
+    ),
+    '#footer' => array(
+      array('footer cell 1.1', 'footer cell 1.2', 'footer cell 1.3'),
+      array('footer cell 2.1', 'footer cell 2.2', 'footer cell 2.3'),
+    ),
+  );
+
+  $form['element9'] = array(
+    '#theme' => 'table',
+    '#caption' => 'Table with a colgroup and a multiple col elements.',
+    '#colgroups' => array(
+      array(
+        'data' => array(
+          array(
+            'style' => 'background-color: red;',
+          ),
+          array(),
+          array(
+            'style' => 'background-color: green;',
+          ),
+        ),
+        'class' => 'jazzy',
+      ),
+    ),
+    '#header' => array(
+      array('header cell 1.1', 'header cell 1.2', 'header cell 1.3'),
+      array('header cell 2.1', 'header cell 2.2', 'header cell 2.3'),
+    ),
+    '#rows' => array(
+      array('body cell 1.1', 'body cell 1.2', 'body cell 1.3'),
+      array('body cell 2.1', 'body cell 2.2', 'body cell 2.3'),
+      array('body cell 3.1', 'body cell 3.2', 'body cell 3.3'),
+    ),
+    '#footer' => array(
+      array('footer cell 1.1', 'footer cell 1.2', 'footer cell 1.3'),
+      array('footer cell 2.1', 'footer cell 2.2', 'footer cell 2.3'),
+    ),
+  );
+
+  $form['element10'] = array(
+    '#theme' => 'table',
+    '#caption' => 'Table with multiple colgroups and a multiple col elements.',
+    '#colgroups' => array(
+      array(
+        'data' => array(
+          array(
+            'style' => 'background-color: green;',
+          ),
+          array(
+            'style' => 'background-color: white;',
+          ),
+        ),
+        'class' => 'bar',
+      ),
+      array(
+        'data' => array(
+          array(
+            'style' => 'background-color: red;',
+          ),
+        ),
+        'class' => 'foo',
+      ),
     ),
     '#header' => array(
       array('header cell 1.1', 'header cell 1.2', 'header cell 1.3'),
@@ -370,8 +431,8 @@ function atomium_preprocess_table(array &$variables, $hook) {
 
   // Format the table colgroups row.
   $variables['colgroups'] = _atomium_table_format_rows(
-    'colgroup',
-    array($variables['colgroups']),
+    'colgroups',
+    $variables['colgroups'],
     $header,
     $ts,
     FALSE,
@@ -390,7 +451,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
 
   // Format the table footer rows.
   $variables['rows'] = _atomium_table_format_rows(
-    'body',
+    'rows',
     $variables['rows'],
     $header,
     $ts,
@@ -434,73 +495,101 @@ function atomium_preprocess_table(array &$variables, $hook) {
 function _atomium_table_format_rows($type, array $rows, array $header, array $ts, $is_header = FALSE, array &$variables = array()) {
   $rows_array = array();
 
-  if (isset($header[0])) {
-    $header = $header[0];
-  }
-
   if (empty($rows)) {
     return $rows_array;
   }
 
+  $header = isset($header[0]) ?
+    $header[0] :
+    array();
+
+  // We will need this map later when adding classes to the row.
+  $type_map = array(
+    'header' => 'thead',
+    'rows' => 'tbody',
+    'footer' => 'tfoot',
+    'colgroups' => 'colgroup',
+  );
+
   $flip = array('even' => 'odd', 'odd' => 'even');
   $class = 'even';
-  foreach ($rows as $rowid => $row) {
+  $rows_count = count($rows);
+  $rows_indexed_by_int = array_values($rows);
+
+  for ($j = 0; $j < $rows_count; $j++) {
+    $row = $rows_indexed_by_int[$j];
+    $attributes = array();
+
     // Check if we're dealing with a simple or complex row.
-    if (isset($row['data'])) {
+    if (isset($row['data']) && !empty($row['data'])) {
       $cells = $row['data'];
       $no_striping = isset($row['no_striping']) ? $row['no_striping'] : FALSE;
-
-      // Set the attributes array and exclude 'data' and 'no_striping'.
       $attributes = $row;
-      unset($attributes['data'], $attributes['no_striping']);
     }
     else {
       $cells = $row;
-      $attributes = array();
       $no_striping = FALSE;
     }
 
-    if (\count($cells) === 0) {
-      continue;
-    }
+    // Remove any value that has a numeric key.
+    $attributes = array_filter(
+      $attributes,
+      function ($key) {
+        return !is_numeric($key);
+      },
+      ARRAY_FILTER_USE_KEY
+    );
 
     // Add odd/even class.
     if (!$no_striping) {
       $class = $flip[$class];
+      $attributes += array('class' => array());
+      $attributes['class'] = (array) $attributes['class'];
       $attributes['class'][] = $class;
     }
 
-    $variables['atomium']['attributes'][$type . '-row-' . $rowid]
-      ->merge($attributes);
+    $variables['atomium']['attributes'][$type . '-row-' . $j]
+      ->merge($attributes)
+      ->remove('data')
+      ->remove('no_stripping')
+      ->append('class', 'row-type-' . $type_map[$type]);
 
-    // Build row.
+    if (!\is_array($cells)) {
+      continue;
+    }
+
+    if (empty($cells)) {
+      continue;
+    }
+
+    // Process cells.
     $i = 0;
-
-    foreach ($cells as $cellid => $cell) {
+    foreach ($cells as $index => $cell) {
       if ($is_header === TRUE) {
-        $cell = tablesort_header($cell, $header, $ts);
+        $cells[$index] = tablesort_header($cell, $header, $ts);
       }
       else {
-        $cellid = $i;
-        $cell = tablesort_cell($cell, $header, $ts, $i++);
+        $cells[$index] = tablesort_cell($cell, $header, $ts, $i++);
       }
+    }
 
-      // @todo: Check this part of code.
+    // Build cells and their attributes.
+    $i = 0;
+    foreach ($cells as $cell) {
       $attributes_array = array();
+
       if (\is_array($cell)) {
-        $cell += array('data' => '');
-        $attributes_array = \array_diff_key(
-          $cell,
-          array(
-            'data' => 'data',
-            'header' => 'header',
-          )
-        );
+        $cell += array('data' => NULL);
+        $attributes_array = $cell;
         $cell = $cell['data'];
       }
 
-      $variables['atomium']['attributes'][$type . '-cell-' . $rowid . '-' . $cellid] = $attributes_array;
-      $rows_array['row-' . $rowid]['cells']['cell-' . $cellid] = $cell;
+      $variables['atomium']['attributes'][$type . '-cell-' . $j . '-' . $i]
+        ->merge($attributes_array)
+        ->remove('data')
+        ->remove('header');
+      $rows_array['row-' . $j]['cells']['cell-' . $i] = $cell;
+      $i++;
     }
   }
 
