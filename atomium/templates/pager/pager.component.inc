@@ -279,6 +279,8 @@ function atomium_preprocess_pager(array &$variables, $hook) {
       ),
     );
   }
+  $GLOBALS['pager_total'] = $pager_total;
+  $GLOBALS['pager_page_array'] = $pager_page_array;
 }
 
 /**
