@@ -49,6 +49,10 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   $i = 0;
   foreach ($variables['items'] as $key => $item) {
     $i++;
+
+    $variables['atomium']['attributes'][$key]
+      ->append('class', ($i % 2) ? 'odd' : 'even');
+
     if ($i === 1) {
       $variables['atomium']['attributes'][$key]->append('class', 'first');
     }
@@ -58,13 +62,15 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
 
     if (\is_array($item) && isset($item['data'])) {
       $item += array('class' => array());
-      $variables['atomium']['attributes'][$key]->append('class', $item['class']);
+      $variables['atomium']['attributes'][$key]
+        ->append('class', $item['class']);
       $item = array(
         '#theme' => 'html_tag',
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key]->getValuesAsArray(),
+            'element' => $variables['atomium']['attributes'][$key]
+              ->getValuesAsArray(),
           ),
         ),
         '#value' => $item['data'],
@@ -81,7 +87,8 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
         '#tag' => 'li',
         '#atomium' => array(
           'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key]->getValuesAsArray(),
+            'element' => $variables['atomium']['attributes'][$key]
+              ->getValuesAsArray(),
           ),
         ),
         '#value' => $item,
@@ -93,6 +100,15 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     }
 
     $variables['items'][$key] += array('#attributes' => array());
+    $variables['items'][$key]['#attributes'] =
+      $variables['atomium']['attributes'][$key]
+        ->merge((array) $variables['items'][$key]['#attributes'])
+        ->getValuesAsArray();
+
+    // We do this to ensure that component like menu_local_task will have
+    // the proper attributes.
+    $variables['items'][$key]['#atomium']['attributes']['wrapper'] =
+      $variables['atomium']['attributes'][$key];
   }
 
   // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
