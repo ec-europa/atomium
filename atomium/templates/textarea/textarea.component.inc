@@ -59,12 +59,16 @@ function atomium_preprocess_textarea(array &$variables, $hook) {
 
   if (isset($variables['element']['#atomium']['attributes']['element'])) {
     $variables['atomium']['attributes']['element']
-      ->merge($variables['element']['#atomium']['attributes']['element']);
+      ->merge(
+        $variables['element']['#atomium']['attributes']['element']->getValuesAsArray()
+      );
   }
 
   if (isset($variables['element']['#atomium']['attributes']['wrapper'])) {
     $variables['atomium']['attributes']['wrapper']
-      ->merge($variables['element']['#atomium']['attributes']['wrapper']);
+      ->merge(
+        $variables['element']['#atomium']['attributes']['wrapper']->getValuesAsArray()
+      );
   }
 
   $variables['atomium']['attributes']['wrapper']
