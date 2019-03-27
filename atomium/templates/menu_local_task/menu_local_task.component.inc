@@ -68,5 +68,7 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
     );
   }
 
-  $variables['atomium']['attributes']['wrapper']->append('class', !empty($variables['active']) ? 'active' : '');
+  if (!empty($variables['active'])) {
+    $variables['atomium']['attributes']['wrapper']->append('class', 'active');
+  }
 }
