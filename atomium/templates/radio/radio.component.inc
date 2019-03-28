@@ -58,7 +58,7 @@ function atomium_preprocess_radio(array &$variables, $hook) {
 
   if (isset($variables['element']['#return_value']) &&
     $variables['element']['#value'] !== FALSE &&
-    (int) $variables['element']['#value'] === (int) $variables['element']['#return_value']) {
+    (string) $variables['element']['#value'] === (string) $variables['element']['#return_value']) {
     $variables['atomium']['attributes']['element']->set('checked');
   }
 }
