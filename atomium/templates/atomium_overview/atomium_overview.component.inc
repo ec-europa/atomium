@@ -109,7 +109,10 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       }
     }
     else {
-      $definition['preview']['#theme'] = array($component);
+      $definition['preview']['#theme'] = _atomium_extend_theme_hook(
+        $component,
+        array('preview')
+      );
     }
 
     // Allow the use of a form.
