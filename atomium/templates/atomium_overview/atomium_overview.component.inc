@@ -104,6 +104,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
         $definition['preview'] = array(
           '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
           '#items' => $elements,
+          '#type' => FALSE,
         );
       }
     }
@@ -128,6 +129,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       $definitions[$component]['preview'] = array(
         '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
         '#items' => $errors[$component],
+        '#type' => FALSE,
       );
     }
   }
