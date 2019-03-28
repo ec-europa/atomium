@@ -40,7 +40,7 @@ function atomium_atomium_definition_form_radios(array $form, array &$form_state)
       'item2' => 'Item 2',
       'item3' => 'Item 3',
     ),
-    '#default_value' => array('item2'),
+    '#default_value' => 'item2',
   );
 
   return $form;
