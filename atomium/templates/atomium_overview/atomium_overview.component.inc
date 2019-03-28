@@ -110,13 +110,18 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
         );
 
         _atomium_extend_theme_property(
-          $definition,
+          $definition['preview'],
           array('preview', $component)
         );
       }
     }
     else {
-      $definition['preview']['#theme'] = array($component);
+      $definition['preview']['#theme'] = $component;
+
+      _atomium_extend_theme_property(
+        $definition['preview'],
+        array('preview')
+      );
     }
 
     // Allow the use of a form.
