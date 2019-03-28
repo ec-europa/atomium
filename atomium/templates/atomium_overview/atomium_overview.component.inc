@@ -106,6 +106,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
         $definition['preview'] = array(
           '#theme' => 'item_list',
           '#items' => $elements,
+          '#type' => FALSE,
         );
 
         _atomium_extend_theme_property(
@@ -135,6 +136,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       $preview = array(
         '#theme' => 'item_list',
         '#items' => $errors[$component],
+        '#type' => FALSE,
       );
 
       _atomium_extend_theme_property(
