@@ -9,28 +9,43 @@
  * Implements hook_field_attach_view_alter().
  */
 function atomium_field_attach_view_alter(array &$output, array $context) {
-  $suggestion_data = atomium_get_settings(
-    'alter.field_attach_view_alter.keys',
-    TRUE
+  $context += array(
+    'suggestion data' => atomium_get_settings(
+      'alter.field_attach_view_alter.keys',
+      TRUE
+    ),
   );
 
-  foreach (element_children($output) as $key) {
+  $callback = function (&$root_element, $root_element_key, $context) {
+    if (!isset($root_element['#theme'])) {
+      return;
+    }
+
     $suggestions = \array_filter(
       \array_map(
-        function ($item) use ($output, $key) {
-          return isset($output[$key]['#' . $item]) ?
-            $output[$key]['#' . $item] :
+        function ($item) use ($root_element) {
+          return isset($root_element['#' . $item]) ?
+            $root_element['#' . $item] :
             NULL;
         },
-        $suggestion_data
+        $context['suggestion data']
       )
     );
 
-    if (isset($output[$key]['#theme']) && !empty($suggestions)) {
-      $output[$key]['#theme'] = _atomium_extend_with_suggestions(
-        (array) $output[$key]['#theme'],
-        $suggestions
-      );
+    if (empty($suggestions)) {
+      return;
     }
-  }
+
+    $root_element['#theme'] = _atomium_extend_with_suggestions(
+      (array) $root_element['#theme'],
+      $suggestions
+    );
+  };
+
+  _atomium_recursive_element_children(
+    $output,
+    $callback,
+    NULL,
+    $context
+  );
 }
