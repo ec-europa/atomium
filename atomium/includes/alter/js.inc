@@ -21,7 +21,7 @@ function atomium_js_alter(array &$js) {
     }
 
     $js = drupal_add_js($js_file, array(
-      'group' => JS_DEFAULT,
+      'group' => JS_THEME,
       'every_page' => TRUE,
     ));
   }
