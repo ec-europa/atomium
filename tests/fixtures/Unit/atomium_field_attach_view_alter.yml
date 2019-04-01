@@ -1,0 +1,81 @@
+-
+  input:
+    -
+      '#theme': item_list
+      'items':
+        -
+          '#theme': block
+          '#property1': foo
+        -
+          '#theme': link
+          '#property2': bar
+  context:
+    'suggestion data': ~
+  output:
+    -
+      '#theme': item_list
+      'items':
+        -
+          '#theme': block
+          '#property1': foo
+        -
+          '#theme': link
+          '#property2': bar
+-
+  input:
+    -
+      '#theme': item_list
+      'items':
+        -
+          '#theme': block
+          '#property1': foo
+        -
+          '#theme': link
+          '#property2': bar
+  context:
+    'suggestion data':
+      - property1
+      - property2
+  output:
+    -
+      '#theme': item_list
+      'items':
+        -
+          '#theme':
+            - block__foo
+          '#property1': foo
+        -
+          '#theme':
+            - link__bar
+          '#property2': bar
+-
+  input:
+    -
+      '#theme': item_list
+      '#property3': baz
+      'items':
+        -
+          '#theme': block
+          '#property1': foo
+        -
+          '#theme': link
+          '#property2': bar
+  context:
+    'suggestion data':
+      - property1
+      - property2
+      - property3
+  output:
+    -
+      '#theme':
+        - item_list__baz
+      '#property3': baz
+      'items':
+        -
+          '#theme':
+            - block__foo
+          '#property1': foo
+        -
+          '#theme':
+            - link__bar
+          '#property2': bar

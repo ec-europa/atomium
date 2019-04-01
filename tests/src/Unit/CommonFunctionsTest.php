@@ -24,6 +24,18 @@ class CommonFunctionsTest extends AbstractUnitTest {
    * @return array
    *   List of component fixtures.
    */
+  public function atomiumFieldAttachViewAlterProvider() {
+    return Yaml::parseFile(
+      __DIR__ . '/../../fixtures/Unit/atomium_field_attach_view_alter.yml'
+    );
+  }
+
+  /**
+   * Return atomium_get_theme_info fixtures.
+   *
+   * @return array
+   *   List of component fixtures.
+   */
   public function atomiumGetThemeInfoProvider() {
     return Yaml::parseFile(
       __DIR__ . '/../../fixtures/Unit/atomium_get_theme_info.yml'
@@ -39,6 +51,17 @@ class CommonFunctionsTest extends AbstractUnitTest {
     $settings = atomium_get_theme_info($theme, $key, $base_themes);
 
     $this::assertSame($expected, $settings[$test]);
+  }
+
+  /**
+   * Test atomium_field_attach_view_alter().
+   *
+   * @dataProvider atomiumFieldAttachViewAlterProvider
+   */
+  public function testAtomiumRecursiveElementChildren($input, $context, $output) {
+    atomium_field_attach_view_alter($input, $context);
+
+    $this::assertSame($input, $output);
   }
 
 }
