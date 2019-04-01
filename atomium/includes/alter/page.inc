@@ -9,7 +9,9 @@
  * Implements hook_page_alter().
  */
 function atomium_page_alter(array &$page) {
-  foreach (system_region_list($GLOBALS['theme'], REGIONS_VISIBLE) as $region => $name) {
+  $regions = array_keys(system_region_list($GLOBALS['theme'], REGIONS_VISIBLE));
+
+  foreach ($regions as $region) {
     if (empty($page[$region])) {
       continue;
     }
