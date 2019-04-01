@@ -51,7 +51,7 @@ function atomium_preprocess_image_style(array &$variables, $hook) {
       '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
       '#path' => $variables['path'],
       '#width' => $variables['width'],
-      '#height' => $variables['width'],
+      '#height' => $variables['height'],
       '#alt' => isset($variables['alt']) ? $variables['alt'] : NULL,
       '#title' => isset($variables['title']) ? $variables['title'] : NULL,
       '#attributes' => isset($variables['attributes']) ? $variables['attributes'] : NULL,
