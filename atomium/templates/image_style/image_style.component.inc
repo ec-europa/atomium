@@ -45,10 +45,17 @@ function atomium_preprocess_image_style(array &$variables, $hook) {
   }
 
   // Determine the URL for the styled image.
-  $variables['path'] = image_style_url($variables['style_name'], $variables['path']);
+  $variables['path'] = image_style_url(
+    $variables['style_name'],
+    $variables['path']
+  );
+
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
+      '#theme' => _atomium_extend_theme_hook(
+        'image',
+        $variables['theme_hook_original']
+      ),
       '#path' => $variables['path'],
       '#width' => $variables['width'],
       '#height' => $variables['height'],
