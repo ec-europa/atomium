@@ -45,8 +45,8 @@ function atomium_atomium_definition_image_formatter() {
     'preview' => array(
       'item' => array(
         'uri' => file_build_uri('logo.png'),
-        'width' => 88,
-        'height' => 100,
+        'width' => 150,
+        'height' => 150,
       ),
       'path' => NULL,
       'image_style' => $style,
