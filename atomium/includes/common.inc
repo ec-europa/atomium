@@ -444,13 +444,16 @@ function _atomium_block_get_render_array($module, $delta, $region = NULL, $block
  *   The extended strings.
  */
 function _atomium_extend_with_suggestions(array $items = array(''), array $suggestions = array()) {
-  return \array_map(function ($base_hook) use ($suggestions) {
-    if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
-      return $hook[0];
+  array_walk_recursive(
+    $items,
+    function (&$base_hook) use ($suggestions) {
+      if ($hook = _atomium_extend_theme_hook($base_hook, $suggestions)) {
+        $base_hook = $hook[0];
+      }
     }
+  );
 
-    return NULL;
-  }, $items);
+  return $items;
 }
 
 /**

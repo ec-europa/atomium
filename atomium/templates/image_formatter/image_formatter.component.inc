@@ -26,7 +26,7 @@ function atomium_atomium_theme_image_formatter(array $existing, $type, $theme, $
  */
 function atomium_atomium_definition_image_formatter() {
   $style = 'thumbnail';
-  
+
   $source_uri = file_unmanaged_copy(
     drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
     'public://'
