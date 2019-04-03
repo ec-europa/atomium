@@ -22,6 +22,24 @@ function atomium_preprocess_block(array &$variables, $hook) {
     $variables['classes_array'] = \array_merge($variables['classes_array'], (array) $variables['block']->classes);
   }
 
+  if (isset($variables['block']->atomium)) {
+    if (isset($variables['block']->atomium['total_blocks_in_regions'])) {
+      if (isset($variables['block']->atomium['block_index_in_region'])) {
+        $total = $variables['block']->atomium['total_blocks_in_regions'];
+        $index = $variables['block']->atomium['block_index_in_region'];
+        if ($index === 0) {
+          $variables['atomium']['attributes']['wrapper']->append('class', 'first');
+        }
+
+        if ($total === $index + 1) {
+          $variables['atomium']['attributes']['wrapper']->append('class', 'last');
+        }
+
+        $variables['atomium']['attributes']['wrapper']->append('class', 'weight-' . $index);
+      }
+    }
+  }
+
   if (
     $module === 'menu_block' ||
     ($module === 'system' && $delta === 'navigation') ||
