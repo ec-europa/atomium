@@ -51,7 +51,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     $i++;
 
     $variables['atomium']['attributes'][$key]
-      ->append('class', ($i % 2) ? 'odd' : 'even');
+      ->append('class', ($i % 2) ? 'even' : 'odd');
 
     if ($i === 1) {
       $variables['atomium']['attributes'][$key]->append('class', 'first');

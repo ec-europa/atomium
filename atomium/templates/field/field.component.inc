@@ -21,10 +21,29 @@ function atomium_atomium_theme_field(array $existing, $type, $theme, $path) {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_field(array &$variables, $hook) {
-  $variables['atomium']['attributes']['wrapper']
-    ->append('class', $variables['classes_array']);
+  $item_list = array(
+    '#theme' => 'item_list',
+    '#title' => $variables['label'],
+    '#items' => $variables['items'],
+    '#type' => 'div',
+    '#atomium' => array(
+      'boo' => 'coin',
+      'attributes' => array(
+        'wrapper' => array(
+          'class' => $variables['classes_array'],
+        ),
+      ),
+    ),
+  );
 
-  $variables['atomium']['attributes'][0]->append('class', 'first');
-  $variables['atomium']['attributes'][\count($variables['items']) - 1]
-    ->append('class', 'last');
+  _atomium_extend_theme_property(
+    $item_list,
+    array(
+      $variables['theme_hook_original'],
+    )
+  );
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $item_list,
+  );
 }
