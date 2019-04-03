@@ -66,8 +66,6 @@ settings[alter][css_alter][exclude][] = 'modules/tracker/tracker.css'
 settings[alter][css_alter][exclude][] = 'modules/update/update.css'
 settings[alter][css_alter][exclude][] = 'modules/user/user.css'
 
-settings[alter][field_attach_view_alter][keys] = field_type,formatter,field_name,entity_type,view_mode,bundle
-
 ; Preprocess configuration
 ; ------------------------
 settings[preprocess][block][classes_to_remove] = block
