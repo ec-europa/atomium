@@ -18,6 +18,42 @@ function atomium_atomium_theme_update_status_label(array $existing, $type, $them
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_update_status_label() {
+  return array(
+    'label' => 'Update status label',
+    'description' => 'Update status label description.',
+    'dependencies' => array(
+      'update',
+    ),
+    'preview' => array(),
+  );
+}
+
+/**
+ * Implements hook_atomium_definition_form_hook().
+ */
+function atomium_atomium_definition_form_update_status_label(array $form, array &$form_state) {
+  $statuses = array(
+    UPDATE_CURRENT,
+    UPDATE_NOT_CURRENT,
+    UPDATE_NOT_SECURE,
+    UPDATE_NOT_SUPPORTED,
+    UPDATE_REVOKED,
+  );
+
+  foreach ($statuses as $status) {
+    $form['status-' . $status] = array(
+      '#theme' => 'update_status_label',
+      '#status' => $status,
+    );
+  }
+
+  return $form;
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_update_status_label(array &$variables, $hook) {
