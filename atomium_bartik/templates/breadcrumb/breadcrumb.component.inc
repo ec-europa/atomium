@@ -9,7 +9,7 @@
  * Implements hook_preprocess_hook().
  */
 function atomium_bartik_preprocess_breadcrumb(array &$variables, $hook) {
-  if (\is_array($variables['breadcrumb'])) {
+  if (!empty($variables['breadcrumb']['breadcrumb'])) {
     foreach ($variables['breadcrumb']['breadcrumb']['#items'] as &$item) {
       $item['#theme_wrappers'] = array();
       $tmp[] = $item;
