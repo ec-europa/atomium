@@ -30,13 +30,11 @@ function atomium_include($theme, $path) {
 
   if ($themes[$theme] && ($file = DRUPAL_ROOT . '/' . $themes[$theme] . '/' . $path) && \file_exists($file)) {
     if (\is_dir($file)) {
-      foreach (\glob($file . '/*.{inc}', GLOB_BRACE) as $file_to_include) {
-        include_once $file_to_include;
-      }
-      foreach (\glob($file . '/*.{php}', GLOB_BRACE) as $file_to_include) {
+      foreach (\glob($file . '/*.{inc,php}', GLOB_BRACE) as $file_to_include) {
         include_once $file_to_include;
       }
     }
+
     if (\is_file($file)) {
       include_once $file;
     }
@@ -62,10 +60,14 @@ function atomium_include($theme, $path) {
 function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE) {
   static $themes;
 
-  $theme_key = ($theme_key) ?: $GLOBALS['theme_key'];
+  $theme_key = $theme_key ?: $GLOBALS['theme_key'];
 
   if (!isset($themes[$theme_key])) {
-    $themes[$theme_key] = \array_unique(\array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
+    $themes[$theme_key] = \array_unique(
+      \array_filter(
+        (array) atomium_get_theme_info($theme_key, 'base theme')
+      )
+    );
   }
 
   if ($include_theme_key) {
@@ -138,13 +140,11 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
     if (\is_array($value)) {
       $value = drupal_array_merge_deep($value, $info);
     }
+    elseif (empty($value)) {
+      $value = $info;
+    }
     else {
-      if (empty($value)) {
-        $value = $info;
-      }
-      else {
-        $value = drupal_array_merge_deep((array) $value, $info);
-      }
+      $value = drupal_array_merge_deep((array) $value, $info);
     }
   }
 
@@ -168,6 +168,8 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
  *   The attributes array. Passed by reference.
  */
 function &_atomium_get_attributes(array &$element, $property = 'attributes') {
+  $hash_property = '#' . $property;
+
   // Attempt to retrieve a renderable element attributes first.
   if (
     isset($element['#type']) ||
@@ -175,22 +177,23 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
     isset($element['#pre_render']) ||
     isset($element['#markup']) ||
     isset($element['#theme_wrappers']) ||
-    isset($element['#' . $property])
+    isset($element[$hash_property])
   ) {
     $element += array(
-      '#' . $property => array(),
+      $hash_property => array(),
     );
 
-    return $element['#' . $property];
+    return $element[$hash_property];
   }
+
   // Treat $element as if it were a [pre]process function $variables parameter
   // and look for a renderable "element".
-  elseif (isset($element['element'])) {
+  if (isset($element['element'])) {
     $element['element'] += array(
-      '#' . $property => array(),
+      $hash_property => array(),
     );
 
-    return $element['element']['#' . $property];
+    return $element['element'][$hash_property];
   }
 
   // If all else fails, create (if needed) a default "attributes" array. This
@@ -406,7 +409,7 @@ function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') 
     $itemKey = $parentKey;
 
     if (!\is_numeric($key)) {
-      $itemKey .= (($parentKey) ? '.' : '') . $key;
+      $itemKey .= ($parentKey ? '.' : '') . $key;
     }
 
     if (\is_array($value)) {
@@ -517,8 +520,13 @@ function atomium_get_base_hook($hook) {
 function atomium_drupal_get_html_head(array $context = array()) {
   $elements = drupal_add_html_head();
 
-  if (!\function_exists('registryonsteroids_alter_recursive_element_children')) {
-    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  if (!module_exists('registryonsteroids_alter')) {
+    watchdog(
+      'Atomium theme',
+      'The Registry on steroids Alter module is not installed',
+      array(),
+      WATCHDOG_ERROR
+    );
 
     return $elements;
   }
@@ -550,11 +558,19 @@ function atomium_drupal_get_html_head(array $context = array()) {
  *   The suggestions strings.
  */
 function _atomium_extend_theme_property(array &$element, array $suggestions_parts) {
-  if (!\function_exists('_registryonsteroids_alter_extend_theme_property_with_suggestions')) {
-    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  if (!module_exists('registryonsteroids_alter')) {
+    watchdog(
+      'Atomium theme',
+      'The Registry on steroids Alter module is not installed',
+      array(),
+      WATCHDOG_ERROR
+    );
   }
   else {
-    _registryonsteroids_alter_extend_theme_property_with_suggestions($element, $suggestions_parts);
+    _registryonsteroids_alter_extend_theme_property_with_suggestions(
+      $element,
+      $suggestions_parts
+    );
   }
 }
 
@@ -567,11 +583,19 @@ function _atomium_extend_theme_property(array &$element, array $suggestions_part
  *   The suggestions strings.
  */
 function _atomium_extend_theme_wrappers_property(array &$element, array $suggestions_parts) {
-  if (!\function_exists('_registryonsteroids_alter_extend_theme_wrappers_property_with_suggestions')) {
-    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  if (!module_exists('registryonsteroids_alter')) {
+    watchdog(
+      'Atomium theme',
+      'The Registry on steroids Alter module is not installed',
+      array(),
+      WATCHDOG_ERROR
+    );
   }
   else {
-    _registryonsteroids_alter_extend_theme_wrappers_property_with_suggestions($element, $suggestions_parts);
+    _registryonsteroids_alter_extend_theme_wrappers_property_with_suggestions(
+      $element,
+      $suggestions_parts
+    );
   }
 }
 
@@ -584,11 +608,19 @@ function _atomium_extend_theme_wrappers_property(array &$element, array $suggest
  *   The suggestions strings.
  */
 function _atomium_extend_value_with_suggestions(&$hook, array $suggestions_parts) {
-  if (!\function_exists('_registryonsteroids_alter_extend_value_with_suggestions')) {
-    watchdog('Atomium theme', 'The Registry on steroids Alter module is not installed', array(), WATCHDOG_ERROR);
+  if (!module_exists('registryonsteroids_alter')) {
+    watchdog(
+      'Atomium theme',
+      'The Registry on steroids Alter module is not installed',
+      array(),
+      WATCHDOG_ERROR
+    );
   }
   else {
-    _registryonsteroids_alter_extend_value_with_suggestions($hook, $suggestions_parts);
+    _registryonsteroids_alter_extend_value_with_suggestions(
+      $hook,
+      $suggestions_parts
+    );
   }
 }
 
