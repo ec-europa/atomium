@@ -27,31 +27,38 @@ function atomium_atomium_theme_image_formatter(array $existing, $type, $theme, $
 function atomium_atomium_definition_image_formatter() {
   $style = 'thumbnail';
 
-  $source_uri = file_unmanaged_copy(
-    drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
-    'public://'
-  );
-
-  image_style_create_derivative(
-    image_style_load($style),
-    $source_uri,
-    image_style_path('large', $source_uri)
-  );
-
-  return array(
+  $build = array(
     'label' => 'Image formatter',
     'description' => 'Image formatter description.',
     'dependencies' => array('image'),
-    'preview' => array(
-      'item' => array(
-        'uri' => file_build_uri('logo.png'),
-        'width' => 150,
-        'height' => 150,
-      ),
-      'path' => NULL,
-      'image_style' => $style,
-    ),
   );
+
+  if (module_exists('image')) {
+    $source_uri = file_unmanaged_copy(
+      drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
+      'public://'
+    );
+
+    image_style_create_derivative(
+      image_style_load($style),
+      $source_uri,
+      image_style_path('large', $source_uri)
+    );
+
+    $build += array(
+      'preview' => array(
+        'item' => array(
+          'uri' => file_build_uri('logo.png'),
+          'width' => 150,
+          'height' => 150,
+        ),
+        'path' => NULL,
+        'image_style' => $style,
+      ),
+    );
+  }
+
+  return $build;
 }
 
 /**

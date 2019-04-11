@@ -44,25 +44,26 @@ function atomium_preprocess_text_format_wrapper(array &$variables, $hook) {
   $description = array();
   if (!empty($element['#description'])) {
     $description = array(
-      'description' => array(
-        '#markup' => $element['#description'],
-        '#weight' => 10,
-        '#theme_wrappers' => array('html_tag'),
-        '#tag' => 'div',
-        '#attributes' => array(
-          'class' => array(
-            'text-format-wrapper',
-          ),
+      '#markup' => $element['#description'],
+      '#weight' => 10,
+      '#theme_wrappers' => array('html_tag'),
+      '#tag' => 'div',
+      '#attributes' => array(
+        'class' => array(
+          'text-format-wrapper',
         ),
       ),
     );
 
     _atomium_extend_theme_wrappers_property(
-      $description['description'],
-      array($description['description']['#tag'], $variables['theme_hook_original']));
+      $description,
+      array($description['#tag'], $variables['theme_hook_original']));
   }
 
   $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => $text_format_wrapper + $description,
+    $variables['base_hook'] => array(
+      'text_format_wrapper' => $text_format_wrapper,
+      'description' => $description,
+    ),
   );
 }

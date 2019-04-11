@@ -39,11 +39,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
       $variables['page']['content']['system_main']['#theme_wrappers'] = \array_filter(
         $variables['page']['content']['system_main']['#theme_wrappers'],
         function ($theme_hook) {
-          if (atomium_get_base_hook($theme_hook) === 'block') {
-            return FALSE;
-          }
-
-          return TRUE;
+          return !(atomium_get_base_hook($theme_hook) === 'block');
         }
       );
     }

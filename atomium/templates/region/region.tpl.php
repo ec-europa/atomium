@@ -5,4 +5,6 @@
  * Contains template file.
  */
 ?>
-<aside<?php print $atomium['attributes']['region']; ?>><?php print render($region); ?></aside>
+<?php if (!empty($content)): ?>
+  <aside<?php print $atomium['attributes']['region']; ?>><?php print $content; ?></aside>
+<?php endif; ?>

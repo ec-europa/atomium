@@ -77,11 +77,15 @@ function atomium_preprocess_links(array &$variables, $hook) {
     if ($i === 1) {
       $link['attributes_array']['class'][] = 'first';
     }
+
     if ($i === $num_links) {
       $link['attributes_array']['class'][] = 'last';
     }
-    if (isset($link['href']) && ($link['href'] === $_GET['q'] || ($link['href'] === '<front>' && drupal_is_front_page()))
-      && (empty($link['language']) || $link['language']->language === $language_url->language)) {
+
+    if (
+      isset($link['href']) &&
+      (empty($link['language']) || $link['language']->language === $language_url->language) &&
+      ($link['href'] === $_GET['q'] || ($link['href'] === '<front>' && drupal_is_front_page()))) {
       $link['attributes_array']['class'][] = 'active';
     }
 

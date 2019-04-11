@@ -9,6 +9,17 @@
  * Implements hook_page_alter().
  */
 function atomium_page_alter(array &$page) {
+  if (!module_exists('registryonsteroids_alter')) {
+    watchdog(
+      'Atomium theme',
+      'The Registry on steroids Alter module is not installed',
+      array(),
+      WATCHDOG_ERROR
+    );
+
+    return;
+  }
+
   $recursive_context = array(
     'blocks info' => array(),
   );

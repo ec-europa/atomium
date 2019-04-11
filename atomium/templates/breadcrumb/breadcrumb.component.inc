@@ -47,6 +47,7 @@ function atomium_atomium_definition_breadcrumb() {
  */
 function atomium_preprocess_breadcrumb(array &$variables, $hook) {
   $links = array();
+
   foreach ($variables['breadcrumb'] as $item) {
     if (\is_string($item)) {
       $item = array(
@@ -54,21 +55,22 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
       );
     }
 
-    $links[] = array(
+    $link = array(
       'link' => $item,
       '#theme_wrappers' => array('html_tag'),
       '#tag' => 'li',
     );
-  }
 
-  \array_walk($links, function (&$link) use ($variables) {
     _atomium_extend_theme_wrappers_property(
       $link,
       array($link['#tag'], $variables['theme_hook_original']));
-  });
 
-  $variables['breadcrumb'] = '';
-  if ($links) {
+    $links[] = $link;
+  }
+
+  $breadcrumb = array();
+
+  if (!empty($links)) {
     $breadcrumb = array(
       '#theme' => 'item_list',
       '#items' => $links,
@@ -80,9 +82,9 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
     _atomium_extend_theme_property(
       $breadcrumb,
       array($breadcrumb['#type'], $variables['theme_hook_original']));
-
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => $breadcrumb,
-    );
   }
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $breadcrumb,
+  );
 }

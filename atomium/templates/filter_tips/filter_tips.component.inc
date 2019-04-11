@@ -55,14 +55,12 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
         ),
         '#value' => $tip['tip'],
       );
+
+      _atomium_extend_theme_property(
+        $items[$key],
+        array($items[$key]['#tag'], $variables['theme_hook_original']));
     }
   }
-
-  \array_walk($items, function (&$item) use ($variables) {
-    _atomium_extend_theme_property(
-      $item,
-      array($item['#tag'], $variables['theme_hook_original']));
-  });
 
   $filter_tips = array(
     '#theme' => 'item_list',
