@@ -550,8 +550,8 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
 
     $variables['atomium']['attributes'][$type . '-row-' . $j]
       ->merge($attributes)
-      ->remove('data')
-      ->remove('no_stripping')
+      ->delete('data')
+      ->delete('no_stripping')
       ->append('class', 'row-type-' . $type_map[$type]);
 
     if (!\is_array($cells)) {
@@ -586,8 +586,9 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
 
       $variables['atomium']['attributes'][$type . '-cell-' . $j . '-' . $i]
         ->merge($attributes_array)
-        ->remove('data')
-        ->remove('header');
+        ->delete('data')
+        ->delete('header');
+
       $rows_array['row-' . $j]['cells']['cell-' . $i] = $cell;
       $i++;
     }

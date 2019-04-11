@@ -25,13 +25,11 @@ function atomium_include($theme, $path) {
 
   if ($themes[$theme] && ($file = DRUPAL_ROOT . '/' . $themes[$theme] . '/' . $path) && \file_exists($file)) {
     if (\is_dir($file)) {
-      foreach (\glob($file . '/*.{inc}', GLOB_BRACE) as $file_to_include) {
-        include_once $file_to_include;
-      }
-      foreach (\glob($file . '/*.{php}', GLOB_BRACE) as $file_to_include) {
+      foreach (\glob($file . '/*.{inc,php}', GLOB_BRACE) as $file_to_include) {
         include_once $file_to_include;
       }
     }
+
     if (\is_file($file)) {
       include_once $file;
     }
@@ -57,10 +55,14 @@ function atomium_include($theme, $path) {
 function _atomium_get_base_themes($theme_key = NULL, $include_theme_key = FALSE) {
   static $themes;
 
-  $theme_key = ($theme_key) ?: $GLOBALS['theme_key'];
+  $theme_key = $theme_key ?: $GLOBALS['theme_key'];
 
   if (!isset($themes[$theme_key])) {
-    $themes[$theme_key] = \array_unique(\array_filter((array) atomium_get_theme_info($theme_key, 'base theme')));
+    $themes[$theme_key] = \array_unique(
+      \array_filter(
+        (array) atomium_get_theme_info($theme_key, 'base theme')
+      )
+    );
   }
 
   if ($include_theme_key) {
@@ -133,13 +135,11 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
     if (\is_array($value)) {
       $value = drupal_array_merge_deep($value, $info);
     }
+    elseif (empty($value)) {
+      $value = $info;
+    }
     else {
-      if (empty($value)) {
-        $value = $info;
-      }
-      else {
-        $value = drupal_array_merge_deep((array) $value, $info);
-      }
+      $value = drupal_array_merge_deep((array) $value, $info);
     }
   }
 
@@ -163,6 +163,8 @@ function atomium_get_theme_info($theme_key = NULL, $key = NULL, $base_themes = T
  *   The attributes array. Passed by reference.
  */
 function &_atomium_get_attributes(array &$element, $property = 'attributes') {
+  $hash_property = '#' . $property;
+
   // Attempt to retrieve a renderable element attributes first.
   if (
     isset($element['#type']) ||
@@ -170,22 +172,23 @@ function &_atomium_get_attributes(array &$element, $property = 'attributes') {
     isset($element['#pre_render']) ||
     isset($element['#markup']) ||
     isset($element['#theme_wrappers']) ||
-    isset($element['#' . $property])
+    isset($element[$hash_property])
   ) {
     $element += array(
-      '#' . $property => array(),
+      $hash_property => array(),
     );
 
-    return $element['#' . $property];
+    return $element[$hash_property];
   }
+
   // Treat $element as if it were a [pre]process function $variables parameter
   // and look for a renderable "element".
-  elseif (isset($element['element'])) {
+  if (isset($element['element'])) {
     $element['element'] += array(
-      '#' . $property => array(),
+      $hash_property => array(),
     );
 
-    return $element['element']['#' . $property];
+    return $element['element'][$hash_property];
   }
 
   // If all else fails, create (if needed) a default "attributes" array. This
@@ -540,7 +543,7 @@ function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') 
     $itemKey = $parentKey;
 
     if (!\is_numeric($key)) {
-      $itemKey .= (($parentKey) ? '.' : '') . $key;
+      $itemKey .= ($parentKey ? '.' : '') . $key;
     }
 
     if (\is_array($value)) {
@@ -577,8 +580,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
   static $drupal_static_fast;
 
   if (!isset($drupal_static_fast)) {
-    $drupal_static_fast['atomium_get_settings'] =
-      &drupal_static(__FUNCTION__);
+    $drupal_static_fast['atomium_get_settings'] = &drupal_static(__FUNCTION__);
   }
 
   $theme_key = $GLOBALS['theme_key'];
@@ -591,9 +593,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
 
   if (!isset($settings_by_theme[$cid])) {
     $settings_by_theme[$cid] = array();
-    if ($theme_settings =
-      atomium_get_theme_info($theme_key, 'settings', $base_themes)
-    ) {
+    if ($theme_settings = atomium_get_theme_info($theme_key, 'settings', $base_themes)) {
       _atomium_array_flatten(
         $theme_settings,
         $settings_by_theme[$cid]);
@@ -636,7 +636,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
  */
 function atomium_get_base_hook($hook) {
   if (FALSE !== $pos = \strpos($hook, '__')) {
-    $hook = \substr($hook, 0, $pos);
+    return \substr($hook, 0, $pos);
   }
 
   return $hook;

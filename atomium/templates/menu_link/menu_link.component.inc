@@ -35,22 +35,28 @@ function atomium_preprocess_menu_link(array &$variables, $hook) {
 
   $variables['atomium']['attributes']['wrapper']->merge($element['#attributes']);
 
-  $variables['sub_menu'] = $sub_menu;
-  $variables['output'] = array(
-    '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-    '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
-    '#path' => $element['#href'],
-    '#options' => $element['#localized_options'],
-  );
+  $suggestions = array();
 
   if (isset($variables['element']['#original_link']['mlid'])) {
-    $variables['theme_hook_suggestions'][] = 'menu_link__' . $variables['element']['#original_link']['mlid'];
+    $suggestions[] = 'mlid_' . $variables['element']['#original_link']['mlid'];
   }
 
-  $variables[$variables['base_hook']] = array(
-    $variables['base_hook'] => array(
-      $variables['output'],
-      $variables['sub_menu'],
+  $suggestions[] = $variables['theme_hook_original'];
+
+  $menu_link = array(
+    '#theme' => _atomium_extend_theme_hook(
+      'link',
+      $suggestions
     ),
+    '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
+    '#path' => $element['#href'],
+    '#options' => $element['#localized_options'] + array('attributes' => array()),
+  );
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $menu_link,
+  );
+  $variables['submenu'] = array(
+    'submenu' => $sub_menu,
   );
 }

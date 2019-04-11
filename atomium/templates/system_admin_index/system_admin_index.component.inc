@@ -33,9 +33,8 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
   $position = 'left';
 
   // Iterate over all modules.
-  foreach ($variables['menu_items'] as $module => $block) {
-    list($description, $items) = $block;
-
+  foreach ($variables['menu_items'] as $module => list($description, $items)) {
+    // Output links.
     if (\count($items) === 0) {
       continue;
     }

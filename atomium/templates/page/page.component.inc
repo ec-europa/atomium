@@ -35,8 +35,13 @@ function atomium_preprocess_page(array &$variables, $hook) {
       unset($variables['page']['content']['system_main']['default_message']);
     }
     if (!empty($variables['page']['content']['system_main']['#theme_wrappers'])) {
-      // Remove the block template wrapper from the main content block.
-      $variables['page']['content']['system_main']['#theme_wrappers'] = \array_diff($variables['page']['content']['system_main']['#theme_wrappers'], array('block'));
+      // Remove the block hook wrapper from the main content block.
+      $variables['page']['content']['system_main']['#theme_wrappers'] = \array_filter(
+        $variables['page']['content']['system_main']['#theme_wrappers'],
+        function ($theme_hook) {
+          return !(atomium_get_base_hook($theme_hook) === 'block');
+        }
+      );
     }
   }
 
@@ -69,12 +74,18 @@ function atomium_preprocess_page(array &$variables, $hook) {
   $variables['messages'] = NULL;
   if ($variables['show_messages']) {
     $variables['messages'] = array(
-      '#theme' => _atomium_extend_theme_hook('status_messages', $variables['theme_hook_original']),
+      '#theme' => _atomium_extend_theme_hook(
+        'status_messages',
+        $variables['theme_hook_original']
+      ),
     );
   }
 
   $variables['breadcrumb'] = array(
-    '#theme' => _atomium_extend_theme_hook('breadcrumb', $variables['theme_hook_original']),
+    '#theme' => _atomium_extend_theme_hook(
+      'breadcrumb',
+      $variables['theme_hook_original']
+    ),
     '#breadcrumb' => atomium_drupal_get_breadcrumb(),
   );
 

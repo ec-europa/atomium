@@ -65,6 +65,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     }
 
     $errors = array();
+    $skip = FALSE;
     foreach ($definition['dependencies'] as $dependency) {
       if (!module_exists($dependency)) {
         $message = t(
@@ -75,7 +76,18 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
           '#markup' => $message,
         );
         drupal_set_message($message, 'warning', FALSE);
+        $skip = TRUE;
+        $definition['preview'] = array(
+          '#theme' => 'item_list',
+          '#items' => $errors[$component],
+          '#type' => FALSE,
+        );
+        $definitions[$component] = $definition;
       }
+    }
+
+    if ($skip === TRUE) {
+      continue;
     }
 
     // Prepend hash to all preview properties.

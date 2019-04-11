@@ -52,7 +52,9 @@ function atomium_preprocess_link(array &$variables, $hook) {
 
   if (\is_string($variables['text'])) {
     $variables['text'] = array(
-      '#markup' => ($variables['options']['html'] ? $variables['text'] : check_plain($variables['text'])),
+      '#markup' => $variables['options']['html'] ?
+      $variables['text'] :
+      check_plain($variables['text']),
     );
   }
 }
