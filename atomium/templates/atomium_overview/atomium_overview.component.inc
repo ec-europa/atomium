@@ -30,6 +30,7 @@ function atomium_atomium_theme_atomium_overview(array $existing, $type, $theme, 
  * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_atomium_overview(array &$variables, $hook) {
+  $links = array();
   $definitions = array();
 
   foreach (atomium_discover_templates() as $component_data) {
@@ -58,6 +59,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       'disable' => FALSE,
       'preview' => array(),
       'dependencies' => array(),
+      'attribute_name' => $component === 'breadcrumb' ? 'overview-breadcrumb' : $component,
     );
 
     if (!\is_array($definition['dependencies'])) {
@@ -82,6 +84,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
           '#items' => $errors[$component],
           '#type' => FALSE,
         );
+
         $definitions[$component] = $definition;
       }
     }
@@ -114,7 +117,10 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       }
       if (!empty($elements)) {
         $definition['preview'] = array(
-          '#theme' => _atomium_extend_theme_hook('item_list', array('preview', $component)),
+          '#theme' => _atomium_extend_theme_hook(
+            'item_list',
+            array('preview', $component)
+          ),
           '#items' => $elements,
           '#type' => FALSE,
         );
@@ -147,7 +153,27 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
         '#type' => FALSE,
       );
     }
+
+    $links[] = l(
+        t('@label', array('@label' => $definition['label']), array(), array('context' => 'atomium')),
+        $component === 'breadcrumb' ? '#overview-breadcrumb' : "#$component",
+        array()
+    );
   }
 
-  $variables['definitions'] = $definitions;
+  $list = array(
+    '#theme' =>  _atomium_extend_theme_hook('item_list', $variables['theme_hook_original']),
+    '#type' => 'ul',
+    '#title' => '',
+    '#items' => $links,
+    '#attributes' => ['class' => 'overview'],
+    '#wrapper_attributes' => ['class' => 'container'],
+  );
+
+  $variables = array(
+    'component_list' => $list,
+    'definitions' => $definitions,
+    'h3_header' => t('Components', array(), array('context' => 'atomium')),
+    'fieldset_legend' => t('Preview', array(), array('context' => 'atomium')),
+  );
 }
