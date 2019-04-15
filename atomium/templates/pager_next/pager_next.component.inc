@@ -47,6 +47,7 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
   $element = $variables['element'];
   $interval = $variables['interval'];
   $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
   global $pager_page_array, $pager_total;
   $pager_next = NULL;
 
@@ -60,6 +61,7 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
         '#text' => $text,
         '#element' => $element,
         '#parameters' => $parameters,
+        '#attributes' => $attributes,
       );
     }
     // The next page is not the last page.
@@ -70,6 +72,7 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
         '#page_new' => $page_new,
         '#element' => $element,
         '#parameters' => $parameters,
+        '#attributes' => $attributes,
       );
     }
 
