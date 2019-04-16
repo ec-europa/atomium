@@ -17,6 +17,7 @@ function atomium_atomium_theme_pager_previous(array $existing, $type, $theme, $p
         'element' => 0,
         'interval' => 1,
         'parameters' => array(),
+        'attributes' => array(),
       ),
     ),
   );
@@ -47,6 +48,7 @@ function atomium_preprocess_pager_previous(array &$variables, $hook) {
   $element = $variables['element'];
   $interval = $variables['interval'];
   $parameters = $variables['parameters'];
+  $attributes = $variables['attributes'];
   global $pager_page_array;
   $pager_previous = NULL;
 
@@ -64,6 +66,7 @@ function atomium_preprocess_pager_previous(array &$variables, $hook) {
         '#text' => $text,
         '#element' => $element,
         '#parameters' => $parameters,
+        '#attributes' => $attributes,
       );
     }
     // The previous page is not the first page.
@@ -77,6 +80,7 @@ function atomium_preprocess_pager_previous(array &$variables, $hook) {
         '#page_new' => $page_new,
         '#element' => $element,
         '#parameters' => $parameters,
+        '#attributes' => $attributes,
       );
     }
   }

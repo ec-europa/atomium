@@ -16,6 +16,7 @@ function atomium_atomium_theme_pager_first(array $existing, $type, $theme, $path
         'text' => NULL,
         'element' => 0,
         'parameters' => array(),
+        'attributes' => array(),
       ),
     ),
   );
@@ -44,10 +45,7 @@ function atomium_atomium_definition_pager_first() {
 function atomium_preprocess_pager_first(array &$variables, $hook) {
   global $pager_page_array;
 
-  $text = $variables['text'];
   $element = $variables['element'];
-  $parameters = $variables['parameters'];
-
   $pager_first = NULL;
 
   // If we are anywhere but the first page.
@@ -57,10 +55,11 @@ function atomium_preprocess_pager_first(array &$variables, $hook) {
         'pager_link',
         array($variables['theme_hook_original'])
       ),
-      '#text' => $text,
+      '#text' => $variables['text'],
       '#page_new' => pager_load_array(0, $element, $pager_page_array),
       '#element' => $element,
-      '#parameters' => $parameters,
+      '#parameters' => $variables['parameters'],
+      '#attributes' => $variables['attributes'],
     );
   }
 

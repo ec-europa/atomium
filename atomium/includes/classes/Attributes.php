@@ -317,20 +317,6 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   }
 
   /**
-   * Delete an attribute.
-   *
-   * @param string|array $name
-   *   The name of the attribute key to delete.
-   *
-   * @deprecated
-   *
-   * @return $this
-   */
-  public function removeAttribute($name = array()) {
-    return $this->delete($name);
-  }
-
-  /**
    * Replace a value with another.
    *
    * @param string $key

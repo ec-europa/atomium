@@ -643,32 +643,6 @@ function atomium_get_base_hook($hook) {
 }
 
 /**
- * Discover templates based on directory name.
- *
- * It is important that directories have the name of the hook for the moment.
- *
- * @deprecated Use atomium_discover_templates()
- */
-function atomium_find_templates() {
-  $templates = array();
-
-  foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
-    $path = drupal_get_path('theme', $theme) . '/templates';
-    if (\is_dir($path)) {
-      $directories = \array_diff(\scandir($path), array('..', '.'));
-      foreach ($directories as $directory) {
-        $templates[$theme][$directory] = array(
-          'theme' => $theme,
-          'directory' => $path . '/' . $directory,
-        );
-      }
-    }
-  }
-
-  return $templates;
-}
-
-/**
  * Recursive element_children() function.
  *
  * As the default element_children() from Drupal is fine for single dimension
