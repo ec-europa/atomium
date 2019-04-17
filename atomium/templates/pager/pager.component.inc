@@ -123,6 +123,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
             array($variables['theme_hook_original'])
           ),
           '#text' => isset($tags[1]) ? $tags[1] : t('‹ previous'),
+          '#element' => $element,
         ),
         '#attributes' => array(
           'class' => array(
@@ -211,6 +212,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
             array($variables['theme_hook_original'])
           ),
           '#text' => isset($tags[3]) ? $tags[3] : t('next ›'),
+          '#element' => $element,
         ),
         '#attributes' => array(
           'class' => array(
@@ -229,6 +231,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
             array($variables['theme_hook_original'])
           ),
           '#text' => isset($tags[4]) ? $tags[4] : t('last »'),
+          '#element' => $element,
         ),
         '#attributes' => array(
           'class' => array(
