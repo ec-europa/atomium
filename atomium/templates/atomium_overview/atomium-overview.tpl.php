@@ -19,9 +19,8 @@
 <div>
   <?php foreach ($definitions as $name => $definition): ?>
       <a name="<?php print $name ?>_preview"></a>
-      <h4><?php print $definition['label'] ?></h4>
       <fieldset>
-          <legend><?php print t('Preview') ?></legend>
+          <legend><?php print $definition['label'] ?></legend>
           <div>
             <?php if (isset($definition['description'])): ?>
                 <p><?php print $definition['description'] ?></p>
