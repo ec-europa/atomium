@@ -28,7 +28,7 @@ function atomium_preprocess_menu_tree(array &$variables, $hook) {
   if (isset($variables['#tree'])) {
     $children = element_children($variables['#tree']);
     if (isset($children[0]) && $item = $variables['#tree'][$children[0]]) {
-      $variables['depth'] = $item['#original_link']['depth'];
+      $variables['depth'] = (int) $item['#original_link']['depth'];
     }
   }
 
