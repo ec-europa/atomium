@@ -25,7 +25,7 @@
         "drupal/drupal": "^7.66",
         "drupal/drupal-extension": "~3.4",
         "drupal/realistic_dummy_content": "^2",
-        "drupol/drupal-conventions": "^1.4.10",
+        "drupol/drupal-conventions": "^1.4.11",
         "drush/drush": "^8.2",
         "mikey179/vfsstream": "^1.6",
         "openeuropa/task-runner": "1.0.0-beta5",
