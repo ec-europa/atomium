@@ -125,7 +125,7 @@ Then:
 
 ```bash
 docker-compose exec web composer install
-docker-compose exec web ./vendor/bin/run drupal:site-install
+docker-compose exec web ./vendor/bin/taskman drupal:site-install
 ```
 
 Using default configuration, the development site files should be available in the `build` directory and the development site
@@ -152,20 +152,20 @@ composer install
 This will:
 
   1. Build a target test site in `./build`
-  2. Run ` ./vendor/bin/run drupal:site-setup` which will setup site and tests configuration files, such as `phpunit.xml`
+  2. Run `$ ./vendor/bin/taskman drupal:site-setup` which will setup site and tests configuration files, such as `phpunit.xml`
 
 After that:
 
-  1. Copy `runner.yml.dist` into `runner.yml` and customize it according to the local environment
-  2. Install the site by running ` ./vendor/bin/run drupal:site-install`
+  1. Copy `taskman.yml.dist` into `taskman.yml` and customize it according to your local environment
+  2. Install the site by running `$ ./vendor/bin/taskman drupal:site-install`
 
 For a list of available commands run:
 
 ```bash
-./vendor/bin/run
+./vendor/bin/taskman
 ```
 
-For more information about how to customise the building process check the [OpenEuropa Task Runner](https://github.com/openeuropa/task-runner)
+For more information about how to customise the building process check [PHP Taskman](https://github.com/php-taskman/core)
 project page.
 
 [Go to top](#table-of-content)
