@@ -47,4 +47,4 @@ commands:
     - { task: "run", command: "drupal:settings-setup" }
     - { task: "run", command: "setup:phpunit" }
   setup:phpunit:
-    - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
+    - { task: "process", from: "phpunit.xml.dist", to: "phpunit.xml" }

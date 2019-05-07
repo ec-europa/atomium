@@ -15,7 +15,7 @@ workspace:
 
 services:
   web:
-    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     environment:
     - DOCUMENT_ROOT=/test/atomium
     pull: true
@@ -27,7 +27,7 @@ services:
 pipeline:
   composer-install-lowest:
     group: prepare
-    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     volumes:
     - /cache:/cache
     commands:
@@ -36,43 +36,40 @@ pipeline:
       # Todo: Remove the `composer install` when the composer bug is fixed.
       # Ref. https://github.com/composer/composer/issues/7542
       # Ref. https://webgate.ec.europa.eu/CITnet/jira/browse/OPENEUROPA-1234
-      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/20-xdebug.ini
-      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/90-blackfire.ini
-      - composer install --ansi --no-suggest --no-progress
-      - composer update --prefer-lowest --ansi --no-suggest --no-progress
+      - composer install --no-ansi --no-suggest --no-progress
+      - composer update --prefer-lowest --no-ansi --no-suggest --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
 
   composer-install-highest:
     group: prepare
-    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     volumes:
       - /cache:/cache
     commands:
-      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/20-xdebug.ini
-      - rm /etc/php/${PHP_VERSION=5.6}/cli/conf.d/90-blackfire.ini
-      - composer install --ansi --no-suggest --no-progress
+      - composer install --no-ansi --no-suggest --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: highest
 
   site-install:
-    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     commands:
-    - ./vendor/bin/run drupal:site-install
+    - ./vendor/bin/taskman drupal:site-install
 
   grumphp:
     group: test
-    image: fpfis/httpd-php-dev:${PHP_VERSION=5.6}
+    image: fpfis/httpd-php-ci:${PHP_VERSION=5.6}
     commands:
-    - ./vendor/bin/grumphp run --ansi
+    - ./vendor/bin/grumphp run --no-ansi
 
 matrix:
   PHP_VERSION:
   - 5.6
   - 7.1
   - 7.2
+  - 7.3
   COMPOSER_BOUNDARY:
   - lowest
   - highest
