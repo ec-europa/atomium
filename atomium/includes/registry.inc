@@ -83,7 +83,7 @@ function atomium_theme_registry_alter(array &$registry) {
     return;
   }
 
-  /* @see _theme_build_registry() */
+  // @see _theme_build_registry()
   list($theme, $base_themes) = $trace[2]['args'];
 
   // Process registered hooks in the theme registry.
