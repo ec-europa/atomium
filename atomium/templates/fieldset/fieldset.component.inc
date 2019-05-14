@@ -54,7 +54,7 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']->append('class', 'form-wrapper');
   $variables['atomium']['attributes']['wrapper']->merge((array) $variables['element']['#attributes']);
 
-  /* <legend> tag handling */
+  // <legend> tag handling
   $legend = '';
   if ($variables['title']) {
     $legend = array(
@@ -88,7 +88,7 @@ function atomium_preprocess_fieldset(array &$variables, $hook) {
   }
   $variables['legend'] = $legend;
 
-  /* Fieldset description handling */
+  // Fieldset description handling
   $description = '';
   if ($variables['description']) {
     $description = array(

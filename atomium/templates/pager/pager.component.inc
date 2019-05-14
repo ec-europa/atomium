@@ -83,7 +83,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   $pager_last = $pager_current + $quantity - $pager_middle;
   // Max is the maximum page number.
   $pager_max = $pager_total_element;
-  /* End of marker calculations. */
+  // End of marker calculations.
 
   // Prepare for generation loop.
   $i = $pager_first;
@@ -97,7 +97,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     $pager_last += (1 - $i);
     $i = 1;
   }
-  /* End of generation loop preparation. */
+  // End of generation loop preparation.
 
   if ($pager_total_element > 1) {
     if ($pager_page_array_element > 0) {
