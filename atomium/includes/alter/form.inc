@@ -31,15 +31,23 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
     }
 
     if (isset($info['#theme'])) {
+      if (!isset($root_element['#theme'])) {
+        $root_element['#theme'] = $info['#theme'];
+      }
+
       $root_element['#theme'] = _atomium_extend_with_suggestions(
-        (array) $info['#theme'],
+        (array) $root_element['#theme'],
         array('form', $context['form_id'], $root_element_key)
       );
     }
 
     if (isset($info['#theme_wrappers'])) {
+      if (!isset($root_element['#theme_wrappers'])) {
+        $root_element['#theme_wrappers'] = $info['#theme_wrappers'];
+      }
+
       $root_element['#theme_wrappers'] = _atomium_extend_with_suggestions(
-        $info['#theme_wrappers'],
+        $root_element['#theme_wrappers'],
         array('form', $context['form_id'], $root_element_key)
       );
     }

@@ -21,7 +21,8 @@ function atomium_atomium_theme_form_element_label(array $existing, $type, $theme
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_form_element_label(array &$variables, $hook) {
-  $element = &$variables['element']['element'];
+  $element = &$variables['element'];
+
   // This is also used in the installer, pre-database setup.
   $t = get_t();
 
@@ -42,13 +43,14 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
     'title' => '',
     'required' => '',
   );
+
   if (isset($element['#title']) && !empty($element['#title'])) {
     $variables['title'] = array(
       '#markup' => $t(filter_xss_admin($element['#title'])),
     );
   }
 
-  if (isset($element['#required']) && $element['#required']) {
+  if (isset($element['#required']) && (bool) $element['#required'] === TRUE) {
     $variables['required'] = array(
       '#theme' => _atomium_extend_theme_hook('form_required_marker', $variables['theme_hook_original']),
     );

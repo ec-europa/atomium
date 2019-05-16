@@ -32,6 +32,21 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     '#title_display' => 'before',
   );
 
+  // If #title is not set, we don't display any label or required marker.
+  if (!isset($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+
+  // Build the label render array manually.
+  $variables['label'] = array(
+    '#theme' => _atomium_extend_theme_hook('form_element_label', $variables['theme_hook_original']),
+    '#element' => $element,
+    '#title_display' => $element['#title_display'],
+    '#title' => isset($element['#title']) ? $element['#title'] : NULL,
+    '#id' => $element['#id'],
+    '#required' => $element['#required'],
+  );
+
   // Add element #id for #type 'item'.
   if (isset($element['#markup']) && !empty($element['#id'])) {
     $attributes['id'] = $element['#id'];
@@ -61,24 +76,14 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     $attributes['class'][] = 'form-disabled';
   }
 
-  // If #title is not set, we don't display any label or required marker.
-  if (!isset($element['#title'])) {
-    $element['#title_display'] = 'none';
-  }
-
   $variables['description'] = '';
   if (!empty($element['#description'])) {
     $variables['description'] = $element['#description'];
   }
 
-  $variables['element'] += array(
+  $element += array(
     '#field_suffix' => '',
     '#field_prefix' => '',
-  );
-
-  $variables['label'] = array(
-    '#theme' => _atomium_extend_theme_hook('form_element_label', $variables['theme_hook_original']),
-    'element' => $variables['element'],
   );
 
   $variables['atomium']['attributes']['wrapper']->merge($attributes);
