@@ -3,6 +3,7 @@ description = Atomium test theme.
 base theme = atomium_test
 core = 7.x
 php = 5.6
+hidden = true
 
 ; ========================================
 ; Regions
