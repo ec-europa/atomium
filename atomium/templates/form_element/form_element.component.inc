@@ -39,7 +39,10 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
 
   // Build the label render array manually.
   $variables['label'] = array(
-    '#theme' => _atomium_extend_theme_hook('form_element_label', $variables['theme_hook_original']),
+    '#theme' => _atomium_extend_theme_hook(
+      'form_element_label',
+      $variables['theme_hook_original']
+    ),
     '#element' => $element,
     '#title_display' => $element['#title_display'],
     '#title' => isset($element['#title']) ? $element['#title'] : NULL,
@@ -55,7 +58,6 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   $attributes['class'] = array();
   // Date selects need the form-item for the show/hide end date.
   if (isset($element['#type'])) {
-    // AND.
     if ($element['#type'] === 'date_select' || $element['#type'] === 'date_text' || $element['#type'] === 'date_popup') {
       $attributes['class'] = array('form-item');
     }
@@ -63,7 +65,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   // Add element's #type and #name as class to aid with JS/CSS selectors.
   $attributes['class'] = array('form-item');
   if (!empty($element['#type'])) {
-    $attributes['class'][] = 'form-type-' . \str_replace($element['#type'], '_', '-');
+    $attributes['class'][] = 'form-type-' . \str_replace('_', '-', $element['#type']);
   }
   if (!empty($element['#name'])) {
     $attributes['class'][] = 'form-item-' . \strtr(
