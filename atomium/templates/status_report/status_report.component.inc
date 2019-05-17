@@ -60,13 +60,12 @@ function atomium_preprocess_status_report(array &$variables, $hook) {
     $cells[] = array(
       'data' => array(
         'container' => array(
-          '#theme' => 'html_tag',
-          '#tag' => 'div',
+          '#theme_wrappers' => array('container'),
           '#attributes' => array(
             'title' => $severity['title'],
           ),
-          '#value' => array(
-            '#theme' => 'htmltag',
+          array(
+            '#type' => 'html_tag',
             '#tag' => 'span',
             '#attributes' => array(
               'class' => array(
