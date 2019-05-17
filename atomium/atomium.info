@@ -75,6 +75,17 @@ settings[alter][css_alter][exclude][] = 'modules/user/user.css'
 
 settings[alter][field_attach_view_alter][keys] = field_type,image_style,formatter,field_name,entity_type,view_mode,bundle
 
+; Element tweaks
+; ------------
+;settings[alter][element][overrides][html_tag] = atomium_html_tag
+;settings[alter][element][overrides][link] = atomium_link
+;settings[alter][element][overrides][actions] = atomium_actions
+;settings[alter][element][overrides][textarea] = atomium_textarea
+;settings[alter][element][overrides][date] = atomium_date
+;settings[alter][element][overrides][button] = atomium_button
+;settings[alter][element][overrides][submit] = atomium_submit
+;settings[alter][element][overrides][textfield] = atomium_textfield
+
 ; Preprocess configuration
 ; ------------------------
 settings[preprocess][block][classes_to_remove] = block

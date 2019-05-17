@@ -6,6 +6,34 @@
  */
 
 /**
+ * Register one or more Drupal element implementations.
+ *
+ * This function is a subfunction of the Drupal's hook_element_info() hook.
+ * Its signature and the return values are identical.
+ *
+ * It must live in: [path_to_theme]/elements/[type]/[type].element.inc
+ *
+ * @see hook_theme()
+ */
+function hook_atomium_element_info_hook() {
+  return array(
+    'custom_element' => array(
+      '#attributes' => array(),
+      '#pre_render' => array(
+        'drupal_pre_render_conditional_comments',
+        'atomium_pre_render_tag',
+        'atomium_pre_render_children',
+        'atomium_pre_render_extend_theme_property',
+      ),
+      '#theme' => 'tag',
+      '#type' => 'tag',
+      '#tag' => NULL,
+      '#theme_hook_suggestions_parts' => array(),
+    ),
+  );
+}
+
+/**
  * Register one or many Atomium component implementations.
  *
  * This function is a subfunction of the Drupal's hook_theme() hook.

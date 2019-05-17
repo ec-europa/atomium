@@ -234,6 +234,39 @@ function atomium_discover_templates() {
 }
 
 /**
+ * Discover elements across a theme and all its subthemes.
+ */
+function atomium_discover_elements() {
+  foreach (_atomium_get_base_themes(NULL, TRUE) as $theme) {
+    $path = drupal_get_path('theme', $theme) . '/elements';
+
+    if (!\is_dir($path)) {
+      continue;
+    }
+
+    $directories = \array_diff(
+      \scandir($path, SCANDIR_SORT_ASCENDING),
+      array('..', '.')
+    );
+
+    foreach ($directories as $directory) {
+      $component_directory = $path . DIRECTORY_SEPARATOR . $directory;
+
+      if (!\is_dir($component_directory)) {
+        continue;
+      }
+
+      yield array(
+        'theme' => $theme,
+        'element' => $directory,
+        'directory' => $component_directory,
+        'includes' => \glob($component_directory . '/*.element.inc'),
+      );
+    }
+  }
+}
+
+/**
  * Verbatim copy of drupal_get_breadcrumb().
  *
  * The only modified stuff are the call to menu_get_active_breadcrumb() which
