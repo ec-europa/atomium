@@ -68,7 +68,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   // Add element's #type and #name as class to aid with JS/CSS selectors.
   $attributes['class'] = array('form-item');
   if (!empty($element['#type'])) {
-    $attributes['class'][] = 'form-type-' . \str_replace($element['#type'], '_', '-');
+    $attributes['class'][] = 'form-type-' . \str_replace('_', '-', $element['#type']);
   }
   if (!empty($element['#name'])) {
     $attributes['class'][] = 'form-item-' . \strtr(
