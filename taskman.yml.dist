@@ -39,6 +39,14 @@ drupal:
         - build/sites/all/themes/atomium/build
       uri: "${drupal.base_url}"
 
+github:
+  changelog:
+    user: ec-europa
+    project: atomium
+    release:
+      branch: '7.x-2.x'
+    between-tags: "$(git tag --sort=-creatordate --merged '${github.changelog.release.branch}' | tr '\n' ',')"
+
 commands:
   drupal:site-setup:
     - { task: "chmod", file: "${drupal.root}/sites", permissions: 0777, recursive: true }

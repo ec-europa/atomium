@@ -28,6 +28,7 @@
         "drupol/drupal-conventions": "^1.4.12",
         "drush/drush": "^8.2.3",
         "mikey179/vfsstream": "^1.6",
+        "phptaskman/changelog": "^0.2.1",
         "phptaskman/drupal": "^0.1.15",
         "phpunit/phpunit": "^5.7",
         "webflo/drupal-finder": "^1.1",

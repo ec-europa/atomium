@@ -5,6 +5,6 @@ node_modules
 .idea/
 /build/
 /phpunit.xml
-/runner.yml
 /.php_cs.cache
 docker-compose.*.yml
+/taskman.yml
