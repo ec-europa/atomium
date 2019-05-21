@@ -144,6 +144,7 @@ To run the phpunit tests:
 ```bash
 docker-compose exec web ./vendor/bin/phpunit
 ```
+
 ## Without docker
 ```bash
 composer install
@@ -163,6 +164,21 @@ For a list of available commands run:
 
 ```bash
 ./vendor/bin/taskman
+```
+
+### Generate changelog
+
+Place your token in `taskman.yml` file:
+
+```yaml
+github:
+  token: YOUR_TOKEN
+```
+
+and then:
+
+```bash
+./vendor/bin/taskman github:changelog
 ```
 
 For more information about how to customise the building process check [PHP Taskman](https://github.com/php-taskman/core)
