@@ -71,44 +71,6 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     $pager_total_element = (int) $pager_total[$element];
   }
 
-  $GLOBALS['pager_total'] = $pager_total;
-  $GLOBALS['pager_page_array'] = $pager_page_array;
-
-  /*
-  foreach ($items as $key => $item) {
-  $pager_item = array(
-  '#type' => 'tag',
-  '#tag' => 'li',
-  '#theme_hook_suggestions_parts' => array(
-  'item_list',
-  $variables['theme_hook_original'],
-  $key,
-  ),
-  '#pager_item_type' => $key,
-  );
-
-  if (!empty($item['markup'])) {
-  $pager_item['value'] = array(
-  '#markup' => $item['markup'],
-  );
-  }
-
-  if (isset($item['link'])) {
-  $pager_item['#attributes'] = $item['link']['#options']['attributes'];
-  }
-
-  $pager_item['item'] = $item;
-
-  $pager_item = array(
-  'wrapper' => $pager_item,
-  );
-
-  hide($pager_item['item']);
-
-  $pager_items[$key] = $pager_item;
-  }
-   */
-
   $pager_items = _atomium_pager_generate_items(
     $variables,
     $quantity,
@@ -146,14 +108,14 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     ),
     '#items' => $pager_items,
     '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
-    '#pager' => array(
-      'element' => $element,
-    ),
   );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => $item_list,
   );
+
+  $GLOBALS['pager_total'] = $pager_total;
+  $GLOBALS['pager_page_array'] = $pager_page_array;
 }
 
 /**
