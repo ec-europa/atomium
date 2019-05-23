@@ -103,7 +103,7 @@ The override file, as its name implies, can contain configuration overrides for 
 services.
 If a service is defined in both files, Docker Compose merges the configurations.
 By using `.env` file to define variables, such as PHP version, which allows a quick debug on docker-compose by running the
- bellow command without spinup the container and also avoid hard-coding values, copy `.env.dist` into `.env` file.
+ below command without spinup the container and also avoid hard-coding values.
 ```bash
 docker-compose config
 ``` 
