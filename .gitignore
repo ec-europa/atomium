@@ -8,3 +8,4 @@ node_modules
 /.php_cs.cache
 docker-compose.*.yml
 /taskman.yml
+.env
