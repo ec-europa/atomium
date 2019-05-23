@@ -82,3 +82,6 @@ settings[preprocess][html][classes_to_remove] = two-sidebars,one-sidebar,sidebar
 settings[preprocess][node][classes_to_remove] = node,node-sticky,node-unpublished,node-promoted
 settings[preprocess][region][classes_to_remove] = region
 
+; Pager configuration
+; -------------------
+settings[pager][use_vanilla] = 1

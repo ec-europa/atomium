@@ -46,22 +46,18 @@ function atomium_preprocess_pager_first(array &$variables, $hook) {
   global $pager_page_array;
 
   $element = $variables['element'];
-  $pager_first = NULL;
 
-  // If we are anywhere but the first page.
-  if ($pager_page_array[$element] > 0) {
-    $pager_first = array(
-      '#theme' => \_atomium_extend_theme_hook(
-        'pager_link',
-        array($variables['theme_hook_original'])
-      ),
-      '#text' => $variables['text'],
-      '#page_new' => \pager_load_array(0, $element, $pager_page_array),
-      '#element' => $element,
-      '#parameters' => $variables['parameters'],
-      '#attributes' => $variables['attributes'],
-    );
-  }
+  $pager_first = array(
+    '#theme' => \_atomium_extend_theme_hook(
+      'pager_link',
+      array($variables['theme_hook_original'])
+    ),
+    '#text' => $variables['text'],
+    '#page_new' => \pager_load_array(0, $element, $pager_page_array),
+    '#element' => $element,
+    '#parameters' => $variables['parameters'],
+    '#attributes' => $variables['attributes'],
+  );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => $pager_first,
