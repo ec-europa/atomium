@@ -1,10 +1,10 @@
 version: '2'
 services:
   web:
-    image: fpfis/httpd-php-dev:7.1
+    image: fpfis/httpd-php-dev:${PHP_VERSION}
     working_dir: /var/www/html
     ports:
-    - 8080:8080
+    - ${WEB_PORT}:8080
     volumes:
     - .:/var/www/html # Non Mac users.
     # - nfsmount:/var/www/html # Mac Users with the nfsmount volume.
@@ -15,7 +15,7 @@ services:
       # For Mac users: sudo ifconfig en0 alias 10.254.254.254 255.255.255.0
       # For Linux users: sudo ip addr add 10.254.254.254/32 dev lo label lo:1
   mysql:
-    image: percona/percona-server:5.6
+    image: percona/percona-server:${PERCONA_SERVER_VERSION}
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   #    ports:
