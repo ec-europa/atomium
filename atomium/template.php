@@ -88,6 +88,224 @@ function atomium_menu_alter(array &$items) {
     'access arguments' => array('administer themes'),
     'type' => MENU_CALLBACK,
   );
+
+  $items['atomium-overview/%'] = array(
+    'title' => 'Atomium overview',
+    'page callback' => 'atomium_overview_component_single',
+    'page arguments' => array(1),
+    'access arguments' => array('administer themes'),
+  );
+}
+
+/**
+ * Load a single component.
+ *
+ * @param string $_component_name
+ *   The component name pass as path.
+ *
+ * @return mixed|null
+ *   The component data if exists, otherwise NULL.
+ */
+function _atomium_overview_component_single_load_component($_component_name) {
+  foreach (atomium_find_templates() as $component_data) {
+    if ($_component_name === $component_data['component']) {
+      return $component_data;
+    }
+  }
+
+  return NULL;
+}
+
+/**
+ * Implements hook_atomium_theme_hook().
+ *
+ * In order to prevent infinite loop during a clear cache or during drupal
+ * install, we have to generate the list of existing definitions in the
+ * preprocess hook.
+ */
+function atomium_atomium_theme_atomium_overview_component_single(array $existing, $type, $theme, $path) {
+  return array(
+    'atomium_overview_component_single' => array(
+      'template' => 'atomium-overview-component-single',
+      'variables' => array(
+        'definitions' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Page callback.
+ *
+ * @param string $_component_name
+ *   The component name.
+ *
+ * @throws \Exception
+ *
+ * @return int|string
+ *   return the theme otherwise the page not found.
+ */
+function atomium_overview_component_single($_component_name) {
+  // drupal_static('atomium_overview_component_single');.
+  $definitions = array();
+
+  foreach (atomium_find_templates() as $component_data) {
+    $component_name = $component_data['component'];
+    $definition = _atomium_build_component_preview_box($component_data);
+
+    if ($component_name !== $_component_name) {
+      continue;
+    }
+
+    if ($definition === NULL) {
+      return MENU_NOT_FOUND;
+    }
+
+    if (!isset($definition['label'])) {
+      return MENU_NOT_FOUND;
+    }
+
+    $definitions[$component_name] = $definition;
+
+    break;
+  }
+
+  if (empty($definitions)) {
+    return MENU_NOT_FOUND;
+  }
+
+  $variables['definitions'] = $definitions;
+
+  return theme('atomium_overview_component_single', $variables);
+}
+
+/**
+ * Generates a preview box for a component.
+ *
+ * The box contains title, description, preview and other parts.
+ *
+ * @param array $component_data
+ *   The component data.
+ *
+ * @return array|null
+ *   A render element with the component preview, or NULL to show nothing.
+ *   Array keys:
+ *   - title:
+ */
+function _atomium_build_component_preview_box(array $component_data) {
+  $component_name = $component_data['component'];
+  $theme = $component_data['theme'];
+
+  if (empty($component_data['includes'])) {
+    return NULL;
+  }
+
+  foreach ($component_data['includes'] as $file) {
+    include_once $file;
+  }
+
+  $function_name = sprintf(
+    '%s_atomium_definition_%s',
+    $theme,
+    $component_name
+  );
+
+  if (!\function_exists($function_name)) {
+    return NULL;
+  }
+
+  $definition = (array) $function_name() + array(
+    'disable' => FALSE,
+    'preview' => array(),
+    'dependencies' => array(),
+  );
+
+  if (!\is_array($definition['dependencies'])) {
+    $definition['dependencies'] = array($definition['dependencies']);
+  }
+
+  $errors = array();
+  foreach ($definition['dependencies'] as $dependency) {
+    if (!module_exists($dependency)) {
+      $message = t(
+        'The component <em>@component</em> has been disabled because the module <em>@module</em> is missing.',
+        array('@component' => $component_name, '@module' => $dependency)
+      );
+      $errors[$dependency] = array(
+        '#markup' => $message,
+      );
+      drupal_set_message($message, 'warning', FALSE);
+    }
+  }
+
+  if ($errors) {
+    $definition['preview'] = array(
+      '#theme' => 'item_list',
+      '#items' => $errors,
+      '#type' => FALSE,
+    );
+
+    return $definition;
+  }
+
+  // Prepend hash to all preview properties.
+  foreach ($definition['preview'] as $key => $value) {
+    if (!\is_numeric($key)) {
+      $definition['preview']["#{$key}"] = $value;
+      unset($definition['preview'][$key]);
+    }
+  }
+
+  // Handle preview differently whereas a component is an element or not.
+  $element = element_info($component_name);
+  if (!empty($element)) {
+    $elements = array();
+
+    foreach ($definition['preview'] as $preview) {
+      // Prepend hash to all preview properties.
+      foreach ($preview as $key => $value) {
+        if (!\is_numeric($key)) {
+          $preview["#{$key}"] = $value;
+          unset($preview[$key]);
+        }
+      }
+      $elements[] = \array_merge($element, $preview);
+    }
+
+    if (!empty($elements)) {
+      $definition['preview'] = array(
+        '#theme' => 'item_list',
+        '#items' => $elements,
+        '#type' => FALSE,
+      );
+
+      _atomium_extend_theme_property(
+        $definition['preview'],
+        array('preview', $component_name)
+      );
+    }
+  }
+  else {
+    $definition['preview']['#theme'] = $component_name;
+
+    _atomium_extend_theme_property(
+      $definition['preview'],
+      array('preview')
+    );
+  }
+
+  // Allow the use of a form.
+  $function_name = $theme . '_atomium_definition_form_' . $component_name;
+  if (\function_exists($function_name)) {
+    $definition['form'] = drupal_get_form($function_name);
+  }
+
+  // Disable the preview if we explicitly set the key disable to TRUE.
+  if ($definition['disable'] === TRUE) {
+    unset($definition['preview']);
+  }
+
+  return \array_filter($definition);
 }
 
 /**

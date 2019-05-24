@@ -8,9 +8,9 @@
 
 <ul>
   <?php foreach ($definitions as $name => $definition): ?>
-      <li>
-          <a href="#<?php print $name ?>-preview"><?php print $definition['label'] ?></a>
-      </li>
+    <li>
+      <a href="#<?php print $name ?>-preview"><?php print $definition['label'] ?></a>
+    </li>
   <?php endforeach; ?>
 </ul>
 
@@ -19,9 +19,9 @@
 <div>
   <?php foreach ($definitions as $name => $definition): ?>
       <a name="<?php print $name ?>-preview"></a>
-      <h4><?php print $definition['label'] ?></h4>
+      <h1><a href="<?php print arg(0) . '/' . $name?>" target='_blank'><?php print $definition['label'] ?></a></h1>
       <fieldset>
-          <legend><?php print t('Preview') ?></legend>
+          <legend><a href="<?php print arg(0) . '/' . $name?>" target='_blank'><?php print t('Preview') ?></a></legend>
           <div>
             <?php if (isset($definition['description'])): ?>
                 <p><?php print $definition['description'] ?></p>
@@ -41,3 +41,5 @@
       </fieldset>
   <?php endforeach; ?>
 </div>
+
+390-atomium-overview-one-page-per-component-7.x-3.x
