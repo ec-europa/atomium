@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains template file.admin_block
+ * Contains template file.admin_block.
  */
 ?>
 
