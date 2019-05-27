@@ -88,6 +88,14 @@ function atomium_menu_alter(array &$items) {
     'access arguments' => array('administer themes'),
     'type' => MENU_CALLBACK,
   );
+
+  $items['atomium-overview/%'] = array(
+    'title' => 'Atomium components overview single',
+    'page callback' => 'theme',
+    'page arguments' => array('atomium_overview_single'),
+    'access arguments' => array('administer themes'),
+    'type' => MENU_CALLBACK,
+  );
 }
 
 /**
