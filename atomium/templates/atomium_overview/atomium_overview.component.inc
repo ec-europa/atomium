@@ -25,9 +25,6 @@ function atomium_atomium_theme_atomium_overview(array $existing, $type, $theme, 
 
 /**
  * Implements hook_preprocess_hook().
- *
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_atomium_overview(array &$variables, $hook) {
   $definitions = array();
@@ -60,110 +57,15 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       'dependencies' => array(),
     );
 
-    if (!\is_array($definition['dependencies'])) {
-      $definition['dependencies'] = array($definition['dependencies']);
-    }
-
-    $errors = array();
-    $skip = FALSE;
-    foreach ($definition['dependencies'] as $dependency) {
-      if (!module_exists($dependency)) {
-        $message = t(
-          'The component <em>@component</em> has been disabled because the module <em>@module</em> is missing.',
-          array('@component' => $component, '@module' => $dependency)
-        );
-        $errors[$component][$dependency] = array(
-          '#markup' => $message,
-        );
-        drupal_set_message($message, 'warning', FALSE);
-        $skip = TRUE;
-        $definition['preview'] = array(
-          '#theme' => 'item_list',
-          '#items' => $errors[$component],
-          '#type' => FALSE,
-        );
-        $definitions[$component] = $definition;
-      }
-    }
-
-    if ($skip === TRUE) {
-      continue;
-    }
-
-    // Prepend hash to all preview properties.
-    foreach ($definition['preview'] as $key => $value) {
-      if (!\is_numeric($key)) {
-        $definition['preview']["#{$key}"] = $value;
-        unset($definition['preview'][$key]);
-      }
-    }
-
-    // Handle preview differently whereas a component is an element or not.
-    $element = element_info($component);
-    if (!empty($element)) {
-      $elements = array();
-
-      foreach ($definition['preview'] as $preview) {
-        // Prepend hash to all preview properties.
-        foreach ($preview as $key => $value) {
-          if (!\is_numeric($key)) {
-            $preview["#{$key}"] = $value;
-            unset($preview[$key]);
-          }
-        }
-        $elements[] = \array_merge($element, $preview);
-      }
-
-      if (!empty($elements)) {
-        $definition['preview'] = array(
-          '#theme' => 'item_list',
-          '#items' => $elements,
-          '#type' => FALSE,
-        );
-
-        _atomium_extend_theme_property(
-          $definition['preview'],
-          array('preview', $component)
-        );
-      }
-    }
-    else {
-      $definition['preview']['#theme'] = $component;
-
-      _atomium_extend_theme_property(
-        $definition['preview'],
-        array('preview')
-      );
-    }
-
-    // Allow the use of a form.
-    $function_name = $theme . '_atomium_definition_form_' . $component;
-    if (\function_exists($function_name)) {
-      $definition['form'] = drupal_get_form($function_name);
-    }
-
-    // Disable the preview if we explicitly set the key disable to TRUE.
-    if ($definition['disable'] === TRUE) {
-      unset($definition['preview']);
-    }
-
-    $definitions[$component] = \array_filter($definition);
-    if (!empty($errors)) {
-      unset($definitions[$component]['form']);
-      $preview = array(
-        '#theme' => 'item_list',
-        '#items' => $errors[$component],
-        '#type' => FALSE,
-      );
-
-      _atomium_extend_theme_property(
-        $preview,
-        array('preview', $component)
-      );
-
-      $definitions[$component]['preview'] = $preview;
-    }
+    $definitions[$component_data['component']] = array(
+      '#theme' => 'component',
+      '#title' => $definition['label'],
+      '#name' => $component_data['component'],
+    );
   }
 
-  $variables['definitions'] = $definitions;
+  $variables['definitions'] = array(
+    '#theme' => 'item_list',
+    '#items' => $definitions,
+  );
 }
