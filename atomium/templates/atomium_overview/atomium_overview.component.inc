@@ -58,9 +58,11 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     );
 
     $definitions[$component_data['component']] = array(
-      '#theme' => 'component',
-      '#title' => $definition['label'],
-      '#name' => $component_data['component'],
+      'data' => array(
+        '#theme' => 'component',
+        '#title' => $definition['label'],
+        '#name' => $component_data['component'],
+      ),
     );
   }
 
