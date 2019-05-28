@@ -11,6 +11,6 @@
   <?php endif; ?>
     <div class="fieldset-wrapper">
       <?php print render($description); ?>
-      <?php print render($element['#children']); ?>
+      <?php print $element['#children']; ?>
     </div>
 </fieldset>
