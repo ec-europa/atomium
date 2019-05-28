@@ -47,7 +47,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     '#title_display' => $element['#title_display'],
     '#title' => isset($element['#title']) ? $element['#title'] : NULL,
     '#id' => isset($element['#id']) ? $element['#id'] : NULL,
-    '#required' => isset($element['#required']) ? $element['#id'] : NULL,
+    '#required' => isset($element['#required']) ? $element['#required'] : NULL,
   );
 
   // Add element #id for #type 'item'.
