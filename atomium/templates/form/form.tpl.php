@@ -6,5 +6,5 @@
  */
 ?>
 <form<?php print $atomium['attributes']['element']; ?>>
-  <?php print render($element['#children']); ?>
+  <?php print $element['#children']; ?>
 </form>
