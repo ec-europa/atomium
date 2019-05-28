@@ -48,6 +48,5 @@ function atomium_preprocess_date(array &$variables, $hook) {
     $attributes['class'] = (array) $element['#attributes']['class'];
   }
   $attributes['class'][] = 'container-inline';
-  $variables['date'] = $variables['element'];
   $variables['atomium']['attributes']['wrapper']->merge($attributes);
 }
