@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Html.preprocess.inc.
+ * Contains component file.
  */
 
 /**
