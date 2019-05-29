@@ -40,8 +40,6 @@ function atomium_atomium_definition_container() {
 function atomium_preprocess_container(array &$variables, $hook) {
   $element = $variables['element'];
 
-  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
-  // Doing this to remove warnings.
   $element += array(
     '#attributes' => array(),
   );
@@ -51,8 +49,6 @@ function atomium_preprocess_container(array &$variables, $hook) {
     // Assign an html ID.
     $variables['atomium']['attributes']['wrapper']->setAttribute('id', $element['#id']);
   }
-  $variables['container'] = $element['#children'];
 
-  // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
   $variables['atomium']['attributes']['wrapper']->merge($element['#attributes']);
 }

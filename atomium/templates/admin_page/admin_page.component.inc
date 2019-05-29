@@ -33,7 +33,7 @@ function atomium_preprocess_admin_page(array &$variables, $hook) {
   foreach ($variables['blocks'] as $block) {
     if (empty($block['position'])) {
       // Perform automatic striping.
-      $block['position'] = ++$stripe % 2 ? 'left' : 'right';
+      $block['position'] = (++$stripe % 2) ? 'left' : 'right';
     }
     $container[$block['position']][] = array(
       '#theme' => _atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
