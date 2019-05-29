@@ -10,18 +10,14 @@
  */
 function atomium_bartik_preprocess_status_messages(array &$variables, $hook) {
   foreach ($variables['status_messages']['status_messages'] as &$data) {
-    $data['#theme_wrappers'] = array();
-    $data['messages']['#title'] = array(
-      'title' => array(
-        '#markup' => $data['messages']['#title'],
-      ),
-      '#theme_wrappers' => array('html_tag'),
+    unset($data['#theme_wrappers']);
+    $data['title'] = array(
+      '#type' => 'html_tag',
       '#tag' => 'h3',
       '#attributes' => array(
-        'class' => array(
-          'element-invisible',
-        ),
+        'class' => 'element-invisible',
       ),
+      'title' => $data['title'],
     );
   }
 }
