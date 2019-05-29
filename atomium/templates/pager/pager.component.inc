@@ -276,18 +276,19 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     foreach ($items as $key => &$item) {
-      $item['#theme_wrappers'] = array('html_tag');
+      $item += array(
+        '#theme_wrappers' => array('html_tag'),
+        '#tag' => 'li',
+      );
 
       _atomium_extend_theme_property(
         $item,
-        array('item_list', $variables['theme_hook_original'], $key)
+        array(
+          $variables['theme_hook_original'],
+          $item['#pager_item_type'],
+          $key
+        )
       );
-
-      $item['#tag'] = 'li';
-      if (isset($item['link'])) {
-        $item['#attributes'] = (array) $item['link']['#options']['attributes'];
-        unset($item['#attributes']['title']);
-      }
     }
 
     $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
