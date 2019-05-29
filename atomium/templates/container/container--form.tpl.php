@@ -9,5 +9,5 @@
  */
 ?>
 <div<?php print $atomium['attributes']['wrapper']->append('class', 'form-wrapper'); ?>>
-  <?php print render($container); ?>
+  <?php print $element['#children']; ?>
 </div>

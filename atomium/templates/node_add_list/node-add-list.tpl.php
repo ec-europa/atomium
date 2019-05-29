@@ -14,6 +14,6 @@
   </dl>
 <?php else: ?>
   <p>
-    <?php print $message; ?>
+    <?php print render($message); ?>
   </p>
 <?php endif; ?>
