@@ -25,12 +25,12 @@ function atomium_preprocess_file_managed_file(array &$variables, $hook) {
 
   if (isset($element['#id'])) {
     $variables['atomium']['attributes']['wrapper']
-      ->set('id', $element['#id']);
+      ->setAttribute('id', $element['#id']);
   }
 
   if (!empty($element['#attributes']['class'])) {
     $variables['atomium']['attributes']['wrapper']
-      ->set('class', (array) $element['#attributes']['class']);
+      ->setAttribute('class', (array) $element['#attributes']['class']);
   }
 
   $variables['atomium']['attributes']['wrapper']

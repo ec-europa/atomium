@@ -288,12 +288,17 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     );
   }
 
-  foreach ($items as &$item) {
-    $item['pager_item']['#theme'] = _atomium_extend_theme_hook(
-      $item['pager_item']['#theme'],
-      $variables['theme_hook_original']
-    );
-  }
+    foreach ($items as $key => &$item) {
+      $item += array(
+        '#type' => 'html_tag',
+        '#tag' => 'li',
+        '#theme_hook_suggestions_parts' => array(
+          $variables['theme_hook_original'],
+          $item['#pager_item_type'],
+          $key,
+        ),
+      );
+    }
 
   $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
 

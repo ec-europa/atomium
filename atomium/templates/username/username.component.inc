@@ -33,23 +33,34 @@ function atomium_preprocess_username(array &$variables, $hook) {
   );
 
   if (isset($variables['link_path'])) {
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => array(
-        '#theme' => _atomium_extend_theme_hook('link', array('username', 'uid_' . $variables['uid'])),
-        '#text' => $variables['name'] . $variables['extra'],
-        '#path' => $variables['link_path'],
-        '#options' => $variables['link_options'],
+    $username = array(
+      '#theme' => _atomium_extend_theme_hook(
+        'link',
+        array(
+          $variables['theme_hook_original'],
+          'uid_' . $variables['uid'],
+        )
       ),
+      '#text' => $variables['name'] . $variables['extra'],
+      '#path' => $variables['link_path'],
+      '#options' => $variables['link_options'],
     );
   }
   else {
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => array(
+    $username = array(
+      '#type' => 'atomium_html_tag',
+      '#tag' => 'span',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+        'uid_' . $variables['uid'],
+      ),
+      'value' => array(
         '#markup' => $variables['name'] . $variables['extra'],
       ),
-      '#theme_wrappers' => _atomium_extend_theme_hook('html_tag', $variables['theme_hook_original']),
-      '#tag' => 'span',
-      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
     );
   }
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $username,
+  );
 }

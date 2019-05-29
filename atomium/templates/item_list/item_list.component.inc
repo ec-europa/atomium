@@ -110,10 +110,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
 
     if (!isset($item['#markup'])) {
       $item += array(
-        '#theme_wrappers' => _atomium_extend_theme_hook(
-          'html_tag',
-          array($variables['theme_hook_original'])
-        ),
+        '#type' => 'atomium_html_tag',
         '#tag' => 'li',
       );
     }

@@ -32,16 +32,18 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   if (!empty($variables['active']) && $variables['active'] === TRUE) {
     // Add text to indicate active tab for non-visual users.
     $active = array(
-      '#markup' => t('(active tab)'),
-      '#theme_wrappers' => _atomium_extend_theme_hook(
-        'html_tag',
-        $variables['theme_hook_original']
+      '#type' => 'atomium_html_tag',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
       ),
       '#tag' => 'span',
       '#attributes' => array(
         'class' => array(
           'element-invisible',
         ),
+      ),
+      'markup' => array(
+        '#markup' => t('(active tab)'),
       ),
     );
 
@@ -57,17 +59,18 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   if (isset($link['href'])) {
     $variables[$variables['base_hook']] = array(
       $variables['base_hook'] => array(
-        '#theme' => _atomium_extend_theme_hook(
-          'link',
-          $variables['theme_hook_original']
+        '#type' => 'link',
+        '#theme_hook_suggestions_parts' => array(
+          $variables['theme_hook_original'],
         ),
-        // TODO: This render() call needs to be removed when #381 is merged.
-        '#text' => $link['title'] . render($active),
+        '#title' => $link['title'],
+        '#text' => $link['title'],
         '#path' => $link['href'],
         '#options' => array(
           'attributes' => array('title' => $link['title']),
           'html' => TRUE,
         ),
+        'active' => $active,
       ),
     );
   }

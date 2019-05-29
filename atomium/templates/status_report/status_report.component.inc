@@ -60,19 +60,31 @@ function atomium_preprocess_status_report(array &$variables, $hook) {
     $cells[] = array(
       'data' => array(
         'container' => array(
-          '#theme_wrappers' => array('container'),
+          '#theme_wrappers' => _atomium_extend_theme_hook(
+            'container',
+            array(
+              $variables['theme_hook_original'],
+              'severity',
+            )
+          ),
           '#attributes' => array(
             'title' => $severity['title'],
           ),
           array(
-            '#type' => 'html_tag',
+            '#type' => 'atomium_html_tag',
             '#tag' => 'span',
+            '#theme_hook_suggestions_parts' => array(
+              $variables['theme_hook_original'],
+              'severity',
+            ),
             '#attributes' => array(
               'class' => array(
                 'element-invisible',
               ),
             ),
-            '#value' => $severity['title'],
+            array(
+              '#markup' => $severity['title'],
+            ),
           ),
         ),
       ),

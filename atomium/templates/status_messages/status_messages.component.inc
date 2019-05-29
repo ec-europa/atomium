@@ -69,6 +69,8 @@ function atomium_preprocess_status_messages(array &$variables, $hook) {
           array($variables['theme_hook_original'], $type)
         ),
         '#items' => $messages,
+        '#type' => 'ul',
+        '#attributes' => array(),
       ),
       '#theme_wrappers' => _atomium_extend_with_suggestions(
         array('container'),

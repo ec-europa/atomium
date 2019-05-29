@@ -43,9 +43,9 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
   foreach ($variables['tips'] as $name => $tip_list) {
     foreach ($tip_list as $key => $tip) {
       $items[$key] = array(
-        '#theme' => _atomium_extend_theme_hook(
-          'html_tag',
-          $variables['theme_hook_original']
+        '#type' => 'atomium_html_tag',
+        '#theme_hook_suggestions_parts' => array(
+          $variables['theme_hook_original'],
         ),
         '#tag' => 'li',
         '#atomium' => array(
@@ -56,7 +56,9 @@ function atomium_preprocess_filter_tips(array &$variables, $hook) {
             ),
           ),
         ),
-        '#value' => $tip['tip'],
+        'value' => array(
+          '#markup' => $tip['tip'],
+        ),
       );
     }
   }

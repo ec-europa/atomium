@@ -34,13 +34,11 @@ function atomium_preprocess_rdf_template_variable_wrapper(array &$variables, $ho
     $variables['atomium']['attributes']['wrapper']->setAttributes($variables['attributes']);
 
     $rdf_template_variable_wrapper = array(
-      '#theme' => _atomium_extend_theme_hook(
-        'html_tag',
-        array(
-          $variables['theme_hook_original'],
-        )
-      ),
+      '#type' => 'atomium_html_tag',
       '#tag' => $variables['inline'] ? 'span' : 'div',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+      ),
       '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
       'content' => $rdf_template_variable_wrapper,
     );

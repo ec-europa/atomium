@@ -45,4 +45,13 @@ function atomium_preprocess_hidden(array &$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['element']->merge($attributes);
+
+  $variables['element'] = array(
+    '#type' => 'atomium_html_tag',
+    '#tag' => 'input',
+    '#theme_hook_suggestions_parts' => array(
+      $variables['theme_hook_original'],
+    ),
+    '#attributes' => $variables['atomium']['attributes']['element']->toArray(),
+  );
 }

@@ -5,6 +5,6 @@
  * Contains template file.
  */
 ?>
-<div<?php print drupal_attributes($attributes); ?>>
+<div<?php print $atomium['attributes']['wrapper']; ?>>
 <?php print drupal_render_children($element); ?>
 </div>

@@ -43,7 +43,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
     if (\is_string($heading)) {
       $heading = array(
-        '#type' => 'html_tag',
+        '#type' => 'atomium_html_tag',
         '#tag' => 'h2',
         '#value' => $variables['heading'],
       );
@@ -55,7 +55,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
     if (isset($heading['text'], $heading['level'])) {
       $heading = array(
-        '#type' => 'html_tag',
+        '#type' => 'atomium_html_tag',
         '#tag' => $heading['level'],
         '#value' => $heading['text'],
         '#attributes' => $variables['atomium']['attributes']['heading']
@@ -97,7 +97,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
         $new_links[] = array(
           'data' => array(
             'link' => array(
-              '#type' => 'html_tag',
+              '#type' => 'atomium_html_tag',
               '#tag' => 'span',
               '#value' => check_plain($link['title']),
             ),

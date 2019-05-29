@@ -24,36 +24,38 @@ function atomium_preprocess_text_format_wrapper(array &$variables, $hook) {
   $element = $variables['element'];
 
   $variables[$variables['base_hook']] = array(
-    'children' => array(
-      '#markup' => $element['#children'],
-      '#weight' => 5,
-    ),
-    '#theme_wrappers' => _atomium_extend_theme_hook(
-      'html_tag',
-      $variables['theme_hook_original']
-    ),
+    '#type' => 'atomium_html_tag',
     '#tag' => 'div',
+    '#theme_hook_suggestions_parts' => array(
+      $variables['theme_hook_original'],
+    ),
     '#attributes' => array(
       'class' => array(
         'text-format-wrapper',
       ),
+    ),
+    'children' => array(
+      '#markup' => $element['#children'],
+      '#weight' => 5,
     ),
   );
 
   if (!empty($element['#description'])) {
     $variables[$variables['base_hook']] += array(
       'description' => array(
-        '#markup' => $element['#description'],
-        '#weight' => 10,
-        '#theme_wrappers' => _atomium_extend_theme_hook(
-          'html_tag',
-          $variables['theme_hook_original']
-        ),
+        '#type' => 'atomium_html_tag',
         '#tag' => 'div',
+        '#theme_hook_suggestions_parts' => array(
+          $variables['theme_hook_original'],
+        ),
         '#attributes' => array(
           'class' => array(
             'text-format-wrapper',
           ),
+        ),
+        '#weight' => 10,
+        'value' => array(
+          '#markup' => $element['#description'],
         ),
       ),
     );
