@@ -26,7 +26,7 @@ function atomium_atomium_definition_container() {
     'description' => 'Container description.',
     'preview' => array(
       'element' => array(
-        'children' => array(
+        array(
           '#markup' => 'Container children',
         ),
       ),
