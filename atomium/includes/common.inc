@@ -413,6 +413,7 @@ function _atomium_array_flatten(array $array, array &$storage, $parentKey = '') 
     }
 
     if (\is_array($value)) {
+      $storage[$itemKey] = $value;
       _atomium_array_flatten($value, $storage, $itemKey);
     }
     else {
@@ -451,7 +452,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
 
   $theme_key = $GLOBALS['theme_key'];
   $cid = $theme_key;
-  if ($base_themes) {
+  if ($base_themes === TRUE) {
     $cid .= '+';
   }
 
@@ -484,7 +485,7 @@ function atomium_get_settings($setting_keys, $base_themes = TRUE, array $value_c
     }
   }
 
-  return \array_values(\array_filter($setting_value));
+  return \array_filter($setting_value);
 }
 
 /**
