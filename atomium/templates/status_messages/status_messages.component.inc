@@ -59,12 +59,14 @@ function atomium_preprocess_status_messages(array &$variables, $hook) {
   $status_messages = drupal_array_merge_deep($variables['messages'], drupal_get_messages($variables['display']));
   foreach ($status_messages as $type => $messages) {
     $container = array(
+      'title' => array(
+        '#markup' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
+      ),
       'messages' => array(
         '#theme' => _atomium_extend_with_suggestions(
           array('item_list'),
           array($variables['theme_hook_original'], $type)
         ),
-        '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
         '#items' => $messages,
         '#type' => 'ul',
         '#attributes' => array('class' => array()),
