@@ -54,9 +54,12 @@ function atomium_preprocess_update_version(array &$variables, $hook) {
   );
 
   $variables['version_details'] = array(
-    '#theme' => 'link',
-    '#text' => $variables['version']['version'],
-    '#path' => $variables['version']['release_link'],
+    '#type' => 'atomium_link',
+    '#theme_hook_suggestions_parts' => array(
+      $variables['theme_hook_original'],
+    ),
+    '#title' => $variables['version']['version'],
+    '#href' => $variables['version']['release_link'],
   );
 
   $variables['version_date'] = format_date(

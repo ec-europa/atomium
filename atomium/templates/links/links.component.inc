@@ -76,7 +76,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
       $new_links[] = array(
         'data' => array(
           'link' => array(
-            '#type' => 'link',
+            '#type' => 'atomium_link',
             '#title' => $link['title'],
             '#href' => $link['href'],
             '#options' => $link,

@@ -117,12 +117,12 @@ function atomium_preprocess_image_formatter(array &$variables, $hook) {
 
     $build = array(
       'link' => array(
-        '#theme' => _atomium_extend_theme_hook(
-          'link',
-          $build['#theme']
+        '#type' => 'atomium_link',
+        '#theme_hook_suggestions_parts' => array(
+          $build['#theme'],
         ),
-        '#text' => $build,
-        '#path' => $path,
+        '#title' => $build,
+        '#href' => $path,
         '#options' => $options,
       ),
     );

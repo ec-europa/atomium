@@ -38,10 +38,17 @@ function atomium_preprocess_more_help_link(array &$variables, $hook) {
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => t('More help'),
-      '#path' => $variables['url'],
-      '#options' => array('attributes' => array('title' => t('More help'))),
+      '#type' => 'atomium_link',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+      ),
+      '#title' => t('More help'),
+      '#href' => $variables['url'],
+      '#options' => array(
+        'attributes' => array(
+          'title' => t('More help'),
+        ),
+      ),
     ),
   );
 }

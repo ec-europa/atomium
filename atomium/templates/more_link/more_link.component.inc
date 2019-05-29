@@ -37,10 +37,17 @@ function atomium_atomium_definition_more_link() {
 function atomium_preprocess_more_link(array &$variables, $hook) {
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => t('More'),
-      '#path' => $variables['url'],
-      '#options' => array('attributes' => array('title' => $variables['title'])),
+      '#type' => 'atomium_link',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+      ),
+      '#title' => t('More'),
+      '#href' => $variables['url'],
+      '#options' => array(
+        'attributes' => array(
+          'title' => $variables['title'],
+        ),
+      ),
     ),
   );
 }

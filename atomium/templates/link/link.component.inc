@@ -22,14 +22,42 @@ function atomium_atomium_theme_link(array $existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_link() {
+  return array(
+    'label' => 'Link',
+    'description' => 'Link',
+  );
+}
+
+/**
+ * Implements hook_atomium_definition_form_hook().
+ */
+function atomium_atomium_definition_form_link(array $form, array &$form_state) {
+  $form['element1'] = array(
+    '#type' => 'atomium_link',
+    '#title' => 'Demo link',
+    '#href' => '/',
+  );
+
+  $form['container'] = array(
+    '#type' => 'container',
+  );
+
+  $form['element2'] = array(
+    '#type' => 'atomium_link',
+    '#title' => 'Demo active link',
+    '#href' => current_path(),
+  );
+
+  return $form;
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_link(array &$variables, $hook) {
-  $variables += array('options' => array('html' => FALSE));
-  $variables['options'] += array(
-    'html' => FALSE,
-  );
-
   if (isset($variables['options']['attributes'])) {
     $variables['atomium']['attributes']['element']
       ->merge($variables['options']['attributes']);

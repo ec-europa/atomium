@@ -333,11 +333,14 @@ function atomium_menu_get_active_breadcrumb() {
       \array_pop($active_trail);
     }
 
-    foreach ($active_trail as $parent) {
+    foreach ($active_trail as $index => $parent) {
       $breadcrumb[] = array(
-        '#theme' => _atomium_extend_theme_hook('link', 'breadcrumb'),
-        '#text' => $parent['title'],
-        '#path' => $parent['href'],
+        '#type' => 'atomium_link',
+        '#theme_hook_suggestions_parts' => array(
+          'breadcrumb',
+        ),
+        '#title' => $parent['title'],
+        '#href' => $parent['href'],
         '#options' => $parent['localized_options'],
       );
     }

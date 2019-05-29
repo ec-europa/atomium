@@ -90,9 +90,12 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       if (!empty($account->uid) && user_access('access user profiles')) {
         $variables[$variables['base_hook']] = array(
           $variables['base_hook'] => array(
-            '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-            '#text' => $variables['user_picture'],
-            '#path' => 'user/' . $account->uid,
+            '#type' => 'atomium_link',
+            '#theme_hook_suggestions_parts' => array(
+              $variables['theme_hook_original'],
+            ),
+            '#title' => $variables['user_picture'],
+            '#href' => 'user/' . $account->uid,
             '#options' => array(
               'html' => TRUE,
               'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->toArray(),

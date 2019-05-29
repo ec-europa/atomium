@@ -25,14 +25,12 @@ function atomium_atomium_theme_node_recent_content(array $existing, $type, $them
 function atomium_preprocess_node_recent_content(array &$variables, $hook) {
   $variables['title'] = array(
     'title' => array(
-      '#theme' => _atomium_extend_theme_hook(
-        'link',
-        array(
-          $variables['theme_hook_original'],
-        )
+      '#type' => 'atomium_link',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
       ),
-      '#text' => $variables['node']->title,
-      '#path' => 'node/' . $variables['node']->nid,
+      '#title' => $variables['node']->title,
+      '#href' => 'node/' . $variables['node']->nid,
     ),
     'mark' => array(
       '#theme' => _atomium_extend_theme_hook(

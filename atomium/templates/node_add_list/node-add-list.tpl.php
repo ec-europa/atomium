@@ -9,7 +9,7 @@
   <dl class="node-type-list">
     <?php foreach ($content as $item): ?>
       <dt><?php print render($item['link']); ?></dt>
-      <dd><?php print $item['description']; ?></dd>
+      <dd><?php print render($item['description']); ?></dd>
     <?php endforeach; ?>
   </dl>
 <?php else: ?>

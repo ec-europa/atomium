@@ -28,10 +28,12 @@ function atomium_preprocess_menu_local_action(array &$variables, $hook) {
 
   if (isset($link['href'])) {
     $variables[$variables['base_hook']] = array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => $link['title'],
-      '#path' => $link['href'],
-      '#options' => array(),
+      '#type' => 'atomium_link',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+      ),
+      '#title' => $link['title'],
+      '#href' => $link['href'],
     );
   }
   elseif (!empty($link['localized_options']['html'])) {

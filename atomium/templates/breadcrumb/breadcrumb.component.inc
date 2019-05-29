@@ -27,14 +27,14 @@ function atomium_atomium_definition_breadcrumb() {
     'preview' => array(
       'breadcrumb' => array(
         array(
-          '#theme' => 'link',
-          '#text' => 'Home',
-          '#path' => '/',
+          '#type' => 'atomium_link',
+          '#title' => 'Home',
+          '#href' => '/',
         ),
         array(
-          '#theme' => 'link',
-          '#text' => 'News',
-          '#path' => '/',
+          '#type' => 'atomium_link',
+          '#title' => 'News',
+          '#href' => '/',
         ),
         t('My news title'),
       ),

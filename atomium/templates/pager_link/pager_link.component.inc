@@ -83,12 +83,12 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
   }
 
   $link = array(
-    '#theme' => _atomium_extend_theme_hook(
-      'link',
-      array($variables['theme_hook_original'])
+    '#type' => 'atomium_link',
+    '#theme_hook_suggestions_parts' => array(
+      $variables['theme_hook_original'],
     ),
-    '#text' => $text,
-    '#path' => $_GET['q'],
+    '#title' => $text,
+    '#href' => $_GET['q'],
     '#options' => array(
       'attributes' => $attributes,
       'query' => $query,

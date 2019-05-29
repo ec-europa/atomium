@@ -34,15 +34,13 @@ function atomium_preprocess_username(array &$variables, $hook) {
 
   if (isset($variables['link_path'])) {
     $username = array(
-      '#theme' => _atomium_extend_theme_hook(
-        'link',
-        array(
-          $variables['theme_hook_original'],
-          'uid_' . $variables['uid'],
-        )
+      '#type' => 'atomium_link',
+      '#theme_hook_suggestions_parts' => array(
+        $variables['theme_hook_original'],
+        'uid_' . $variables['uid'],
       ),
-      '#text' => $variables['name'] . $variables['extra'],
-      '#path' => $variables['link_path'],
+      '#title' => $variables['name'] . $variables['extra'],
+      '#href' => $variables['link_path'],
       '#options' => $variables['link_options'],
     );
   }

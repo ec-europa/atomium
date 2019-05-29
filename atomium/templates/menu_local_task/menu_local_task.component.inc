@@ -59,15 +59,16 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   if (isset($link['href'])) {
     $variables[$variables['base_hook']] = array(
       $variables['base_hook'] => array(
-        '#type' => 'link',
+        '#type' => 'atomium_link',
         '#theme_hook_suggestions_parts' => array(
           $variables['theme_hook_original'],
         ),
         '#title' => $link['title'],
-        '#text' => $link['title'],
-        '#path' => $link['href'],
+        '#href' => $link['href'],
         '#options' => array(
-          'attributes' => array('title' => $link['title']),
+          'attributes' => array(
+            'title' => $link['title'],
+          ),
           'html' => TRUE,
         ),
         'active' => $active,
