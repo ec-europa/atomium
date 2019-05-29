@@ -264,7 +264,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     foreach ($items as $key => &$item) {
-      $item = array(
+      $item += array(
         '#theme_wrappers' => _atomium_extend_with_suggestions(
           array('html_tag'),
           array(
@@ -274,9 +274,6 @@ function atomium_preprocess_pager(array &$variables, $hook) {
           )
         ),
         '#tag' => 'li',
-        '#attributes' => $item['#attributes'],
-        '#pager_item_type' => $item['#pager_item_type'],
-        'pager_item' => $item['pager_item'],
       );
     }
 
