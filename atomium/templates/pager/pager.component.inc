@@ -275,7 +275,8 @@ function atomium_preprocess_pager(array &$variables, $hook) {
         ),
         '#tag' => 'li',
         '#attributes' => $item['#attributes'],
-        'item' => $item['pager_item'],
+        '#pager_item_type' => $item['#pager_item_type'],
+        'pager_item' => $item['pager_item'],
       );
     }
 
