@@ -42,4 +42,11 @@ function atomium_element_info_alter(array &$types) {
       $types[$type] = $types[$overridenBy];
     }
   }
+
+  foreach ($types as $type => &$type_info) {
+    $type_info += array('#pre_render' => array());
+
+    // Using a non numeric key to avoid duplicates.
+    $type_info['#pre_render']['atomium_pre_render_element'] = 'atomium_pre_render_element';
+  }
 }
