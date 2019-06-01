@@ -697,7 +697,7 @@ function atomium_get_base_hook($hook) {
  * @param array $context
  *   The context.
  */
-function _atomium_recursive_element_children(array &$root_element, callable $callback, $root_element_key = NULL, array &$context = array()) {
+function atomium_recursive_element_children(array &$root_element, callable $callback, $root_element_key = NULL, array &$context = array()) {
   $context += array('parents' => array());
   $context['parents'][$root_element_key] = &$root_element;
 
@@ -707,7 +707,7 @@ function _atomium_recursive_element_children(array &$root_element, callable $cal
     if (!is_array($root_element[$sub_element_key])) {
       continue;
     }
-    _atomium_recursive_element_children(
+    atomium_recursive_element_children(
       $root_element[$sub_element_key],
       $callback,
       $sub_element_key,
@@ -716,4 +716,205 @@ function _atomium_recursive_element_children(array &$root_element, callable $cal
   }
 
   array_pop($context['parents']);
+}
+
+/**
+ * Extend the #theme_wrappers property of an element.
+ *
+ * @param array $element
+ *   The element.
+ * @param string[] $suggestions_parts
+ *   The suggestions parts.
+ */
+function _atomium_extend_theme_wrappers_property_with_suggestions(array &$element, array $suggestions_parts) {
+  if (!isset($element['#theme_wrappers']) || !is_array($element['#theme_wrappers'])) {
+    return;
+  }
+
+  foreach ($element['#theme_wrappers'] as &$hook_or_hooks) {
+    _atomium_extend_value_with_suggestions(
+      $hook_or_hooks,
+      $suggestions_parts);
+  }
+}
+
+/**
+ * Extend the #theme property of an element.
+ *
+ * @param array $element
+ *   The element.
+ * @param string[] $suggestions_parts
+ *   The suggestions parts.
+ */
+function _atomium_extend_theme_property_with_suggestions(array &$element, array $suggestions_parts) {
+  if (!isset($element['#theme'])) {
+    return;
+  }
+
+  _atomium_extend_value_with_suggestions(
+    $element['#theme'],
+    $suggestions_parts);
+}
+
+/**
+ * Extends strings with an array of suggestions.
+ *
+ * @param string|string[] $hook_or_hooks
+ *   The hook or hooks to extend.
+ * @param string[] $suggestion_parts
+ *   The suggestions to extend the base string with.
+ *
+ * @example
+ *   $base = 'block';
+ *   $suggestions_parts = ['system', 'main-menu'];
+ *
+ *   The result will be: 'block__system__main_menu'
+ *
+ *   Quick note about the drupal_strtolower() call:
+ *   We must ensure lowercase values because get_defined_functions()
+ *   in drupal_group_functions_by_prefix() returns functions in lower case.
+ */
+function _atomium_extend_value_with_suggestions(&$hook_or_hooks, array $suggestion_parts) {
+  $suffix = '';
+
+  foreach ($suggestion_parts as $suggestion_part) {
+    if (is_array($suggestion_part)) {
+      $suggestion_part = implode('__', $suggestion_part);
+    }
+
+    $suggestion_part = strtolower(
+      trim(
+        preg_replace('@\W@', '_', $suggestion_part),
+        '_'
+      )
+    );
+
+    if ($suggestion_part === '') {
+      continue;
+    }
+
+    $suffix .= '__' . $suggestion_part;
+  }
+
+  if (is_string($hook_or_hooks)) {
+    $hook_or_hooks .= $suffix;
+  }
+  elseif (is_array($hook_or_hooks)) {
+    // @todo Do we really want to append the suffix to every hook in the array?
+    $hook_or_hooks = array_map(
+      function ($hook) use ($suffix) {
+        return $hook . $suffix;
+      },
+      $hook_or_hooks
+    );
+  }
+}
+
+/**
+ * Recursive function that goes through all children of a Drupal's menu build.
+ *
+ * @param array $root_element
+ *   The root element.
+ *   Typical structure:
+ *   $[$mlid]['#theme'] === 'menu_link__navigation'
+ *   $['#theme_wrappers'][] = 'menu_tree__navigation'.
+ * @param callable $callback
+ *   A custom callback to apply to each element.
+ * @param string|null $root_element_key
+ *   The root element key.
+ * @param array $context
+ *   The context.
+ */
+function atomium_recursive_menu_tree(array &$root_element, callable $callback, $root_element_key = NULL, array &$context = array()) {
+  $context += array('level' => 1);
+
+  // Alter the menu tree element.
+  $callback($root_element, $root_element_key, $context);
+
+  foreach (element_children($root_element) as $sub_element_key) {
+    if (!is_array($root_element[$sub_element_key])) {
+      continue;
+    }
+
+    // Alter the menu link element.
+    $callback($root_element[$sub_element_key], $sub_element_key, $context);
+
+    if (empty($root_element[$sub_element_key]['#below'])) {
+      continue;
+    }
+
+    // Alter the sub-tree.
+    $context['level']++;
+    atomium_recursive_menu_tree(
+      $root_element[$sub_element_key]['#below'],
+      $callback,
+      $sub_element_key,
+      $context
+    );
+    $context['level']--;
+  }
+}
+
+/**
+ * Populate an element with default pre render variables.
+ *
+ * @param array $element
+ *   The Drupal element.
+ */
+function _atomium_add_default_pre_render_variables(array &$element) {
+  $element += array('#atomium' => array());
+  $element['#atomium'] += array('suggestions' => array());
+  $element['#atomium']['suggestions'] += array('theme' => array());
+  $element['#atomium']['suggestions'] += array('theme_wrappers' => array());
+}
+
+/**
+ * Populate an element with a specific pre-render callback.
+ *
+ * @param array $element
+ *   The Drupal element.
+ */
+function _atomium_add_default_pre_render_callback(array &$element) {
+  $element += array('#pre_render' => array());
+
+  // Using a non numeric key to avoid duplicates.
+  $element['#pre_render']['atomium_pre_render_element'] = 'atomium_pre_render_element';
+}
+
+/**
+ * Custom pre_render callback.
+ *
+ * @param array $element
+ *   The element to alter.
+ *
+ * @return array
+ *   The element altered.
+ */
+function atomium_pre_render_element(array $element) {
+  $query = isset($_GET['q']) ? $_GET['q'] : '';
+  $suggestions_page = explode('/', $query);
+
+  _atomium_add_default_pre_render_variables($element);
+
+  $suggestions_theme_wrappers = array_merge(
+    $element['#atomium']['suggestions']['theme_wrappers'],
+    $suggestions_page
+  );
+
+  _atomium_extend_theme_wrappers_property_with_suggestions(
+    $element,
+    $suggestions_theme_wrappers
+  );
+
+  $suggestions_theme = array_merge(
+    $element['#atomium']['suggestions']['theme'],
+    $suggestions_page
+  );
+
+  _atomium_extend_theme_property_with_suggestions(
+    $element,
+    $suggestions_theme
+  );
+
+  return $element;
 }

@@ -9,64 +9,93 @@
  * Implements hook_form_alter().
  */
 function atomium_form_alter(array &$form, array &$form_state, $form_id) {
-  $context = array(
-    'form' => $form,
-    'form_state' => $form_state,
-    'form_id' => $form_id,
+  $form += array(
+    '#pre_render' => array(),
   );
 
-  $callback = function (&$root_element, $root_element_key, $context) {
-    if (!isset($root_element['#type'])) {
-      return;
-    }
+  $form['#pre_render'] = array_merge(
+    $form['#pre_render'],
+    array(
+      '_atomium_form_alter_pre_render' => '_atomium_form_alter_pre_render',
+      'atomium_pre_render_form_bug_3056608' => 'atomium_pre_render_form_bug_3056608',
+    )
+  );
+}
 
-    if (!empty($root_element['#defaults_loaded'])) {
-      return;
-    }
+/**
+ * Custom pre_render callback.
+ *
+ * @param array $element
+ *   The element to alter.
+ *
+ * @return array
+ *   The element altered.
+ */
+function _atomium_form_alter_pre_render(array $element) {
+  $context = array(
+    'form' => $element,
+    'suggestions parts' => array(
+      $element['#id'],
+    ),
+  );
 
-    $info = element_info($root_element['#type']);
+  _atomium_add_default_pre_render_variables($element);
 
-    if (empty($info)) {
-      return;
-    }
+  atomium_recursive_element_children(
+    $element,
+    function (&$element, $element_key, &$recursive_context) use ($context) {
+      _atomium_add_default_pre_render_variables($element);
 
-    if (isset($info['#theme'])) {
-      if (!isset($root_element['#theme'])) {
-        $root_element['#theme'] = $info['#theme'];
+      $element['#atomium']['suggestions']['theme'] = array_merge(
+        array_filter(array_keys($recursive_context['parents'])),
+        $context['suggestions parts'],
+        $element['#atomium']['suggestions']['theme']
+      );
+
+      $type = array();
+      if (isset($element['#type'])) {
+        $type[] = $element['#type'];
+
+        if (isset($element['#theme'])) {
+          if ($element['#theme'] !== $element['#type']) {
+            $type = array_merge(
+              $type,
+              (array) $element['#theme']
+            );
+          }
+        }
       }
 
-      $root_element['#theme'] = _atomium_extend_with_suggestions(
-        (array) $root_element['#theme'],
-        array('form', $context['form_id'], $root_element_key)
+      $element['#atomium']['suggestions']['theme_wrappers'] = array_merge(
+        $type,
+        array_filter(array_keys($recursive_context['parents'])),
+        $context['suggestions parts'],
+        $element['#atomium']['suggestions']['theme_wrappers']
       );
-    }
-
-    if (isset($info['#theme_wrappers'])) {
-      if (!isset($root_element['#theme_wrappers'])) {
-        $root_element['#theme_wrappers'] = $info['#theme_wrappers'];
-      }
-
-      $root_element['#theme_wrappers'] = _atomium_extend_with_suggestions(
-        $root_element['#theme_wrappers'],
-        array('form', $context['form_id'], $root_element_key)
-      );
-    }
-  };
-
-  _atomium_recursive_element_children(
-    $form,
-    $callback,
+    },
     NULL,
     $context
   );
 
-  /*
-   * Prevent user-facing field styling from screwing up node edit forms by
-   * renaming the classes on the node edit form's field wrappers.
-   *
-   * Remove if #1245218 is backported to D7 core.
-   */
-  foreach (\array_keys($form) as $item) {
+  return $element;
+}
+
+/**
+ * Custom pre_render callback.
+ *
+ * Prevent user-facing field styling from screwing up node edit forms by
+ * renaming the classes on the node edit form's field wrappers.
+ *
+ * To be removed if #1245218 is backported to Drupal 7.
+ *
+ * @param array $element
+ *   The element to alter.
+ *
+ * @return array
+ *   The element altered.
+ */
+function atomium_pre_render_form_bug_3056608(array $element) {
+  foreach (\array_keys($element) as $item) {
     if (\strpos($item, 'field_') !== 0) {
       continue;
     }
@@ -94,6 +123,8 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
       $class = 'form-' . $class;
     }
   }
+
+  return $element;
 }
 
 /**

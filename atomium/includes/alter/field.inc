@@ -42,7 +42,7 @@ function atomium_field_attach_view_alter(array &$output, array $context) {
     );
   };
 
-  _atomium_recursive_element_children(
+  atomium_recursive_element_children(
     $output,
     $callback,
     NULL,
