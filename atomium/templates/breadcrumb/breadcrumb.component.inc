@@ -55,17 +55,10 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
       );
     }
 
-    $link = array(
-      'link' => $item,
-      '#theme_wrappers' => array('html_tag'),
-      '#tag' => 'li',
+    $links[] = array(
+      'data' => $item,
+      '#theme_wrappers' => NULL,
     );
-
-    _atomium_extend_theme_wrappers_property(
-      $link,
-      array($link['#tag'], $variables['theme_hook_original']));
-
-    $links[] = $link;
   }
 
   $breadcrumb = array();
@@ -74,14 +67,15 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
     $breadcrumb = array(
       '#theme' => 'item_list',
       '#items' => $links,
-      '#type' => 'ul',
       '#wrapper' => FALSE,
-      '#attributes' => array(),
     );
 
     _atomium_extend_theme_property(
       $breadcrumb,
-      array($breadcrumb['#type'], $variables['theme_hook_original']));
+      array(
+        $variables['theme_hook_original']
+      )
+    );
   }
 
   $variables[$variables['base_hook']] = array(
