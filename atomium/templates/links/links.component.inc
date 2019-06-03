@@ -27,135 +27,104 @@ function atomium_atomium_theme_links(array $existing, $type, $theme, $path) {
 
 /**
  * Implements hook_preprocess_hook().
- *
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_links(array &$variables, $hook) {
-  $language_url = $GLOBALS['language_url'];
-
-  $count = \count($variables['links']);
-  if ($count <= 0) {
-    return;
-  }
-
   $heading = $variables['heading'];
 
-  $variables['atomium']['attributes']['list']->merge($variables['attributes']);
-  $variables['atomium']['attributes']['list']->append('class', 'links');
+  $variables['atomium']['attributes']['wrapper']
+    ->merge($variables['attributes']);
+  $variables['atomium']['attributes']['wrapper']
+    ->append('class', 'links');
 
   // Treat the heading first if it is present to prepend it to the
   // list of links.
   if (!empty($variables['heading'])) {
-    if (\is_string($variables['heading'])) {
-      // Prepare the array that will be used when the passed heading
-      // is a string.
-      $variables['heading'] = array(
-        'text' => $variables['heading'],
-        // Set the default level of the heading.
-        'level' => 'h2',
+    $heading = $variables['heading'];
+
+    if (\is_string($heading)) {
+      $heading = array(
+        '#type' => 'html_tag',
+        '#tag' => 'h2',
+        '#value' => $variables['heading'],
       );
     }
-    if (!empty($variables['heading']['class'])) {
-      $variables['atomium']['attributes']['heading']->merge(array(
-        'class' => $heading['class'],
-      ));
+
+    $heading += array(
+      'class' => array(),
+    );
+
+    if (isset($heading['text'], $heading['level'])) {
+      $heading = array(
+        '#type' => 'html_tag',
+        '#tag' => $heading['level'],
+        '#value' => $heading['text'],
+        '#attributes' => $variables['atomium']['attributes']['heading']
+          ->merge(
+            array(
+              'class' => $heading['class'],
+            )
+        )
+          ->toArray(),
+      );
     }
-    $variables['heading']['text'] = check_plain($variables['heading']['text']);
   }
 
-  $num_links = $count;
-  $i = 1;
   $new_links = array();
 
   foreach ($variables['links'] as $key => $link) {
-    $link['attributes_array'] = array('class' => array($key));
-    $link['span_attributes_array'] = array();
-
-    // Add first, last and active classes to the list of links to help out
-    // themers.
-    if ($i === 1) {
-      $link['attributes_array']['class'][] = 'first';
-    }
-
-    if ($i === $num_links) {
-      $link['attributes_array']['class'][] = 'last';
-    }
-
-    if (
-      isset($link['href']) &&
-      (empty($link['language']) || $link['language']->language === $language_url->language) &&
-      ($link['href'] === $_GET['q'] || ($link['href'] === '<front>' && drupal_is_front_page()))) {
-      $link['attributes_array']['class'][] = 'active';
-    }
-
-    $newlink = '';
     if (isset($link['href'])) {
-      // Pass in $link as $options, they share the same keys.
-      $newlink = array(
-        'link' => array(
-          '#theme' => 'link',
-          '#text' => $link['title'],
-          '#path' => $link['href'],
-          '#options' => $link,
+      $new_links[] = array(
+        'data' => array(
+          'link' => array(
+            '#type' => 'link',
+            '#title' => $link['title'],
+            '#href' => $link['href'],
+            '#options' => $link,
+          ),
+          '#attributes' => array(
+            'class' => array(
+              $key,
+            ),
+          ),
         ),
-        '#theme_wrappers' => array('html_tag'),
-        '#tag' => 'li',
-        '#attributes' => $link['attributes_array'],
       );
-      _atomium_extend_theme_property(
-        $newlink['link'],
-        array($variables['theme_hook_original']));
-      _atomium_extend_theme_wrappers_property(
-        $newlink,
-        array($newlink['#tag'], $variables['theme_hook_original']));
     }
 
     if (isset($link['title']) && !empty($link['title']) && empty($link['href'])) {
-      $link['span_attributes_array'] = array();
-      if (isset($link['attributes_array'])) {
-        $link['span_attributes_array'] = $link['attributes_array'];
-      }
-
       // Some links are actually not links, but we wrap these in <span> for
       // adding title and class attributes.
       if (empty($link['html'])) {
-        $newlink = array(
-          'link' => array(
-            '#markup' => check_plain($link['title']),
-            '#theme_wrappers' => array('html_tag'),
-            '#tag' => 'span',
-            '#attributes' => $link['span_attributes_array'],
+        $new_links[] = array(
+          'data' => array(
+            'link' => array(
+              '#type' => 'html_tag',
+              '#tag' => 'span',
+              '#value' => check_plain($link['title']),
+            ),
           ),
-          '#theme_wrappers' => array('html_tag'),
-          '#tag' => 'li',
-          '#attributes' => $link['attributes_array'],
         );
-        _atomium_extend_theme_wrappers_property(
-          $newlink['link'],
-          array($newlink['link']['#tag'], $variables['theme_hook_original']));
-        _atomium_extend_theme_wrappers_property(
-          $newlink,
-          array($newlink['#tag'], $variables['theme_hook_original']));
       }
     }
-
-    $i++;
-    $new_links[] = $newlink;
   }
 
   $links = array(
     '#theme' => 'item_list',
-    '#items' => \array_filter($new_links),
-    '#type' => 'ul',
+    '#items' => $new_links,
     '#atomium' => array(
-      'attributes' => $variables['atomium']['attributes'],
+      'attributes' => array(
+        'list' => $variables['atomium']['attributes']['wrapper'],
+      ),
     ),
+    '#wrapper' => FALSE,
+    '#title' => $heading,
   );
 
   _atomium_extend_theme_property(
     $links,
-    array($links['#type'], $variables['theme_hook_original']));
+    array(
+      $variables['theme_hook_original'],
+    )
+  );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => $links,
