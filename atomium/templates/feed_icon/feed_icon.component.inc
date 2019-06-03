@@ -39,17 +39,30 @@ function atomium_atomium_definition_feed_icon() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_feed_icon(array &$variables, $hook) {
-  $text = t('Subscribe to !feed-title', array('!feed-title' => $variables['title']));
+  $text = t(
+    'Subscribe to !feed-title',
+    array('!feed-title' => $variables['title'])
+  );
+
+  $image = array(
+    '#theme' => _atomium_extend_theme_hook(
+      'image__link',
+      $variables['theme_hook_original']
+    ),
+    '#path' => 'misc/feed.png',
+    '#width' => 16,
+    '#height' => 16,
+    '#alt' => $text,
+  );
+
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
-      '#text' => array(
-        '#theme' => _atomium_extend_theme_hook('image__link', $variables['theme_hook_original']),
-        '#path' => 'misc/feed.png',
-        '#width' => 16,
-        '#height' => 16,
-        '#alt' => $text,
+      '#theme' => _atomium_extend_theme_hook(
+        'link',
+        $variables['theme_hook_original']
       ),
+      // TODO: This render() call needs to be removed when #381 is merged.
+      '#text' => render($image),
       '#path' => $variables['url'],
       '#options' => array(
         'html' => TRUE,
