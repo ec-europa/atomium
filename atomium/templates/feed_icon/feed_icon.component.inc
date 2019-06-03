@@ -15,6 +15,7 @@ function atomium_atomium_theme_feed_icon(array $existing, $type, $theme, $path) 
       'variables' => array(
         'url' => NULL,
         'title' => NULL,
+        'link' => NULL,
       ),
     ),
   );
@@ -40,17 +41,28 @@ function atomium_atomium_definition_feed_icon() {
 function atomium_preprocess_feed_icon(array &$variables, $hook) {
   $text = t(
     'Subscribe to !feed-title',
-    array('!feed-title' => $variables['title']));
+    array('!feed-title' => $variables['title'])
+  );
+
+  $image = array(
+    '#theme' => 'image__link',
+    '#path' => 'misc/feed.png',
+    '#width' => 16,
+    '#height' => 16,
+    '#alt' => $text,
+  );
+
+  _atomium_extend_theme_property(
+    $image,
+    array(
+      $variables['theme_hook_original']
+    )
+  );
 
   $feed_icon = array(
     '#theme' => 'link',
-    '#text' => array(
-      '#theme' => 'image',
-      '#path' => 'misc/feed.png',
-      '#width' => 16,
-      '#height' => 16,
-      '#alt' => $text,
-    ),
+    // TODO: This render() call needs to be removed when #381 is merged.
+    '#text' => render($image),
     '#path' => $variables['url'],
     '#options' => array(
       'html' => TRUE,
@@ -63,11 +75,9 @@ function atomium_preprocess_feed_icon(array &$variables, $hook) {
 
   _atomium_extend_theme_property(
     $feed_icon,
-    array($variables['theme_hook_original']));
-
-  _atomium_extend_theme_property(
-    $feed_icon['#text'],
-    array($feed_icon['#theme']));
+    array(
+      $feed_icon['#theme'])
+  );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => $feed_icon,

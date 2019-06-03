@@ -26,7 +26,8 @@ function atomium_atomium_theme_menu_local_task(array $existing, $type, $theme, $
  */
 function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   $link = $variables['link'];
-  $active = NULL;
+  $link_text = $link['title'];
+  $active = array();
 
   if (!empty($variables['active']) && $variables['active'] === TRUE) {
     // Add text to indicate active tab for non-visual users.
@@ -43,7 +44,11 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
 
     _atomium_extend_theme_wrappers_property(
       $active,
-      array($active['#tag'], $variables['theme_hook_original']));
+      array(
+        $active['#tag'],
+        $variables['theme_hook_original']
+      )
+    );
 
     // If the link does not contain HTML already, check_plain() it now.
     // After we set 'html'=TRUE the link will not be sanitized by l().
@@ -70,7 +75,10 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
 
     _atomium_extend_theme_property(
       $menu_local_task,
-      array($variables['theme_hook_original']));
+      array(
+        $variables['theme_hook_original'],
+      )
+    );
   }
 
   $variables[$variables['base_hook']] = array(
