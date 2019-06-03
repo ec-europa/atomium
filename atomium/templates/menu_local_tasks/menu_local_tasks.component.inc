@@ -15,9 +15,6 @@ function atomium_atomium_theme_menu_local_tasks(array $existing, $type, $theme, 
       'variables' => array(
         'primary' => array(),
         'secondary' => array(),
-        'primary_attributes_array' => array(),
-        'secondary_attributes_array' => array(),
-        'type' => 'ul',
       ),
     ),
   );
@@ -27,35 +24,53 @@ function atomium_atomium_theme_menu_local_tasks(array $existing, $type, $theme, 
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
-  $primary = '';
-  if ($variables['primary']) {
-    $primary = array(
+  if (!empty($variables['primary'])) {
+    foreach ($variables['primary'] as &$item) {
+      $item += array(
+        '#theme_wrappers' => array(),
+      );
+    }
+
+    $variables['primary'] = array(
       '#theme' => 'item_list',
       '#items' => $variables['primary'],
-      '#type' => $variables['type'],
-      '#attributes' => $variables['atomium']['attributes']['primary']->getValuesAsArray(),
+      '#attributes' => $variables['atomium']['attributes']['primary']
+        ->toArray(),
       '#wrapper_attributes' => array(),
+      '#wrapper' => FALSE,
     );
 
     _atomium_extend_theme_property(
-      $primary,
-      array('primary', $primary['#type'], $variables['theme_hook_original']));
+      $variables['primary'],
+      array(
+        $variables['theme_hook_original'],
+        'primary',
+      )
+    );
   }
 
-  $secondary = '';
-  if ($variables['secondary']) {
-    $secondary = array(
+  if (!empty($variables['secondary'])) {
+    foreach ($variables['secondary'] as &$item) {
+      $item += array(
+        '#theme_wrappers' => array(),
+      );
+    }
+
+    $variables['secondary'] = array(
       '#theme' => 'item_list',
       '#items' => $variables['secondary'],
-      '#type' => $variables['type'],
-      '#attributes' => $variables['atomium']['attributes']['secondary']->getValuesAsArray(),
+      '#attributes' => $variables['atomium']['attributes']['secondary']
+        ->toArray(),
       '#wrapper_attributes' => array(),
+      '#wrapper' => FALSE,
     );
-    _atomium_extend_theme_property(
-      $secondary,
-      array('secondary', $secondary['#type'], $variables['theme_hook_original']));
-  }
 
-  $variables['primary'] = $primary;
-  $variables['secondary'] = $secondary;
+    _atomium_extend_theme_property(
+      $variables['secondary'],
+      array(
+        $variables['theme_hook_original'],
+        'secondary',
+      )
+    );
+  }
 }

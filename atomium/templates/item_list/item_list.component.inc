@@ -30,6 +30,35 @@ function atomium_atomium_theme_item_list(array $existing, $type, $theme, $path) 
 }
 
 /**
+ * Implements hook_atomium_definition_hook().
+ */
+function atomium_atomium_definition_item_list() {
+  return array(
+    'label' => 'Item list',
+    'description' => 'Item list description.',
+    'preview' => array(
+      'items' => array(
+        'item1' => array(
+          'data' => array(
+            '#markup' => 'Item 1',
+          ),
+        ),
+        'item2' => array(
+          'data' => array(
+            '#markup' => 'Item 2',
+          ),
+        ),
+        'item3' => array(
+          'data' => array(
+            '#markup' => 'Item 3',
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_item_list(array &$variables, $hook) {
@@ -47,7 +76,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   // Empty headers are not semantic and present accessibility challenges.
   $num_items = \count($variables['items']);
   $i = 0;
-  foreach ($variables['items'] as $key => $item) {
+  foreach ($variables['items'] as $key => &$item) {
     $i++;
 
     $variables['atomium']['attributes'][$key]
@@ -60,58 +89,56 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
       $variables['atomium']['attributes'][$key]->append('class', 'last');
     }
 
-    if (\is_array($item) && isset($item['data'])) {
-      $item += array('class' => array());
-      $variables['atomium']['attributes'][$key]
-        ->append('class', $item['class']);
-      $item = array(
-        '#theme' => 'html_tag',
-        '#tag' => 'li',
-        '#atomium' => array(
-          'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key]
-              ->getValuesAsArray(),
-          ),
-        ),
-        '#value' => $item['data'],
-      );
-      _atomium_extend_theme_property(
-        $item,
-        array($item['#tag'], $variables['theme_hook_original']));
-      $variables['items'][$key] = $item;
-    }
-
     if (\is_string($item)) {
       $item = array(
-        '#theme' => 'html_tag',
-        '#tag' => 'li',
-        '#atomium' => array(
-          'attributes' => array(
-            'element' => $variables['atomium']['attributes'][$key]
-              ->getValuesAsArray(),
-          ),
-        ),
-        '#value' => $item,
+        'data' => $item,
       );
-      _atomium_extend_theme_property(
-        $item,
-        array($item['#tag'], $variables['theme_hook_original']));
-      $variables['items'][$key] = $item;
     }
 
-    $variables['items'][$key] += array('#attributes' => array());
-    $variables['items'][$key]['#attributes'] =
-      $variables['atomium']['attributes'][$key]
-        ->merge((array) $variables['items'][$key]['#attributes'])
-        ->getValuesAsArray();
+    $item += array(
+      'class' => array(),
+      '#attributes' => array(),
+    );
+
+    if (!isset($item['#markup'])) {
+      $item += array(
+        '#theme_wrappers' => array('html_tag'),
+        '#tag' => 'li',
+      );
+
+      _atomium_extend_theme_property(
+        $item,
+        array(
+          $item['#tag'],
+          $variables['theme_hook_original'])
+      );
+    }
+
+    $variables['atomium']['attributes'][$key]
+      ->append('class', $item['class'])
+      ->merge($item['#attributes']);
+
+    if (isset($item['data'])) {
+      if (is_string($item['data'])) {
+        $item['data'] = array(
+          '#markup' => $item['data'],
+        );
+      }
+    }
+
+    $item['#attributes'] = $variables['atomium']['attributes'][$key]
+      ->merge($item['#attributes'])
+      ->toArray();
 
     // We do this to ensure that component like menu_local_task will have
     // the proper attributes.
-    $variables['items'][$key]['#atomium']['attributes']['wrapper'] =
+    $item['#atomium']['attributes']['wrapper'] =
       $variables['atomium']['attributes'][$key];
   }
 
   // @Todo: Remove this, it shouldn't be used anymore but it's too early now.
-  $variables['atomium']['attributes']['list']->merge($variables['attributes']);
-  $variables['atomium']['attributes']['wrapper']->merge($variables['wrapper_attributes']);
+  $variables['atomium']['attributes']['list']
+    ->merge($variables['attributes']);
+  $variables['atomium']['attributes']['wrapper']
+    ->merge($variables['wrapper_attributes']);
 }

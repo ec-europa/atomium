@@ -5,9 +5,11 @@
  * Contains template file.
  */
 ?>
-<?php if ($primary): ?>
+<?php if (!empty($primary)): ?>
+  <h2 class="element-invisible"><?php print t('Primary tabs'); ?></h2>
   <?php print render($primary); ?>
 <?php endif; ?>
-<?php if ($secondary): ?>
+<?php if (!empty($secondary)): ?>
+  <h2 class="element-invisible"><?php print t('Secondary tabs'); ?></h2>
   <?php print render($secondary); ?>
 <?php endif; ?>
