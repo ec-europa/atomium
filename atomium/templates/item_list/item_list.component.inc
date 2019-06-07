@@ -100,6 +100,14 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
       '#attributes' => array(),
     );
 
+    $variables['atomium']['attributes'][$key]
+      ->append('class', $item['class'])
+      ->merge($item['#attributes']);
+
+    // Remove this so it's not considered as a render array when it gets
+    // rendered.
+    unset($item['class']);
+
     if (!isset($item['#markup'])) {
       $item += array(
         '#theme_wrappers' => _atomium_extend_theme_hook(
@@ -109,10 +117,6 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
         '#tag' => 'li',
       );
     }
-
-    $variables['atomium']['attributes'][$key]
-      ->append('class', $item['class'])
-      ->merge($item['#attributes']);
 
     if (isset($item['data'])) {
       if (is_string($item['data'])) {
