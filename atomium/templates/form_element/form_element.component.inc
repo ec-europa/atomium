@@ -19,9 +19,6 @@ function atomium_atomium_theme_form_element(array $existing, $type, $theme, $pat
 
 /**
  * Implements hook_preprocess_hook().
- *
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_form_element(array &$variables, $hook) {
   $element = &$variables['element'];
@@ -37,15 +34,18 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     $element['#title_display'] = 'none';
   }
 
-  // Build the label render array manually.
-  $variables['label'] = array(
-    '#theme' => 'form_element_label',
-    '#element' => $element,
-    '#title_display' => $element['#title_display'],
-    '#title' => isset($element['#title']) ? $element['#title'] : NULL,
-    '#id' => isset($element['#id']) ? $element['#id'] : NULL,
-    '#required' => isset($element['#required']) ? $element['#required'] : NULL,
-  );
+  $variables['label'] = '';
+  if ($element['#title_display'] !== 'none' && $element['#title_display'] !== 'attribute') {
+    // Build the label render array manually.
+    $variables['label'] = array(
+      '#theme' => 'form_element_label',
+      '#element' => $element,
+      '#title_display' => $element['#title_display'],
+      '#title' => isset($element['#title']) ? $element['#title'] : NULL,
+      '#id' => isset($element['#id']) ? $element['#id'] : NULL,
+      '#required' => isset($element['#required']) ? $element['#required'] : NULL,
+    );
+  }
 
   _atomium_extend_theme_property(
     $variables['label'],

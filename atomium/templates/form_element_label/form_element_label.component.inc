@@ -30,13 +30,16 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
   if ($element['#title_display'] === 'after') {
     $variables['atomium']['attributes']['wrapper']->append('class', 'option');
   }
+
   // Show label only to screen readers to avoid disruption in visual flows.
-  elseif ($element['#title_display'] === 'invisible') {
-    $variables['atomium']['attributes']['wrapper']->append('class', 'element-invisible');
+  if ($element['#title_display'] === 'invisible') {
+    $variables['atomium']['attributes']['wrapper']
+      ->append('class', 'element-invisible');
   }
 
   if (!empty($element['#id'])) {
-    $variables['atomium']['attributes']['wrapper']->append('for', $element['#id']);
+    $variables['atomium']['attributes']['wrapper']
+      ->append('for', $element['#id']);
   }
 
   $variables += array(
