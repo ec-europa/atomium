@@ -56,12 +56,15 @@ function atomium_preprocess_status_messages(array &$variables, $hook) {
   $output = array();
 
   $variables += array('messages' => array());
-  $status_messages = drupal_array_merge_deep($variables['messages'], drupal_get_messages($variables['display']));
+  $status_messages = drupal_array_merge_deep(
+    $variables['messages'],
+    drupal_get_messages($variables['display'])
+  );
+
   foreach ($status_messages as $type => $messages) {
     $container = array(
       'messages' => array(
         '#theme' => 'item_list',
-        '#title' => !empty($status_heading[$type]) ? $status_heading[$type] : '',
         '#items' => $messages,
         '#attributes' => array('class' => array()),
       ),
@@ -73,6 +76,10 @@ function atomium_preprocess_status_messages(array &$variables, $hook) {
       ),
     );
 
+    if (!empty($status_heading[$type])) {
+      $container['messages']['#title'] = $status_heading[$type];
+    }
+
     _atomium_extend_theme_property(
       $container['messages'],
       array(
@@ -81,9 +88,13 @@ function atomium_preprocess_status_messages(array &$variables, $hook) {
         $variables['theme_hook_original'],
       )
     );
+
     _atomium_extend_theme_wrappers_property(
       $container,
-      array($container['messages']['#theme']));
+      array(
+        $container['messages']['#theme'],
+      )
+    );
 
     $output[$type] = $container;
   }
