@@ -13,7 +13,7 @@ function atomium_atomium_theme_pager_next(array $existing, $type, $theme, $path)
     'pager_next' => array(
       'template' => 'pager-next',
       'variables' => array(
-        'text' => NULL,
+        'text' => 'next ›',
         'element' => 0,
         'interval' => 1,
         'parameters' => array(),

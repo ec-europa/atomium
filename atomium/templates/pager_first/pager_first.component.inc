@@ -13,7 +13,7 @@ function atomium_atomium_theme_pager_first(array $existing, $type, $theme, $path
     'pager_first' => array(
       'template' => 'pager-first',
       'variables' => array(
-        'text' => NULL,
+        'text' => '« first',
         'element' => 0,
         'parameters' => array(),
         'attributes' => array(),

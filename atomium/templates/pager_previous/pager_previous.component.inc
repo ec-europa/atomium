@@ -13,7 +13,7 @@ function atomium_atomium_theme_pager_previous(array $existing, $type, $theme, $p
     'pager_previous' => array(
       'template' => 'pager-previous',
       'variables' => array(
-        'text' => NULL,
+        'text' => '‹ previous',
         'element' => 0,
         'interval' => 1,
         'parameters' => array(),
