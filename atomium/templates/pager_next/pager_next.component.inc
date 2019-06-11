@@ -13,7 +13,7 @@ function atomium_atomium_theme_pager_next(array $existing, $type, $theme, $path)
     'pager_next' => array(
       'template' => 'pager-next',
       'variables' => array(
-        'text' => NULL,
+        'text' => 'next ›',
         'element' => 0,
         'interval' => 1,
         'parameters' => array(),
@@ -59,8 +59,8 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
     if ($page_new[$element] === ($pager_total[$element] - 1)) {
       $pager_next = array(
         '#theme' => _atomium_extend_theme_hook(
-        'pager_last',
-        array($variables['theme_hook_original'])
+          'pager_last',
+          array($variables['theme_hook_original'])
         ),
         '#text' => $text,
         '#element' => $element,

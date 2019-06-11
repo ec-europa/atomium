@@ -13,7 +13,7 @@ function atomium_atomium_theme_pager_last(array $existing, $type, $theme, $path)
     'pager_last' => array(
       'template' => 'pager-last',
       'variables' => array(
-        'text' => NULL,
+        'text' => 'last »',
         'element' => 0,
         'interval' => 1,
         'parameters' => array(),

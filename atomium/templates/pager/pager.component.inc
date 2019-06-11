@@ -6,6 +6,27 @@
  */
 
 /**
+ * Implements hook_atomium_theme_hook().
+ */
+function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
+  return array(
+    'pager' => array(
+      'template' => 'pager',
+      'variables' => array(
+        'tags' => array(),
+        'element' => 0,
+        'parameters' => array(),
+        'quantity' => 9,
+        // This is only for hook_atomium_definition_hook().
+        'pager_page_array' => NULL,
+        'pager_total' => NULL,
+        'interval' => 1,
+      ),
+    ),
+  );
+}
+
+/**
  * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_pager() {
@@ -24,36 +45,16 @@ function atomium_atomium_definition_pager() {
 }
 
 /**
- * Implements hook_atomium_theme_hook().
- */
-function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
-  return array(
-    'pager' => array(
-      'template' => 'pager',
-      'variables' => array(
-        'tags' => array(),
-        'element' => 0,
-        'parameters' => array(),
-        'quantity' => 9,
-        // This is only for hook_atomium_definition_hook().
-        'pager_page_array' => NULL,
-        'pager_total' => NULL,
-      ),
-    ),
-  );
-}
-
-/**
  * Implements hook_preprocess_hook().
- *
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_pager(array &$variables, $hook) {
-  $tags = $variables['tags'];
   $element = $variables['element'];
+  $interval = $variables['interval'];
   $quantity = $variables['quantity'];
+  $tags = $variables['tags'];
+
   $items = array();
+
   $pager_page_array = isset($GLOBALS['pager_page_array']) ?
     $GLOBALS['pager_page_array'] :
     array();
@@ -98,200 +99,219 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   }
 
   // End of generation loop preparation.
-  if ($pager_total_element > 1) {
-    if ($pager_page_array_element > 0) {
-      $items[] = array(
-        'pager_item' => array(
-          '#theme' => _atomium_extend_theme_hook(
-            'pager_first',
-            array($variables['theme_hook_original'])
-          ),
-          '#text' => isset($tags[0]) ? $tags[0] : t('« first'),
-          '#element' => $element,
-        ),
-        '#attributes' => array(
-          'class' => array(
-            'pager-first',
-          ),
-        ),
-        '#weight' => $i,
-        '#pager_item_type' => 'pager_first',
-      );
+  if ($pager_total_element <= 1) {
+    return;
+  }
 
+  if ($pager_page_array_element > 0) {
+    $items[] = array(
+      'pager_item' => array(
+        '#theme' => 'pager_first',
+        '#text' => isset($tags[0]) ? $tags[0] : NULL,
+        '#element' => $element,
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'pager-first',
+        ),
+      ),
+      '#pager_item_type' => 'pager_first',
+      '#pager_page' => 0,
+    );
+
+    $page = pager_load_array(
+      $pager_page_array[$element] - $interval,
+      $element,
+      $pager_page_array
+    );
+
+    $items[] = array(
+      'pager_item' => array(
+        '#theme' => 'pager_previous',
+        '#interval' => $interval,
+        '#text' => isset($tags[1]) ? $tags[1] : NULL,
+        '#element' => $element,
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'pager-previous',
+        ),
+      ),
+      '#pager_item_type' => 'pager_previous',
+      '#pager_page' => $page[$element],
+    );
+  }
+
+  // When there is more than one page, create the pager list.
+  if ($i !== $pager_max) {
+    if ($i > 1) {
       $items[] = array(
         'pager_item' => array(
-          '#theme' => _atomium_extend_theme_hook(
-            'pager_previous',
-            array($variables['theme_hook_original'])
-          ),
-          '#text' => isset($tags[1]) ? $tags[1] : t('‹ previous'),
-          '#element' => $element,
+          '#theme' => 'pager_ellipsis',
         ),
         '#attributes' => array(
           'class' => array(
-            'pager-previous',
+            'pager-ellipsis',
           ),
         ),
-        '#weight' => $i,
-        '#pager_item_type' => 'pager_previous',
+        '#pager_item_type' => 'pager_ellipsis',
       );
     }
 
-    // When there is more than one page, create the pager list.
-    if ($i !== $pager_max) {
-      if ($i > 1) {
+    // Now generate the actual pager piece.
+    for (; $i <= $pager_last && $i <= $pager_max; $i++) {
+      if ($i < $pager_current || $i > $pager_current) {
+        $pager = pager_load_array(
+          $pager_page_array_element + ($i - $pager_current),
+          $element,
+          $pager_page_array
+        );
+
+        $page = isset($_GET['page']) ? $_GET['page'] : '';
+        // Todo: See if this is really needed, maybe we can use the previous
+        // pager variable.
+        $pager_new = pager_load_array(
+          $pager[$element],
+          $element,
+          explode(',', $page)
+        );
+        if (!empty($pager_new)) {
+          $page = implode(',', $pager_new);
+        }
+
         $items[] = array(
           'pager_item' => array(
-            '#theme' => _atomium_extend_theme_hook(
-              'pager_ellipsis',
-              array($variables['theme_hook_original'])
-            ),
+            '#theme' => 'pager_link',
+            '#text' => $i,
+            '#page_new' => $pager,
+            '#element' => $element,
           ),
           '#attributes' => array(
             'class' => array(
-              'pager-ellipsis',
+              'pager-item',
             ),
           ),
-          '#weight' => $i,
-          '#pager_item_type' => 'pager_ellipsis',
+          '#pager_item_type' => 'pager_link',
+          '#pager_page' => (int) $page,
         );
       }
-      // Now generate the actual pager piece.
-      for (; $i <= $pager_last && $i <= $pager_max; $i++) {
-        if ($i < $pager_current || $i > $pager_current) {
-          $pager = pager_load_array(
-            $pager_page_array_element + ($i - $pager_current),
-            $element,
-            $pager_page_array
-          );
 
-          $items[] = array(
-            'pager_item' => array(
-              '#theme' => _atomium_extend_theme_hook(
-                'pager_link',
-                array($variables['theme_hook_original'])
-              ),
-              '#text' => $i,
-              '#page_new' => $pager,
-              '#element' => $element,
-            ),
-            '#attributes' => array(
-              'class' => array(
-                'pager-item',
-              ),
-            ),
-            '#weight' => $i,
-            '#pager_item_type' => 'pager_link',
-          );
-        }
-
-        if ($i === $pager_current) {
-          $items[] = array(
-            'pager_item' => array(
-              '#markup' => $i,
-            ),
-            '#attributes' => array(
-              'class' => array(
-                'pager-current',
-              ),
-            ),
-            '#weight' => $i,
-            '#pager_item_type' => 'pager_current',
-          );
-        }
-      }
-
-      if ($i < $pager_max) {
+      if ($i === $pager_current) {
         $items[] = array(
           'pager_item' => array(
-            '#theme' => _atomium_extend_theme_hook(
-              'pager_ellipsis',
-              array($variables['theme_hook_original'])
-            ),
+            '#theme' => 'pager_current',
+            '#text' => $i,
           ),
           '#attributes' => array(
             'class' => array(
-              'pager-ellipsis',
+              'pager-current',
             ),
           ),
-          '#weight' => $i,
-          '#pager_item_type' => 'pager_ellipsis',
+          '#pager_item_type' => 'pager_current',
+          '#pager_page' => $i - 1,
         );
       }
     }
-    // End generation.
-    // If we are anywhere but the last page.
-    if ($pager_page_array_element < ($pager_total_element - 1)) {
-      // If the next page is the last page, mark the link as such.
+
+    if ($i < $pager_max) {
       $items[] = array(
         'pager_item' => array(
-          '#theme' => _atomium_extend_theme_hook(
-            'pager_next',
-            array($variables['theme_hook_original'])
-          ),
-          '#text' => isset($tags[3]) ? $tags[3] : t('next ›'),
-          '#element' => $element,
+          '#theme' => 'pager_ellipsis',
         ),
         '#attributes' => array(
           'class' => array(
-            'pager-next',
+            'pager-ellipsis',
           ),
         ),
-        '#weight' => $i,
-        '#pager_item_type' => 'pager_next',
+        '#pager_item_type' => 'pager_ellipsis',
       );
     }
-
-    // If we are anywhere but the last page.
-    if ($pager_page_array_element < ($pager_total_element - 1)) {
-      $items[] = array(
-        'pager_item' => array(
-          '#theme' => _atomium_extend_theme_hook(
-            'pager_last',
-            array($variables['theme_hook_original'])
-          ),
-          '#text' => isset($tags[4]) ? $tags[4] : t('last »'),
-          '#element' => $element,
-        ),
-        '#attributes' => array(
-          'class' => array(
-            'pager-last',
-          ),
-        ),
-        '#weight' => $i,
-        '#pager_item_type' => 'pager_last',
-      );
+  }
+  // End generation.
+  // If we are anywhere but the last page.
+  if ($pager_page_array_element < ($pager_total_element - 1)) {
+    $pager = pager_load_array(
+      $pager_page_array[$element] + $interval,
+      $element,
+      $pager_page_array
+    );
+    $page = isset($_GET['page']) ? $_GET['page'] : '';
+    $pager_new = pager_load_array(
+      $pager[$element],
+      $element,
+      explode(',', $page)
+    );
+    if (!empty($pager_new)) {
+      $page = implode(',', $pager_new);
     }
 
-    foreach ($items as $key => &$item) {
-      $item += array(
-        '#theme_wrappers' => _atomium_extend_with_suggestions(
-          array('html_tag'),
-          array(
-            $variables['theme_hook_original'],
-            $item['#pager_item_type'],
-            $key,
-          )
+    // If the next page is the last page, mark the link as such.
+    $items[] = array(
+      'pager_item' => array(
+        '#theme' => 'pager_next',
+        '#text' => isset($tags[3]) ? $tags[3] : NULL,
+        '#element' => $element,
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'pager-next',
         ),
-        '#tag' => 'li',
-      );
+      ),
+      '#pager_item_type' => 'pager_next',
+      '#pager_page' => $page,
+    );
+  }
+
+  // If we are anywhere but the last page.
+  if ($pager_page_array_element < ($pager_total_element - 1)) {
+    $pager = pager_load_array($pager_total[$element] - 1, $element, $pager_page_array);
+
+    $page = isset($_GET['page']) ? $_GET['page'] : '';
+    $pager_new = pager_load_array(
+      $pager[$element],
+      $element,
+      explode(',', $page)
+    );
+    if (!empty($pager_new)) {
+      $page = implode(',', $pager_new);
     }
 
-    $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
+    $items[] = array(
+      'pager_item' => array(
+        '#theme' => 'pager_last',
+        '#text' => isset($tags[4]) ? $tags[4] : NULL,
+        '#element' => $element,
+      ),
+      '#attributes' => array(
+        'class' => array(
+          'pager-last',
+        ),
+      ),
+      '#pager_item_type' => 'pager_last',
+      '#pager_page' => (int) $page,
+    );
+  }
 
-    $item_list = array(
+  foreach ($items as $key => &$item) {
+    $item['pager_item']['#theme'] = _atomium_extend_theme_hook(
+      $item['pager_item']['#theme'],
+      $variables['theme_hook_original']
+    );
+  }
+
+  $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => array(
       '#theme' => _atomium_extend_theme_hook(
         'item_list',
         array($variables['theme_hook_original'])
       ),
       '#items' => $items,
-      '#attributes' => $variables['atomium']['attributes']['wrapper']->toArray(),
-    );
-
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => $item_list,
-    );
-  }
+      '#attributes' => $variables['atomium']['attributes']['wrapper']
+        ->toArray(),
+    ),
+  );
 
   $GLOBALS['pager_total'] = $pager_total;
   $GLOBALS['pager_page_array'] = $pager_page_array;
