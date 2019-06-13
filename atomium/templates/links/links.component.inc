@@ -64,7 +64,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
               'class' => $heading['class'],
             )
         )
-          ->toArray(),
+          ->getValuesAsArray(),
       );
     }
   }
@@ -112,7 +112,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
     '#items' => $new_links,
     '#atomium' => array(
       'attributes' => array(
-        'list' => $variables['atomium']['attributes']['wrapper'],
+        'list' => $variables['atomium']['attributes']['wrapper']->getValuesAsArray(),
       ),
     ),
     '#wrapper' => FALSE,

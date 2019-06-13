@@ -292,39 +292,38 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     );
   }
 
-    foreach ($items as $key => &$item) {
-      $item += array(
-        '#theme_wrappers' => array('html_tag'),
-        '#tag' => 'li',
-      );
-
-      _atomium_extend_theme_property(
-        $item,
-        array(
-          $variables['theme_hook_original'],
-          $item['#pager_item_type'],
-          $key
-        )
-      );
-    }
-
-  $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
-
-    $item_list = array(
-      '#theme' => 'item_list',
-      '#items' => $items,
-      '#attributes' => $variables['atomium']['attributes']['wrapper']->getValuesAsArray(),
+  foreach ($items as $key => &$item) {
+    $item += array(
+      '#theme_wrappers' => array('html_tag'),
+      '#tag' => 'li',
     );
 
     _atomium_extend_theme_property(
-      $item_list,
-      array($variables['theme_hook_original'])
-    );
-
-    $variables[$variables['base_hook']] = array(
-      $variables['base_hook'] => $item_list,
+      $item,
+      array(
+        $variables['theme_hook_original'],
+        $item['#pager_item_type'],
+        $key,
+      )
     );
   }
+
+  $variables['atomium']['attributes']['wrapper']->append('class', 'pager');
+
+  $item_list = array(
+    '#theme' => 'item_list',
+    '#items' => $items,
+    '#attributes' => $variables['atomium']['attributes']['wrapper']->getValuesAsArray(),
+  );
+
+  _atomium_extend_theme_property(
+    $item_list,
+    array($variables['theme_hook_original'])
+  );
+
+  $variables[$variables['base_hook']] = array(
+    $variables['base_hook'] => $item_list,
+  );
 
   $GLOBALS['pager_total'] = $pager_total;
   $GLOBALS['pager_page_array'] = $pager_page_array;

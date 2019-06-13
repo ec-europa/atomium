@@ -41,9 +41,13 @@ function atomium_preprocess_more_link(array &$variables, $hook) {
     '#path' => $variables['url'],
     '#options' => array('attributes' => array('title' => $variables['title'])),
   );
+
   _atomium_extend_theme_property(
     $more_link,
-    array($variables['theme_hook_original']));
+    array(
+      $variables['theme_hook_original'],
+    )
+  );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] = $more_link,

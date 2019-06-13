@@ -45,7 +45,7 @@ function atomium_preprocess_link(array &$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['element']
-    ->setAttribute('href', $variables['path']);
+    ->set('href', $variables['path']);
 
   // The text property must be a string.
   $variables['text'] = $variables['options']['html'] ?

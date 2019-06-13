@@ -34,7 +34,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     $element['#title_display'] = 'none';
   }
 
-  $variables['label'] = '';
+  $variables['label'] = array();
   if ($element['#title_display'] !== 'none' && $element['#title_display'] !== 'attribute') {
     // Build the label render array manually.
     $variables['label'] = array(

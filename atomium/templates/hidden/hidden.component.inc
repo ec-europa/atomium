@@ -34,9 +34,6 @@ function atomium_preprocess_hidden(array &$variables, $hook) {
   _form_set_class($variables['element'], array('form-hidden'));
   element_set_attributes($variables['element'], array('id', 'name', 'value'));
   $attributes = _atomium_get_attributes($variables['element']);
-  $variables['element']['#attributes']['class'] = array(
-    $variables['element']['#attributes']['class'],
-  );
   $attributes['type'] = 'hidden';
 
   if (isset($variables['element']['#atomium']['attributes']['element'])) {
@@ -44,5 +41,5 @@ function atomium_preprocess_hidden(array &$variables, $hook) {
       ->merge($variables['element']['#atomium']['attributes']['element']);
   }
 
-  $variables['atomium']['attributes']['element']->merge($attributes);
+  $variables['atomium']['attributes']['element']->import($attributes);
 }

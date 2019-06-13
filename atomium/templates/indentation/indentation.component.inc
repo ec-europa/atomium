@@ -71,7 +71,7 @@ function atomium_preprocess_indentation(array &$variables, $hook) {
     $indentation,
     array(
       $variables['theme_hook_original'],
-      'size_' . $size
+      'size_' . $size,
     )
   );
 

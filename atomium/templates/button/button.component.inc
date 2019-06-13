@@ -54,5 +54,5 @@ function atomium_preprocess_button(array &$variables, $hook) {
       ->merge($variables['element']['#atomium']['attributes']['element']);
   }
 
-  $variables['atomium']['attributes']['element']->merge($attributes);
+  $variables['atomium']['attributes']['element']->import($attributes);
 }

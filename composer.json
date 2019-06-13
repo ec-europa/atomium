@@ -27,7 +27,7 @@
         "drupol/htmltag": "^2.2",
         "drupal/realistic_dummy_content": "^2",
         "drupol/drupal-conventions": "^1.4.12",
-        "drupal/registryonsteroids": "^1.8",
+        "drupal/registryonsteroids": "^1.9",
         "drupal/xautoload": "^5.7",
         "drush/drush": "^8.2.3",
         "mikey179/vfsstream": "^1.6",

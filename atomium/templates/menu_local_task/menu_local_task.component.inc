@@ -46,7 +46,7 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
       $active,
       array(
         $active['#tag'],
-        $variables['theme_hook_original']
+        $variables['theme_hook_original'],
       )
     );
 
@@ -58,14 +58,12 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
     $link['localized_options']['html'] = TRUE;
   }
 
-  $menu_local_task = $link['title'];
+  $menu_local_task = $link_text;
   if (isset($link['href'])) {
     $menu_local_task = array(
       '#theme' => 'link',
-      '#text' => array(
-        array('#markup' => $link['title']),
-        $active,
-      ),
+      // TODO: This render() call needs to be removed when #381 is merged.
+      '#text' => $link['title'] . render($active),
       '#path' => $link['href'],
       '#options' => array(
         'attributes' => array('title' => $link['title']),

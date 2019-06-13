@@ -55,7 +55,7 @@ function atomium_preprocess_feed_icon(array &$variables, $hook) {
   _atomium_extend_theme_property(
     $image,
     array(
-      $variables['theme_hook_original']
+      $variables['theme_hook_original'],
     )
   );
 
@@ -76,7 +76,8 @@ function atomium_preprocess_feed_icon(array &$variables, $hook) {
   _atomium_extend_theme_property(
     $feed_icon,
     array(
-      $feed_icon['#theme'])
+      $feed_icon['#theme'],
+    )
   );
 
   $variables[$variables['base_hook']] = array(

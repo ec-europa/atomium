@@ -73,7 +73,7 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
     _atomium_extend_theme_property(
       $breadcrumb,
       array(
-        $variables['theme_hook_original']
+        $variables['theme_hook_original'],
       )
     );
   }

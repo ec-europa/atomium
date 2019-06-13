@@ -118,7 +118,8 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
         $item,
         array(
           $item['#tag'],
-          $variables['theme_hook_original'])
+          $variables['theme_hook_original'],
+        )
       );
     }
 
@@ -132,7 +133,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
 
     $item['#attributes'] = $variables['atomium']['attributes'][$key]
       ->merge($item['#attributes'])
-      ->toArray();
+      ->getValuesAsArray();
 
     // We do this to ensure that component like menu_local_task will have
     // the proper attributes.

@@ -35,7 +35,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
       '#theme' => 'item_list',
       '#items' => $variables['primary'],
       '#attributes' => $variables['atomium']['attributes']['primary']
-        ->toArray(),
+        ->getValuesAsArray(),
       '#wrapper_attributes' => array(),
       '#wrapper' => FALSE,
     );
@@ -60,7 +60,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
       '#theme' => 'item_list',
       '#items' => $variables['secondary'],
       '#attributes' => $variables['atomium']['attributes']['secondary']
-        ->toArray(),
+        ->getValuesAsArray(),
       '#wrapper_attributes' => array(),
       '#wrapper' => FALSE,
     );
