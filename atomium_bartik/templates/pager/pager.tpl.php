@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<div class="item-list"><?php print render($pager); ?></div>
+<?php print render($pager); ?>
