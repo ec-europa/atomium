@@ -17,9 +17,6 @@ function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
         'element' => 0,
         'parameters' => array(),
         'quantity' => 9,
-        // This is only for hook_atomium_definition_hook().
-        'pager_page_array' => NULL,
-        'pager_total' => NULL,
         'interval' => 1,
       ),
     ),
@@ -30,17 +27,17 @@ function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
  * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_pager() {
+  $GLOBALS['pager_page_array'] = array(
+    0 => \mt_rand(0, 30),
+  );
+  $GLOBALS['pager_total'] = array(
+    0 => 30,
+  );
+
   return array(
     'label' => 'Pager',
     'description' => 'The pager',
-    'preview' => array(
-      'pager_page_array' => array(
-        0 => \mt_rand(0, 30),
-      ),
-      'pager_total' => array(
-        0 => 30,
-      ),
-    ),
+    'preview' => array(),
   );
 }
 
@@ -55,23 +52,22 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
   $items = array();
 
-  $pager_page_array = isset($GLOBALS['pager_page_array']) ?
+  $pager_page_array = array_key_exists('pager_page_array', $GLOBALS) ?
     $GLOBALS['pager_page_array'] :
     array();
-  $pager_total = isset($GLOBALS['pager_total']) ?
+  $pager_total = array_key_exists('pager_total', $GLOBALS) ?
     $GLOBALS['pager_total'] :
     array();
 
-  // This is for the hook_atomium_definition_hook() to work.
-  if (isset($variables['pager_page_array']) && $variables['pager_page_array'] !== NULL) {
-    $pager_page_array = $variables['pager_page_array'];
+  $pager_page_array_element = NULL;
+  if (array_key_exists($element, $pager_page_array)) {
+    $pager_page_array_element = (int) $pager_page_array[$element];
   }
-  $pager_page_array_element = (int) $pager_page_array[$element];
 
-  if (isset($variables['pager_total']) && $variables['pager_total'] !== NULL) {
-    $pager_total = $variables['pager_total'];
+  $pager_total_element = NULL;
+  if (array_key_exists($element, $pager_total)) {
+    $pager_total_element = (int) $pager_total[$element];
   }
-  $pager_total_element = (int) $pager_total[$element];
 
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
