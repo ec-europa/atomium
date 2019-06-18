@@ -94,7 +94,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   else {
     // Unhide all the items.
     foreach ($pager_items as &$item) {
-      show($item['wrapper']);
+      show($item['pager_item']);
     }
   }
 
@@ -230,6 +230,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     ),
     '#pager_item_type' => 'pager_first',
     '#pager_page' => 0,
+    '#pager_middle' => $pager_middle,
+    '#pager_current' => $pager_current,
+    '#pager_first' => $pager_first,
+    '#pager_last' => $pager_last,
+    '#pager_max' => $pager_max,
+    '#pager_i' => $i,
   );
 
   $page = pager_load_array(
@@ -252,6 +258,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     ),
     '#pager_item_type' => 'pager_previous',
     '#pager_page' => $page[$element],
+    '#pager_middle' => $pager_middle,
+    '#pager_current' => $pager_current,
+    '#pager_first' => $pager_first,
+    '#pager_last' => $pager_last,
+    '#pager_max' => $pager_max,
+    '#pager_i' => $i,
   );
 
   // When there is more than one page, create the pager list.
@@ -266,6 +278,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     ),
     '#pager_item_type' => 'pager_ellipsis',
     '#pager_page' => NULL,
+    '#pager_middle' => $pager_middle,
+    '#pager_current' => $pager_current,
+    '#pager_first' => $pager_first,
+    '#pager_last' => $pager_last,
+    '#pager_max' => $pager_max,
+    '#pager_i' => $i,
   );
 
   // Now generate the actual pager piece.
@@ -302,6 +320,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
       ),
       '#pager_item_type' => 'pager_link',
       '#pager_page' => (int) $page,
+      '#pager_middle' => $pager_middle,
+      '#pager_current' => $pager_current,
+      '#pager_first' => $pager_first,
+      '#pager_last' => $pager_last,
+      '#pager_max' => $pager_max,
+      '#pager_i' => $i,
     );
 
     if ($i === $pager_current) {
@@ -317,6 +341,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
         ),
         '#pager_item_type' => 'pager_current',
         '#pager_page' => $i - 1,
+        '#pager_middle' => $pager_middle,
+        '#pager_current' => $pager_current,
+        '#pager_first' => $pager_first,
+        '#pager_last' => $pager_last,
+        '#pager_max' => $pager_max,
+        '#pager_i' => $i,
       );
     }
   }
@@ -333,6 +363,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
       ),
       '#pager_item_type' => 'pager_ellipsis',
       '#pager_page' => NULL,
+      '#pager_middle' => $pager_middle,
+      '#pager_current' => $pager_current,
+      '#pager_first' => $pager_first,
+      '#pager_last' => $pager_last,
+      '#pager_max' => $pager_max,
+      '#pager_i' => $i,
     );
   }
 
@@ -368,6 +404,12 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     ),
     '#pager_item_type' => 'pager_next',
     '#pager_page' => (int) $page,
+    '#pager_middle' => $pager_middle,
+    '#pager_current' => $pager_current,
+    '#pager_first' => $pager_first,
+    '#pager_last' => $pager_last,
+    '#pager_max' => $pager_max,
+    '#pager_i' => $i,
   );
 
   $items[] = array(
@@ -383,9 +425,15 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     ),
     '#pager_item_type' => 'pager_last',
     '#pager_page' => (int) $page,
+    '#pager_middle' => $pager_middle,
+    '#pager_current' => $pager_current,
+    '#pager_first' => $pager_first,
+    '#pager_last' => $pager_last,
+    '#pager_max' => $pager_max,
+    '#pager_i' => $i,
   );
 
-  foreach ($items as $key => &$item) {
+  foreach ($items as &$item) {
     hide($item['pager_item']);
   }
 
@@ -411,56 +459,48 @@ function _atomium_pager_generate_vanilla(array $variables, array $pager_items, a
   $element = $variables['element'];
   $pager_page_array_element = (int) $pager_page_array[$element];
 
-  $pager_infos = _atomium_pager_generate_infos($variables, $pager_page_array_element, $pager_total_element);
-
-  $pager_current = $pager_infos['pager_current'];
-  $pager_last = $pager_infos['pager_last'];
-  $pager_max = $pager_infos['pager_max'];
-  $i = $pager_infos['i'];
-
   foreach ($pager_items as &$pager_item) {
     switch ($pager_item['#pager_item_type']) {
       case 'pager_first':
       case 'pager_previous':
-        show($pager_item['pager_item']);
-        show($pager_item['pager_item']);
+        if ($pager_item['#pager_i'] !== $pager_item['#pager_current']) {
+          show($pager_item['pager_item']);
+          show($pager_item['pager_item']);
+        }
+
         break;
 
       case 'pager_ellipsis':
-        if ($i !== $pager_max) {
-          if ($i > 1) {
-            show($pager_item['pager_item']);
-          }
-          if ($i < $pager_max) {
-            show($pager_item['pager_item']);
-          }
+        if ($pager_item['#pager_i'] > 1) {
+          show($pager_item['pager_item']);
         }
+
         break;
 
       case 'pager_next':
         if ($pager_page_array_element < ($pager_total_element - 1)) {
           show($pager_item['pager_item']);
         }
+
         break;
+
       case 'pager_last':
         if ($pager_page_array_element < ($pager_total_element - 1)) {
           show($pager_item['pager_item']);
         }
+
         break;
 
       case 'pager_current':
-      case 'pager_link':
-        if ($i !== $pager_max) {
-          for (; $i <= $pager_last && $i <= $pager_max; $i++) {
-            if ($i < $pager_current || $i > $pager_current) {
-              show($pager_item['pager_item']);
-            }
+        show($pager_item['pager_item']);
 
-            if ($i === $pager_current) {
-              show($pager_items['pager_item']);
-            }
-          }
+        break;
+
+      case 'pager_link':
+        if ($pager_item['#pager_current'] !== $pager_item['#pager_page'] + 1) {
+          show($pager_item['pager_item']);
         }
+
         break;
     }
   }
