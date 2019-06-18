@@ -149,29 +149,11 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_item_list__pager(array &$variables, $hook) {
-  $i = 0;
-  $num_items = \count($variables['items']);
+  foreach ($variables['items'] as $key => &$item) {
+    if ($item['pager_item']['#printed'] === TRUE) {
+      unset($variables['items'][$key]);
 
-  foreach ($variables['items'] as &$item) {
-    if ($item['wrapper']['#printed'] === TRUE) {
       continue;
     }
-
-    $i++;
-
-    $attributes = $variables['atomium']['attributes']['item_' . $i]
-      ->setAttributes($item['#attributes'])
-      ->remove('class', array('even', 'odd', 'first', 'last'))
-      ->append('class', ($i % 2) ? 'even' : 'odd');
-
-    if ($i === 1) {
-      $attributes->append('class', 'first');
-    }
-    if ($i === $num_items) {
-      $attributes->append('class', 'last');
-    }
-
-    $item['wrapper']['#attributes'] = $attributes->toArray();
-    unset($item['#attributes']);
   }
 }
