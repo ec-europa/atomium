@@ -36,7 +36,7 @@ function atomium_page_alter(array &$page) {
 
   // Compute a mapping of regions and number of blocks in them.
   $block_region_count = array();
-  foreach ($recursive_context['blocks info'] as $bid => $info) {
+  foreach ($recursive_context['blocks info'] as $info) {
     $block_region_count += array($info['block']->region => 0);
     $block_region_count[$info['block']->region]++;
   }

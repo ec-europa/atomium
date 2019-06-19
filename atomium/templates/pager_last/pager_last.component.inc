@@ -47,7 +47,6 @@ function atomium_preprocess_pager_last(array &$variables, $hook) {
   $text = $variables['text'];
   $element = $variables['element'];
   global $pager_page_array, $pager_total;
-  $render = NULL;
 
   $pager_last = NULL;
 

@@ -288,7 +288,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     );
   }
 
-  foreach ($items as $key => &$item) {
+  foreach ($items as &$item) {
     $item['pager_item']['#theme'] = _atomium_extend_theme_hook(
       $item['pager_item']['#theme'],
       $variables['theme_hook_original']

@@ -38,8 +38,11 @@ function atomium_preprocess_filter_tips_more_info(array &$variables, $hook) {
       '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => t('More information about text formats'),
       '#path' => 'filter/tips',
-      // @codingStandardsIgnoreLine: False positive.
-      '#options' => array('attributes' => array('target' => '_blank')),
+      '#options' => array(
+        'attributes' => array(
+          'target' => '_blank',
+        ),
+      ),
     ),
   );
 }
