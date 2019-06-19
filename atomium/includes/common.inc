@@ -333,7 +333,7 @@ function atomium_menu_get_active_breadcrumb() {
       \array_pop($active_trail);
     }
 
-    foreach ($active_trail as $index => $parent) {
+    foreach ($active_trail as $parent) {
       $breadcrumb[] = array(
         '#type' => 'atomium_link',
         '#theme_hook_suggestions_parts' => array(
