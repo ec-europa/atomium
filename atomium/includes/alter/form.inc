@@ -100,11 +100,11 @@ function atomium_pre_render_form_bug_3056608(array $element) {
       continue;
     }
 
-    if (empty($form[$item]['#attributes']['class'])) {
+    if (empty($element[$item]['#attributes']['class'])) {
       continue;
     }
 
-    foreach ($form[$item]['#attributes']['class'] as &$class) {
+    foreach ($element[$item]['#attributes']['class'] as &$class) {
       // Core bug: the field-type-text-with-summary class
       // is used as a JS hook.
       if ($class === 'field-type-text-with-summary') {
