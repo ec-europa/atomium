@@ -35,13 +35,11 @@ function atomium_preprocess_filter_tips_more_info(array &$variables, $hook) {
     '#theme' => 'link',
     '#text' => t('More information about text formats'),
     '#path' => 'filter/tips',
-    // @codingStandardsIgnoreStart
     '#options' => array(
       'attributes' => array(
         'target' => '_blank',
       ),
     ),
-    // @codingStandardsIgnoreEnd
   );
 
   _atomium_extend_theme_property(
