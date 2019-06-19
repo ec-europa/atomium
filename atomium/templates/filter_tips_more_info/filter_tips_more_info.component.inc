@@ -41,11 +41,14 @@ function atomium_preprocess_filter_tips_more_info(array &$variables, $hook) {
       ),
       '#title' => t('More information about text formats'),
       '#href' => 'filter/tips',
+      // See: https://www.drupal.org/project/coder/issues/3062766
+      // @codingStandardsIgnoreStart
       '#options' => array(
         'attributes' => array(
           'target' => '_blank',
         ),
       ),
+      // @codingStandardsIgnoreEnd
     ),
   );
 }
