@@ -131,8 +131,10 @@ function atomium_pre_render_atomium_html_tag(array $element) {
 function atomium_pre_render_children(array $element) {
   $element += array('#children' => '');
 
-  // Render the element children if any.
-  $element['#children'] .= drupal_render_children($element);
+  // Render the element children if any, sorted by weight.
+  foreach (element_children($element, TRUE) as $key) {
+    $element['#children'] .= drupal_render($element[$key]);
+  }
 
   return $element;
 }
