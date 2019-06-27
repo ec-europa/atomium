@@ -23,9 +23,29 @@ function atomium_atomium_element_info_atomium_textarea(array $types) {
     $textarea['#pre_render'], 'atomium_pre_render_children'
   );
 
+  $textarea['#pre_render'][] = 'atomium_pre_render_value_to_children';
   $textarea['#pre_render'][] = 'atomium_pre_render_extend_theme_property';
 
   return array(
     'atomium_textarea' => $textarea,
   );
+}
+
+/**
+ * @param array $element
+ *
+ * @return array
+ */
+function atomium_pre_render_value_to_children(array $element) {
+  $value = isset($element['#value']) ? $element['#value'] : '';
+
+  // This is to avoid issue when $value is not a string like with the date
+  // type where $value is an array containing multiple values.
+  if (!is_string($value)) {
+    $value = '';
+  }
+
+  $element['#children'] .= $value;
+
+  return $element;
 }
