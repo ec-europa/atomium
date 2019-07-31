@@ -27,27 +27,27 @@ function atomium_preprocess_file_link(array &$variables, $hook) {
   $file = $variables['file'];
   $icon_directory = $variables['icon_directory'];
 
-  $url = file_create_url($file->uri);
+  $url = \file_create_url($file->uri);
 
   // Human-readable names, for use as text-alternatives to icons.
   $mime_name = array(
-    'application/msword' => t('Microsoft Office document icon'),
-    'application/vnd.ms-excel' => t('Office spreadsheet icon'),
-    'application/vnd.ms-powerpoint' => t('Office presentation icon'),
-    'application/pdf' => t('PDF icon'),
-    'video/quicktime' => t('Movie icon'),
-    'audio/mpeg' => t('Audio icon'),
-    'audio/wav' => t('Audio icon'),
-    'image/jpeg' => t('Image icon'),
-    'image/png' => t('Image icon'),
-    'image/gif' => t('Image icon'),
-    'application/zip' => t('Package icon'),
-    'text/html' => t('HTML icon'),
-    'text/plain' => t('Plain text icon'),
-    'application/octet-stream' => t('Binary Data'),
+    'application/msword' => \t('Microsoft Office document icon'),
+    'application/vnd.ms-excel' => \t('Office spreadsheet icon'),
+    'application/vnd.ms-powerpoint' => \t('Office presentation icon'),
+    'application/pdf' => \t('PDF icon'),
+    'video/quicktime' => \t('Movie icon'),
+    'audio/mpeg' => \t('Audio icon'),
+    'audio/wav' => \t('Audio icon'),
+    'image/jpeg' => \t('Image icon'),
+    'image/png' => \t('Image icon'),
+    'image/gif' => \t('Image icon'),
+    'application/zip' => \t('Package icon'),
+    'text/html' => \t('HTML icon'),
+    'text/plain' => \t('Plain text icon'),
+    'application/octet-stream' => \t('Binary Data'),
   );
 
-  $mimetype = file_get_mimetype($file->uri);
+  $mimetype = \file_get_mimetype($file->uri);
 
   // Set options as per anchor format described at
   // http://microformats.org/wiki/file-format-examples
@@ -63,18 +63,18 @@ function atomium_preprocess_file_link(array &$variables, $hook) {
   }
   else {
     $link_text = $file->description;
-    $options['attributes']['title'] = check_plain($file->filename);
+    $options['attributes']['title'] = \check_plain($file->filename);
   }
 
   $variables[$variables['base_hook']] = array(
     'file_icon' => array(
-      '#theme' => _atomium_extend_theme_hook('file_icon', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('file_icon', $variables['theme_hook_original']),
       '#file' => $file,
       '#icon_directory' => $icon_directory,
-      '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : t('File'),
+      '#alt' => !empty($mime_name[$mimetype]) ? $mime_name[$mimetype] : \t('File'),
     ),
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => $link_text,
       '#path' => $url,
       '#options' => $options,

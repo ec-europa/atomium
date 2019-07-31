@@ -24,7 +24,7 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
   $element = &$variables['element'];
 
   // This is also used in the installer, pre-database setup.
-  $t = get_t();
+  $t = \get_t();
 
   // Style the label as class option to display inline with the element.
   if ($element['#title_display'] === 'after') {
@@ -49,13 +49,13 @@ function atomium_preprocess_form_element_label(array &$variables, $hook) {
 
   if (isset($element['#title']) && !empty($element['#title'])) {
     $variables['title'] = array(
-      '#markup' => $t(filter_xss_admin($element['#title'])),
+      '#markup' => $t(\filter_xss_admin($element['#title'])),
     );
   }
 
   if (isset($element['#required']) && (bool) $element['#required'] === TRUE) {
     $variables['required'] = array(
-      '#theme' => _atomium_extend_theme_hook('form_required_marker', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('form_required_marker', $variables['theme_hook_original']),
     );
   }
 

@@ -35,10 +35,11 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   }
 
   $variables['label'] = '';
+
   if ($element['#title_display'] !== 'none' && $element['#title_display'] !== 'attribute') {
     // Build the label render array manually.
     $variables['label'] = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'form_element_label',
         $variables['theme_hook_original']
       ),
@@ -57,6 +58,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
 
   // Add element's #type and #name as class to aid with JS/CSS selectors.
   $attributes['class'] = array('form-item');
+
   if (!empty($element['#type'])) {
     $attributes['class'][] = 'form-type-' . \str_replace('_', '-', $element['#type']);
   }
@@ -64,7 +66,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   if (!empty($element['#name'])) {
     $attributes['class'][] = 'form-item-' . \strtr(
       $element['#name'],
-        array(' ' => '-', '_' => '-', '[' => '-', ']' => '')
+      array(' ' => '-', '_' => '-', '[' => '-', ']' => '')
       );
   }
 
@@ -74,6 +76,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   }
 
   $variables['description'] = '';
+
   if (!empty($element['#description'])) {
     $variables['description'] = $element['#description'];
   }

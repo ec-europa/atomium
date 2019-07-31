@@ -24,7 +24,7 @@ function atomium_atomium_theme_admin_page(array $existing, $type, $theme, $path)
  */
 function atomium_preprocess_admin_page(array &$variables, $hook) {
   $variables['toggle_link'] = array(
-    '#theme' => _atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
+    '#theme' => \_atomium_extend_theme_hook('system_compact_link', $variables['theme_hook_original']),
   );
 
   $stripe = 0;
@@ -36,7 +36,7 @@ function atomium_preprocess_admin_page(array &$variables, $hook) {
       $block['position'] = (++$stripe % 2) ? 'left' : 'right';
     }
     $container[$block['position']][] = array(
-      '#theme' => _atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('admin_block', $variables['theme_hook_original']),
       '#block' => $block,
       '#position' => $block['position'],
     );

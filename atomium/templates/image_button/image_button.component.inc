@@ -27,7 +27,7 @@ function atomium_atomium_definition_image_button() {
     'preview' => array(
       array(
         'title' => 'Image button',
-        'src' => drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
+        'src' => \drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
       ),
     ),
   );
@@ -37,7 +37,7 @@ function atomium_atomium_definition_image_button() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_image_button(array &$variables, $hook) {
-  element_set_attributes(
+  \element_set_attributes(
     $variables['element'],
     array(
       0 => 'id',
@@ -47,12 +47,13 @@ function atomium_preprocess_image_button(array &$variables, $hook) {
       '#title' => 'alt',
     )
   );
-  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes = \_atomium_get_attributes($variables['element']);
 
   $attributes['type'] = 'image';
-  $attributes['src'] = file_create_url($variables['element']['#src']);
+  $attributes['src'] = \file_create_url($variables['element']['#src']);
 
   $attributes['class'][] = 'form-' . $variables['element']['#button_type'];
+
   if (!empty($variables['element']['#attributes']['disabled'])) {
     $attributes['class'][] = 'form-button-disabled';
   }

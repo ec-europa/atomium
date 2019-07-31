@@ -8,6 +8,8 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class AbstractTest.
+ *
+ * @internal
  */
 abstract class AbstractTest extends TestCase {
 
@@ -21,9 +23,9 @@ abstract class AbstractTest extends TestCase {
     $finder = (new Finder())
       ->files()->in(\realpath(__DIR__ . '/../fixtures/components'));
 
-    return \array_map(function ($file) {
+    return \array_map(static function ($file) {
       return array(
-        'hook' => drupal_basename($file->getRelativePathname(), '.yml'),
+        'hook' => \drupal_basename($file->getRelativePathname(), '.yml'),
         'content' => Yaml::parse($file->getContents()),
       );
     }, \iterator_to_array($finder));

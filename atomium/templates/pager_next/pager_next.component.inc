@@ -54,11 +54,11 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
 
   // If we are anywhere but the last page.
   if ($pager_page_array[$element] < ($pager_total[$element] - 1)) {
-    $page_new = pager_load_array($pager_page_array[$element] + $interval, $element, $pager_page_array);
+    $page_new = \pager_load_array($pager_page_array[$element] + $interval, $element, $pager_page_array);
     // If the next page is the last page, mark the link as such.
     if ($page_new[$element] === ($pager_total[$element] - 1)) {
       $pager_next = array(
-        '#theme' => _atomium_extend_theme_hook(
+        '#theme' => \_atomium_extend_theme_hook(
           'pager_last',
           array($variables['theme_hook_original'])
         ),
@@ -71,7 +71,7 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
     // The next page is not the last page.
     else {
       $pager_next = array(
-        '#theme' => _atomium_extend_theme_hook(
+        '#theme' => \_atomium_extend_theme_hook(
           'pager_link',
           array($variables['theme_hook_original'])
         ),

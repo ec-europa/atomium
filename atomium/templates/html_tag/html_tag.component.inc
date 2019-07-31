@@ -37,7 +37,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
   }
 
   // Loop over element children, render them, and add them to the #value array.
-  foreach (element_children($element) as $key) {
+  foreach (\element_children($element) as $key) {
     $element['#value'][] = $element[$key];
   }
 

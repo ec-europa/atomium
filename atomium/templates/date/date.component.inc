@@ -27,7 +27,7 @@ function atomium_atomium_definition_date() {
     'preview' => array(
       'element' => array(
         array(
-          '#markup' => format_date(REQUEST_TIME),
+          '#markup' => \format_date(REQUEST_TIME),
         ),
       ),
     ),
@@ -41,9 +41,11 @@ function atomium_preprocess_date(array &$variables, $hook) {
   $element = $variables['element'];
 
   $attributes = array();
+
   if (isset($element['#id'])) {
     $attributes['id'] = $element['#id'];
   }
+
   if (!empty($element['#attributes']['class'])) {
     $attributes['class'] = (array) $element['#attributes']['class'];
   }

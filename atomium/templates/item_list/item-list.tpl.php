@@ -8,13 +8,13 @@
 <?php if ($wrapper): ?>
   <div<?php print $atomium['attributes']['wrapper']; ?>>
 <?php endif; ?>
-  <?php print render($title); ?>
+  <?php print \render($title); ?>
   <?php if (!empty($variables['items'])): ?>
     <?php if ($type): ?>
         <<?php print $type; ?><?php print $atomium['attributes']['list']; ?>>
     <?php endif; ?>
 
-    <?php print render($variables['items']); ?>
+    <?php print \render($variables['items']); ?>
 
     <?php if ($type): ?>
       </<?php print $type; ?>>

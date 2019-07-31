@@ -33,22 +33,22 @@ function atomium_atomium_definition_image_formatter() {
     'dependencies' => array('image'),
   );
 
-  if (module_exists('image')) {
-    $source_uri = file_unmanaged_copy(
-      drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
+  if (\module_exists('image')) {
+    $source_uri = \file_unmanaged_copy(
+      \drupal_get_path('theme', 'atomium') . '/assets/images/logo.png',
       'public://'
     );
 
-    image_style_create_derivative(
-      image_style_load($style),
+    \image_style_create_derivative(
+      \image_style_load($style),
       $source_uri,
-      image_style_path('large', $source_uri)
+      \image_style_path('large', $source_uri)
     );
 
     $build += array(
       'preview' => array(
         'item' => array(
-          'uri' => file_build_uri('logo.png'),
+          'uri' => \file_build_uri('logo.png'),
           'width' => 150,
           'height' => 150,
         ),
@@ -68,13 +68,13 @@ function atomium_preprocess_image_formatter(array &$variables, $hook) {
   $item = $variables['item'];
 
   // Do not output an empty 'title' attribute.
-  if (isset($item['title']) && drupal_strlen($item['title']) === 0) {
+  if (isset($item['title']) && \drupal_strlen($item['title']) === 0) {
     unset($item['title']);
   }
 
   if (!empty($variables['image_style'])) {
     $build = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'image_style',
         array(
           $variables['image_style'],
@@ -92,7 +92,7 @@ function atomium_preprocess_image_formatter(array &$variables, $hook) {
   }
   else {
     $build = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'image',
         array(
           $variables['theme_hook_original'],
@@ -117,7 +117,7 @@ function atomium_preprocess_image_formatter(array &$variables, $hook) {
 
     $build = array(
       'link' => array(
-        '#theme' => _atomium_extend_theme_hook(
+        '#theme' => \_atomium_extend_theme_hook(
           'link',
           $build['#theme']
         ),

@@ -6,16 +6,19 @@ use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CommonFunctionsTest.
+ *
+ * @internal
+ * @coversNothing
  */
-class CommonFunctionsTest extends AbstractUnitTest {
+final class CommonFunctionsTest extends AbstractUnitTest {
 
   /**
    * Setup test.
    */
-  public function setUp() {
+  protected function setUp() {
     parent::setUp();
 
-    theme_enable(array('atomium_test', 'atomium_test_test'));
+    \theme_enable(array('atomium_test', 'atomium_test_test'));
   }
 
   /**
@@ -48,7 +51,7 @@ class CommonFunctionsTest extends AbstractUnitTest {
    * @dataProvider atomiumGetThemeInfoProvider
    */
   public function testAtomiumGetThemeInfo($theme, $key, $base_themes, $test, $expected) {
-    $settings = atomium_get_theme_info($theme, $key, $base_themes);
+    $settings = \atomium_get_theme_info($theme, $key, $base_themes);
 
     $this::assertSame($expected, $settings[$test]);
   }
@@ -59,7 +62,7 @@ class CommonFunctionsTest extends AbstractUnitTest {
    * @dataProvider atomiumFieldAttachViewAlterProvider
    */
   public function testAtomiumRecursiveElementChildren($input, $context, $output) {
-    atomium_field_attach_view_alter($input, $context);
+    \atomium_field_attach_view_alter($input, $context);
 
     $this::assertSame($input, $output);
   }

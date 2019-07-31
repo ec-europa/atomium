@@ -53,7 +53,8 @@ function atomium_preprocess_admin_block_content(array &$variables, $hook) {
 
   if (!empty($variables['content'])) {
     $variables['atomium']['attributes']['wrapper']->append('class', 'admin-list');
-    if ($variables['compact'] = system_admin_compact_mode()) {
+
+    if ($variables['compact'] = \system_admin_compact_mode()) {
       $variables['atomium']['attributes']['wrapper']->append('class', 'compact');
     }
   }
@@ -61,15 +62,16 @@ function atomium_preprocess_admin_block_content(array &$variables, $hook) {
   foreach ($variables['content'] as &$item) {
     $description = '';
     $link = array(
-      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => $item['title'],
       '#path' => $item['href'],
       '#options' => $item['localized_options'],
     );
+
     if (!$variables['compact'] && isset($item['description'])) {
       $description = array(
         '#type' => 'markup',
-        '#markup' => filter_xss_admin($item['description']),
+        '#markup' => \filter_xss_admin($item['description']),
       );
     }
     $item = array(

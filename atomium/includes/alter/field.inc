@@ -10,20 +10,20 @@
  */
 function atomium_field_attach_view_alter(array &$output, array $context) {
   $context += array(
-    'suggestion data' => atomium_get_settings(
+    'suggestion data' => \atomium_get_settings(
       'alter.field_attach_view_alter.keys',
       TRUE
     ),
   );
 
-  $callback = function (&$root_element, $root_element_key, $context) {
+  $callback = static function (&$root_element, $root_element_key, $context) {
     if (!isset($root_element['#theme'])) {
       return;
     }
 
     $suggestions = \array_filter(
       \array_map(
-        function ($item) use ($root_element) {
+        static function ($item) use ($root_element) {
           return isset($root_element['#' . $item]) ?
             $root_element['#' . $item] :
             NULL;
@@ -36,13 +36,13 @@ function atomium_field_attach_view_alter(array &$output, array $context) {
       return;
     }
 
-    $root_element['#theme'] = _atomium_extend_with_suggestions(
+    $root_element['#theme'] = \_atomium_extend_with_suggestions(
       (array) $root_element['#theme'],
       $suggestions
     );
   };
 
-  _atomium_recursive_element_children(
+  \_atomium_recursive_element_children(
     $output,
     $callback,
     NULL,

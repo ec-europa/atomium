@@ -37,6 +37,6 @@ function atomium_preprocess_dashboard_disabled_block(array &$variables, $hook) {
     );
 
   $variables['title'] = (!empty($block['title']) && $block['title'] !== '<none>') ?
-    check_plain($block['title']) :
-    check_plain($block['info']);
+    \check_plain($block['title']) :
+    \check_plain($block['info']);
 }

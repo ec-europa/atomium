@@ -31,12 +31,14 @@ function atomium_preprocess_node(array &$variables, $hook) {
   }
 
   $variables['unpublished'] = (!$variables['status']) ? TRUE : FALSE;
+
   if ($variables['status'] === '0') {
     $variables['classes_array'][] = 'node__unpublished';
     $variables['theme_hook_suggestions'][] = 'node__unpublished';
   }
 
   $variables['preview'] = isset($variables['preview']) ? $variables['preview'] : FALSE;
+
   if (isset($variables['preview'])) {
     $variables['classes_array'][] = 'node__preview';
     $variables['theme_hook_suggestions'][] = 'node__preview';
@@ -79,9 +81,10 @@ function atomium_preprocess_node(array &$variables, $hook) {
   }
 
   // Add pubdate to submitted variable.
-  $variables['pubdate'] = '<time pubdate datetime="' . format_date($variables['node']->created, 'custom', 'c') . '">' . $variables['date'] . '</time>';
+  $variables['pubdate'] = '<time pubdate datetime="' . \format_date($variables['node']->created, 'custom', 'c') . '">' . $variables['date'] . '</time>';
+
   if ($variables['display_submitted']) {
-    $variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['pubdate']));
+    $variables['submitted'] = \t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['pubdate']));
   }
 
   // Add a class for the view mode.
@@ -94,7 +97,7 @@ function atomium_preprocess_node(array &$variables, $hook) {
   $variables['classes_array'][] = 'node-' . $variables['nid'];
 
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
-  $variables['atomium']['attributes']['wrapper']->remove('class', atomium_get_settings('preprocess.node.classes_to_remove', TRUE));
+  $variables['atomium']['attributes']['wrapper']->remove('class', \atomium_get_settings('preprocess.node.classes_to_remove', TRUE));
   $variables['atomium']['attributes']['wrapper']->append('role', 'article');
   $variables['atomium']['attributes']['wrapper']->append('id', 'node-' . $variables['nid']);
 }

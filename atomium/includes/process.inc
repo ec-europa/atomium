@@ -9,9 +9,9 @@
  * Implements hook_process().
  */
 function atomium_process(array &$variables, $hook) {
-  atomium_recursive_foreach(
+  \atomium_recursive_foreach(
     $variables,
-    function ($key, &$value, &$parent) use (&$variables) {
+    static function ($key, &$value, &$parent) use (&$variables) {
       if (\is_string($value) && $key === '#theme') {
         $value = array($value);
       }
@@ -22,12 +22,12 @@ function atomium_process(array &$variables, $hook) {
         // #theme_wrappers values. We need to deal with that as well.
         // This is why we are using this to flatten the array properly.
         if (isset($variables['theme_hook_original'])) {
-          $value = _atomium_extend_with_suggestions(
-          \iterator_to_array(
-            new RecursiveIteratorIterator(new RecursiveArrayIterator($value)),
-            FALSE
+          $value = \_atomium_extend_with_suggestions(
+            \iterator_to_array(
+              new RecursiveIteratorIterator(new RecursiveArrayIterator($value)),
+              FALSE
           ),
-          array($variables['theme_hook_original'])
+            array($variables['theme_hook_original'])
           );
         }
       }

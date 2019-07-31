@@ -15,7 +15,7 @@ function atomium_entity_view_alter(array &$build, $type) {
 
   if (isset($build[$property])) {
     $entity = $build[$property];
-    $info = entity_get_info($type);
+    $info = \entity_get_info($type);
 
     if (!empty($entity->{$info['entity keys']['id']})) {
       $build['#contextual_links'][$type] = array(
@@ -25,7 +25,7 @@ function atomium_entity_view_alter(array &$build, $type) {
     }
   }
 
-  $build['#theme'] = _atomium_extend_theme_hook(
+  $build['#theme'] = \_atomium_extend_theme_hook(
     $build['#theme'],
     array($build['#bundle'], $build['#view_mode'])
   );

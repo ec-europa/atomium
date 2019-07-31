@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($indentation); ?>
+<?php print \render($indentation); ?>

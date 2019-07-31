@@ -37,8 +37,8 @@ function atomium_atomium_definition_radio() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_radio(array &$variables, $hook) {
-  _form_set_class($variables['element'], array('form-radio'));
-  element_set_attributes(
+  \_form_set_class($variables['element'], array('form-radio'));
+  \element_set_attributes(
     $variables['element'],
     array(
       0 => 'id',
@@ -47,7 +47,7 @@ function atomium_preprocess_radio(array &$variables, $hook) {
       '#return_value' => 'value',
     )
   );
-  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes = \_atomium_get_attributes($variables['element']);
 
   if (isset($variables['element']['#atomium']['attributes']['element'])) {
     $variables['atomium']['attributes']['element']

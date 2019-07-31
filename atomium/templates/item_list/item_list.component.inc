@@ -76,8 +76,9 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   // Empty headers are not semantic and present accessibility challenges.
   $num_items = \count($variables['items']);
   $i = 0;
+
   foreach ($variables['items'] as $key => &$item) {
-    $i++;
+    ++$i;
 
     $variables['atomium']['attributes'][$key]
       ->append('class', ($i % 2) ? 'even' : 'odd');
@@ -85,6 +86,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     if ($i === 1) {
       $variables['atomium']['attributes'][$key]->append('class', 'first');
     }
+
     if ($i === $num_items) {
       $variables['atomium']['attributes'][$key]->append('class', 'last');
     }
@@ -110,7 +112,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
 
     if (!isset($item['#markup'])) {
       $item += array(
-        '#theme_wrappers' => _atomium_extend_theme_hook(
+        '#theme_wrappers' => \_atomium_extend_theme_hook(
           'html_tag',
           array($variables['theme_hook_original'])
         ),
@@ -119,7 +121,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     }
 
     if (isset($item['data'])) {
-      if (is_string($item['data'])) {
+      if (\is_string($item['data'])) {
         $item['data'] = array(
           '#markup' => $item['data'],
         );

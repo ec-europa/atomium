@@ -31,9 +31,9 @@ function atomium_preprocess_hidden(array &$variables, $hook) {
     );
   }
 
-  _form_set_class($variables['element'], array('form-hidden'));
-  element_set_attributes($variables['element'], array('id', 'name', 'value'));
-  $attributes = _atomium_get_attributes($variables['element']);
+  \_form_set_class($variables['element'], array('form-hidden'));
+  \element_set_attributes($variables['element'], array('id', 'name', 'value'));
+  $attributes = \_atomium_get_attributes($variables['element']);
   $variables['element']['#attributes']['class'] = array(
     $variables['element']['#attributes']['class'],
   );

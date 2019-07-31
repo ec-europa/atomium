@@ -37,8 +37,8 @@ function atomium_atomium_definition_textfield() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_textfield(array &$variables, $hook) {
-  _form_set_class($variables['element'], array('form-text'));
-  element_set_attributes(
+  \_form_set_class($variables['element'], array('form-text'));
+  \element_set_attributes(
     $variables['element'],
     array(
       0 => 'id',
@@ -51,13 +51,13 @@ function atomium_preprocess_textfield(array &$variables, $hook) {
   );
 
   $variables['atomium']['attributes']['element']
-    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
+    ->setAttributes(\_atomium_get_attributes($variables['element']), FALSE);
 
   $attributes['type'] = 'text';
 
   if (isset($variables['element']['#autocomplete_path']) &&
     !empty($variables['element']['#autocomplete_input'])) {
-    drupal_add_library('system', 'drupal.autocomplete');
+    \drupal_add_library('system', 'drupal.autocomplete');
     $attributes['class'][] = 'form-autocomplete';
 
     $variables['suffix'] = array(
@@ -80,11 +80,14 @@ function atomium_preprocess_textfield(array &$variables, $hook) {
   if (isset($variables['element']['#field_name'])) {
     $variables['theme_hook_suggestions'][] = 'textfield__' . $variables['element']['#field_name'];
   }
+
   if (isset($variables['element']['#entity_type'])) {
     $variables['theme_hook_suggestions'][] = 'textfield__' . $variables['element']['#entity_type'];
+
     if (isset($variables['element']['#field_name'])) {
       $variables['theme_hook_suggestions'][] = 'textfield__' . $variables['element']['#entity_type'] . '__' . $variables['element']['#field_name'];
     }
+
     if (isset($variables['element']['#bundle'])) {
       $variables['theme_hook_suggestions'][] = 'textfield__' . $variables['element']['#entity_type'] . '__' . $variables['element']['#bundle'];
     }

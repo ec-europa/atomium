@@ -51,12 +51,12 @@ function atomium_preprocess_pager_first(array &$variables, $hook) {
   // If we are anywhere but the first page.
   if ($pager_page_array[$element] > 0) {
     $pager_first = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'pager_link',
         array($variables['theme_hook_original'])
       ),
       '#text' => $variables['text'],
-      '#page_new' => pager_load_array(0, $element, $pager_page_array),
+      '#page_new' => \pager_load_array(0, $element, $pager_page_array),
       '#element' => $element,
       '#parameters' => $variables['parameters'],
       '#attributes' => $variables['attributes'],

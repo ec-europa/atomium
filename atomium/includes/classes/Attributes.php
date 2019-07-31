@@ -35,10 +35,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     foreach ($attributes as $attribute => &$data) {
       if (\is_numeric($attribute) || \is_bool($data)) {
-        $data = \sprintf('%s', \trim(check_plain($attribute)));
+        $data = \sprintf('%s', \trim(\check_plain($attribute)));
       }
       else {
-        $data = \array_map(function ($item) use ($attribute) {
+        $data = \array_map(static function ($item) use ($attribute) {
           if ($attribute === 'placeholder') {
             $item = \strip_tags($item);
           }
@@ -52,7 +52,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
            * }
            */
 
-          return \trim(check_plain($item));
+          return \trim(\check_plain($item));
         }, (array) $data);
 
         // By default, sort the value of the class attribute.
@@ -77,7 +77,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   The attribute's name.
-   * @param string|array|bool $value
+   * @param array|bool|string $value
    *   The attribute's value.
    *
    * @return $this
@@ -99,6 +99,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     $value_iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator((array) $value));
 
     $data = array();
+
     foreach ($value_iterator as $item) {
       $data = \array_merge($data, \explode(' ', $item));
     }
@@ -113,7 +114,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   Attribute name.
-   * @param string|bool $value
+   * @param bool|string $value
    *   Attribute value.
    *
    * @return bool
@@ -137,7 +138,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     }
 
     foreach ($candidates as $item) {
-      if (\stripos($item, $value) !== FALSE) {
+      if (\mb_stripos($item, $value) !== FALSE) {
         return TRUE;
       }
     }
@@ -148,7 +149,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
   /**
    * Delete an attribute.
    *
-   * @param string|array $name
+   * @param array|string $name
    *   The name of the attribute key to delete.
    *
    * @return $this
@@ -170,7 +171,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   Attribute name.
-   * @param string|bool $value
+   * @param bool|string $value
    *   Attribute value.
    *
    * @return bool
@@ -185,9 +186,10 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     return $storage[$key] !== \array_filter(
       $storage[$key],
-      function ($item) use ($value) {
+      static function ($item) use ($value) {
         return $item !== $value;
-      });
+      }
+    );
   }
 
   /**
@@ -205,7 +207,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    */
   public function getStorage() {
     // Flatten the array.
-    \array_walk($this->storage, function (&$member) {
+    \array_walk($this->storage, static function (&$member) {
       // Take care of loners attributes.
       if (!\is_bool($member)) {
         $value_iterator = new \RecursiveIteratorIterator(
@@ -290,7 +292,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $key
    *   The attribute's name.
-   * @param string|array|bool $value
+   * @param array|bool|string $value
    *   The attribute's value.
    *
    * @return $this
@@ -332,7 +334,8 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
     $attributes = $this->getStorage();
 
     if (isset($attributes[$key])) {
-      $attributes[$key] = \array_replace($attributes[$key],
+      $attributes[$key] = \array_replace(
+        $attributes[$key],
         \array_fill_keys(
           \array_keys($attributes[$key], $value, TRUE),
           $replacement
@@ -348,7 +351,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    *
    * @param string $attribute
    *   Name of the attribute.
-   * @param string|array|bool $value
+   * @param array|bool|string $value
    *   Value(s) to set for the given attribute key.
    * @param bool $explode
    *   Should we explode attributes value ?
@@ -426,7 +429,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
    */
   public function toArray() {
     return \array_map(
-      function ($value) {
+      static function ($value) {
         return \array_filter((array) $value, 'strlen');
       },
       $this->getStorage()

@@ -7,21 +7,23 @@
 ?>
 <table<?php print $atomium['attributes']['wrapper']; ?>>
   <?php if (!empty($caption)) : ?>
-    <caption><?php print render($caption); ?></caption>
+    <caption><?php print \render($caption); ?></caption>
   <?php endif; ?>
 
   <?php if (!empty($colgroups)) : ?>
     <?php $row_num_index = 0; ?>
     <?php foreach ($colgroups as $row_index => $row): ?>
-      <colgroup<?php print $atomium['attributes']['colgroups-row-' . $row_num_index]->append('class',
-        $row_index); ?>>
+      <colgroup<?php print $atomium['attributes']['colgroups-row-' . $row_num_index]->append(
+  'class',
+  $row_index
+); ?>>
         <?php $cell_num_index = 0; ?>
         <?php foreach ($row['cells'] as $cell_index => $cell): ?>
           <col<?php print $atomium['attributes']['colgroups-cell-' . $row_num_index . '-' . $cell_num_index]; ?>/>
-          <?php $cell_num_index++; ?>
+          <?php ++$cell_num_index; ?>
         <?php endforeach; ?>
       </colgroup>
-      <?php $row_num_index++; ?>
+      <?php ++$row_num_index; ?>
     <?php endforeach; ?>
   <?php endif; ?>
 
@@ -33,12 +35,12 @@
         <?php $cell_num_index = 0; ?>
         <?php foreach ($row['cells'] as $cell_index => $cell): ?>
           <th<?php print $atomium['attributes']['header-cell-' . $row_num_index . '-' . $cell_num_index]->append('scope', 'col')->append('class', $cell_index)->append('class', 'cell-index-' . $cell_num_index); ?>>
-            <?php print render($cell); ?>
+            <?php print \render($cell); ?>
           </th>
-          <?php $cell_num_index++; ?>
+          <?php ++$cell_num_index; ?>
         <?php endforeach; ?>
       </tr>
-      <?php $row_num_index++; ?>
+      <?php ++$row_num_index; ?>
     <?php endforeach; ?>
     </thead>
   <?php endif; ?>
@@ -50,12 +52,12 @@
       <?php $cell_num_index = 0; ?>
       <?php foreach ($row['cells'] as $cell_index => $cell): ?>
         <td<?php print $atomium['attributes']['rows-cell-' . $row_num_index . '-' . $cell_num_index]->append('class', 'cell-index-' . $cell_num_index)->append('class', $cell_index); ?>>
-          <?php print render($cell); ?>
+          <?php print \render($cell); ?>
         </td>
-        <?php $cell_num_index++; ?>
+        <?php ++$cell_num_index; ?>
       <?php endforeach; ?>
     </tr>
-    <?php $row_num_index++; ?>
+    <?php ++$row_num_index; ?>
   <?php endforeach; ?>
   </tbody>
 
@@ -67,12 +69,12 @@
         <?php $cell_num_index = 0; ?>
         <?php foreach ($row['cells'] as $cell_index => $cell): ?>
           <td<?php print $atomium['attributes']['footer-cell-' . $row_num_index . '-' . $cell_num_index]->append('class', $cell_index)->append('class', 'cell-index-' . $cell_num_index); ?>>
-            <?php print render($cell); ?>
+            <?php print \render($cell); ?>
           </td>
-          <?php $cell_num_index++; ?>
+          <?php ++$cell_num_index; ?>
         <?php endforeach; ?>
       </tr>
-      <?php $row_num_index++; ?>
+      <?php ++$row_num_index; ?>
     <?php endforeach; ?>
     </tfoot>
   <?php endif; ?>

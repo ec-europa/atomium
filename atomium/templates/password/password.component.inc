@@ -37,7 +37,7 @@ function atomium_atomium_definition_password() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_password(array &$variables, $hook) {
-  element_set_attributes(
+  \element_set_attributes(
     $variables['element'],
     array(
       0 => 'id',
@@ -47,9 +47,9 @@ function atomium_preprocess_password(array &$variables, $hook) {
       '#title' => 'placeholder',
     )
   );
-  _form_set_class($variables['element'], array('form-text'));
+  \_form_set_class($variables['element'], array('form-text'));
 
-  $attributes = _atomium_get_attributes($variables['element']);
+  $attributes = \_atomium_get_attributes($variables['element']);
   $attributes['type'] = 'password';
 
   if (isset($variables['element']['#atomium']['attributes']['element'])) {

@@ -10,7 +10,7 @@
  */
 function atomium_css_alter(array &$css) {
   // Automatically includes css file from a component if it exists.
-  foreach (atomium_discover_templates() as $component_data) {
+  foreach (\atomium_discover_templates() as $component_data) {
     $css_file = \sprintf(
       '%s/%s.css',
       $component_data['directory'],
@@ -21,14 +21,14 @@ function atomium_css_alter(array &$css) {
       continue;
     }
 
-    $css = drupal_add_css($css_file, array(
+    $css = \drupal_add_css($css_file, array(
       'group' => CSS_THEME,
       'every_page' => TRUE,
     ));
   }
 
   // Exclude specified CSS files from theme.
-  $excludes = atomium_get_settings(
+  $excludes = \atomium_get_settings(
     'alter.css_alter.exclude',
     FALSE
   );
@@ -38,6 +38,6 @@ function atomium_css_alter(array &$css) {
       $excludes,
       \str_replace('.css', '-rtl.css', $excludes)
     );
-    $css = \array_diff_key($css, drupal_map_assoc($excludes));
+    $css = \array_diff_key($css, \drupal_map_assoc($excludes));
   }
 }

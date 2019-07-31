@@ -27,12 +27,12 @@ function atomium_preprocess_exposed_filters(array &$variables, $hook) {
   if (isset($form['current'])) {
     $items = array();
 
-    foreach (element_children($form['current']) as $key) {
+    foreach (\element_children($form['current']) as $key) {
       $items[] = $form['current'][$key];
     }
 
     $exposed_filters = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'item_list',
         array(
           $variables['theme_hook_original'],

@@ -5,25 +5,25 @@
  * Put the logo path into JavaScript for the live preview.
  */
 
-drupal_add_js(array('color' => array('logo' => theme_get_setting('logo', 'bartik'))), 'setting');
+\drupal_add_js(array('color' => array('logo' => \theme_get_setting('logo', 'bartik'))), 'setting');
 
 $info = array(
   // Available colors and color labels used in theme.
   'fields' => array(
-    'top' => t('Header top'),
-    'bottom' => t('Header bottom'),
-    'bg' => t('Main background'),
-    'sidebar' => t('Sidebar background'),
-    'sidebarborders' => t('Sidebar borders'),
-    'footer' => t('Footer background'),
-    'titleslogan' => t('Title and slogan'),
-    'text' => t('Text color'),
-    'link' => t('Link color'),
+    'top' => \t('Header top'),
+    'bottom' => \t('Header bottom'),
+    'bg' => \t('Main background'),
+    'sidebar' => \t('Sidebar background'),
+    'sidebarborders' => \t('Sidebar borders'),
+    'footer' => \t('Footer background'),
+    'titleslogan' => \t('Title and slogan'),
+    'text' => \t('Text color'),
+    'link' => \t('Link color'),
   ),
   // Pre-defined color schemes.
   'schemes' => array(
     'default' => array(
-      'title' => t('Blue Lagoon (default)'),
+      'title' => \t('Blue Lagoon (default)'),
       'colors' => array(
         'top' => '#0779bf',
         'bottom' => '#48a9e4',
@@ -37,7 +37,7 @@ $info = array(
       ),
     ),
     'firehouse' => array(
-      'title' => t('Firehouse'),
+      'title' => \t('Firehouse'),
       'colors' => array(
         'top' => '#cd2d2d',
         'bottom' => '#cf3535',
@@ -51,7 +51,7 @@ $info = array(
       ),
     ),
     'ice' => array(
-      'title' => t('Ice'),
+      'title' => \t('Ice'),
       'colors' => array(
         'top' => '#d0d0d0',
         'bottom' => '#c2c4c5',
@@ -65,7 +65,7 @@ $info = array(
       ),
     ),
     'plum' => array(
-      'title' => t('Plum'),
+      'title' => \t('Plum'),
       'colors' => array(
         'top' => '#4c1c58',
         'bottom' => '#593662',
@@ -79,7 +79,7 @@ $info = array(
       ),
     ),
     'slate' => array(
-      'title' => t('Slate'),
+      'title' => \t('Slate'),
       'colors' => array(
         'top' => '#4a4a4a',
         'bottom' => '#4e4e4e',

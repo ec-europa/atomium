@@ -24,12 +24,12 @@ function atomium_atomium_theme_node_admin_overview(array $existing, $type, $them
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_node_admin_overview(array &$variables, $hook) {
-  $variables['name'] = check_plain($variables['name']);
+  $variables['name'] = \check_plain($variables['name']);
 
-  $variables['machine_name'] = t(
+  $variables['machine_name'] = \t(
     '(Machine name: @type)',
     array('@type' => $variables['type']->type)
   );
 
-  $variables['description'] = filter_xss_admin($variables['type']->description);
+  $variables['description'] = \filter_xss_admin($variables['type']->description);
 }

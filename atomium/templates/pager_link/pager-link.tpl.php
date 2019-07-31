@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print render($pager_link); ?>
+<?php print \render($pager_link); ?>

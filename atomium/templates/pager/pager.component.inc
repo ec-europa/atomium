@@ -52,20 +52,22 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
   $items = array();
 
-  $pager_page_array = array_key_exists('pager_page_array', $GLOBALS) ?
+  $pager_page_array = \array_key_exists('pager_page_array', $GLOBALS) ?
     $GLOBALS['pager_page_array'] :
     array();
-  $pager_total = array_key_exists('pager_total', $GLOBALS) ?
+  $pager_total = \array_key_exists('pager_total', $GLOBALS) ?
     $GLOBALS['pager_total'] :
     array();
 
   $pager_page_array_element = NULL;
-  if (array_key_exists($element, $pager_page_array)) {
+
+  if (\array_key_exists($element, $pager_page_array)) {
     $pager_page_array_element = (int) $pager_page_array[$element];
   }
 
   $pager_total_element = NULL;
-  if (array_key_exists($element, $pager_total)) {
+
+  if (\array_key_exists($element, $pager_total)) {
     $pager_total_element = (int) $pager_total[$element];
   }
 
@@ -83,11 +85,13 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   // End of marker calculations.
   // Prepare for generation loop.
   $i = $pager_first;
+
   if ($pager_last > $pager_max) {
     // Adjust "center" if at end of query.
     $i += ($pager_max - $pager_last);
     $pager_last = $pager_max;
   }
+
   if ($i <= 0) {
     // Adjust "center" if at start of query.
     $pager_last += (1 - $i);
@@ -115,7 +119,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
       '#pager_page' => 0,
     );
 
-    $page = pager_load_array(
+    $page = \pager_load_array(
       $pager_page_array[$element] - $interval,
       $element,
       $pager_page_array
@@ -155,9 +159,9 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     }
 
     // Now generate the actual pager piece.
-    for (; $i <= $pager_last && $i <= $pager_max; $i++) {
+    for (; $i <= $pager_last && $i <= $pager_max; ++$i) {
       if ($i < $pager_current || $i > $pager_current) {
-        $pager = pager_load_array(
+        $pager = \pager_load_array(
           $pager_page_array_element + ($i - $pager_current),
           $element,
           $pager_page_array
@@ -166,13 +170,14 @@ function atomium_preprocess_pager(array &$variables, $hook) {
         $page = isset($_GET['page']) ? $_GET['page'] : '';
         // Todo: See if this is really needed, maybe we can use the previous
         // pager variable.
-        $pager_new = pager_load_array(
+        $pager_new = \pager_load_array(
           $pager[$element],
           $element,
-          explode(',', $page)
+          \explode(',', $page)
         );
+
         if (!empty($pager_new)) {
-          $page = implode(',', $pager_new);
+          $page = \implode(',', $pager_new);
         }
 
         $items[] = array(
@@ -226,19 +231,20 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   // End generation.
   // If we are anywhere but the last page.
   if ($pager_page_array_element < ($pager_total_element - 1)) {
-    $pager = pager_load_array(
+    $pager = \pager_load_array(
       $pager_page_array[$element] + $interval,
       $element,
       $pager_page_array
     );
     $page = isset($_GET['page']) ? $_GET['page'] : '';
-    $pager_new = pager_load_array(
+    $pager_new = \pager_load_array(
       $pager[$element],
       $element,
-      explode(',', $page)
+      \explode(',', $page)
     );
+
     if (!empty($pager_new)) {
-      $page = implode(',', $pager_new);
+      $page = \implode(',', $pager_new);
     }
 
     // If the next page is the last page, mark the link as such.
@@ -260,16 +266,17 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
   // If we are anywhere but the last page.
   if ($pager_page_array_element < ($pager_total_element - 1)) {
-    $pager = pager_load_array($pager_total[$element] - 1, $element, $pager_page_array);
+    $pager = \pager_load_array($pager_total[$element] - 1, $element, $pager_page_array);
 
     $page = isset($_GET['page']) ? $_GET['page'] : '';
-    $pager_new = pager_load_array(
+    $pager_new = \pager_load_array(
       $pager[$element],
       $element,
-      explode(',', $page)
+      \explode(',', $page)
     );
+
     if (!empty($pager_new)) {
-      $page = implode(',', $pager_new);
+      $page = \implode(',', $pager_new);
     }
 
     $items[] = array(
@@ -289,7 +296,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   }
 
   foreach ($items as &$item) {
-    $item['pager_item']['#theme'] = _atomium_extend_theme_hook(
+    $item['pager_item']['#theme'] = \_atomium_extend_theme_hook(
       $item['pager_item']['#theme'],
       $variables['theme_hook_original']
     );
@@ -299,7 +306,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'item_list',
         array($variables['theme_hook_original'])
       ),

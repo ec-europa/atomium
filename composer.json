@@ -2,7 +2,7 @@
     "name": "ec-europa/atomium",
     "description": "A clean and atomic base theme.",
     "type": "drupal-theme",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-or-later",
     "homepage": "https://drupal.org/project/atomium",
     "authors": [
         {
@@ -25,7 +25,7 @@
         "drupal/drupal": "^7.67",
         "drupal/drupal-extension": "~3.4",
         "drupal/realistic_dummy_content": "^2",
-        "drupol/drupal-conventions": "^1.4.15",
+        "drupol/drupal-conventions": "^1.7",
         "drush/drush": "^8.2.3",
         "mikey179/vfsstream": "^1.6",
         "phptaskman/changelog": "^0.2.3",

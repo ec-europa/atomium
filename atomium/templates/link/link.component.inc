@@ -37,11 +37,11 @@ function atomium_preprocess_link(array &$variables, $hook) {
 
   // This cannot be moved to a #pre_render because some contrib modules
   // uses #theme => link instead of #type => link (see admin_menu).
-  $startWithHash = (\strpos($variables['path'], '#') === 0);
-  $startWithJavascript = (\strpos($variables['path'], 'javascript:') === 0);
+  $startWithHash = (\mb_strpos($variables['path'], '#') === 0);
+  $startWithJavascript = (\mb_strpos($variables['path'], 'javascript:') === 0);
 
   if (!($startWithHash || $startWithJavascript)) {
-    $variables['path'] = url($variables['path'], $variables['options']);
+    $variables['path'] = \url($variables['path'], $variables['options']);
   }
 
   $variables['atomium']['attributes']['element']
@@ -50,5 +50,5 @@ function atomium_preprocess_link(array &$variables, $hook) {
   // The text property must be a string.
   $variables['text'] = $variables['options']['html'] ?
     $variables['text'] :
-    check_plain($variables['text']);
+    \check_plain($variables['text']);
 }

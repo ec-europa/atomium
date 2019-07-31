@@ -30,13 +30,13 @@ function atomium_atomium_definition_status_messages() {
     'preview' => array(
       'messages' => array(
         'error' => array(
-          t('Error message'),
+          \t('Error message'),
         ),
         'status' => array(
-          t('Status message'),
+          \t('Status message'),
         ),
         'warning' => array(
-          t('Warning message'),
+          \t('Warning message'),
         ),
       ),
     ),
@@ -48,29 +48,29 @@ function atomium_atomium_definition_status_messages() {
  */
 function atomium_preprocess_status_messages(array &$variables, $hook) {
   $status_heading = array(
-    'status' => t('Status message'),
-    'error' => t('Error message'),
-    'warning' => t('Warning message'),
+    'status' => \t('Status message'),
+    'error' => \t('Error message'),
+    'warning' => \t('Warning message'),
   );
 
   $output = array();
 
   $variables += array('messages' => array());
-  $status_messages = drupal_array_merge_deep(
+  $status_messages = \drupal_array_merge_deep(
     $variables['messages'],
-    drupal_get_messages($variables['display'])
+    \drupal_get_messages($variables['display'])
   );
 
   foreach ($status_messages as $type => $messages) {
     $container = array(
       'messages' => array(
-        '#theme' => _atomium_extend_with_suggestions(
+        '#theme' => \_atomium_extend_with_suggestions(
           array('item_list'),
           array($variables['theme_hook_original'], $type)
         ),
         '#items' => $messages,
       ),
-      '#theme_wrappers' => _atomium_extend_with_suggestions(
+      '#theme_wrappers' => \_atomium_extend_with_suggestions(
         array('container'),
         array($variables['theme_hook_original'], $type)
       ),

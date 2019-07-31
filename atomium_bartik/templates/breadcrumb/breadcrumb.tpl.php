@@ -5,5 +5,5 @@
  * Contains template file.
  */
 ?>
-<h2 class="element-invisible"><?php print t('You are here'); ?></h2>
-<?php print render($breadcrumb); ?>
+<h2 class="element-invisible"><?php print \t('You are here'); ?></h2>
+<?php print \render($breadcrumb); ?>

@@ -39,9 +39,10 @@ function atomium_preprocess_comment(array &$variables, $hook) {
   $variables['atomium']['attributes']['content']->append('class', 'content');
 
   $variables['picture'] = NULL;
-  if (theme_get_setting('toggle_comment_user_picture')) {
+
+  if (\theme_get_setting('toggle_comment_user_picture')) {
     $variables['picture'] = array(
-      '#theme' => _atomium_extend_theme_hook('user_picture', $variables['theme_hook_original']),
+      '#theme' => \_atomium_extend_theme_hook('user_picture', $variables['theme_hook_original']),
       '#account' => $variables['elements']['#comment'],
     );
   }

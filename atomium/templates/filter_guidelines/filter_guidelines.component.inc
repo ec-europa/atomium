@@ -23,15 +23,15 @@ function atomium_atomium_theme_filter_guidelines(array $existing, $type, $theme,
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_filter_guidelines(array &$variables, $hook) {
-  $variables['name'] = check_plain($variables['format']->name);
+  $variables['name'] = \check_plain($variables['format']->name);
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'filter_tips',
         $variables['theme_hook_original']
       ),
-      '#tips' => _filter_tips(
+      '#tips' => \_filter_tips(
         $variables['format']->format,
         FALSE
       ),

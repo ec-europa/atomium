@@ -34,7 +34,7 @@ function atomium_preprocess_rdf_template_variable_wrapper(array &$variables, $ho
     $variables['atomium']['attributes']['wrapper']->setAttributes($variables['attributes']);
 
     $rdf_template_variable_wrapper = array(
-      '#theme' => _atomium_extend_theme_hook(
+      '#theme' => \_atomium_extend_theme_hook(
         'html_tag',
         array(
           $variables['theme_hook_original'],

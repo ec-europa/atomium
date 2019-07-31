@@ -18,30 +18,30 @@
  */
 
 // Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('atomium_rebuild_registry') && !\defined('MAINTENANCE_MODE')) {
+if (\theme_get_setting('atomium_rebuild_registry') && !\defined('MAINTENANCE_MODE')) {
   // Rebuild .info data.
-  system_rebuild_theme_data();
+  \system_rebuild_theme_data();
   // Rebuild theme registry.
-  drupal_theme_rebuild();
+  \drupal_theme_rebuild();
 }
 
 /**
  * Include common functions used through out theme.
  */
-include_once drupal_dirname(__FILE__) . '/includes/common.inc';
+include_once \drupal_dirname(__FILE__) . '/includes/common.inc';
 
-atomium_include('atomium', 'includes/config.inc');
-atomium_include('atomium', 'includes/preprocess.inc');
-atomium_include('atomium', 'includes/process.inc');
-atomium_include('atomium', 'includes/classes');
+\atomium_include('atomium', 'includes/config.inc');
+\atomium_include('atomium', 'includes/preprocess.inc');
+\atomium_include('atomium', 'includes/process.inc');
+\atomium_include('atomium', 'includes/classes');
 
 /**
  * Implements hook_theme().
  */
 function atomium_theme(&$existing, $type, $theme, $path) {
-  atomium_include('atomium', 'includes/registry.inc');
+  \atomium_include('atomium', 'includes/registry.inc');
 
-  return _atomium_theme($existing, $type, $theme, $path);
+  return \_atomium_theme($existing, $type, $theme, $path);
 }
 
 /**
@@ -65,7 +65,7 @@ function atomium_menu_alter(array &$items) {
  *
  * @see https://www.drupal.org/node/2351731
  */
-drupal_static_reset('element_info');
+\drupal_static_reset('element_info');
 
 /**
  * Declare various hook_*_alter() hooks.
@@ -73,4 +73,4 @@ drupal_static_reset('element_info');
  * Hook_*_alter() implementations must live (via include) inside this file so
  * they are properly detected when drupal_alter() is invoked.
  */
-atomium_include('atomium', 'includes/alter');
+\atomium_include('atomium', 'includes/alter');

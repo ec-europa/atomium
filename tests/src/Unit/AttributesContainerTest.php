@@ -6,8 +6,11 @@ use Drupal\atomium\AttributesContainer;
 
 /**
  * Class AttributesContainerTest.
+ *
+ * @internal
+ * @coversNothing
  */
-class AttributesContainerTest extends AbstractUnitTest {
+final class AttributesContainerTest extends AbstractUnitTest {
 
   /**
    * Test AttributesContainer class.

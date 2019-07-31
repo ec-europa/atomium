@@ -23,7 +23,7 @@ function atomium_atomium_theme_menu_overview_form(array $existing, $type, $theme
 function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
   $form = $variables['form'];
 
-  drupal_add_tabledrag(
+  \drupal_add_tabledrag(
     'menu-overview',
     'match',
     'parent',
@@ -33,7 +33,7 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
     TRUE,
     MENU_MAX_DEPTH - 1
   );
-  drupal_add_tabledrag(
+  \drupal_add_tabledrag(
     'menu-overview',
     'order',
     'sibling',
@@ -41,14 +41,15 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
   );
 
   $header = array(
-    t('Menu link'),
-    array('data' => t('Enabled'), 'class' => array('checkbox')),
-    t('Weight'),
-    array('data' => t('Operations'), 'colspan' => '3'),
+    \t('Menu link'),
+    array('data' => \t('Enabled'), 'class' => array('checkbox')),
+    \t('Weight'),
+    array('data' => \t('Operations'), 'colspan' => '3'),
   );
 
   $rows = array();
-  foreach (element_children($form) as $mlid) {
+
+  foreach (\element_children($form) as $mlid) {
     if (!isset($form[$mlid]['hidden'])) {
       continue;
     }
@@ -88,7 +89,7 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
     );
 
     // Build a list of operations.
-    foreach (element_children($element['operations']) as $op) {
+    foreach (\element_children($element['operations']) as $op) {
       $row[$op] = array(
         'data' => $element['operations'][$op],
         'class' => array('menu-operations'),
@@ -113,7 +114,7 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
   }
 
   $variables['form']['table'] = array(
-    '#theme' => _atomium_extend_with_suggestions(
+    '#theme' => \_atomium_extend_with_suggestions(
       array('table'),
       array(
         $variables['theme_hook_original'],

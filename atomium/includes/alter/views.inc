@@ -24,7 +24,7 @@ function atomium_views_pre_render(view $view) {
 
   if (isset($view->display_handler->definition['theme'])) {
     $view->display_handler->definition['theme'] = \current(
-      _atomium_extend_theme_hook(
+      \_atomium_extend_theme_hook(
         $view->display_handler->definition['theme'],
         $extend
       )
@@ -33,7 +33,7 @@ function atomium_views_pre_render(view $view) {
 
   if (isset($view->style_plugin->definition['theme'])) {
     $view->style_plugin->definition['theme'] = \current(
-      _atomium_extend_theme_hook(
+      \_atomium_extend_theme_hook(
         $view->style_plugin->definition['theme'],
         \array_slice($extend, 1)
       )
