@@ -144,3 +144,14 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   $variables['atomium']['attributes']['wrapper']
     ->merge($variables['wrapper_attributes']);
 }
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function atomium_preprocess_item_list__pager(array &$variables, $hook) {
+  foreach ($variables['items'] as $key => &$item) {
+    if ($item['pager_item']['#printed'] === TRUE) {
+      unset($variables['items'][$key]);
+    }
+  }
+}

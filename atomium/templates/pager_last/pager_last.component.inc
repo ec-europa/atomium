@@ -48,22 +48,17 @@ function atomium_preprocess_pager_last(array &$variables, $hook) {
   $element = $variables['element'];
   global $pager_page_array, $pager_total;
 
-  $pager_last = NULL;
-
-  // If we are anywhere but the last page.
-  if ($pager_page_array[$element] < ($pager_total[$element] - 1)) {
-    $pager_last = array(
-      '#theme' => \_atomium_extend_theme_hook(
-        'pager_link',
-        array($variables['theme_hook_original'])
-      ),
-      '#text' => $text,
-      '#page_new' => \pager_load_array($pager_total[$element] - 1, $element, $pager_page_array),
-      '#element' => $element,
-      '#parameters' => $variables['parameters'],
-      '#attributes' => $variables['attributes'],
-    );
-  }
+  $pager_last = array(
+    '#theme' => \_atomium_extend_theme_hook(
+      'pager_link',
+      array($variables['theme_hook_original'])
+    ),
+    '#text' => $text,
+    '#page_new' => \pager_load_array($pager_total[$element] - 1, $element, $pager_page_array),
+    '#element' => $element,
+    '#parameters' => $variables['parameters'],
+    '#attributes' => $variables['attributes'],
+  );
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => $pager_last,
