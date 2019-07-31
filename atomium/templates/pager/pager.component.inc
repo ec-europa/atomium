@@ -71,20 +71,20 @@ function atomium_preprocess_pager(array &$variables, $hook) {
     $pager_total_element = (int) $pager_total[$element];
   }
 
-  $pager_items = _atomium_pager_generate_items(
+  $pager_items = \_atomium_pager_generate_items(
     $variables,
     $pager_page_array,
     $pager_total_element
   );
 
   // The setting value is taken form te .info file.
-  $pager_type_vanilla = (bool) current(
-    atomium_get_settings('pager.use_vanilla')
+  $pager_type_vanilla = (bool) \current(
+    \atomium_get_settings('pager.use_vanilla')
   );
 
   if ($pager_type_vanilla === TRUE) {
     // Unhide some items to mimic the default Drupal's pager.
-    $pager_items = _atomium_pager_generate_vanilla(
+    $pager_items = \_atomium_pager_generate_vanilla(
       $variables,
       $pager_items,
       $pager_page_array,
@@ -94,12 +94,12 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   else {
     // Unhide all the items.
     foreach ($pager_items as &$item) {
-      show($item['pager_item']);
+      \show($item['pager_item']);
     }
   }
 
   $item_list = array(
-    '#theme' => _atomium_extend_theme_hook(
+    '#theme' => \_atomium_extend_theme_hook(
       'item_list',
       array($variables['theme_hook_original'])
     ),
@@ -201,7 +201,7 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
   $element = $variables['element'];
   $pager_page_array_element = (int) $pager_page_array[$element];
 
-  $pager_infos = _atomium_pager_generate_infos($variables, $pager_page_array_element, $pager_total_element);
+  $pager_infos = \_atomium_pager_generate_infos($variables, $pager_page_array_element, $pager_total_element);
 
   $pager_middle = $pager_infos['pager_middle'];
   $pager_current = $pager_infos['pager_current'];
@@ -238,7 +238,7 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     '#pager_i' => $i,
   );
 
-  $page = pager_load_array(
+  $page = \pager_load_array(
     $pager_page_array[$element] - $interval,
     $element,
     $pager_page_array
@@ -287,8 +287,8 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
   );
 
   // Now generate the actual pager piece.
-  for (; $i <= $pager_last && $i <= $pager_max; $i++) {
-    $pager = pager_load_array(
+  for (; $i <= $pager_last && $i <= $pager_max; ++$i) {
+    $pager = \pager_load_array(
       $pager_page_array_element + ($i - $pager_current),
       $element,
       $pager_page_array
@@ -297,13 +297,14 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     $page = isset($_GET['page']) ? $_GET['page'] : NULL;
     // Todo: See if this is really needed, maybe we can use the previous
     // pager variable.
-    $pager_new = pager_load_array(
+    $pager_new = \pager_load_array(
       $pager[$element],
       $element,
-      explode(',', $page)
+      \explode(',', $page)
     );
+
     if (!empty($pager_new)) {
-      $page = implode(',', $pager_new);
+      $page = \implode(',', $pager_new);
     }
 
     $items[] = array(
@@ -372,7 +373,7 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     );
   }
 
-  $pager = pager_load_array(
+  $pager = \pager_load_array(
     $pager_page_array[$element] + $interval,
     $element,
     $pager_page_array
@@ -380,14 +381,14 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
 
   $page = isset($_GET['page']) ? $_GET['page'] : '';
 
-  $pager_new = pager_load_array(
+  $pager_new = \pager_load_array(
     $pager[$element],
     $element,
-    explode(',', $page)
+    \explode(',', $page)
   );
 
   if (!empty($pager_new)) {
-    $page = implode(',', $pager_new);
+    $page = \implode(',', $pager_new);
   }
 
   // If the next page is the last page, mark the link as such.
@@ -434,7 +435,7 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
   );
 
   foreach ($items as &$item) {
-    hide($item['pager_item']);
+    \hide($item['pager_item']);
   }
 
   return $items;
@@ -464,41 +465,41 @@ function _atomium_pager_generate_vanilla(array $variables, array $pager_items, a
       case 'pager_first':
       case 'pager_previous':
         if ($pager_item['#pager_i'] !== $pager_item['#pager_current']) {
-          show($pager_item['pager_item']);
-          show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
         }
 
         break;
 
       case 'pager_ellipsis':
         if ($pager_item['#pager_i'] > 1) {
-          show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
         }
 
         break;
 
       case 'pager_next':
         if ($pager_page_array_element < ($pager_total_element - 1)) {
-          show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
         }
 
         break;
 
       case 'pager_last':
         if ($pager_page_array_element < ($pager_total_element - 1)) {
-          show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
         }
 
         break;
 
       case 'pager_current':
-        show($pager_item['pager_item']);
+        \show($pager_item['pager_item']);
 
         break;
 
       case 'pager_link':
         if ($pager_item['#pager_current'] !== $pager_item['#pager_page'] + 1) {
-          show($pager_item['pager_item']);
+          \show($pager_item['pager_item']);
         }
 
         break;

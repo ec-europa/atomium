@@ -11,6 +11,7 @@
 function atomium_bartik_preprocess_status_messages(array &$variables, $hook) {
   foreach ($variables['status_messages']['status_messages'] as &$data) {
     unset($data['#theme_wrappers']);
+
     if (!empty($data['title'])) {
       $data['title'] = array(
         '#type' => 'html_tag',
