@@ -33,6 +33,7 @@ function atomium_atomium_theme_item_list(array $existing, $type, $theme, $path) 
  * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_item_list() {
+  $a= array();
   return array(
     'label' => 'Item list',
     'description' => 'Item list description.',
@@ -47,10 +48,15 @@ function atomium_atomium_definition_item_list() {
           'data' => array(
             '#markup' => 'Item 2',
           ),
+          'style' => 'color: red;',
         ),
         'item3' => array(
           'data' => array(
             '#markup' => 'Item 3',
+          ),
+          'children' => array(
+            'item 3.1',
+            'item 3.2',
           ),
         ),
       ),
@@ -126,6 +132,17 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
           '#markup' => $item['data'],
         );
       }
+    }
+
+    if (isset($item['children'])) {
+      $children = $item['children'];
+      unset($item['children']);
+      $item['children'] = array(
+        '#theme' => 'item_list',
+        '#items' => $children,
+        '#type' => $variables['type'],
+        '#title' => NULL,
+      );
     }
 
     $item['#attributes'] = $variables['atomium']['attributes'][$key]
