@@ -59,8 +59,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
         '#tag' => $heading['level'],
         '#value' => $heading['text'],
         '#attributes' => $variables['atomium']['attributes']['heading']
-          ->merge(array('class' => $heading['class']))
-          ->toArray(),
+          ->merge(array('class' => $heading['class']))->toArray(),
       );
     }
   }

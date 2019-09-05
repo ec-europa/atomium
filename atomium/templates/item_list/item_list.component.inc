@@ -33,7 +33,6 @@ function atomium_atomium_theme_item_list(array $existing, $type, $theme, $path) 
  * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_item_list() {
-  $a= array();
   return array(
     'label' => 'Item list',
     'description' => 'Item list description.',
