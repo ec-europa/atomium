@@ -492,7 +492,7 @@ function _atomium_extend_theme_hook($base = NULL, $suggestions = array()) {
           '__',
           \array_map(
             static function ($suggestion) {
-              return \trim($suggestion, '_');
+              return \trim($suggestion, '_-');
             },
             \array_filter(
               $suggestions
