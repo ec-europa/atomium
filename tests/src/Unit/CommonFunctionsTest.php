@@ -34,6 +34,18 @@ final class CommonFunctionsTest extends AbstractUnitTest {
   }
 
   /**
+   * Return atomium_get_theme_hook_suggestions fixtures.
+   *
+   * @return array
+   *   List of component fixtures.
+   */
+  public function atomiumGetThemeHookSuggestionsProvider() {
+    return Yaml::parseFile(
+      __DIR__ . '/../../fixtures/Unit/atomium_get_theme_hook_suggestions.yml'
+    );
+  }
+
+  /**
    * Return atomium_get_theme_info fixtures.
    *
    * @return array
@@ -43,6 +55,17 @@ final class CommonFunctionsTest extends AbstractUnitTest {
     return Yaml::parseFile(
       __DIR__ . '/../../fixtures/Unit/atomium_get_theme_info.yml'
     );
+  }
+
+  /**
+   * Test atomium_field_attach_view_alter().
+   *
+   * @dataProvider atomiumGetThemeHookSuggestionsProvider
+   */
+  public function testAtomiumExtendThemeHook($base, $suggestions, $output) {
+    $input = _atomium_extend_theme_hook($base, $suggestions);
+
+    $this::assertSame($input, $output);
   }
 
   /**

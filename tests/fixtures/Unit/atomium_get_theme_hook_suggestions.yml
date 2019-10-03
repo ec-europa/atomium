@@ -1,0 +1,29 @@
+-
+  baseHook: baseHook
+  suggestions:
+    - sugg1
+    - sugg2
+    - sugg3
+  output:
+    - basehook__sugg1__sugg2__sugg3
+
+-
+  baseHook: baseHook2
+  suggestions:
+    - -sugg_with_dash
+    - sugg2
+    - sugg3
+  output:
+    - basehook2__sugg_with_dash__sugg2__sugg3
+
+-
+  baseHook: baseHook3
+  suggestions:
+  output:
+    - basehook3
+
+-
+  baseHook:
+  suggestions:
+    - suggestion
+  output: FALSE
