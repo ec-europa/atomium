@@ -1,5 +1,6 @@
 imports:
   - { resource: vendor/drupol/drupal-conventions/config/drupal7/grumphp.yml }
+
 parameters:
   extra_tasks:
     phpunit:

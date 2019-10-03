@@ -38,6 +38,6 @@ function atomium_atomium_definition_menu_admin_overview() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_menu_admin_overview(array &$variables, $hook) {
-  $variables['title'] = \check_plain($variables['title']);
-  $variables['description'] = \filter_xss_admin($variables['description']);
+  $variables['title'] = check_plain($variables['title']);
+  $variables['description'] = filter_xss_admin($variables['description']);
 }

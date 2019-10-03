@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print \render($file_icon); ?>
+<?php print render($file_icon); ?>

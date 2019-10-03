@@ -36,7 +36,7 @@ function atomium_atomium_definition_breadcrumb() {
           '#text' => 'News',
           '#path' => '/',
         ),
-        \t('My news title'),
+        t('My news title'),
       ),
     ),
   );
@@ -65,7 +65,7 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
 
   if (!empty($links)) {
     $breadcrumb = array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'item_list',
         array(
           'ul',

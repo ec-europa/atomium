@@ -27,7 +27,7 @@ function atomium_atomium_definition_date() {
     'preview' => array(
       'element' => array(
         array(
-          '#markup' => \format_date(REQUEST_TIME),
+          '#markup' => format_date(REQUEST_TIME),
         ),
       ),
     ),

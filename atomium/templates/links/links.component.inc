@@ -59,11 +59,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
         '#tag' => $heading['level'],
         '#value' => $heading['text'],
         '#attributes' => $variables['atomium']['attributes']['heading']
-          ->merge(
-            array(
-              'class' => $heading['class'],
-            )
-        )
+          ->merge(array('class' => $heading['class']))
           ->toArray(),
       );
     }
@@ -99,7 +95,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
             'link' => array(
               '#type' => 'html_tag',
               '#tag' => 'span',
-              '#value' => \check_plain($link['title']),
+              '#value' => check_plain($link['title']),
             ),
           ),
         );
@@ -109,7 +105,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
 
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'item_list',
         $variables['theme_hook_original']
       ),

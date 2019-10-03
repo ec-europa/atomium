@@ -19,7 +19,7 @@ final class SubThemeTest extends AbstractThemeTest {
     $GLOBALS['conf']['theme_debug'] = FALSE;
     $GLOBALS['conf']['theme_default'] = 'atomium_test_test';
 
-    \theme_enable(array('atomium', 'atomium_test_test'));
+    theme_enable(array('atomium', 'atomium_test_test'));
   }
 
   /**
@@ -31,12 +31,12 @@ final class SubThemeTest extends AbstractThemeTest {
     // We unset this variable to ensure drupal_theme_initialize() does its job.
     unset($GLOBALS['theme']);
 
-    \drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-    \drupal_flush_all_caches();
+    drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+    drupal_flush_all_caches();
 
     $this::assertSame(
       'atomium_test_preprocess_more_link,atomium_test_test_preprocess_more_link,tests/themes/atomium_test_test/templates/more_link/more-link.tpl.php',
-      \theme('more_link')
+      theme('more_link')
     );
   }
 
@@ -47,12 +47,12 @@ final class SubThemeTest extends AbstractThemeTest {
     // We unset this variable to ensure drupal_theme_initialize() does its job.
     unset($GLOBALS['theme']);
 
-    \drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-    \drupal_flush_all_caches();
+    drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+    drupal_flush_all_caches();
 
     $GLOBALS['theme_engine'] = 'atomium_test';
 
-    $actual = \theme('more_link');
+    $actual = theme('more_link');
 
     $this::assertSame('sites/all/themes/custom/atomium/tests/themes/atomium_test_test/templates/more_link/more-link.tpl.php', $actual['template']);
     $this::assertSame(

@@ -6,5 +6,5 @@
  */
 ?>
 <span>
-  <?php print \render($system_powered_by); ?>
+  <?php print render($system_powered_by); ?>
 </span>

@@ -17,6 +17,6 @@ function atomium_bartik_preprocess_item_list__links__system_secondary_menu(array
         'element-invisible',
       ),
     ),
-    '#value' => \t('Secondary menu'),
+    '#value' => t('Secondary menu'),
   );
 }

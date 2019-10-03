@@ -11,7 +11,7 @@
 
   <?php if ($title): ?>
     <div class="field-label">
-      <?php print \render($title); ?>:
+      <?php print render($title); ?>:
     </div>
   <?php endif; ?>
 
@@ -22,7 +22,7 @@
 
     <?php foreach ($variables['items'] as $delta => $item): ?>
       <div<?php print $atomium['attributes'][$delta]->append('class', 'field-item'); ?>>
-        <?php print \render($item); ?>
+        <?php print render($item); ?>
       </div>
     <?php endforeach; ?>
 

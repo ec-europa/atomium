@@ -39,7 +39,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   if ($element['#title_display'] !== 'none' && $element['#title_display'] !== 'attribute') {
     // Build the label render array manually.
     $variables['label'] = array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'form_element_label',
         $variables['theme_hook_original']
       ),
@@ -67,7 +67,7 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
     $attributes['class'][] = 'form-item-' . \strtr(
       $element['#name'],
       array(' ' => '-', '_' => '-', '[' => '-', ']' => '')
-      );
+    );
   }
 
   // Add a class for disabled elements to facilitate cross-browser styling.

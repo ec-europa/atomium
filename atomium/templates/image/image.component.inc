@@ -28,7 +28,7 @@ function atomium_atomium_theme_image(array $existing, $type, $theme, $path) {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_image(array &$variables, $hook) {
-  $variables['atomium']['attributes']['element']->append('src', \file_create_url($variables['path']));
+  $variables['atomium']['attributes']['element']->append('src', file_create_url($variables['path']));
 
   foreach (array('width', 'height', 'alt', 'title') as $key) {
     if (isset($variables[$key])) {

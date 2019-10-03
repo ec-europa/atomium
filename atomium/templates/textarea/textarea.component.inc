@@ -37,15 +37,15 @@ function atomium_atomium_definition_textarea() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_textarea(array &$variables, $hook) {
-  \element_set_attributes(
+  element_set_attributes(
     $variables['element'],
     array('id', 'name', 'cols', 'rows', 'title', '#title' => 'placeholder')
   );
 
-  \_form_set_class($variables['element'], array('form-textarea'));
+  _form_set_class($variables['element'], array('form-textarea'));
 
   $variables['atomium']['attributes']['element']
-    ->setAttributes(\_atomium_get_attributes($variables['element']), FALSE);
+    ->setAttributes(_atomium_get_attributes($variables['element']), FALSE);
 
   $wrapper_attributes_array = array(
     'class' => array('form-textarea-wrapper'),
@@ -53,7 +53,7 @@ function atomium_preprocess_textarea(array &$variables, $hook) {
 
   // Add resizable behavior.
   if (!empty($variables['element']['#resizable'])) {
-    \drupal_add_library('system', 'drupal.textarea');
+    drupal_add_library('system', 'drupal.textarea');
     $wrapper_attributes_array['class'][] = 'resizable';
   }
 

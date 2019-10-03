@@ -14,7 +14,7 @@ function atomium_page_alter(array &$page) {
   );
 
   // Find all the blocks in the page.
-  \_atomium_recursive_element_children(
+  _atomium_recursive_element_children(
     $page,
     static function ($element, $element_key, &$recursive_context) {
       $recursive_context += array('block_index_in_region' => array());
@@ -46,7 +46,7 @@ function atomium_page_alter(array &$page) {
   $recursive_context['blocks in regions count'] = $block_region_count;
 
   // Recursively loops through all the elements in the page.
-  \_atomium_recursive_element_children(
+  _atomium_recursive_element_children(
     $page,
     static function (&$element, $element_key, &$recursive_context) {
       if (!isset($element['#block'])) {
@@ -63,7 +63,7 @@ function atomium_page_alter(array &$page) {
 
         if (isset($element['#theme_wrappers'])) {
           $element['#theme_wrappers'] =
-            \_atomium_extend_with_suggestions(
+            _atomium_extend_with_suggestions(
               $element['#theme_wrappers'],
               array($region)
             );
@@ -74,7 +74,7 @@ function atomium_page_alter(array &$page) {
 
       $block = $element['#block'];
 
-      \_atomium_update_block_render_array(
+      _atomium_update_block_render_array(
         $element,
         $block->region,
         $recursive_context['blocks info'][$block->bid]['block_index_in_region'],

@@ -32,8 +32,8 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   if (!empty($variables['active']) && $variables['active'] === TRUE) {
     // Add text to indicate active tab for non-visual users.
     $active = array(
-      '#markup' => \t('(active tab)'),
-      '#theme_wrappers' => \_atomium_extend_theme_hook(
+      '#markup' => t('(active tab)'),
+      '#theme_wrappers' => _atomium_extend_theme_hook(
         'html_tag',
         $variables['theme_hook_original']
       ),
@@ -48,7 +48,7 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
     // If the link does not contain HTML already, check_plain() it now.
     // After we set 'html'=TRUE the link will not be sanitized by l().
     if (empty($link['localized_options']['html'])) {
-      $link['title'] = \check_plain($link['title']);
+      $link['title'] = check_plain($link['title']);
     }
     $link['localized_options']['html'] = TRUE;
   }
@@ -58,12 +58,12 @@ function atomium_preprocess_menu_local_task(array &$variables, $hook) {
   if (isset($link['href'])) {
     $variables[$variables['base_hook']] = array(
       $variables['base_hook'] => array(
-        '#theme' => \_atomium_extend_theme_hook(
+        '#theme' => _atomium_extend_theme_hook(
           'link',
           $variables['theme_hook_original']
         ),
         // TODO: This render() call needs to be removed when #381 is merged.
-        '#text' => $link['title'] . \render($active),
+        '#text' => $link['title'] . render($active),
         '#path' => $link['href'],
         '#options' => array(
           'attributes' => array('title' => $link['title']),

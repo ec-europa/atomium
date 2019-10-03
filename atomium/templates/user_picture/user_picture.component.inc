@@ -28,7 +28,7 @@ function atomium_atomium_definition_user_picture() {
     'label' => 'User picture',
     'description' => 'User picture description.',
     'preview' => array(
-      'account' => \user_load(1),
+      'account' => user_load(1),
     ),
   );
 }
@@ -39,7 +39,7 @@ function atomium_atomium_definition_user_picture() {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 function atomium_preprocess_user_picture(array &$variables, $hook) {
-  if (\variable_get('user_pictures', 0)) {
+  if (variable_get('user_pictures', 0)) {
     $account = $variables['account'];
     $filepath = NULL;
 
@@ -52,19 +52,19 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
       // comment_load_multiple() functions the user module will be able to load
       // the picture files in mass during the object's load process.
       if (\is_numeric($account->picture)) {
-        $account->picture = \file_load($account->picture);
+        $account->picture = file_load($account->picture);
       }
 
       if (!empty($account->picture->uri)) {
         $filepath = $account->picture->uri;
       }
     }
-    elseif (\variable_get('user_picture_default', '')) {
-      $filepath = \variable_get('user_picture_default', '');
+    elseif (variable_get('user_picture_default', '')) {
+      $filepath = variable_get('user_picture_default', '');
     }
 
     if ($filepath === NULL) {
-      $alt = \t("@user's picture", array('@user' => \format_username($account)));
+      $alt = t("@user's picture", array('@user' => format_username($account)));
 
       $variables[$variables['base_hook']] = array(
         '#path' => $filepath,
@@ -74,29 +74,29 @@ function atomium_preprocess_user_picture(array &$variables, $hook) {
 
       // If the image does not have a valid Drupal scheme (for eg. HTTP),
       // don't load image styles.
-      if (\module_exists('image') && \file_valid_uri($filepath) && $style = \variable_get('user_picture_style', '')) {
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
         $variables[$variables['base_hook']] += array(
-          '#theme' => \_atomium_extend_theme_hook('image_style', $variables['theme_hook_original']),
+          '#theme' => _atomium_extend_theme_hook('image_style', $variables['theme_hook_original']),
           '#style_name' => $style,
           '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
         );
       }
       else {
         $variables[$variables['base_hook']] += array(
-          '#theme' => \_atomium_extend_theme_hook('image', $variables['theme_hook_original']),
+          '#theme' => _atomium_extend_theme_hook('image', $variables['theme_hook_original']),
           '#attributes' => $variables['atomium']['attributes']['image']->toArray(),
         );
       }
 
-      if (!empty($account->uid) && \user_access('access user profiles')) {
+      if (!empty($account->uid) && user_access('access user profiles')) {
         $variables[$variables['base_hook']] = array(
           $variables['base_hook'] => array(
-            '#theme' => \_atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+            '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
             '#text' => $variables['user_picture'],
             '#path' => 'user/' . $account->uid,
             '#options' => array(
               'html' => TRUE,
-              'attributes' => $variables['atomium']['attributes']['link']->append('title', \t('View user profile.'))->toArray(),
+              'attributes' => $variables['atomium']['attributes']['link']->append('title', t('View user profile.'))->toArray(),
             ),
           ),
         );

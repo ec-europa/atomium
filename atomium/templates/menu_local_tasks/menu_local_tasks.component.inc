@@ -32,7 +32,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
     }
 
     $variables['primary'] = array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'item_list',
         $variables['theme_hook_original'] . '__primary'
       ),
@@ -52,7 +52,7 @@ function atomium_preprocess_menu_local_tasks(array &$variables, $hook) {
     }
 
     $variables['secondary'] = array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'item_list',
         $variables['theme_hook_original'] . '__secondary'
       ),

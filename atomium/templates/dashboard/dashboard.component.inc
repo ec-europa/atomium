@@ -21,7 +21,7 @@ function atomium_atomium_theme_dashboard(array $existing, $type, $theme, $path) 
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_dashboard(array &$variables, $hook) {
-  \drupal_add_css(
-    \drupal_get_path('module', 'dashboard') . '/dashboard.css'
+  drupal_add_css(
+    drupal_get_path('module', 'dashboard') . '/dashboard.css'
   );
 }

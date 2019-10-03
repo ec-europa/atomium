@@ -28,7 +28,7 @@ function atomium_preprocess_book_title_link(array &$variables, $hook) {
   $link['options']['attributes']['class'] = array('book-title');
 
   $book_title_link = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'link',
       array(
         $variables['theme_hook_original'],

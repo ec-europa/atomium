@@ -52,10 +52,10 @@ function atomium_preprocess_pager_next(array &$variables, $hook) {
   global $pager_page_array, $pager_total;
   $pager_next = NULL;
 
-  $page_new = \pager_load_array($pager_page_array[$element] + $interval, $element, $pager_page_array);
+  $page_new = pager_load_array($pager_page_array[$element] + $interval, $element, $pager_page_array);
 
   $pager_next = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'pager_link',
       array($variables['theme_hook_original'])
     ),

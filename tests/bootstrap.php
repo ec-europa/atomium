@@ -30,4 +30,4 @@ function atomium_test_render_template($template_file, $variables) {
   );
 }
 
-\drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);

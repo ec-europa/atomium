@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print \render($rdf_template_variable_wrapper); ?>
+<?php print render($rdf_template_variable_wrapper); ?>

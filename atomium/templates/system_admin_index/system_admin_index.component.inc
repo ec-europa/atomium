@@ -22,7 +22,7 @@ function atomium_atomium_theme_system_admin_index(array $existing, $type, $theme
  */
 function atomium_preprocess_system_admin_index(array &$variables, $hook) {
   $variables['toggle_link'] = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'system_compact_link',
       $variables['theme_hook_original']
     ),
@@ -42,20 +42,20 @@ function atomium_preprocess_system_admin_index(array &$variables, $hook) {
     $position = $flip[$position];
 
     $container[$flip[$position]][] = array(
-      '#theme' => \_atomium_extend_theme_hook(
+      '#theme' => _atomium_extend_theme_hook(
         'admin_block',
         $variables['theme_hook_original']
       ),
       '#block' => array(
         'title' => $module,
         'content' => array(
-          '#theme' => \_atomium_extend_theme_hook(
+          '#theme' => _atomium_extend_theme_hook(
             'admin_block_content',
             $variables['theme_hook_original']
           ),
           '#content' => $items,
         ),
-        'description' => \t('@description', array('@description' => $description)),
+        'description' => t('@description', array('@description' => $description)),
         'show' => TRUE,
         'position' => $flip[$position],
       ),

@@ -400,7 +400,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
 
   // Add sticky headers, if applicable.
   if ($sticky === TRUE && \is_array($header) && \count($header) !== 0) {
-    \drupal_add_js('misc/tableheader.js');
+    drupal_add_js('misc/tableheader.js');
     // Add 'sticky-enabled' class to the table to identify it for JS.
     // This is needed to target tables constructed by this function.
     $variables['atomium']['attributes']['wrapper']
@@ -428,10 +428,10 @@ function atomium_preprocess_table(array &$variables, $hook) {
     );
   }
 
-  $ts = !empty($header) ? \tablesort_init($header[0]) : array();
+  $ts = !empty($header) ? tablesort_init($header[0]) : array();
 
   // Format the table colgroups row.
-  $variables['colgroups'] = \_atomium_table_format_rows(
+  $variables['colgroups'] = _atomium_table_format_rows(
     'colgroups',
     $variables['colgroups'],
     $header,
@@ -441,7 +441,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
   );
 
   // Format the table header rows.
-  $variables['header'] = \_atomium_table_format_rows(
+  $variables['header'] = _atomium_table_format_rows(
     'header',
     $variables['header'],
     $header,
@@ -451,7 +451,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
   );
 
   // Format the table footer rows.
-  $variables['rows'] = \_atomium_table_format_rows(
+  $variables['rows'] = _atomium_table_format_rows(
     'rows',
     $variables['rows'],
     $header,
@@ -461,7 +461,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
   );
 
   // Format the table footer rows.
-  $variables['footer'] = \_atomium_table_format_rows(
+  $variables['footer'] = _atomium_table_format_rows(
     'footer',
     $variables['footer'],
     $header,
@@ -568,10 +568,10 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
 
     foreach ($cells as $index => $cell) {
       if ($is_header === TRUE) {
-        $cells[$index] = \tablesort_header($cell, $header, $ts);
+        $cells[$index] = tablesort_header($cell, $header, $ts);
       }
       else {
-        $cells[$index] = \tablesort_cell($cell, $header, $ts, $i++);
+        $cells[$index] = tablesort_cell($cell, $header, $ts, $i++);
       }
     }
 

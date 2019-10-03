@@ -50,7 +50,7 @@ function atomium_preprocess_block(array &$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['wrapper']->append('class', $variables['classes_array']);
-  $variables['atomium']['attributes']['wrapper']->remove('class', \atomium_get_settings('preprocess.block.classes_to_remove', TRUE));
+  $variables['atomium']['attributes']['wrapper']->remove('class', atomium_get_settings('preprocess.block.classes_to_remove', TRUE));
 
   $variables['atomium']['attributes']['wrapper']->append('id', $variables['block_html_id']);
 
@@ -135,7 +135,7 @@ function atomium_preprocess_block(array &$variables, $hook) {
       break;
   }
 
-  $variables['atomium']['attributes']['wrapper']->append('class', \drupal_html_class('block-' . $variables['block']->module));
+  $variables['atomium']['attributes']['wrapper']->append('class', drupal_html_class('block-' . $variables['block']->module));
 
   $variables['title']['#markup'] = '';
 

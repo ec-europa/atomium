@@ -44,11 +44,11 @@ function atomium_preprocess_menu_link(array &$variables, $hook) {
   $suggestions[] = $variables['theme_hook_original'];
 
   $menu_link = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'link',
       $suggestions
     ),
-    '#text' => empty($element['#localized_options']['html']) ? \check_plain($element['#title']) : \filter_xss_admin($element['#title']),
+    '#text' => empty($element['#localized_options']['html']) ? check_plain($element['#title']) : filter_xss_admin($element['#title']),
     '#path' => $element['#href'],
     '#options' => $element['#localized_options'] + array('attributes' => array()),
   );

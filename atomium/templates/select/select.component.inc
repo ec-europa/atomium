@@ -41,9 +41,9 @@ function atomium_atomium_definition_select() {
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_select(array &$variables, $hook) {
-  \element_set_attributes($variables['element'], array('id', 'name', 'size'));
-  \_form_set_class($variables['element'], array('form-select'));
-  $attributes = \_atomium_get_attributes($variables['element']);
+  element_set_attributes($variables['element'], array('id', 'name', 'size'));
+  _form_set_class($variables['element'], array('form-select'));
+  $attributes = _atomium_get_attributes($variables['element']);
 
   if (isset($variables['element']['#field_name'])) {
     $variables['theme_hook_suggestions'][] = 'select__' . $variables['element']['#field_name'];

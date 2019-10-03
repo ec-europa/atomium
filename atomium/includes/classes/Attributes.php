@@ -35,7 +35,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
 
     foreach ($attributes as $attribute => &$data) {
       if (\is_numeric($attribute) || \is_bool($data)) {
-        $data = \sprintf('%s', \trim(\check_plain($attribute)));
+        $data = \sprintf('%s', \trim(check_plain($attribute)));
       }
       else {
         $data = \array_map(static function ($item) use ($attribute) {
@@ -52,7 +52,7 @@ class Attributes implements \ArrayAccess, \IteratorAggregate {
            * }
            */
 
-          return \trim(\check_plain($item));
+          return \trim(check_plain($item));
         }, (array) $data);
 
         // By default, sort the value of the class attribute.

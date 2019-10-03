@@ -52,17 +52,17 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
 
   $page = isset($_GET['page']) ? $_GET['page'] : '';
 
-  if ($new_page = \implode(',', \pager_load_array($page_new[$element], $element, \explode(',', $page)))) {
+  if ($new_page = \implode(',', pager_load_array($page_new[$element], $element, \explode(',', $page)))) {
     $parameters['page'] = $new_page;
   }
 
   $query = array();
 
   if (\count($parameters)) {
-    $query = \drupal_get_query_parameters($parameters, array());
+    $query = drupal_get_query_parameters($parameters, array());
   }
 
-  if ($query_pager = \pager_get_query_parameters()) {
+  if ($query_pager = pager_get_query_parameters()) {
     $query = \array_merge($query, $query_pager);
   }
 
@@ -72,10 +72,10 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
 
     if (!isset($titles)) {
       $titles = array(
-        \t('« first') => \t('Go to first page'),
-        \t('‹ previous') => \t('Go to previous page'),
-        \t('next ›') => \t('Go to next page'),
-        \t('last »') => \t('Go to last page'),
+        t('« first') => t('Go to first page'),
+        t('‹ previous') => t('Go to previous page'),
+        t('next ›') => t('Go to next page'),
+        t('last »') => t('Go to last page'),
       );
     }
 
@@ -83,12 +83,12 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
       $attributes['title'] = $titles[$text];
     }
     elseif (\is_numeric($text)) {
-      $attributes['title'] = \t('Go to page @number', array('@number' => $text));
+      $attributes['title'] = t('Go to page @number', array('@number' => $text));
     }
   }
 
   $link = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'link',
       array($variables['theme_hook_original'])
     ),

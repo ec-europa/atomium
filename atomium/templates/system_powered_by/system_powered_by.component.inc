@@ -34,7 +34,7 @@ function atomium_atomium_theme_system_powered_by(array $existing, $type, $theme,
 function atomium_preprocess_system_powered_by(array &$variables, $hook) {
   $variables[$variables['base_hook']] = array(
     $variables['base_hook'] => array(
-      '#markup' => \t('Powered by <a href="@poweredby">Drupal</a> & <a href="@atomium_project_url">Atomium</a>', array('@poweredby' => 'https://www.drupal.org', '@atomium_project_url' => 'https://www.drupal.org/project/atomium')),
+      '#markup' => t('Powered by <a href="@poweredby">Drupal</a> & <a href="@atomium_project_url">Atomium</a>', array('@poweredby' => 'https://www.drupal.org', '@atomium_project_url' => 'https://www.drupal.org/project/atomium')),
     ),
   );
 }

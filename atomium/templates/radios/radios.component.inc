@@ -33,12 +33,12 @@ function atomium_atomium_definition_radios() {
 function atomium_atomium_definition_form_radios(array $form, array &$form_state) {
   $form['element1'] = array(
     '#title' => 'Radios',
-    '#description' => \t('Radios description'),
+    '#description' => t('Radios description'),
     '#type' => 'radios',
     '#options' => array(
-      'item1' => \t('Item 1'),
-      'item2' => \t('Item 2'),
-      'item3' => \t('Item 3'),
+      'item1' => t('Item 1'),
+      'item2' => t('Item 2'),
+      'item3' => t('Item 3'),
     ),
     '#default_value' => 'item2',
   );
@@ -50,13 +50,13 @@ function atomium_atomium_definition_form_radios(array $form, array &$form_state)
  * Implements hook_preprocess_hook().
  */
 function atomium_preprocess_radios(array &$variables, $hook) {
-  \_form_set_class($variables['element'], array('form-radios'));
-  \element_set_attributes(
+  _form_set_class($variables['element'], array('form-radios'));
+  element_set_attributes(
     $variables['element'],
     array('id', 'title')
   );
 
-  $attributes = \_atomium_get_attributes($variables['element']);
+  $attributes = _atomium_get_attributes($variables['element']);
 
   if (isset($variables['element']['#atomium']['attributes']['wrapper'])) {
     $variables['atomium']['attributes']['wrapper']

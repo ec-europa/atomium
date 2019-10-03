@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print \render($filter_tips); ?>
+<?php print render($filter_tips); ?>

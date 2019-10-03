@@ -59,7 +59,7 @@ function atomium_preprocess_update_version(array &$variables, $hook) {
     '#path' => $variables['version']['release_link'],
   );
 
-  $variables['version_date'] = \format_date(
+  $variables['version_date'] = format_date(
     $variables['version']['date'],
     'custom',
     'Y-M-d'
@@ -67,16 +67,16 @@ function atomium_preprocess_update_version(array &$variables, $hook) {
 
   $links = array();
   $links['update-download'] = array(
-    'title' => \t('Download'),
+    'title' => t('Download'),
     'href' => $variables['version']['download_link'],
   );
   $links['update-release-notes'] = array(
-    'title' => \t('Release notes'),
+    'title' => t('Release notes'),
     'href' => $variables['version']['release_link'],
   );
 
   $variables['links'] = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'links',
       array(
         $variables['theme_hook_original'],

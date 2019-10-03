@@ -8,12 +8,12 @@
 <?php if (!empty($content)): ?>
   <dl class="node-type-list">
     <?php foreach ($content as $item): ?>
-      <dt><?php print \render($item['link']); ?></dt>
+      <dt><?php print render($item['link']); ?></dt>
       <dd><?php print $item['description']; ?></dd>
     <?php endforeach; ?>
   </dl>
 <?php else: ?>
   <p>
-    <?php print \render($message); ?>
+    <?php print render($message); ?>
   </p>
 <?php endif; ?>

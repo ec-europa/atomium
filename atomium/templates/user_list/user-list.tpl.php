@@ -5,4 +5,4 @@
  * Contains template file.
  */
 ?>
-<?php print \render($user_list); ?>
+<?php print render($user_list); ?>

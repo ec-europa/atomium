@@ -24,7 +24,7 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
       return;
     }
 
-    $info = \element_info($root_element['#type']);
+    $info = element_info($root_element['#type']);
 
     if (empty($info)) {
       return;
@@ -35,7 +35,7 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
         $root_element['#theme'] = $info['#theme'];
       }
 
-      $root_element['#theme'] = \_atomium_extend_with_suggestions(
+      $root_element['#theme'] = _atomium_extend_with_suggestions(
         (array) $root_element['#theme'],
         array('form', $context['form_id'], $root_element_key)
       );
@@ -46,14 +46,14 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
         $root_element['#theme_wrappers'] = $info['#theme_wrappers'];
       }
 
-      $root_element['#theme_wrappers'] = \_atomium_extend_with_suggestions(
+      $root_element['#theme_wrappers'] = _atomium_extend_with_suggestions(
         $root_element['#theme_wrappers'],
         array('form', $context['form_id'], $root_element_key)
       );
     }
   };
 
-  \_atomium_recursive_element_children(
+  _atomium_recursive_element_children(
     $form,
     $callback,
     NULL,

@@ -26,19 +26,19 @@ function atomium_preprocess_status_report(array &$variables, $hook) {
 
   $severities = array(
     REQUIREMENT_INFO => array(
-      'title' => \t('Info'),
+      'title' => t('Info'),
       'class' => 'info',
     ),
     REQUIREMENT_OK => array(
-      'title' => \t('OK'),
+      'title' => t('OK'),
       'class' => 'ok',
     ),
     REQUIREMENT_WARNING => array(
-      'title' => \t('Warning'),
+      'title' => t('Warning'),
       'class' => 'warning',
     ),
     REQUIREMENT_ERROR => array(
-      'title' => \t('Error'),
+      'title' => t('Error'),
       'class' => 'error',
     ),
   );
@@ -123,7 +123,7 @@ function atomium_preprocess_status_report(array &$variables, $hook) {
   }
 
   $table = array(
-    '#theme' => \_atomium_extend_theme_hook(
+    '#theme' => _atomium_extend_theme_hook(
       'table',
       array(
         $variables['theme_hook_original'],

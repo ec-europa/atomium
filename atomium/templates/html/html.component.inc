@@ -13,7 +13,7 @@
  */
 function atomium_preprocess_html(array &$variables, $hook) {
   // Add variables and paths needed for HTML5 and responsive support.
-  $variables['base_path'] = \base_path();
+  $variables['base_path'] = base_path();
 
   // Attributes for html element.
   $variables['atomium']['attributes']['html']->merge(array(
@@ -32,7 +32,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
 
     foreach (\explode("\n  ", \ltrim($variables['rdf_namespaces'])) as $namespace) {
       // Remove xlmns: and ending quote and fix prefix formatting.
-      $prefixes[] = \str_replace('="', ': ', \drupal_substr($namespace, 6, -1));
+      $prefixes[] = \str_replace('="', ': ', drupal_substr($namespace, 6, -1));
     }
     $variables['rdf_namespaces'] = \implode(' ', $prefixes);
   }
@@ -43,7 +43,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
   // on context (home page, node of certain type, etc.).
   if (!$variables['is_front']) {
     // Add unique class for each page.
-    $path = \drupal_get_path_alias($_GET['q']);
+    $path = drupal_get_path_alias($_GET['q']);
     // Add unique class for each website section.
     list($section) = \explode('/', $path, 1);
     $arg = \explode('/', $_GET['q']);
@@ -60,7 +60,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
   }
 
   // Store the menu item since it has some useful information.
-  $variables['menu_item'] = \menu_get_item();
+  $variables['menu_item'] = menu_get_item();
 
   if ($variables['menu_item']) {
     switch ($variables['menu_item']['page_callback']) {
@@ -90,7 +90,7 @@ function atomium_preprocess_html(array &$variables, $hook) {
     }
   }
 
-  $headers = \drupal_get_http_header();
+  $headers = drupal_get_http_header();
 
   if (isset($headers['status'])) {
     $variables['classes_array'][] = 'status-' . $headers['status'];
@@ -101,5 +101,5 @@ function atomium_preprocess_html(array &$variables, $hook) {
   }
 
   $variables['atomium']['attributes']['body']->append('class', $variables['classes_array']);
-  $variables['atomium']['attributes']['body']->remove('class', \atomium_get_settings('preprocess.html.classes_to_remove', TRUE));
+  $variables['atomium']['attributes']['body']->remove('class', atomium_get_settings('preprocess.html.classes_to_remove', TRUE));
 }

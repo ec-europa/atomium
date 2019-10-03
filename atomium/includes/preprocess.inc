@@ -21,5 +21,5 @@ function atomium_preprocess(array &$variables, $hook) {
     );
   }
 
-  $variables['base_hook'] = \atomium_get_base_hook($hook);
+  $variables['base_hook'] = atomium_get_base_hook($hook);
 }

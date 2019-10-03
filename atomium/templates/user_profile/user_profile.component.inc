@@ -9,7 +9,7 @@
  * Implements hook_atomium_definition_hook().
  */
 function atomium_atomium_definition_user_profile() {
-  $user = \user_load(1);
+  $user = user_load(1);
 
   return array(
     'label' => 'User profile',

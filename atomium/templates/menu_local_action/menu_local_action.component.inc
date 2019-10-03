@@ -28,7 +28,7 @@ function atomium_preprocess_menu_local_action(array &$variables, $hook) {
 
   if (isset($link['href'])) {
     $variables[$variables['base_hook']] = array(
-      '#theme' => \_atomium_extend_theme_hook('link', $variables['theme_hook_original']),
+      '#theme' => _atomium_extend_theme_hook('link', $variables['theme_hook_original']),
       '#text' => $link['title'],
       '#path' => $link['href'],
       '#options' => array(),
@@ -38,6 +38,6 @@ function atomium_preprocess_menu_local_action(array &$variables, $hook) {
     $variables[$variables['base_hook']] = $link['title'];
   }
   else {
-    $variables[$variables['base_hook']] = \check_plain($link['title']);
+    $variables[$variables['base_hook']] = check_plain($link['title']);
   }
 }

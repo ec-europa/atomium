@@ -6,5 +6,5 @@
  */
 ?>
 <div<?php print $atomium['attributes']['wrapper']; ?>>
-  <?php print \render($more_link); ?>
+  <?php print render($more_link); ?>
 </div>
