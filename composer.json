@@ -29,7 +29,7 @@
         "drush/drush": "^8.2.3",
         "mikey179/vfsstream": "^1.6",
         "phptaskman/changelog": "^0.2.3",
-        "phptaskman/drupal": "^0.1.23",
+        "phptaskman/drupal": "^0.1.26",
         "phpunit/phpunit": "^5.7",
         "webflo/drupal-finder": "^1.1",
         "webmozart/path-util": "^2.3"
