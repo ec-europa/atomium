@@ -58,14 +58,14 @@ function atomium_preprocess_node(array &$variables, $hook) {
   // Remove class from the ul that holds the links <ul class="inline links">.
   // This is generated in the node_build_content() function in the node.module.
   if (isset($variables['content']['links'])) {
-    $variables['content']['links']['#attributes']['class'] = \array_values(
-      \array_diff(
+    $variables['content']['links']['#attributes']['class'] = array_values(
+      array_diff(
         $variables['content']['links']['#attributes']['class'],
         array('inline')
       )
     );
-    $variables['content']['links']['#attributes']['class'] = \array_values(
-      \array_diff(
+    $variables['content']['links']['#attributes']['class'] = array_values(
+      array_diff(
         $variables['content']['links']['#attributes']['class'],
         array('links')
       )

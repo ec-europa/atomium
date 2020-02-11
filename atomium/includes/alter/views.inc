@@ -5,6 +5,9 @@
  * views.inc
  */
 
+use function array_key_exists;
+use function array_slice;
+
 /**
  * Implements hook_views_pre_render().
  */
@@ -12,7 +15,7 @@ function atomium_views_pre_render(view $view) {
   $extend = array();
   $display = $view->display[$view->current_display];
 
-  if (true === array_key_exists('theme', $view->style_plugin->definition)) {
+  if (array_key_exists('theme', $view->style_plugin->definition) === TRUE) {
     $extend[] = $view->style_plugin->definition['theme'];
     $extend[] = $view->name;
     $extend[] = $display->display_plugin;
@@ -23,7 +26,7 @@ function atomium_views_pre_render(view $view) {
   }
 
   if (isset($view->display_handler->definition['theme'])) {
-    $view->display_handler->definition['theme'] = \current(
+    $view->display_handler->definition['theme'] = current(
       _atomium_extend_theme_hook(
         $view->display_handler->definition['theme'],
         $extend
@@ -32,10 +35,10 @@ function atomium_views_pre_render(view $view) {
   }
 
   if (isset($view->style_plugin->definition['theme'])) {
-    $view->style_plugin->definition['theme'] = \current(
+    $view->style_plugin->definition['theme'] = current(
       _atomium_extend_theme_hook(
         $view->style_plugin->definition['theme'],
-        \array_slice($extend, 1)
+        array_slice($extend, 1)
       )
     );
   }

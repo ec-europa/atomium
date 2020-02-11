@@ -5,6 +5,8 @@
  * Contains component file.
  */
 
+use function is_string;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -28,7 +30,7 @@ function atomium_preprocess_html_tag(array &$variables, $hook) {
     '#attributes' => array(),
   );
 
-  if (\is_string($element['#value'])) {
+  if (is_string($element['#value'])) {
     $element['#value'] = array(
       array(
         '#markup' => $element['#value'],

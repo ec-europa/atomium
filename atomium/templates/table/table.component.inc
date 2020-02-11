@@ -5,6 +5,10 @@
  * Contains component file.
  */
 
+use function count;
+use function is_array;
+use const ARRAY_FILTER_USE_KEY;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -391,7 +395,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
 
   // Allows to have multiple lines in the header.
   foreach ($variables['header'] as $item) {
-    if (!\is_array($item) || (\is_array($item) && isset($item['data']))) {
+    if (!is_array($item) || (is_array($item) && isset($item['data']))) {
       $header = $variables['header'] = array($variables['header']);
 
       break;
@@ -399,7 +403,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
   }
 
   // Add sticky headers, if applicable.
-  if ($sticky === TRUE && \is_array($header) && \count($header) !== 0) {
+  if ($sticky === TRUE && is_array($header) && count($header) !== 0) {
     drupal_add_js('misc/tableheader.js');
     // Add 'sticky-enabled' class to the table to identify it for JS.
     // This is needed to target tables constructed by this function.
@@ -412,7 +416,7 @@ function atomium_preprocess_table(array &$variables, $hook) {
     $header_count = 0;
 
     foreach ($header[0] as $header_cell) {
-      if (\is_array($header_cell)) {
+      if (is_array($header_cell)) {
         $header_count += isset($header_cell['colspan']) ? $header_cell['colspan'] : 1;
       }
       else {
@@ -514,8 +518,8 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
 
   $flip = array('even' => 'odd', 'odd' => 'even');
   $class = 'even';
-  $rows_count = \count($rows);
-  $rows_indexed_by_int = \array_values($rows);
+  $rows_count = count($rows);
+  $rows_indexed_by_int = array_values($rows);
 
   for ($j = 0; $j < $rows_count; ++$j) {
     $row = $rows_indexed_by_int[$j];
@@ -533,12 +537,12 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
     }
 
     // Remove any value that has a numeric key.
-    $attributes = \array_filter(
+    $attributes = array_filter(
       $attributes,
       static function ($key) {
-        return !\is_numeric($key);
+        return !is_numeric($key);
       },
-      \ARRAY_FILTER_USE_KEY
+      ARRAY_FILTER_USE_KEY
     );
 
     // Add odd/even class.
@@ -555,7 +559,7 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
       ->delete('no_stripping')
       ->append('class', 'row-type-' . $type_map[$type]);
 
-    if (!\is_array($cells)) {
+    if (!is_array($cells)) {
       continue;
     }
 
@@ -581,7 +585,7 @@ function _atomium_table_format_rows($type, array $rows, array $header, array $ts
     foreach ($cells as $cell) {
       $attributes_array = array();
 
-      if (\is_array($cell)) {
+      if (is_array($cell)) {
         $cell += array('data' => NULL);
         $attributes_array = $cell;
         $cell = $cell['data'];

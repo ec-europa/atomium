@@ -36,7 +36,7 @@ function atomium_atomium_definition_update_version() {
         'version' => '3.1415',
         'release_link' => 'https://drupal.org/project/atomium',
         'download_link' => 'https://drupal.org/project/atomium',
-        'date' => \time(),
+        'date' => time(),
       ),
       'tag' => 'pie',
     ),

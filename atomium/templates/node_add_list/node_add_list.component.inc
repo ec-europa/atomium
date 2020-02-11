@@ -27,8 +27,8 @@ function atomium_preprocess_node_add_list(array &$variables, $hook) {
 
   if (!empty($variables['content'])) {
     foreach ($variables['content'] as &$item) {
-      $suggestions = \explode('/', $item['href']);
-      \array_unshift($suggestions, $variables['theme_hook_original']);
+      $suggestions = explode('/', $item['href']);
+      array_unshift($suggestions, $variables['theme_hook_original']);
 
       $item = array(
         'link' => array(

@@ -5,6 +5,9 @@
  * Contains component file.
  */
 
+use function is_array;
+use const PREG_GREP_INVERT;
+
 /**
  * Implements hook_preprocess_hook().
  *
@@ -12,12 +15,12 @@
  * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 function atomium_preprocess_block(array &$variables, $hook) {
-  $variables['classes_array'] = \preg_grep('/^block-/', $variables['classes_array'], \PREG_GREP_INVERT);
+  $variables['classes_array'] = preg_grep('/^block-/', $variables['classes_array'], PREG_GREP_INVERT);
   $variables['classes_array'][] = $variables['block_html_id'];
   $variables['classes_array'][] = $variables['block_zebra'];
 
-  if (isset($variables['block']->classes) && \is_array($variables['block']->classes)) {
-    $variables['classes_array'] = \array_merge($variables['classes_array'], (array) $variables['block']->classes);
+  if (isset($variables['block']->classes) && is_array($variables['block']->classes)) {
+    $variables['classes_array'] = array_merge($variables['classes_array'], (array) $variables['block']->classes);
   }
 
   if (isset($variables['block']->atomium)) {

@@ -60,11 +60,11 @@ function atomium_preprocess_form_element(array &$variables, $hook) {
   $attributes['class'] = array('form-item');
 
   if (!empty($element['#type'])) {
-    $attributes['class'][] = 'form-type-' . \str_replace('_', '-', $element['#type']);
+    $attributes['class'][] = 'form-type-' . str_replace('_', '-', $element['#type']);
   }
 
   if (!empty($element['#name'])) {
-    $attributes['class'][] = 'form-item-' . \strtr(
+    $attributes['class'][] = 'form-item-' . strtr(
       $element['#name'],
       array(' ' => '-', '_' => '-', '[' => '-', ']' => '')
     );

@@ -30,11 +30,11 @@ function atomium_preprocess_html(array &$variables, $hook) {
   if ($variables['rdf_namespaces']) {
     $prefixes = array();
 
-    foreach (\explode("\n  ", \ltrim($variables['rdf_namespaces'])) as $namespace) {
+    foreach (explode("\n  ", ltrim($variables['rdf_namespaces'])) as $namespace) {
       // Remove xlmns: and ending quote and fix prefix formatting.
-      $prefixes[] = \str_replace('="', ': ', drupal_substr($namespace, 6, -1));
+      $prefixes[] = str_replace('="', ': ', drupal_substr($namespace, 6, -1));
     }
-    $variables['rdf_namespaces'] = \implode(' ', $prefixes);
+    $variables['rdf_namespaces'] = implode(' ', $prefixes);
   }
 
   $variables['atomium']['attributes']['html']->append('prefix', $variables['rdf_namespaces']);
@@ -45,14 +45,14 @@ function atomium_preprocess_html(array &$variables, $hook) {
     // Add unique class for each page.
     $path = drupal_get_path_alias($_GET['q']);
     // Add unique class for each website section.
-    list($section) = \explode('/', $path, 1);
-    $arg = \explode('/', $_GET['q']);
+    list($section) = explode('/', $path, 1);
+    $arg = explode('/', $_GET['q']);
 
     if ($arg[0] === 'node' && isset($arg[1])) {
       if ($arg[1] === 'add') {
         $section = 'node-add';
       }
-      elseif (isset($arg[2]) && \is_numeric($arg[1]) && ($arg[2] === 'edit' || $arg[2] === 'delete')) {
+      elseif (isset($arg[2]) && is_numeric($arg[1]) && ($arg[2] === 'edit' || $arg[2] === 'delete')) {
         $section = 'node-' . $arg[2];
       }
     }

@@ -21,14 +21,14 @@ abstract class AbstractTest extends TestCase {
    */
   public function componentsProvider() {
     $finder = (new Finder())
-      ->files()->in(\realpath(__DIR__ . '/../fixtures/components'));
+      ->files()->in(realpath(__DIR__ . '/../fixtures/components'));
 
-    return \array_map(static function ($file) {
+    return array_map(static function ($file) {
       return array(
         'hook' => drupal_basename($file->getRelativePathname(), '.yml'),
         'content' => Yaml::parse($file->getContents()),
       );
-    }, \iterator_to_array($finder));
+    }, iterator_to_array($finder));
   }
 
 }

@@ -23,7 +23,7 @@ function atomium_bartik_preprocess_breadcrumb(array &$variables, $hook) {
     );
   }
 
-  \array_pop($breadcrumb);
+  array_pop($breadcrumb);
 
   $variables['breadcrumb']['breadcrumb']['#items'] = $breadcrumb;
   $variables['breadcrumb']['#tag'] = 'div';

@@ -25,7 +25,7 @@ function atomium_atomium_definition_progress_bar() {
     'label' => 'Progress bar',
     'description' => 'Progress bar description.',
     'preview' => array(
-      'percent' => \mt_rand(0, 100),
+      'percent' => mt_rand(0, 100),
     ),
   );
 }

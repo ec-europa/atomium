@@ -2,10 +2,12 @@
 
 namespace Drupal\atomium;
 
+use ArrayAccess;
+
 /**
  * Class AttributesContainer.
  */
-class AttributesContainer implements \ArrayAccess {
+class AttributesContainer implements ArrayAccess {
   /**
    * Stores the attribute data.
    *

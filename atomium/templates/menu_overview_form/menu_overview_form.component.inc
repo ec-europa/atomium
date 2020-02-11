@@ -100,7 +100,7 @@ function atomium_preprocess_menu_overview_form(array &$variables, $hook) {
       $row['reset'] = array();
     }
 
-    $row = \array_merge(
+    $row = array_merge(
       array('data' => $row),
       $element['#attributes']
     );

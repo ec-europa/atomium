@@ -21,8 +21,8 @@ function atomium_field_attach_view_alter(array &$output, array $context) {
       return;
     }
 
-    $suggestions = \array_filter(
-      \array_map(
+    $suggestions = array_filter(
+      array_map(
         static function ($item) use ($root_element) {
           return isset($root_element['#' . $item]) ?
             $root_element['#' . $item] :

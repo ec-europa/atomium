@@ -5,6 +5,10 @@
  * Contains component file.
  */
 
+use function count;
+use function in_array;
+use function is_string;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -79,7 +83,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
   // Only output the list container and title, if there are any list items.
   // Check to see whether the block title exists before adding a header.
   // Empty headers are not semantic and present accessibility challenges.
-  $num_items = \count($variables['items']);
+  $num_items = count($variables['items']);
   $i = 0;
 
   foreach ($variables['items'] as $key => &$item) {
@@ -96,7 +100,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
       $variables['atomium']['attributes'][$key]->append('class', 'last');
     }
 
-    if (\is_string($item)) {
+    if (is_string($item)) {
       $item = array(
         'data' => $item,
       );
@@ -115,7 +119,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     // rendered.
     unset($item['class']);
 
-    if (!isset($item['#markup']) && \in_array($variables['type'], array('ul', 'ol'), TRUE)) {
+    if (!isset($item['#markup']) && in_array($variables['type'], array('ul', 'ol'), TRUE)) {
       $item += array(
         '#theme_wrappers' => _atomium_extend_theme_hook(
           'html_tag',
@@ -126,7 +130,7 @@ function atomium_preprocess_item_list(array &$variables, $hook) {
     }
 
     if (isset($item['data'])) {
-      if (\is_string($item['data'])) {
+      if (is_string($item['data'])) {
         $item['data'] = array(
           '#markup' => $item['data'],
         );

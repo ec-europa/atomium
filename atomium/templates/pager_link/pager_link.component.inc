@@ -5,6 +5,8 @@
  * Contains component file.
  */
 
+use function count;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -52,18 +54,18 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
 
   $page = isset($_GET['page']) ? $_GET['page'] : '';
 
-  if ($new_page = \implode(',', pager_load_array($page_new[$element], $element, \explode(',', $page)))) {
+  if ($new_page = implode(',', pager_load_array($page_new[$element], $element, explode(',', $page)))) {
     $parameters['page'] = $new_page;
   }
 
   $query = array();
 
-  if (\count($parameters)) {
+  if (count($parameters)) {
     $query = drupal_get_query_parameters($parameters, array());
   }
 
   if ($query_pager = pager_get_query_parameters()) {
-    $query = \array_merge($query, $query_pager);
+    $query = array_merge($query, $query_pager);
   }
 
   // Set each pager link title.
@@ -82,7 +84,7 @@ function atomium_preprocess_pager_link(array &$variables, $hook) {
     if (isset($titles[$text])) {
       $attributes['title'] = $titles[$text];
     }
-    elseif (\is_numeric($text)) {
+    elseif (is_numeric($text)) {
       $attributes['title'] = t('Go to page @number', array('@number' => $text));
     }
   }

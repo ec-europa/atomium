@@ -5,6 +5,8 @@
  * Contains component file.
  */
 
+use function array_key_exists;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -28,7 +30,7 @@ function atomium_atomium_theme_pager(array $existing, $type, $theme, $path) {
  */
 function atomium_atomium_definition_pager() {
   $GLOBALS['pager_page_array'] = array(
-    0 => \mt_rand(0, 30),
+    0 => mt_rand(0, 30),
   );
   $GLOBALS['pager_total'] = array(
     0 => 30,
@@ -52,22 +54,22 @@ function atomium_preprocess_pager(array &$variables, $hook) {
 
   $items = array();
 
-  $pager_page_array = \array_key_exists('pager_page_array', $GLOBALS) ?
+  $pager_page_array = array_key_exists('pager_page_array', $GLOBALS) ?
     $GLOBALS['pager_page_array'] :
     array();
-  $pager_total = \array_key_exists('pager_total', $GLOBALS) ?
+  $pager_total = array_key_exists('pager_total', $GLOBALS) ?
     $GLOBALS['pager_total'] :
     array();
 
   $pager_page_array_element = NULL;
 
-  if (\array_key_exists($element, $pager_page_array)) {
+  if (array_key_exists($element, $pager_page_array)) {
     $pager_page_array_element = (int) $pager_page_array[$element];
   }
 
   $pager_total_element = NULL;
 
-  if (\array_key_exists($element, $pager_total)) {
+  if (array_key_exists($element, $pager_total)) {
     $pager_total_element = (int) $pager_total[$element];
   }
 
@@ -78,7 +80,7 @@ function atomium_preprocess_pager(array &$variables, $hook) {
   );
 
   // The setting value is taken form te .info file.
-  $pager_type_vanilla = (bool) \current(
+  $pager_type_vanilla = (bool) current(
     atomium_get_settings('pager.use_vanilla')
   );
 
@@ -135,7 +137,7 @@ function _atomium_pager_generate_infos(array $variables, $pager_page_array_eleme
 
   // Calculate various markers within this pager piece:
   // Middle is used to "center" pages around the current page.
-  $pager_middle = (int) \ceil($quantity / 2);
+  $pager_middle = (int) ceil($quantity / 2);
   // Current is the page we are currently paged to.
   $pager_current = $pager_page_array_element + 1;
   // First is the first page listed by this pager piece (re quantity).
@@ -300,11 +302,11 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
     $pager_new = pager_load_array(
       $pager[$element],
       $element,
-      \explode(',', $page)
+      explode(',', $page)
     );
 
     if (!empty($pager_new)) {
-      $page = \implode(',', $pager_new);
+      $page = implode(',', $pager_new);
     }
 
     $items[] = array(
@@ -384,11 +386,11 @@ function _atomium_pager_generate_items(array $variables, array $pager_page_array
   $pager_new = pager_load_array(
     $pager[$element],
     $element,
-    \explode(',', $page)
+    explode(',', $page)
   );
 
   if (!empty($pager_new)) {
-    $page = \implode(',', $pager_new);
+    $page = implode(',', $pager_new);
   }
 
   // If the next page is the last page, mark the link as such.

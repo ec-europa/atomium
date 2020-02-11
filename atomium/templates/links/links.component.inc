@@ -5,6 +5,8 @@
  * Contains component file.
  */
 
+use function is_string;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -41,7 +43,7 @@ function atomium_preprocess_links(array &$variables, $hook) {
   if (!empty($variables['heading'])) {
     $heading = $variables['heading'];
 
-    if (\is_string($heading)) {
+    if (is_string($heading)) {
       $heading = array(
         '#type' => 'html_tag',
         '#tag' => 'h2',

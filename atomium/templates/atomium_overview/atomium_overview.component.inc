@@ -5,6 +5,9 @@
  * Contains component file.
  */
 
+use function function_exists;
+use function is_array;
+
 /**
  * Implements hook_atomium_theme_hook().
  *
@@ -44,13 +47,13 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       include_once $file;
     }
 
-    $function_name = \sprintf(
+    $function_name = sprintf(
       '%s_atomium_definition_%s',
       $theme,
       $component
     );
 
-    if (!\function_exists($function_name)) {
+    if (!function_exists($function_name)) {
       continue;
     }
 
@@ -60,7 +63,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       'dependencies' => array(),
     );
 
-    if (!\is_array($definition['dependencies'])) {
+    if (!is_array($definition['dependencies'])) {
       $definition['dependencies'] = array($definition['dependencies']);
     }
 
@@ -93,7 +96,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
 
     // Prepend hash to all preview properties.
     foreach ($definition['preview'] as $key => $value) {
-      if (!\is_numeric($key)) {
+      if (!is_numeric($key)) {
         $definition['preview']["#{$key}"] = $value;
         unset($definition['preview'][$key]);
       }
@@ -108,12 +111,12 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       foreach ($definition['preview'] as $preview) {
         // Prepend hash to all preview properties.
         foreach ($preview as $key => $value) {
-          if (!\is_numeric($key)) {
+          if (!is_numeric($key)) {
             $preview["#{$key}"] = $value;
             unset($preview[$key]);
           }
         }
-        $elements[] = \array_merge($element, $preview);
+        $elements[] = array_merge($element, $preview);
       }
 
       if (!empty($elements)) {
@@ -134,7 +137,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
     // Allow the use of a form.
     $function_name = $theme . '_atomium_definition_form_' . $component;
 
-    if (\function_exists($function_name)) {
+    if (function_exists($function_name)) {
       $definition['form'] = drupal_get_form($function_name);
     }
 
@@ -143,7 +146,7 @@ function atomium_preprocess_atomium_overview(array &$variables, $hook) {
       unset($definition['preview']);
     }
 
-    $definitions[$component] = \array_filter($definition);
+    $definitions[$component] = array_filter($definition);
 
     if (!empty($errors)) {
       unset($definitions[$component]['form']);

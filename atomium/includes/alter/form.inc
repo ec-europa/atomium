@@ -66,8 +66,8 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
    *
    * Remove if #1245218 is backported to D7 core.
    */
-  foreach (\array_keys($form) as $item) {
-    if (\mb_strpos($item, 'field_') !== 0) {
+  foreach (array_keys($form) as $item) {
+    if (mb_strpos($item, 'field_') !== 0) {
       continue;
     }
 
@@ -82,11 +82,11 @@ function atomium_form_alter(array &$form, array &$form_state, $form_id) {
         continue;
       }
 
-      if (\mb_strpos($class, 'field-type-') !== 0) {
+      if (mb_strpos($class, 'field-type-') !== 0) {
         continue;
       }
 
-      if (\mb_strpos($class, 'field-name-') !== 0) {
+      if (mb_strpos($class, 'field-name-') !== 0) {
         continue;
       }
 

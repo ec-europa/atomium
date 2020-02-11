@@ -5,6 +5,8 @@
  * Contains component file.
  */
 
+use function is_string;
+
 /**
  * Implements hook_atomium_theme_hook().
  */
@@ -49,7 +51,7 @@ function atomium_preprocess_breadcrumb(array &$variables, $hook) {
   $links = array();
 
   foreach ($variables['breadcrumb'] as $item) {
-    if (\is_string($item)) {
+    if (is_string($item)) {
       $item = array(
         '#markup' => $item,
       );

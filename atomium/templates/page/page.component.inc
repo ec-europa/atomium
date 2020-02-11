@@ -39,7 +39,7 @@ function atomium_preprocess_page(array &$variables, $hook) {
 
     if (!empty($variables['page']['content']['system_main']['#theme_wrappers'])) {
       // Remove the block hook wrapper from the main content block.
-      $variables['page']['content']['system_main']['#theme_wrappers'] = \array_filter(
+      $variables['page']['content']['system_main']['#theme_wrappers'] = array_filter(
         $variables['page']['content']['system_main']['#theme_wrappers'],
         static function ($theme_hook) {
           return !(atomium_get_base_hook($theme_hook) === 'block');

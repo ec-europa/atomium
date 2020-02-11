@@ -14,7 +14,7 @@ function atomium_html_head_alter(array &$head_elements) {
 
   if (isset($head_elements['system_meta_content_type']['#attributes']['content'])) {
     $head_elements['system_meta_content_type']['#attributes'] = array(
-      'charset' => \str_replace(
+      'charset' => str_replace(
         'text/html; charset=',
         '',
         $head_elements['system_meta_content_type']['#attributes']['content']

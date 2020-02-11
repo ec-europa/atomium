@@ -4,6 +4,7 @@ namespace Drupal\Tests\atomium\Unit;
 
 use Drupal\atomium\Attributes;
 use Symfony\Component\Yaml\Yaml;
+use function call_user_func_array;
 
 /**
  * Class AttributesTest.
@@ -20,7 +21,7 @@ final class AttributesTest extends AbstractUnitTest {
    *   Test data.
    */
   public function methodsProvider() {
-    return Yaml::parse(\file_get_contents(__DIR__ . '/../../fixtures/attributes/attributes.yml'));
+    return Yaml::parse(file_get_contents(__DIR__ . '/../../fixtures/attributes/attributes.yml'));
   }
 
   /**
@@ -33,7 +34,7 @@ final class AttributesTest extends AbstractUnitTest {
 
     foreach ($runs as $run) {
       foreach ($run as $method => $arguments) {
-        \call_user_func_array(array($attributes, $method), $arguments);
+        call_user_func_array(array($attributes, $method), $arguments);
       }
     }
 
@@ -41,7 +42,7 @@ final class AttributesTest extends AbstractUnitTest {
       foreach ($expect as $method => $item) {
         $item += array('arguments' => array());
 
-        $actual = \call_user_func_array(
+        $actual = call_user_func_array(
           array($attributes, $method),
           $item['arguments']
         );
