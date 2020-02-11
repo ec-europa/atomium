@@ -9,14 +9,14 @@
  * Implements hook_views_pre_render().
  */
 function atomium_views_pre_render(view $view) {
+  $extend = array();
   $display = $view->display[$view->current_display];
-  $style_plugin = $view->style_plugin->definition['theme'];
 
-  $extend = array(
-    $style_plugin,
-    $view->name,
-    $display->display_plugin,
-  );
+  if (true === array_key_exists('theme', $view->style_plugin->definition)) {
+    $extend[] = $view->style_plugin->definition['theme'];
+    $extend[] = $view->name;
+    $extend[] = $display->display_plugin;
+  }
 
   if ($display->id !== $display->display_plugin) {
     $extend[] = $display->id;
