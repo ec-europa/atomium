@@ -5,8 +5,6 @@
  * Contains component file.
  */
 
-use function count;
-
 /**
  * Implements hook_atomium_theme_hook().
  */

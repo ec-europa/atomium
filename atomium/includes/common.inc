@@ -5,13 +5,6 @@
  * common.inc
  */
 
-use function call_user_func_array;
-use function is_array;
-use function is_string;
-use const DIRECTORY_SEPARATOR;
-use const GLOB_BRACE;
-use const SCANDIR_SORT_ASCENDING;
-
 /**
  * Includes a theme file.
  *

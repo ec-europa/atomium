@@ -5,9 +5,6 @@
  * views.inc
  */
 
-use function array_key_exists;
-use function array_slice;
-
 /**
  * Implements hook_views_pre_render().
  */

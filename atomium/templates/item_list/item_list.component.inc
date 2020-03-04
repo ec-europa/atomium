@@ -5,10 +5,6 @@
  * Contains component file.
  */
 
-use function count;
-use function in_array;
-use function is_string;
-
 /**
  * Implements hook_atomium_theme_hook().
  */

@@ -5,9 +5,6 @@
  * Contains component file.
  */
 
-use function is_array;
-use const PREG_GREP_INVERT;
-
 /**
  * Implements hook_preprocess_hook().
  *

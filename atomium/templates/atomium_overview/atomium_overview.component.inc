@@ -5,9 +5,6 @@
  * Contains component file.
  */
 
-use function function_exists;
-use function is_array;
-
 /**
  * Implements hook_atomium_theme_hook().
  *

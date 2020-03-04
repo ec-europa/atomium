@@ -7,8 +7,6 @@ use ArrayIterator;
 use IteratorAggregate;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
-use function is_array;
-use function is_bool;
 
 /**
  * Class Attributes.

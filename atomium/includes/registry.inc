@@ -5,10 +5,6 @@
  * List of functions used to alter the theme registry in Atomium based themes.
  */
 
-use function count;
-use function function_exists;
-use function in_array;
-
 /**
  * Stub implementation for atomium_theme().
  *

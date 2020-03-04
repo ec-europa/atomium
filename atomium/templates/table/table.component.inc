@@ -5,10 +5,6 @@
  * Contains component file.
  */
 
-use function count;
-use function is_array;
-use const ARRAY_FILTER_USE_KEY;
-
 /**
  * Implements hook_atomium_theme_hook().
  */

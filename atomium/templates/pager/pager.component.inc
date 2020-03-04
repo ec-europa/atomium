@@ -5,8 +5,6 @@
  * Contains component file.
  */
 
-use function array_key_exists;
-
 /**
  * Implements hook_atomium_theme_hook().
  */
